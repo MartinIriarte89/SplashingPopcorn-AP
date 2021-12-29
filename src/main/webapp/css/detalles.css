@@ -1,0 +1,78 @@
+.container, #informacion {
+	padding: 12px;
+}
+
+#detalles {
+	margin-top: 62px;
+}
+
+#titulo, h3, .header_info {
+	color: rgb(255, 255, 255);
+	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+		'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.d-flex {
+	justify-content: center;
+}
+
+.datos {
+	color: #b1a7a6;
+}
+
+.tagline, .character {
+	font-style: italic;
+}
+
+.resumen {
+	text-align: justify;
+}
+
+#precio-bloque {
+	align-items: center;
+	display: flex;
+	justify-content: center;
+	padding: 12px;
+}
+
+#precio {
+	text-shadow: #b1a7a6 1px 2px 5px;
+	text-align: center;
+	background-color: yellow;
+}
+
+#precio>h2 {
+	color: black;
+	margin: 0;
+}
+
+#imagen-pelicula {
+	padding-top: 24px;
+	padding-bottom: 12px;
+	height: 80vh;
+}
+
+#comprar {
+	text-align: center;
+	margin: 0;
+}
+
+#mensaje_error {
+	margin-top: 10px;
+}
+
+#boton-comprar, #boton-editar, #boton-eliminar {
+	color: #f5f3f4;
+	border-color: #a4161a;
+	background-color: #a4161a;
+}
+
+#boton-comprar:hover, #boton-editar:hover, #boton-eliminar:hover {
+	color: #a4161a;
+	border-color: #a4161a;
+	background-color: black;
+}
+
+#boton-comprar:focus, #boton-editar:focus, #boton-eliminar:focus {
+	box-shadow: 0 0 20px #e5383b;
+}

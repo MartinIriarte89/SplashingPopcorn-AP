@@ -1,0 +1,140 @@
+body{
+	background-color: rgb(0, 0, 0);
+	
+}
+
+main{
+	margin-top: 62px;
+}
+
+.boton-inicio::before {
+  
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+ 
+  transition: .5s;
+  transform: scale(.9);
+  z-index: -1;
+}
+
+
+
+#altura-max{
+	max-height: calc(100vh - 62px) !important;
+}
+
+.color-principal{
+	color: black;
+	font-weight: bolder;
+	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;	
+	background-color: rgb(190, 21, 19);
+	box-shadow: 0px 8px 8px rgba(0,0,0,0.7);
+}
+
+#fondo-pochoclos{
+	background-image: url(../imagenes/fondoPochoclos.jpg)!important;
+	background-size: 20%;
+	background-attachment: fixed;
+}
+
+.container {
+	margin-top: 40px;
+}
+
+
+.carousel-inner img {
+	width: 100%;
+	max-height: calc(100vh - 104px);
+}
+
+.d-flex1{
+	margin-right: 20px;
+}
+
+.carta{
+	border-radius: 16px;
+	box-shadow: 4px 8px 12px rgba(0,0,0, 0.5);
+	max-width: 400px;
+	min-width: 200px;
+}
+
+.fondo-backdrop{
+	background-size: cover;
+	background-position: right center;
+}
+
+.fondo-portada{
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center	;
+	width: calc(100% - 40px);
+	height: 500px;
+	filter: brightness(70%);
+	transition: 0.2s;
+}
+
+.fondo-portada:hover{
+	filter: brightness(100%);
+}
+
+.descripcion{
+	color: white;
+}
+
+span{
+	color: lightyellow;
+	font-size: 70%;
+	opacity: 0.6;
+}
+
+@media (min-width: 0px) and (max-width: 575.99px){
+	
+	.fondo-portada{
+		height: 250px;
+	}
+	
+	#titulo{
+		font-size: 25px!important;
+		margin-top: 100px !important;
+	}
+	
+	.carta{
+		min-width: 150px;
+	}
+	
+}
+
+@media (max-width: 576px){
+	
+	#titulo{
+		margin-bottom: 25px !important;
+		font-size: 40px	;	
+	}
+	
+}
+
+@media (min-width: 576px) and (max-width: 991.99px){
+	
+	
+	
+	.titulo-carta{
+		font-size: 16px;
+	}
+	#titulo{
+		font-size: 35px!important;
+		margin-top: 100px !important;
+	}
+		
+	.fondo-portada{
+		height: 350px;
+	}
+}
+
+@media (min-width: 991.99px) and (max-width: 1199.99px){
+	
+	.titulo-carta{
+		font-size: 18px;
+	}
+}
+

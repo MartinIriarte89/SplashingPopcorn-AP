@@ -1,0 +1,236 @@
+:root{
+	--col-primario: #660708;
+	--col-secundario: #BA181B;
+	--col-terciario: #161A1D;
+}
+
+body{
+	background-color: rgb(0, 0, 0);
+}
+/*------------ESTILO DE LA BARRA-----------*/
+
+#barra{
+	box-shadow: 2px 8px 8px rgba(0,0,0, 1);
+	opacity: 95%;
+	transition: 0.4s;
+	background-image: linear-gradient(135deg, #161A1D, #161A1D 250px, rgba(186, 24, 27, .8) 252px, rgba(102, 7, 8, .9) 1300px), url(../imagenes/fondoBarra.jpg)!important;
+	
+}
+
+#barra:hover{
+	transform: scale(1.005);
+	background-image: linear-gradient(135deg, #BA181B 250px, #161A1D, rgba(102, 7, 8, .9) 252px, rgba(186, 24, 27, .9)), url(../imagenes/fondoBarra.jpg)!important;
+}
+
+.collapse ul > li > a:hover{
+	opacity: 100% !important;
+}
+
+.boton-inicio{
+	color: #F5F3F4;
+	background-image: radial-gradient(#161A1D, #2C343A);
+	transition: 0.4s;
+}
+
+.boton-inicio::before {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+ 
+  transition: .5s;
+  transform: scale(.9);
+  z-index: -1;
+}
+
+.boton-inicio:hover {
+  	box-shadow: 0px 2px 12px #F5F3F4;
+	color: #F5F3FF;	
+}
+
+
+/*-------------ESTILO DE BOTONES EN LA BARRA-----------*/
+
+.itemsbarra li a {
+  	position: relative;
+  	transition: 0.7s;
+}
+.itemsbarra li a:before {
+  	content: "";
+ 	position: absolute;
+ 	top: 0;
+ 	left: 0;
+  	width: 100%;
+  	height: 100%;
+  	border-top: 2px solid rgb(41, 41, 41);
+  	border-bottom: 2px solid rgb(41, 41, 41);
+  	transform: scaleY(1.5);
+  	opacity: 0;
+  	transition: 0.8s;
+}
+.itemsbarra li a:after {
+  	content: "";
+	position: absolute;
+	top: 2px;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color:  rgb(41, 41, 41);
+	transform: scale(0);
+	opacity: 0;
+	transition: 0.5s;
+	z-index: -1;
+}
+
+.itemsbarra li a:hover:before {
+ 	transform: scaleY(1);
+  	opacity: 1;
+}
+.itemsbarra li a:hover:after {
+  	transform: scaleY(1);
+  	opacity: 1;
+}	
+
+
+/*-----------ESTILO DEL FOOTER-----------*/
+
+.fondo-footer{
+	background-image: url(../imagenes/fondoFooter.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+	background-position: center 50px;
+}
+
+.texto-footer{
+	color:  ivory;
+	
+}
+
+footer a svg{
+	color: ivory;	
+}
+
+
+/*---------ESTILOS DE LAS REDES EN FOOTER-----------*/
+
+
+.animacion li {
+  list-style: none;
+}
+
+.animacion li a {
+  width: 50px;
+  height: 50px;
+  background-color: #fff;
+  text-align: center;
+  line-height: 45px;
+  font-size: 25px;
+  display: block;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid #fff;
+  z-index: 1;
+}
+
+.animacion li a .icon {
+  position: relative;
+  color: #262626;
+  transition: .5s;
+  z-index: 3;
+}
+
+.animacion li a:hover .icon {
+  color: rgb(255, 255, 255);
+  transform: rotateY(360deg);
+}
+
+.facebook:hover .icon{
+  background-color: #3b5999;
+}
+
+.instagram:hover .icon{
+	background: linear-gradient(135deg,blue,red);
+}
+
+.twitter:hover .icon{
+	background-color: #55acee;
+}
+
+.animacion li a:before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 150%;
+  height: 150%;
+  background: #f00;
+  transition: .5s;
+  z-index: 2;
+}
+
+.animacion li a:hover:before {
+  top: 0;
+}
+
+.animacion li:nth-child(2) a:before{
+  background: #3b5999;
+}
+
+.animacion li:nth-child(3) a:before{
+  background: #55acee;
+}
+
+.animacion li:nth-child(4) a:before {
+  background:linear-gradient(135deg,blue,red);
+}
+
+
+/*----------ESTILOS EN RESOLUCION DE CELULARES----------*/
+
+
+@media (min-width: 0px) and (max-width: 767.99px){
+	html{
+		font-size: 0.75rem;
+	}
+	
+	/* ESTILO DE LA BARRA*/
+	
+	#barra{
+		background-image: repeating-linear-gradient(135deg, #161A1D, #161A1D 180px, rgba(190, 21, 21, .8) 182px, rgba(140, 21, 21, 1) 1300px), url(../imagenes/fondoBarra.jpg)!important;
+	}
+	
+	#barra:hover{
+		background-image: linear-gradient(135deg, rgb(205, 26, 26) 180px, rgba(44, 44, 44, 0.9), rgba(140, 21, 21, 0.8) 181px, rgba(205, 26, 26, 1)), url(../imagenes/fondoBarra.jpg)!important;
+	}
+	
+	.nav-padding{
+		padding-top: 15.5px;
+		padding-bottom: 15.5px;
+		padding-left: 5px;
+	}
+	
+	.boton-mt{
+		margin-top: 15.5px;
+	}
+	
+	/*ESTILOS DE BOTONES EN LA BARRA*/
+	
+	.itemsbarra li a:hover:before {
+		border-bottom-right-radius: 6px;
+		border-top-right-radius: 6px;
+	}
+	.itemsbarra li a:hover:after {
+		border-bottom-right-radius: 6px;
+		border-top-right-radius: 6px;	
+	}
+	
+	/*ESTILOS DE LAS REDES EN FOOTER*/
+	
+	.animacion li a{
+		width: 30px;
+  		height: 30px;
+		line-height: 28px;
+		font-size: 23px;
+	}	
+}
