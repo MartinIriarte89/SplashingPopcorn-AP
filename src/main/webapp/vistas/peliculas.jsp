@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@page import="servicios.ServicioPelicula"%>
-<jsp:useBean id="servicioPelicula" class="servicios.ServicioPelicula" />
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -70,7 +69,7 @@
 
 										<div class="col-12 row m-0">
 											<div class="col-6 p-0">
-												<a href="#" type="button"
+												<a type="button"
 													class="boton-admin d-flex col-10 btn btn-danger text-center mx-auto align-items-center justify-content-center"
 													data-bs-toggle="modal" data-bs-target="#modalCrearPelicula">Añadir
 													película</a>
@@ -127,7 +126,7 @@
 							<c:forEach items="${peliculas}" var="pelicula">
 								<div
 									class="inicio display-flex justify-content-center col-md-4 col-5 mt-5 px-md-4 px-sm-5 px-2"
-									id="${pelicula.titulo}" data-type="${pelicula.genero}">
+									data-type="${pelicula.genero}">
 									<!-- BACKDROP IMAGEN -->
 									<div class="row flex-column fondo-backdrop carta mx-auto m-0"
 										data-type="${pelicula.genero}"
@@ -216,10 +215,7 @@
 			</div>
 		</div>
 
-		<c:if test="${param.id != null }">
-			<c:set var="pelicula"
-				value="${servicioPelicula.buscarPor(Integer.parseInt(param.id))}"></c:set>
-		</c:if>
+		
 		<!-- MODAL CREAR PELÍCULA -->
 		<div class="modal fade" id="modalCrearPelicula"
 			data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -447,8 +443,6 @@
 			</div>
 		</div>
 
-
-
 		<!-- MODAL ELIMINAR PELÍCULA -->
 		<div class="modal fade" id="modalEliminarPelicula"
 			data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -470,8 +464,6 @@
 				</div>
 			</div>
 		</div>
-
-		<!--href="/TP_3_SplashingPopcorn_Entrega_Final2/borrarPelicula.ad?id=${pelicula.id}"-->
 
 		<!-- MODAL CREAR GÉNERO -->
 		<div class="modal fade" id="modalCrearGenero" tabindex="-1"

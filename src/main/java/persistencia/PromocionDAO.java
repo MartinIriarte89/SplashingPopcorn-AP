@@ -17,7 +17,7 @@ import persistencia.commons.ProveedorDeConexion;
 public class PromocionDAO {
 
 	public ArrayList<Promocion> cargar() {
-		String sqlDatosPromocion = "SELECT * FROM promociones"; // WHERE borrado_logico = 0" agregar a bd
+		String sqlDatosPromocion = "SELECT * FROM promociones WHERE borrado_logico = 0";
 		String sqlPelisEnPromocion = "SELECT fk_pelicula AS 'id pelicula' FROM peliculas_en_promocion WHERE fk_promocion = ?";
 		ArrayList<Promocion> promociones = new ArrayList<Promocion>();
 
@@ -32,7 +32,10 @@ public class PromocionDAO {
 			while (resultadosPromociones.next()) {
 				declarPelicEnProm.setInt(1, resultadosPromociones.getInt("id"));
 				ResultSet resultadosIdPelic = declarPelicEnProm.executeQuery();
-				promociones.add(crearPromocion(resultadosPromociones, resultadosIdPelic));
+				Promocion promocion = crearPromocion(resultadosPromociones, resultadosIdPelic);
+				if(!promocion.esNulo()) {
+					promociones.add(promocion);
+				}
 			}
 		} catch (Exception e) {
 			throw new DatosPerdidosError(e);
@@ -142,16 +145,22 @@ public class PromocionDAO {
 		ArrayList<Pelicula> peliculasDeProm = new ArrayList<Pelicula>();
 
 		while (resultadosIdPelic.next()) {
-			peliculasDeProm.add(peliculaDAO.buscarPor(resultadosIdPelic.getInt("id pelicula")));
+			Pelicula pelicula = peliculaDAO.buscarPor(resultadosIdPelic.getInt("id pelicula"));
+			if (!pelicula.esNulo()) {
+				peliculasDeProm.add(pelicula);
+			}
 		}
 
-		if (tipoPromocion.equalsIgnoreCase("Porcentual"))
-			return new PromocionPorcentual(id, nombre, peliculasDeProm, descuento, descripcion, urlPortada);
-		else if (tipoPromocion.equalsIgnoreCase("Absoluta"))
-			return new PromocionAbsoluta(id, nombre, peliculasDeProm, descuento, descripcion, urlPortada);
-		else if (tipoPromocion.equalsIgnoreCase("AxB"))
-			return new PromocionAPorB(id, nombre, peliculasDeProm, descuento, descripcion, urlPortada);
-		else
-			throw new Error();
+		if (!peliculasDeProm.isEmpty()) {
+			if (tipoPromocion.equalsIgnoreCase("Porcentual"))
+				return new PromocionPorcentual(id, nombre, peliculasDeProm, descuento, descripcion, urlPortada);
+			else if (tipoPromocion.equalsIgnoreCase("Absoluta"))
+				return new PromocionAbsoluta(id, nombre, peliculasDeProm, descuento, descripcion, urlPortada);
+			else if (tipoPromocion.equalsIgnoreCase("AxB"))
+				return new PromocionAPorB(id, nombre, peliculasDeProm, descuento, descripcion, urlPortada);
+			else
+				throw new Error();
+		} else
+			return PromocionNula.construir();
 	}
 }

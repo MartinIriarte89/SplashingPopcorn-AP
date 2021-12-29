@@ -24,11 +24,11 @@ public class BorrarPromocionServlet extends HttpServlet implements Servlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		int id = Integer.parseInt(request.getParameter("id"));
 		servicioPromocion.borrar(id);
 
-		response.sendRedirect("/pelicula");
-
+		response.sendRedirect("promociones");
 	}
 
 }

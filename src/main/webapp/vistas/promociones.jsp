@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,13 +19,15 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
 <script type="text/javascript"
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" defer></script>
 <script type="text/javascript"
 	src="/TP_3_SplashingPopcorn_Entrega_Final2/js/filtrarGeneros.js" defer></script>
 <script type="text/javascript"
 	src="/TP_3_SplashingPopcorn_Entrega_Final2/js/jquery.pajinate.js" defer></script>
 <script type="text/javascript"
 	src="/TP_3_SplashingPopcorn_Entrega_Final2/js/jquery.resize2.js" defer></script>
+<script type="text/javascript"
+	src="/TP_3_SplashingPopcorn_Entrega_Final2/js/funciones.js" defer></script>
 
 </head>
 
@@ -35,6 +36,7 @@
 		<!-- ELEMENTO HEADER -->
 		<jsp:include page="../parciales/header.jsp"></jsp:include>
 	</header>
+	
 	<main>
 
 		<!-- MODAL INICIO SESION -->
@@ -66,7 +68,7 @@
 
 										<div class="col-12 row m-0">
 											<div class="col-6 p-0">
-												<a href="#" type="button"
+												<a type="button"
 													class="boton-admin d-flex col-10 btn btn-danger text-center mx-auto align-items-center justify-content-center"
 													data-bs-toggle="modal" data-bs-target="#modalCrearPromocion">Añadir
 													promoción</a>
@@ -115,7 +117,7 @@
 
 					<!-- CONTENEDOR DE CARDS -->
 					<div
-						class="d-flex col-xl-9 col-12 flex-column mt-0 border border-dark border-4 border-end-0 border-start-0"
+						class="d-flex col-xl-9 col-12 flex-column mt-0"
 						id="contenedor-paginador-xxl">
 
 						<!-- TABLA DE CARDS -->
@@ -162,35 +164,39 @@
 												<!-- BOTONES CARD -->
 												<div class="d-flex mt-auto justify-content-center mb-2">
 													<a
-														href="/TP_3_SplashingPopcorn_Entrega_Final2/listarDetallePelicula?id=${promocion.id}"
+														href="/TP_3_SplashingPopcorn_Entrega_Final2/listarDetallePromocion?id=${promocion.id}"
 														class="botondes learn-more d-flex"> <span
 														class="circle" aria-hidden="true"> <span
 															class="icon arrow"></span>
-													</span> <span class="button-text mx-auto">Ver</span>
+													</span> <span class="button-text mx-auto">Detalle</span>
 													</a>
 												</div>
 
 												<c:if test="${usuario.esAdmin()}">
-													<div class="d-flex mt-auto justify-content-center">
-														<a
-															href="/TP_3_SplashingPopcorn_Entrega_Final2/editarPelicula.ad"
-															class="botondes learn-more d-flex"> <span
-															class="circle" aria-hidden="true" id="botonAdmin">
-																<span class="icon arrow"></span>
-														</span> <span class="button-text mx-auto">Editar</span>
-														</a>
-													</div>
-													<div class="d-flex mt-auto justify-content-center">
-														<a
-															href="/TP_3_SplashingPopcorn_Entrega_Final2/borrarPelicula.ad"
-															class="botondes learn-more d-flex"> <span
-															class="circle" aria-hidden="true" id="botonAdmin">>
-																<span class="icon arrow"></span>
-														</span> <span class="button-text mx-auto">Eliminar</span>
-														</a>
+													<div class="row p-0 m-0 my-2">
+														<div
+															class="col-6 d-flex justify-content-center align-items-center">
+															<a href="" type="button" class="boton-card-edit"
+																data-bs-toggle="modal"
+																data-bs-target="#modalEditarPelicula"
+																data-bs-id="${promocion.id}"
+																data-bs-titulo="${promocion.titulo}"
+																data-bs-precio="${promocion.precio}"
+																data-bs-duracion="${promocion.duracion}"
+																data-bs-stock="${promocion.stock}"
+																data-bs-genero="${promocion.genero}"
+																data-bs-descripcion="${promocion.descripcion}"><i
+																class="bi bi-pencil-square"></i></a> <span>editar</span>
+														</div>
+														<div
+															class="col-6 d-flex justify-content-center align-items-center">
+															<a type="button" data-bs-toggle="modal"
+																data-bs-target="#modalEliminarPromocion"
+																data-bs-id="${promocion.id}" class="boton-card-elim"><i
+																class="bi bi-file-x"></i></a> <span>eliminar</span>
+														</div>
 													</div>
 												</c:if>
-
 											</div>
 										</div>
 									</div>
@@ -298,7 +304,6 @@
 			</div>
 		</div>
 
-
 		<!-- MODAL EDITAR PROMOCIÓN -->
 		<div class="modal fade" id="modalEditarPromocion" tabindex="-1"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -388,7 +393,28 @@
 			</div>
 		</div>
 
-
+		<!-- MODAL ELIMINAR PROMOCIÓN -->
+		<div class="modal fade" id="modalEliminarPromocion"
+			data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+			aria-labelledby="staticBackdropLabel1" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="staticBackdropLabel1">Atención</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body">Estas a punto de eliminar esta
+						promoción. ¿Estas seguro?</div>
+					<div class="modal-footer">
+						<a id="botonElim" type="button" href="" class="btn btn-primary">Aceptar</a>
+						<button type="button" class="btn btn-secondary"
+							data-bs-dismiss="modal">Cancelar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
 	</main>
 
 	<footer>

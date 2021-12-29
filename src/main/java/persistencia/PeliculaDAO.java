@@ -118,7 +118,7 @@ public class PeliculaDAO {
 	public Pelicula buscarPor(int id) {
 		Pelicula pelicula;
 		try {
-			String sql = "SELECT * FROM peliculas WHERE id = ?";
+			String sql = "SELECT * FROM peliculas WHERE id = ? and borrado_logico = 0";
 			Connection conexion = ProveedorDeConexion.getConexion();
 			PreparedStatement declaracion = conexion.prepareStatement(sql);
 			declaracion.setInt(1, id);

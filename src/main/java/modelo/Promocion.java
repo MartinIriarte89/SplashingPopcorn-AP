@@ -195,7 +195,7 @@ public abstract class Promocion implements Sugerencia {
 	}
 
 	// SIRVE PARA VALIDAR QUE TODAS LAS PELIS PERTENEZCAN AL MISMO GÉNERO
-	public boolean generosIguales(ArrayList<Pelicula> peliculas) {
+	private boolean generosIguales(ArrayList<Pelicula> peliculas) {
 
 		for (int i = 0; i < peliculas.size(); i++) {
 
@@ -205,4 +205,11 @@ public abstract class Promocion implements Sugerencia {
 		}
 		return false;
 	}
+
+	@Override
+	public String toString() {
+		return "Promocion [id=" + id + ", titulo=" + titulo + "]";
+	}
+	
+	
 }

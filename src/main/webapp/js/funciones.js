@@ -4,6 +4,7 @@ if (!!document.getElementById('modalEliminarPelicula')) {
 
 	var modalBorrar = document.getElementById('modalEliminarPelicula')
 	modalBorrar.addEventListener('show.bs.modal', function(event) {
+		
 		let boton = event.relatedTarget
 
 		let id = boton.getAttribute('data-bs-id')
@@ -56,6 +57,24 @@ if (!!document.getElementById('modalEditarPelicula')) {
 	});
 }
 
+if (!!document.getElementById('modalEliminarPromocion')) {
+
+	var modalBorrarPromo = document.getElementById('modalEliminarPromocion')
+	modalBorrarPromo.addEventListener('show.bs.modal', function(event) {
+		
+		let boton = event.relatedTarget
+
+		let id = boton.getAttribute('data-bs-id')
+
+		let botonEnviar = modalBorrarPromo.querySelector('#botonElim')
+
+		botonEnviar.setAttribute('href', "/TP_3_SplashingPopcorn_Entrega_Final2/borrarPromocion.ad?id=" + id)
+	});
+}
+
+
+
+
 function mostrarPelicula(id, esPromo) {
 	const xhr = new XMLHttpRequest();
 	const fd = new FormData;
@@ -78,8 +97,6 @@ function mostrarPelicula(id, esPromo) {
 	// Realizamos el pedido
 	xhr.send(fd);
 }
-
-
 
 function cargarModal(json) {
 	var myModal = new bootstrap.Modal(document.getElementById('compra'));
