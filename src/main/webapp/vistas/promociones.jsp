@@ -19,7 +19,8 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
 <script type="text/javascript"
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" defer></script>
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"
+	defer></script>
 <script type="text/javascript"
 	src="/TP_3_SplashingPopcorn_Entrega_Final2/js/filtrarGeneros.js" defer></script>
 <script type="text/javascript"
@@ -36,7 +37,7 @@
 		<!-- ELEMENTO HEADER -->
 		<jsp:include page="../parciales/header.jsp"></jsp:include>
 	</header>
-	
+
 	<main>
 
 		<!-- MODAL INICIO SESION -->
@@ -60,7 +61,9 @@
 						<div class="row w-100 flex-column">
 							<!-- BOTONES DE ADMIN -->
 							<c:if test="${usuario.esAdmin()}">
-								<div class="row px-0 m-0 align-items-center border-bottom border-2" id="contenedor-btn-admin">
+								<div
+									class="row px-0 m-0 align-items-center border-bottom border-2"
+									id="contenedor-btn-admin">
 									<div
 										class="col-xl-12 col-6 text-center my-xl-5 mt-2 mb-4 h1 text-white font-lato titulo-filtro">Menu
 										administrador</div>
@@ -70,8 +73,8 @@
 											<div class="col-6 p-0">
 												<a type="button"
 													class="boton-admin d-flex col-10 btn btn-danger text-center mx-auto align-items-center justify-content-center"
-													data-bs-toggle="modal" data-bs-target="#modalCrearPromocion">Añadir
-													promoción</a>
+													data-bs-toggle="modal"
+													data-bs-target="#modalCrearPromocion">Añadir promoción</a>
 											</div>
 
 											<div class="col-6 p-0 ">
@@ -116,8 +119,7 @@
 					</div>
 
 					<!-- CONTENEDOR DE CARDS -->
-					<div
-						class="d-flex col-xl-9 col-12 flex-column mt-0"
+					<div class="d-flex col-xl-9 col-12 flex-column mt-0"
 						id="contenedor-paginador-xxl">
 
 						<!-- TABLA DE CARDS -->
@@ -214,15 +216,15 @@
 		</div>
 
 		<!-- MODAL CREAR PROMOCIÓN -->
-		<div class="modal fade" id="modalCrearPromocion" tabindex="-1"
+		<div class="modal fade" id="modalCrearPromocion"
+			data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-dialog-centered">
 				<div class="modal-content rounded-5 shadow">
+					<!-- ENCABEZADO DEL MODAL -->
 					<div class="modal-header p-5 pb-4 border-bottom-0">
 						<div class="d-inline-flex">
-							<img alt="" src="imagenes/logo.png"
-								style="width: 30%; margin: -20px;">
-							<h2 class="align-self-center">Crear promoción</h2>
+							<h2 class="align-self-center">CREAR PROMOCIÓN</h2>
 						</div>
 
 						<button type="button" class="btn-close" data-bs-dismiss="modal"
@@ -230,68 +232,50 @@
 					</div>
 
 					<div class="modal-body p-5 pt-0">
-						<form
-							action="/TP_3_SplashingPopcorn_Entrega_Final2/promocion/crearPromocion.ad"
-							method="post">
+						<form action="crearPromocion.ad" method="post">
 
-							<label for="titulo">Titulo de promoción</label>
 							<div class="form-floating mb-3">
 								<input type="text" class="form-control rounded-4" id="titulo"
-									name="titulo" required value="${promocion.titulo}">
-								<div class="invalid-feedback">Introduzca su nombre por
-									favor</div>
+									placeholder="Titulo" required="required" name="titulo">
+								<label for="titulo">Nombre</label>
+								<div class="invalid-feedback">Introduzca un nombre válido</div>
 							</div>
 
-							<div class="form-floating mt-5 mb-3">
-								<label for="pelicula1">Elija una película:</label> <input
-									list="listaPeliculas" id="pelicula1" name="pelicula1" />
-
-								<datalist id="listaPeliculas">
-									<c:forEach items="${peliculas}" var="pelicula1">
-										<option value="${pelicula1.titulo}">
+							<div class="input-group">
+								<select class="form-select" id="pelicula" name="pelicula"
+									aria-label="Example select with button addon">
+									<c:forEach items="${peliculas}" var="pelicula">
+										<option value="${pelicula.id}">${pelicula.titulo}</option>
 									</c:forEach>
-								</datalist>
-
+								</select>
+								<button  onclick="seleccionarPelicula()" class="btn btn-primary w-25" type="button">Agregar
+									película</button>
 							</div>
-							<div class="form-floating mt-5 mb-3">
-								<label for="pelicula2">Elija una película:</label> <input
-									list="listaPeliculas" id="peliculasEnPromos"
-									name="peliculasEnPromos" />
-
-								<datalist id="listaPeliculas">
-									<c:forEach items="${peliculas}" var="pelicula2">
-										<option value="${pelicula2.titulo}">
-									</c:forEach>
-								</datalist>
-
-							</div>
-							<div class="form-floating mt-5 mb-3">
-								<label for="pelicula3">Elija una película:</label> <input
-									list="listaPeliculas" id="pelicula3" name="peliculasEnPromos" />
-
-								<datalist id="listaPeliculas">
-									<c:forEach items="${peliculas}" var="pelicula3">
-										<option value="${pelicula3.titulo}">
-									</c:forEach>
-								</datalist>
-
-							</div>
-
-							<label for="descripcion">Descripción de promoción</label>
-							<div class="form-floating mb-3">
-								<input type="text" class="form-control rounded-4"
-									id="descripcion" name="descripcion" required
-									value="${promocion.descripcion}">
-								<div class="invalid-feedback">Introduzca la descripción
-									por favor</div>
+							
+							<div class="form-floating my-3 col-md-10 col-12 mx-auto">
+								<textarea readonly="readonly" class="form-control"
+									placeholder="peliculas" name="peliculas" id="peliculas"
+									style="height: 100px"></textarea>
+								<label for="peliculas">Películas en promoción</label>
 							</div>
 
 							<div class="form-floating mb-3">
-								<label for="urlPortada">Foto de portada</label> <input
-									type="file" class="form-control" id="urlPortada"
-									name="urlPortada" required value="${promocion.urlPortada}">
-								<div class="invalid-feedback">Introduzca una imagen por
-									favor</div>
+								<input type="text" class="form-control rounded-4 d-none"
+									id="idPeliculas" placeholder="idPeliculas" required="required"
+									name="idPeliculas">
+							</div>
+
+							<div class="">
+								<label for="fotoDePortada" class="form-label">Foto de
+									portada</label> <input class="form-control" type="file"
+									id="fotoDePortada">
+							</div>
+
+							<div class="form-floating my-3 col-md-10 col-12 mx-auto">
+								<textarea class="form-control"
+									placeholder="Leave a comment here" name="descripcion"
+									id="descripcion" style="height: 100px"></textarea>
+								<label for="descripcion">Descripción</label>
 							</div>
 
 							<button type="submit"
@@ -305,15 +289,15 @@
 		</div>
 
 		<!-- MODAL EDITAR PROMOCIÓN -->
-		<div class="modal fade" id="modalEditarPromocion" tabindex="-1"
+		<div class="modal fade" id="modalEditarPromocion"
+			data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-dialog modal-dialog-centered modal-lg">
 				<div class="modal-content rounded-5 shadow">
+					<!-- ENCABEZADO DEL MODAL -->
 					<div class="modal-header p-5 pb-4 border-bottom-0">
 						<div class="d-inline-flex">
-							<img alt="" src="imagenes/logo.png"
-								style="width: 30%; margin: -20px;">
-							<h2 class="align-self-center">Editar promoción</h2>
+							<h2 class="align-self-center">EDITAR PROMOCIÓN</h2>
 						</div>
 
 						<button type="button" class="btn-close" data-bs-dismiss="modal"
@@ -376,7 +360,7 @@
 
 							<div class="form-floating mb-3">
 								<label for="urlPortada">Foto de portada</label> <input
-									type="file" class="form-control" id="urlPortada"
+									type="file" class="form-control" id="urltada"
 									name="urlPortada" required value="${promocion.urlPortada}">
 								<div class="invalid-feedback">Introduzca una imagen por
 									favor</div>
@@ -414,7 +398,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 	</main>
 
 	<footer>

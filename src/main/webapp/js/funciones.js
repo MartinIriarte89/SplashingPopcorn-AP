@@ -116,5 +116,22 @@ function cargarModal(json) {
 	myModal.show();
 }
 
+function seleccionarPelicula(){
+	let select = document.querySelector('#pelicula');
+	let textAreaNombre = document.querySelector('#peliculas')
+	let inputID = document.querySelector('#idPeliculas')
+	
+	const indice = select.selectedIndex;
+	const opcionSeleccionada = select.options[indice];
+	
+	if(inputID.value==''){
+		inputID.value = opcionSeleccionada.value;
+	}else{
+		inputID.value = inputID.value + ',' + opcionSeleccionada.value;
+	}
+	textAreaNombre.value = opcionSeleccionada.text + '\n' + textAreaNombre.value;
+	select.remove(indice);
+}
+
 
 

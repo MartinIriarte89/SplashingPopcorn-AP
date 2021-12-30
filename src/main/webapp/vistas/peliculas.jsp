@@ -443,6 +443,7 @@
 			</div>
 		</div>
 
+
 		<!-- MODAL ELIMINAR PELÍCULA -->
 		<div class="modal fade" id="modalEliminarPelicula"
 			data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
