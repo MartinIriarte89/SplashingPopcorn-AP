@@ -8,6 +8,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import persistencia.DatosPerdidosError;
+
 public class ProveedorDeConexion {
 
 	private static String url;
@@ -50,10 +52,22 @@ public class ProveedorDeConexion {
 		} catch (ClassNotFoundException e) {
 			throw new SQLException(e);
 		}
-		if (conexion == null) {
+		if (conexion == null || conexion.isClosed()) {
 			conexion = DriverManager.getConnection(url);
 		}
 		return conexion;
+	}
+	
+	public static boolean cerrarConexion() {
+		if (conexion != null) {
+			try {
+				conexion.close();
+			} catch (SQLException e) {
+				throw new DatosPerdidosError(e);
+			}
+			return true;
+		} else
+			return false;
 	}
 
 	/*public static Connection getConexion(String url) throws SQLException {

@@ -1,10 +1,11 @@
 
+/*CODIGO USADO PARA CARGAR MODALES DE ELIMINAR Y EDITAR*/
 
 if (!!document.getElementById('modalEliminarPelicula')) {
 
 	var modalBorrar = document.getElementById('modalEliminarPelicula')
 	modalBorrar.addEventListener('show.bs.modal', function(event) {
-		
+
 		let boton = event.relatedTarget
 
 		let id = boton.getAttribute('data-bs-id')
@@ -19,9 +20,9 @@ if (!!document.getElementById('modalEditarPelicula')) {
 
 	var modalEditar = document.getElementById('modalEditarPelicula')
 	modalEditar.addEventListener('show.bs.modal', function(event) {
-		
+
 		let boton = event.relatedTarget
-		
+
 		let id = boton.getAttribute('data-bs-id')
 		let titulo = boton.getAttribute('data-bs-titulo')
 		let lema = boton.getAttribute('data-bs-lema')
@@ -31,8 +32,8 @@ if (!!document.getElementById('modalEditarPelicula')) {
 		let genero = boton.getAttribute('data-bs-genero')
 		let anioLanzamiento = boton.getAttribute('data-bs-anioLanzamiento')
 		let descripcion = boton.getAttribute('data-bs-descripcion')
-		
-		
+
+
 		let botonEnviar = modalEditar.querySelector('#botonEdit')
 		let idEdit = modalEditar.querySelector('#idEdit')
 		let tituloEdit = modalEditar.querySelector('#tituloEdit')
@@ -43,11 +44,11 @@ if (!!document.getElementById('modalEditarPelicula')) {
 		let generoEdit = modalEditar.querySelector('#generoEdit')
 		let anioLanzamientoEdit = modalEditar.querySelector('#anioLanzamientoEdit')
 		let descripcionEdit = modalEditar.querySelector('#descripcionEdit')
-		
+
 		botonEnviar.setAttribute('href', "/TP_3_SplashingPopcorn_Entrega_Final2/editarPelicula.ad")
 		idEdit.value = id;
 		tituloEdit.value = titulo;
-		lemaEdit.value 	= lema;
+		lemaEdit.value = lema;
 		precioEdit.value = precio;
 		duracionEdit.value = duracion;
 		stockEdit.value = stock;
@@ -57,11 +58,13 @@ if (!!document.getElementById('modalEditarPelicula')) {
 	});
 }
 
+/*CODIGO PARA CREAR ELIMINAR Y EDITAR PROMOCIONES*/
+
 if (!!document.getElementById('modalEliminarPromocion')) {
 
 	var modalBorrarPromo = document.getElementById('modalEliminarPromocion')
 	modalBorrarPromo.addEventListener('show.bs.modal', function(event) {
-		
+
 		let boton = event.relatedTarget
 
 		let id = boton.getAttribute('data-bs-id')
@@ -70,6 +73,95 @@ if (!!document.getElementById('modalEliminarPromocion')) {
 
 		botonEnviar.setAttribute('href', "/TP_3_SplashingPopcorn_Entrega_Final2/borrarPromocion.ad?id=" + id)
 	});
+}
+
+/* codigo usado para completar el modal de crear promociones*/
+
+if (!!document.getElementById('selectPelicula')) {
+	/*se crea una copia del select que contiene a todas las peliculas*/
+	let nodosOptions = document.querySelector('#selectPelicula').children;
+	let copia = Array();
+	var copiaNodosOptions = Object.assign(copia, nodosOptions);
+}
+
+function seleccionarPelicula() {
+	let select = document.querySelector('#selectPelicula');
+	let textAreaNombre = document.querySelector('#peliculas')
+	let inputID = document.querySelector('#idPeliculas')
+
+	/*se obtiene el option seleccionado*/
+	const indice = select.selectedIndex;
+	const opcionSeleccionada = select.options[indice];
+	/*y el genero de la pelicula elegida*/
+	const genero = opcionSeleccionada.attributes[1].nodeValue
+
+	select.remove(indice);
+
+	/*si es la primera vez que se agrega una pelicula*/
+	if (inputID.value == '') {
+		inputID.value = opcionSeleccionada.value;
+		/*se eliminan las peliculas que no coincidan con el genero de la seleccionada del select*/
+		for (let i = select.options.length - 1; i >= 0; i--) {
+			let generoTemp = select.options[i].attributes[1].nodeValue
+			if (generoTemp != genero) {
+				select.remove(i)
+			}
+		}
+		/*si ya hay una pelicula seleccionada*/
+	} else {
+		inputID.value = inputID.value + ',' + opcionSeleccionada.value;
+	}
+	textAreaNombre.value = opcionSeleccionada.text + '\n' + textAreaNombre.value;
+}
+
+
+
+function cambiar() {
+
+	var descripBeneficio = document.querySelector('#descrip-beneficio');
+	var beneficio = document.querySelector('#tipoPromocion');
+	
+	console.log(descripBeneficio)
+	console.log(beneficio)
+	
+	let indice = beneficio.selectedIndex
+	console.log(indice);
+	let opcionSeleccionada = beneficio.options[indice];
+	
+	console.log(opcionSeleccionada.text)
+
+	if (opcionSeleccionada.text == 'Super descuentos') {
+		descripBeneficio.innerHTML = 'Ingresar un %';
+	}
+
+	else if (opcionSeleccionada.text == 'Precios locos') {
+		
+		descripBeneficio.innerHTML = 'Ingresar un monto fijo';
+	}
+
+	else {
+		descripBeneficio.innerHTML = 'N° de películas a cobrar';
+	}
+};
+
+function resetear() {
+	let select = document.querySelector('#selectPelicula');
+	let textAreaNombre = document.querySelector('#peliculas');
+	let inputID = document.querySelector('#idPeliculas');
+	/*se borra todo el contenido del select de peliculas */
+	for (let i = select.options.length - 1; i >= 0; i--) {
+		select.remove(i);
+	}
+
+	/*con la copia del select se reestablecen los valores por defecto*/
+	for (let i = 0; i < copiaNodosOptions.length; i++) {
+		select.appendChild(copiaNodosOptions[i]);
+		console.log(copiaNodosOptions[i])
+	}
+
+	/*se limpia el textArea y el input que envia los id de las peliculas al servlet*/
+	textAreaNombre.value = '';
+	inputID.value = '';
 }
 
 
@@ -116,22 +208,9 @@ function cargarModal(json) {
 	myModal.show();
 }
 
-function seleccionarPelicula(){
-	let select = document.querySelector('#pelicula');
-	let textAreaNombre = document.querySelector('#peliculas')
-	let inputID = document.querySelector('#idPeliculas')
-	
-	const indice = select.selectedIndex;
-	const opcionSeleccionada = select.options[indice];
-	
-	if(inputID.value==''){
-		inputID.value = opcionSeleccionada.value;
-	}else{
-		inputID.value = inputID.value + ',' + opcionSeleccionada.value;
-	}
-	textAreaNombre.value = opcionSeleccionada.text + '\n' + textAreaNombre.value;
-	select.remove(indice);
-}
+
+
+
 
 
 

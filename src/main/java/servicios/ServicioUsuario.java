@@ -6,6 +6,7 @@ import java.util.HashMap;
 import modelo.Usuario;
 import persistencia.FabricaDAO;
 import persistencia.UsuarioDAO;
+import persistencia.commons.ProveedorDeConexion;
 
 public class ServicioUsuario {
 
@@ -14,13 +15,14 @@ public class ServicioUsuario {
 
 	public ArrayList<Usuario> listar(){
 		ArrayList<Usuario> usuarios = usuarioDao.cargar();
+		ProveedorDeConexion.cerrarConexion();
 		return usuarios;
 	}
 	
 	public boolean eliminar(int id) {
 		Usuario usuario = usuarioDao.buscarPorId(id);
 		boolean esOperacionCorrec = usuarioDao.borrar(usuario);
-
+		ProveedorDeConexion.cerrarConexion();
 		return esOperacionCorrec;
 	}
 
@@ -31,6 +33,7 @@ public class ServicioUsuario {
 
 		if (nuevoUsuario.esValido()) {
 			usuarioDao.insertar(nuevoUsuario);
+			ProveedorDeConexion.cerrarConexion();
 		}
 		return nuevoUsuario;
 	}
@@ -50,13 +53,16 @@ public class ServicioUsuario {
 		
 		if(usuarioBBDD.esValido()){
 			usuarioDao.actualizar(usuarioBBDD);
+			ProveedorDeConexion.cerrarConexion();
 		}
 		
 		return usuarioBBDD;
 	}
 
 	public Usuario buscar(int id) {
-		return usuarioDao.buscarPorId(id);
+		Usuario usuario = usuarioDao.buscarPorId(id);
+		ProveedorDeConexion.cerrarConexion();
+		return usuario;
 	}
 	
 	public boolean sonDatosValidos() {

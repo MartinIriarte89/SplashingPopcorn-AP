@@ -37,6 +37,7 @@ public class ItinerarioDAO {
 				itinerarios.put(idItinerario,
 						crearItinerario(resultItinerario, resultIdPromociones, resultIdAtracciones));
 			}
+			
 		} catch (Exception e) {
 			throw new DatosPerdidosError(e);
 		}
@@ -84,7 +85,7 @@ public class ItinerarioDAO {
 
 			insertarCompras(itinerario, conexion);
 			declaracion.executeUpdate();
-
+			
 		} catch (Exception e) {
 			throw new DatosPerdidosError(e);
 		}
@@ -134,7 +135,7 @@ public class ItinerarioDAO {
 			int idPelicula = resultIdPelicula.getInt("fk_pelicula");
 			compras.add(peliculaDAO.buscarPor(idPelicula));
 		}
-
+		
 		return new Itinerario(fkUsuario, compras, costo, duracion);
 	}
 }

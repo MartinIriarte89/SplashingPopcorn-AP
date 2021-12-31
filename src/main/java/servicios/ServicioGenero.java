@@ -5,27 +5,33 @@ import java.util.ArrayList;
 import modelo.Genero;
 import persistencia.FabricaDAO;
 import persistencia.GeneroDAO;
+import persistencia.commons.ProveedorDeConexion;
 
 public class ServicioGenero {
 	GeneroDAO generoDAO = FabricaDAO.getGeneroDAO();
 	
 	
 	public ArrayList<Genero> listar() {
-		return generoDAO.cargar();
+		ArrayList<Genero> generos = generoDAO.cargar();
+		ProveedorDeConexion.cerrarConexion();
+		return generos;
 	}
 	
 	public void borrar(String nombre) {
 		Genero genero = buscarPor(nombre);
 		generoDAO.borrar(genero);
+		ProveedorDeConexion.cerrarConexion();
 	}
 	
 	public Genero buscarPor(String nombre) {
-		return generoDAO.buscarPor(nombre);
+		Genero genero = generoDAO.buscarPor(nombre);
+		ProveedorDeConexion.cerrarConexion();
+		return genero;
 	}
 	public Genero crear(String nombre) {
 		Genero genero = new Genero(nombre);
 		generoDAO.insertar(genero);
-		
+		ProveedorDeConexion.cerrarConexion();
 		return genero;
 	}
 }

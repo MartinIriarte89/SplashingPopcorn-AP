@@ -33,7 +33,7 @@ public class PromocionDAO {
 				declarPelicEnProm.setInt(1, resultadosPromociones.getInt("id"));
 				ResultSet resultadosIdPelic = declarPelicEnProm.executeQuery();
 				Promocion promocion = crearPromocion(resultadosPromociones, resultadosIdPelic);
-				if(!promocion.esNulo()) {
+				if (!promocion.esNulo()) {
 					promociones.add(promocion);
 				}
 			}
@@ -51,6 +51,53 @@ public class PromocionDAO {
 			peliculaDAO.actualizarStock(pelicula);
 		}
 		return true;
+	}
+
+	public boolean insertar(Promocion promocion, double descuento, String tipo) {
+		String sqlPromocion = "INSERT INTO promociones (tipo_promocion, nombre, descuento, descripcion, foto_portada) VALUES (?, ?, ?, ?, ?)";
+		String sqlInsertarPeliculas = "INSERT INTO peliculas_en_promocion (fk_promocion, fk_pelicula) VALUES (?, ?)";
+		String sqlUltimoId = "SELECT max(id) as 'id' FROM promociones";
+		try {
+			Connection conexion = ProveedorDeConexion.getConexion();
+			PreparedStatement declarPromo = conexion.prepareStatement(sqlPromocion);
+			PreparedStatement declarInsertarPelic = conexion.prepareStatement(sqlInsertarPeliculas);
+			PreparedStatement declarUltimoId = conexion.prepareStatement(sqlUltimoId);
+
+			declarPromo.setString(1, tipo);
+			declarPromo.setString(2, promocion.getTitulo());
+
+			switch (tipo) {
+			case "Porcentual":
+				declarPromo.setInt(3, (int) descuento);
+				break;
+			case "Absoluta":
+				declarPromo.setDouble(3, descuento);
+				break;
+			case "AxB":
+				declarPromo.setInt(3, (int) descuento);
+				break;
+			}
+			declarPromo.setString(4, promocion.getDescripcion());
+			declarPromo.setString(5, promocion.getUrlPortada());
+
+			declarPromo.executeUpdate();
+			
+			ResultSet ultimoId = declarUltimoId.executeQuery();
+			ultimoId.next();
+
+			// Se insterta peliculas en Peliculas en promocion
+			ArrayList<Pelicula> peliculas = promocion.getPeliculas();
+
+			for (Pelicula pelicula : peliculas) {
+				declarInsertarPelic.setInt(1, ultimoId.getInt("id"));
+				declarInsertarPelic.setInt(2, pelicula.getId());
+				declarInsertarPelic.executeUpdate();
+			}
+			
+			return true;
+		} catch (SQLException e) {
+			throw new DatosPerdidosError(e);
+		}
 	}
 
 	public boolean editar(Promocion promocion) {
@@ -74,6 +121,7 @@ public class PromocionDAO {
 			for (Pelicula pelicula : peliculas) {
 				declarInsertarPelic.setInt(1, promocion.getId());
 				declarInsertarPelic.setInt(2, pelicula.getId());
+				declarInsertarPelic.executeUpdate();
 			}
 
 			// Por ultimo se actualiza los datos de Promocion
@@ -82,7 +130,7 @@ public class PromocionDAO {
 			declarPromo.setString(3, promocion.getUrlPortada());
 			declarPromo.setInt(4, promocion.getId());
 			declarPromo.executeUpdate();
-
+			
 		} catch (SQLException e) {
 			throw new DatosPerdidosError(e);
 		}
@@ -98,7 +146,7 @@ public class PromocionDAO {
 
 			declaracion.setInt(1, promocion.getId());
 			declaracion.executeUpdate();
-
+			
 			return true;
 		} catch (SQLException e) {
 			throw new DatosPerdidosError(e);
@@ -126,7 +174,6 @@ public class PromocionDAO {
 			if (resultados.next()) {
 				promocion = crearPromocion(resultados, resultIdPeliculas);
 			}
-
 		} catch (Exception e) {
 			throw new DatosPerdidosError(e);
 		}

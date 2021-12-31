@@ -231,37 +231,70 @@
 							aria-label="Close"></button>
 					</div>
 
+					<!-- CUERPO DEL MODAL -->
 					<div class="modal-body p-5 pt-0">
+						<!-- FORLMULARIO DEL MODAL -->
 						<form action="crearPromocion.ad" method="post">
-
 							<div class="form-floating mb-3">
 								<input type="text" class="form-control rounded-4" id="titulo"
 									placeholder="Titulo" required="required" name="titulo">
 								<label for="titulo">Nombre</label>
 								<div class="invalid-feedback">Introduzca un nombre válido</div>
 							</div>
+							<div class="row align-items-end mb-3">
+								<div class="col-7 form-floating me-auto">
+									<select onchange="cambiar()" class="form-select"
+										name="tipoPromocion" id="tipoPromocion"
+										aria-label="Floating label select example" required="required">
+										<option value="Porcentual">Super descuentos</option>
+										<option value="Absoluta">Precios locos</option>
+										<option value="AxB">Regaladas</option>
+									</select> <label for="tipoPromocion">Tipo de promoción</label>
+								</div>
 
-							<div class="input-group">
-								<select class="form-select" id="pelicula" name="pelicula"
-									aria-label="Example select with button addon">
+								<div class="row col-5">
+									<small id="descrip-beneficio"
+										class="col-12 text-center mb-1 p-0"
+										style="font-size: 10.9px; color: #e1ac0d">Ingresar un
+										%</small>
+									<div class="col-12 form-floating">
+										<input type="number" class="form-control rounded-4"
+											id="beneficio" placeholder="beneficio" required="required"
+											name="beneficio"> <label for="beneficio">Beneficio</label>
+										<div class="invalid-feedback">Introduzca un beneficio
+											válido</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="input-group row m-0">
+								<small class="col-12 mb-1 text-center p-0"
+									style="font-size: 10.9px; color: #e1ac0d;">Las
+									películas aparecerán en función del género de la primer
+									película seleccionada</small> <select
+									class="form-select form-select-sm col-9" id="selectPelicula"
+									name="pelicula" aria-label=".form-select-sm example">
 									<c:forEach items="${peliculas}" var="pelicula">
-										<option value="${pelicula.id}">${pelicula.titulo}</option>
+										<option value="${pelicula.id}" data-type="${pelicula.genero}">${pelicula.titulo}</option>
 									</c:forEach>
 								</select>
-								<button  onclick="seleccionarPelicula()" class="btn btn-primary w-25" type="button">Agregar
-									película</button>
-							</div>
-							
-							<div class="form-floating my-3 col-md-10 col-12 mx-auto">
-								<textarea readonly="readonly" class="form-control"
-									placeholder="peliculas" name="peliculas" id="peliculas"
-									style="height: 100px"></textarea>
-								<label for="peliculas">Películas en promoción</label>
+								<button onclick="seleccionarPelicula()"
+									class="col-3 btn btn-primary" type="button">Agregar</button>
 							</div>
 
-							<div class="form-floating mb-3">
-								<input type="text" class="form-control rounded-4 d-none"
-									id="idPeliculas" placeholder="idPeliculas" required="required"
+							<div class="form-floating row flex-column m-0 my-3">
+								<textarea readonly="readonly"
+									class="col-10 mx-auto form-control" placeholder="peliculas"
+									name="peliculas" id="peliculas" required="required"
+									style="height: 150px"></textarea>
+								<label for="peliculas">Películas agregadas</label>
+								<button onclick="resetear()"
+									class="col-3 mx-auto mt-2 btn btn-primary" type="button">Vaciar</button>
+							</div>
+
+							<div>
+								<input type="text" class="form-control d-none" id="idPeliculas"
+									placeholder="idPeliculas" required="required"
 									name="idPeliculas">
 							</div>
 
@@ -271,17 +304,18 @@
 									id="fotoDePortada">
 							</div>
 
-							<div class="form-floating my-3 col-md-10 col-12 mx-auto">
+							<div class="form-floating my-3 col-12 mx-auto">
 								<textarea class="form-control"
 									placeholder="Leave a comment here" name="descripcion"
 									id="descripcion" style="height: 100px"></textarea>
-								<label for="descripcion">Descripción</label>
+								<label for="descripcion">Descripción de la promoción</label>
 							</div>
 
-							<button type="submit"
-								class="w-100 mb-2 btn btn-lg rounded-4 btn-warning">Crear
-								promoción</button>
-
+							<div class="row">
+								<button type="submit"
+									class="col-6 mx-auto mb-2 btn btn rounded-4 btn-warning">Crear
+									promoción</button>
+							</div>
 						</form>
 					</div>
 				</div>
@@ -292,85 +326,103 @@
 		<div class="modal fade" id="modalEditarPromocion"
 			data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered modal-lg">
+			<div class="modal-dialog modal-dialog-centered">
 				<div class="modal-content rounded-5 shadow">
 					<!-- ENCABEZADO DEL MODAL -->
 					<div class="modal-header p-5 pb-4 border-bottom-0">
 						<div class="d-inline-flex">
-							<h2 class="align-self-center">EDITAR PROMOCIÓN</h2>
+							<h2 class="align-self-center">CREAR PROMOCIÓN</h2>
 						</div>
 
 						<button type="button" class="btn-close" data-bs-dismiss="modal"
 							aria-label="Close"></button>
 					</div>
 
+					<!-- CUERPO DEL MODAL -->
 					<div class="modal-body p-5 pt-0">
-						<form
-							action="/TP_3_SplashingPopcorn_Entrega_Final2/promocion/editarPromocion.ad"
-							method="post">
-							<label for="titulo">Titulo de promoción</label>
+						<!-- FORLMULARIO DEL MODAL -->
+						<form action="crearPromocion.ad" method="post">
 							<div class="form-floating mb-3">
-								<input type="text" class="form-control rounded-4" id="titulo"
-									name="titulo" required value="${promocion.titulo}">
-								<div class="invalid-feedback">Introduzca su nombre por
-									favor</div>
+								<input type="text" class="form-control rounded-4" id="tituloEdit"
+									placeholder="Titulo" required="required" name="tituloEdit">
+								<label for="tituloEdit">Nombre</label>
+								<div class="invalid-feedback">Introduzca un nombre válido</div>
+							</div>
+							<div class="row align-items-end mb-3">
+								<div class="col-7 form-floating me-auto">
+									<select onchange="" class="form-select"
+										name="tipoPromocionEdit" id="tipoPromocionEdit"
+										aria-label="Floating label select example" required="required">
+										<option value="Porcentual">Super descuentos</option>
+										<option value="Absoluta">Precios locos</option>
+										<option value="AxB">Regaladas</option>
+									</select> <label for="tipoPromocionEdit">Tipo de promoción</label>
+								</div>
+
+								<div class="row col-5">
+									<small id="descrip-beneficioEdit"
+										class="col-12 text-center mb-1 p-0"
+										style="font-size: 10.9px; color: #e1ac0d">Ingresar un
+										%</small>
+									<div class="col-12 form-floating">
+										<input type="number" class="form-control rounded-4"
+											id="beneficioEdit" placeholder="beneficio" required="required"
+											name="beneficioEdit"> <label for="beneficioEdit">Beneficio</label>
+										<div class="invalid-feedback">Introduzca un beneficio
+											válido</div>
+									</div>
+								</div>
 							</div>
 
-							<div class="form-floating mt-5 mb-3">
-								<label for="pelicula1">Elija una película</label> <input
-									list="listaPeliculas" id="pelicula1" name="peliculasEnPromos" />
-
-								<datalist id="listaPeliculas">
-									<c:forEach items="${peliculas}" var="pelicula1">
-										<option value="${pelicula1.titulo}">
+							<div class="input-group row m-0">
+								<small class="col-12 mb-1 text-center p-0"
+									style="font-size: 10.9px; color: #e1ac0d;">Las
+									películas aparecerán en función del género de la primer
+									película seleccionada</small> <select
+									class="form-select form-select-sm col-9" id="selectPeliculaEdit"
+									name="selectPeliculaEdit" aria-label=".form-select-sm example">
+									<c:forEach items="${peliculas}" var="pelicula">
+										<option value="${pelicula.id}" data-type="${pelicula.genero}">${pelicula.titulo}</option>
 									</c:forEach>
-								</datalist>
-
-							</div>
-							<div class="form-floating mt-5 mb-3">
-								<label for="pelicula2">Elija una película</label> <input
-									list="listaPeliculas" id="pelicula2" name="peliculasEnPromos" />
-
-								<datalist id="listaPeliculas">
-									<c:forEach items="${peliculas}" var="pelicula2">
-										<option value="${pelicula2.titulo}">
-									</c:forEach>
-								</datalist>
-
-							</div>
-							<div class="form-floating mt-5 mb-3">
-								<label for="pelicula3">Elija una película</label> <input
-									list="listaPeliculas" id="pelicula3" name="peliculasEnPromos" />
-
-								<datalist id="listaPeliculas">
-									<c:forEach items="${peliculas}" var="pelicula3">
-										<option value="${pelicula3.titulo}">
-									</c:forEach>
-								</datalist>
-
-							</div>
-							<label for="descripcion">Descripción de promoción</label>
-							<div class="form-floating mb-3">
-								<input type="text" class="form-control rounded-4"
-									id="descripcion" name="descripcion" required
-									value="${promocion.descripcion}">
-								<div class="invalid-feedback">Introduzca la descripción
-									por favor</div>
+								</select>
+								<button onclick=""
+									class="col-3 btn btn-primary" type="button">Agregar</button>
 							</div>
 
-							<div class="form-floating mb-3">
-								<label for="urlPortada">Foto de portada</label> <input
-									type="file" class="form-control" id="urltada"
-									name="urlPortada" required value="${promocion.urlPortada}">
-								<div class="invalid-feedback">Introduzca una imagen por
-									favor</div>
+							<div class="form-floating row flex-column m-0 my-3">
+								<textarea readonly="readonly"
+									class="col-10 mx-auto form-control" placeholder="peliculas"
+									name="peliculasEdit" id="peliculasEdit" required="required"
+									style="height: 150px"></textarea>
+								<label for="peliculasEdit">Películas agregadas</label>
+								<button onclick=""
+									class="col-3 mx-auto mt-2 btn btn-primary" type="button">Vaciar</button>
 							</div>
 
+							<div>
+								<input type="text" class="form-control d-none" id="idPeliculasEdit"
+									placeholder="idPeliculas" required="required"
+									name="idPeliculasEdit">
+							</div>
 
-							<button type="submit"
-								class="w-100 mb-2 btn btn-lg rounded-4 btn-warning">Guardar
-								cambios</button>
+							<div class="">
+								<label for="fotoDePortadaEdit" class="form-label">Foto de
+									portada</label> <input class="form-control" type="file"
+									id="fotoDePortadaEdit">
+							</div>
 
+							<div class="form-floating my-3 col-12 mx-auto">
+								<textarea class="form-control"
+									placeholder="Leave a comment here" name="descripcionEdit"
+									id="descripcionEdit" style="height: 100px"></textarea>
+								<label for="descripcionEdit">Descripción de la promoción</label>
+							</div>
+
+							<div class="row">
+								<button type="submit"
+									class="col-6 mx-auto mb-2 btn btn rounded-4 btn-warning">Crear
+									promoción</button>
+							</div>
 						</form>
 					</div>
 				</div>

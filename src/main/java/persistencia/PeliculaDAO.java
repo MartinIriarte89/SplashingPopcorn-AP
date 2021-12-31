@@ -64,7 +64,6 @@ public class PeliculaDAO {
 
 			declaracion.setInt(1, pelicula.getId());
 			declaracion.executeUpdate();
-
 			return true;
 		} catch (SQLException e) {
 			throw new DatosPerdidosError(e);
@@ -130,7 +129,6 @@ public class PeliculaDAO {
 			if (resultados.next()) {
 				pelicula = crearPelicula(resultados);
 			}
-
 		} catch (Exception e) {
 			throw new DatosPerdidosError(e);
 

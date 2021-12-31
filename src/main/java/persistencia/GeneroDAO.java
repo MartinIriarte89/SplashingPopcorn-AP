@@ -24,6 +24,7 @@ public class GeneroDAO {
 			while (resultados.next()) {
 				generos.add(crearGenero(resultados));
 			}
+			
 		} catch (Exception e) {
 			throw new DatosPerdidosError(e);
 		}
@@ -38,7 +39,7 @@ public class GeneroDAO {
 
 			declaracion.setString(1, genero.getNombre());
 			declaracion.executeUpdate();
-
+			
 			return true;
 		} catch (SQLException e) {
 			throw new DatosPerdidosError(e);
@@ -55,8 +56,8 @@ public class GeneroDAO {
 			declaracion.setString(1, genero.getNombre());
 			
 			declaracion.executeUpdate();
+			
 			return true;
-
 		} catch (SQLException e) {
 			throw new DatosPerdidosError(e);
 		}
@@ -84,6 +85,7 @@ public class GeneroDAO {
 			if (resultados.next()) {
 				genero = crearGenero(resultados);
 			}
+			
 
 		} catch (Exception e) {
 			throw new DatosPerdidosError(e);

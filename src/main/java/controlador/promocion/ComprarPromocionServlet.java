@@ -10,19 +10,23 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import modelo.Promocion;
 import modelo.Usuario;
 import persistencia.FabricaDAO;
-import servicios.ServicioComprarPromocion;
+import servicios.ServicioComprar;
+import servicios.ServicioPromocion;
 
 @WebServlet("/comprarPromocion.do")
 public class ComprarPromocionServlet extends HttpServlet implements Servlet{
 	private static final long serialVersionUID = 4039954273142666646L;
-	private ServicioComprarPromocion servicioComprarPromo;
+	private ServicioComprar servicioComprarPromo;
+	private ServicioPromocion servPromocion;
 	
 	@Override
 	public void init() throws ServletException {
 		super.init();
-		this.servicioComprarPromo = new ServicioComprarPromocion();
+		this.servicioComprarPromo = new ServicioComprar();
+		this.servPromocion = new ServicioPromocion();
 	}
 	
 	@Override
@@ -30,8 +34,9 @@ public class ComprarPromocionServlet extends HttpServlet implements Servlet{
 			throws ServletException, IOException {
 
 		int promocionId = Integer.parseInt(request.getParameter("id"));
+		Promocion promocion = servPromocion.buscarPor(promocionId);
 		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
-		Map<String, String> errores = servicioComprarPromo.comprar(usuario.getId(), promocionId);
+		Map<String, String> errores = servicioComprarPromo.comprar(usuario, promocion);
 
 		Usuario nuevoUsuario = FabricaDAO.getUsuarioDAO().buscarPorId(usuario.getId());
 		request.getSession().setAttribute("usuario", nuevoUsuario);

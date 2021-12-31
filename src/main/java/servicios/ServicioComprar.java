@@ -2,40 +2,35 @@ package servicios;
 
 import java.util.HashMap;
 
-import modelo.Pelicula;
+import modelo.Sugerencia;
 import modelo.Usuario;
 import persistencia.FabricaDAO;
 import persistencia.ItinerarioDAO;
 import persistencia.PeliculaDAO;
 import persistencia.UsuarioDAO;
 
-public class ServicioComprarPelicula {
+public class ServicioComprar {
 
 	PeliculaDAO peliculaDAO = FabricaDAO.getPeliculaDAO();
 	UsuarioDAO usuarioDAO = FabricaDAO.getUsuarioDAO();
 	ItinerarioDAO itinerarioDAO = FabricaDAO.getItinerarioDAO();
 	ServicioTransaccion transaccion = new ServicioTransaccion();
 
-	public HashMap<String, String> comprar(int idUsuario, int idPelicula) {
+	public HashMap<String, String> comprar(Usuario usuario, Sugerencia sugerencia) {
 		HashMap<String, String> errores = new HashMap<String, String>();
 
-		Usuario usuario = usuarioDAO.buscarPorId(idUsuario);
-		Pelicula pelicula = peliculaDAO.buscarPor(idPelicula);
-
-		if (!usuario.puedeComprarA(pelicula)) {
+		if (!usuario.puedeComprarA(sugerencia)) {
 			errores.put("usuario", "Su dinero o tiempo no es suficiente");
 		}
 
-		if (!pelicula.tieneStock()) {
+		if (!sugerencia.tieneStock()) {
 			errores.put("pelicula", "No hay stock disponible");
 		}
 
 		if (errores.isEmpty()) {
-			usuario.comprar(pelicula);
-			pelicula.restarStock();
-
-			transaccion.actualizarEnBBDD(usuario, pelicula);
-
+			usuario.comprar(sugerencia);
+			sugerencia.restarStock();
+			transaccion.actualizarEnBBDD(usuario, sugerencia);
 		}
 		return errores;
 	}

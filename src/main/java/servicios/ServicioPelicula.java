@@ -4,13 +4,16 @@ import java.util.ArrayList;
 import modelo.Pelicula;
 import persistencia.FabricaDAO;
 import persistencia.PeliculaDAO;
+import persistencia.commons.ProveedorDeConexion;
 
 public class ServicioPelicula {
 
 	PeliculaDAO peliculaDAO = FabricaDAO.getPeliculaDAO();
 
 	public ArrayList<Pelicula> listar() {
-		return peliculaDAO.cargar();
+		ArrayList<Pelicula> peliculas = peliculaDAO.cargar();
+		ProveedorDeConexion.cerrarConexion();
+		return peliculas;
 	}
 
 	public Pelicula crear(String titulo, double precio, int duracion, int stock, String genero, String descripcion,
@@ -20,7 +23,7 @@ public class ServicioPelicula {
 				anioLanzamiento, lema);
 		if (pelicula.esValida()) {
 			peliculaDAO.insertar(pelicula);
-
+			ProveedorDeConexion.cerrarConexion();
 		}
 		return pelicula;
 	}
@@ -48,6 +51,7 @@ public class ServicioPelicula {
 		}
 		if (pelicula.esValida()) {
 			peliculaDAO.editar(pelicula);
+			ProveedorDeConexion.cerrarConexion();
 		}
 		return pelicula;
 	}
@@ -55,9 +59,12 @@ public class ServicioPelicula {
 	public void borrar(int id) {
 		Pelicula pelicula = buscarPor(id);
 		peliculaDAO.borrar(pelicula);
+		ProveedorDeConexion.cerrarConexion();
 	}
 
 	public Pelicula buscarPor(int id) {
-		return peliculaDAO.buscarPor(id);
+		Pelicula pelicula = peliculaDAO.buscarPor(id);
+		ProveedorDeConexion.cerrarConexion();
+		return pelicula;
 	}
 }
