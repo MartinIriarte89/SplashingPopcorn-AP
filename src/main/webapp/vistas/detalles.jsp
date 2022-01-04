@@ -89,11 +89,11 @@
 									<div class="btn-group align-self-center" role="group"
 										id="acceso_compra">
 										<a
-											href="/TP_3_SplashingPopcorn_Entrega_Final2/peliculas/editarPelicula.ad"
+											href="/Webapp_Proyecto_Final/peliculas/editarPelicula.ad"
 											role="button" class="btn btn-lg" data-bs-toggle="modal"
 											data-bs-target="#modalEditar" id="boton-editar"> <strong>Editar</strong>
 										</a> <a
-											href="/TP_3_SplashingPopcorn_Entrega_Final2/peliculas/borrarPelicula.ad"
+											href="/Webapp_Proyecto_Final/peliculas/borrarPelicula.ad"
 											role="button" class="btn btn-lg" data-bs-toggle="modal"
 											data-bs-target="#modalEliminar" id="boton-eliminar"><strong>Eliminar</strong>
 										</a>
@@ -106,7 +106,7 @@
 
 										<c:if test="${usuario.puedeComprarA(pelicula) && pelicula.tieneStock()}">
 											<a class="btn btn-lg"
-												href="/TP_3_SplashingPopcorn_Entrega_Final2/comprarPelicula.do?id=${pelicula.id}"
+												href="/Webapp_Proyecto_Final/comprarPelicula.do?id=${pelicula.id}"
 												role="button" id="boton-comprar"><strong>Comprar</strong></a>
 										</c:if>
 										<c:if test="${!usuario.puedeComprarA(pelicula) && !pelicula.tieneStock()}">

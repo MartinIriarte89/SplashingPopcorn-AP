@@ -5,7 +5,7 @@
 			<!-- ENCABEZADO DEL MODAL -->
 			<div class="modal-header p-5 pb-4 border-bottom-0">
 				<div class="d-inline-flex">
-					<img alt="" src="/TP_3_SplashingPopcorn_Entrega_Final2/imagenes/logo.png"
+					<img alt="" src="/Webapp_Proyecto_Final/imagenes/logo.png"
 						style="width: 30%; margin: -20px;">
 					<h2 class="align-self-center">Splashing Popcorn</h2>
 				</div>

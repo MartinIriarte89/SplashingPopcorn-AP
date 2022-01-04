@@ -10,7 +10,7 @@
 
 <jsp:include page="../parciales/librerias.jsp"></jsp:include>
 <link rel="stylesheet"
-	href="/TP_3_SplashingPopcorn_Entrega_Final2/css/estilosCompartidos.css">
+	href="/Webapp_Proyecto_Final/css/estilosCompartidos.css">
 
 
 <title>Usuarios Registrados</title>
@@ -22,7 +22,7 @@
 	</header>
 
 	<main
-		style="background-image: url('/TP_3_SplashingPopcorn_Entrega_Final2/imagenes/spikes.png');">
+		style="background-image: url('/Webapp_Proyecto_Final/imagenes/spikes.png');">
 		<div class="container pt-5 " style="min-height: 100vh;">
 			<div class="f1 h1 text-center mt-5 mb-3 font-lato">Tabla de
 				Usuarios</div>
@@ -44,7 +44,7 @@
 								<td>${user.nombre}</td>
 								<td>${user.usuario}</td>
 								<td><a href=""><i class="far fa-eye"></i></a> <a
-									href="/TP_3_SplashingPopcorn_Entrega_Final2/listarItinerario.do?id=${user.id}"><i
+									href="/Webapp_Proyecto_Final/listarItinerario.do?id=${user.id}"><i
 										class="fas fa-shopping-cart"></i></a> <a href=""><i
 										class="fas fa-pencil-alt"></i></a> <a
 									href="/TP_3_SplashingPopcorn_Entrega_Final2/borrarUsuario.ad?id=${user.id}">

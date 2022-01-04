@@ -51,18 +51,18 @@
 												<c:out value="Precio: ${pelicula.precio}"></c:out>
 											</p>
 											<a
-												href="/TP_3_SplashingPopcorn_Entrega_Final2/listarDetallePelicula?id=${pelicula.id}"
+												href="/Webapp_Proyecto_Final/listarDetallePelicula?id=${pelicula.id}"
 												class="btn btn-primary" id="botonDetalles">Ver</a>
 
 											<c:if test="${usuario.esAdmin()}">
 												<a
-													href="controlador/pelicula/editarPelicula?id=${pelicula.id}"
+													href="/Webapp_Proyecto_Final/editarPelicula?id=${pelicula.id}"
 													data-bs-toggle="modal"
 													data-bs-target="#modalEditarPelicula"
 													class="btn btn-success" id="botonEditar">Editar</a>
 
 												<a
-													href="controlador/pelicula/borrarPelicula?id=${pelicula.id}"
+													href="/Webapp_Proyecto_Final/borrarPelicula?id=${pelicula.id}"
 													data-bs-toggle="modal" data-bs-target="#modalEliminar"
 													class="btn btn-success" id="botonEliminar">Eliminar</a>
 
@@ -96,11 +96,11 @@
 									<div class="btn-group align-self-center" role="group"
 										id="acceso_compra">
 										<a
-											href="/TP_3_SplashingPopcorn_Entrega_Final2/promocion/editarPromocion.ad"
+											href="/Webapp_Proyecto_Final/editarPromocion.ad"
 											role="button" class="btn btn-lg" data-bs-toggle="modal"
 											data-bs-target="#modalEditar" id="boton-editar"> <strong>Editar</strong>
 										</a> <a
-											href="/TP_3_SplashingPopcorn_Entrega_Final2/promocion/borrarPromocion.ad"
+											href="/Webapp_Proyecto_Final/borrarPromocion.ad"
 											role="button" class="btn btn-lg" data-bs-toggle="modal"
 											data-bs-target="#modalEliminar" id="boton-eliminar"><strong>Eliminar</strong>
 										</a>
@@ -114,7 +114,7 @@
 										<c:if
 											test="${usuario.puedeComprarA(promocion) && promocion.tieneStock()}">
 											<a class="btn btn-lg"
-												href="/TP_3_SplashingPopcorn_Entrega_Final2/comprarPromocion.do?id=${promocion.id}&usuario=${usuario.id}"
+												href="/Webapp_Proyecto_Final/comprarPromocion.do?id=${promocion.id}&usuario=${usuario.id}"
 												role="button" id="boton-comprar"><strong>Comprar</strong></a>
 										</c:if>
 										<c:if test="${!usuario.puedeComprarA(promocion) && !promocion.tieneStock()}">
@@ -201,7 +201,7 @@
 						</div>
 
 						<div class="modal-body p-5 pt-0">
-							<form action="controlador/promociones/editarPromocion.do"
+							<form action="/Webapp_Proyecto_Final/editarPromocion.do"
 								method="post">
 								<label for="titulo">Titulo de promoción</label>
 								<div class="form-floating mb-3">

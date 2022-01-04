@@ -1,5 +1,5 @@
 
-/*CODIGO USADO PARA CARGAR MODALES DE ELIMINAR Y EDITAR*/
+/*CODIGO USADO PARA CARGAR MODALES DE ELIMINAR Y EDITAR DE PELICULAS*/
 
 if (!!document.getElementById('modalEliminarPelicula')) {
 
@@ -12,7 +12,7 @@ if (!!document.getElementById('modalEliminarPelicula')) {
 
 		let botonEnviar = modalBorrar.querySelector('#botonElim')
 
-		botonEnviar.setAttribute('href', "/TP_3_SplashingPopcorn_Entrega_Final2/borrarPelicula.ad?id=" + id)
+		botonEnviar.setAttribute('href', "/Webapp_Proyecto_Final/borrarPelicula.ad?id=" + id)
 	});
 }
 
@@ -45,7 +45,7 @@ if (!!document.getElementById('modalEditarPelicula')) {
 		let anioLanzamientoEdit = modalEditar.querySelector('#anioLanzamientoEdit')
 		let descripcionEdit = modalEditar.querySelector('#descripcionEdit')
 
-		botonEnviar.setAttribute('href', "/TP_3_SplashingPopcorn_Entrega_Final2/editarPelicula.ad")
+		botonEnviar.setAttribute('href', "/Webapp_Proyecto_Final/editarPelicula.ad")
 		idEdit.value = id;
 		tituloEdit.value = titulo;
 		lemaEdit.value = lema;
@@ -71,7 +71,86 @@ if (!!document.getElementById('modalEliminarPromocion')) {
 
 		let botonEnviar = modalBorrarPromo.querySelector('#botonElim')
 
-		botonEnviar.setAttribute('href', "/TP_3_SplashingPopcorn_Entrega_Final2/borrarPromocion.ad?id=" + id)
+		botonEnviar.setAttribute('href', "/Webapp_Proyecto_Final/borrarPromocion.ad?id=" + id)
+	});
+}
+
+if (!!document.getElementById('modalEditarPromocion')) {
+
+	var modalEditarPromocion = document.getElementById('modalEditarPromocion')
+	modalEditarPromocion.addEventListener('show.bs.modal', function(event) {
+
+		let boton = event.relatedTarget
+		let id = boton.getAttribute('data-bs-id')
+		let titulo = boton.getAttribute('data-bs-titulo')
+		let idPelis = boton.getAttribute('data-bs-idPelis')
+		let arrayIdPelis = idPelis.split(',')
+		let genero = boton.getAttribute('data-bs-genero')
+		let descripcion = boton.getAttribute('data-bs-descripcion')
+		let beneficio = boton.getAttribute('data-bs-beneficio')
+		let tipoPromocion = boton.getAttribute('data-bs-tipoPromocion')
+		
+		console.log(idPelis)
+		console.log(arrayIdPelis)
+
+		let idEdit = modalEditarPromocion.querySelector('#idEdit')
+		let tituloEdit = modalEditarPromocion.querySelector('#tituloEdit')
+		let tipoPromocionEdit = modalEditarPromocion.querySelector('#tipoPromocionEdit')
+		let beneficioEdit = modalEditarPromocion.querySelector('#beneficioEdit')
+		let descripBeneficioEdit = modalEditarPromocion.querySelector('#descrip-beneficioEdit')
+		let selectPeliculaEdit = modalEditarPromocion.querySelector('#selectPeliculaEdit')
+		let peliculasEdit = modalEditarPromocion.querySelector('#peliculasEdit')
+		let idPeliculasEdit = modalEditarPromocion.querySelector('#idPeliculasEdit')
+		let descripcionEdit = modalEditarPromocion.querySelector('#descripcionEdit')
+
+		idEdit.value = id;
+		tituloEdit.value = titulo;
+		descripcionEdit.value = descripcion;
+		tipoPromocionEdit.value = tipoPromocion;
+		beneficioEdit.value = beneficio;
+
+		for (let x = 0; x < arrayIdPelis.length; x++) {
+			
+			selectPeliculaEdit.value = arrayIdPelis[x];
+			let index = selectPeliculaEdit.selectedIndex;
+			let opcion = selectPeliculaEdit.options[index];
+			
+			console.log(selectPeliculaEdit.value)
+			console.log(index)
+			console.log(opcion.text)
+			peliculasEdit.value = selectPeliculaEdit.options[index].text + '\n' + peliculasEdit.value;
+			if (idPeliculasEdit.value == '') {
+				idPeliculasEdit.value = selectPeliculaEdit.options[index].value;
+			} else {
+				idPeliculasEdit.value = idPeliculasEdit.value + ',' + selectPeliculaEdit.options[index].value;
+			}
+			selectPeliculaEdit.remove(index);
+		}
+
+		for (let i = selectPeliculaEdit.options.length - 1; i >= 0; i--) {
+
+			let generoTemp = selectPeliculaEdit.options[i].attributes[1].nodeValue
+			if (generoTemp != genero) {
+				selectPeliculaEdit.remove(i)
+			}
+		}
+
+		let indice = tipoPromocionEdit.selectedIndex
+		let opcionSeleccionada = tipoPromocionEdit.options[indice];
+
+		if (opcionSeleccionada.text == 'Super descuentos') {
+			descripBeneficioEdit.innerHTML = 'Ingresar un %';
+		}
+
+		else if (opcionSeleccionada.text == 'Precios locos') {
+
+			descripBeneficioEdit.innerHTML = 'Ingresar un monto fijo';
+		}
+
+		else {
+			descripBeneficioEdit.innerHTML = 'N° de películas a cobrar';
+		}
+
 	});
 }
 
@@ -85,6 +164,7 @@ if (!!document.getElementById('selectPelicula')) {
 }
 
 function seleccionarPelicula() {
+
 	let select = document.querySelector('#selectPelicula');
 	let textAreaNombre = document.querySelector('#peliculas')
 	let inputID = document.querySelector('#idPeliculas')
@@ -115,35 +195,6 @@ function seleccionarPelicula() {
 }
 
 
-
-function cambiar() {
-
-	var descripBeneficio = document.querySelector('#descrip-beneficio');
-	var beneficio = document.querySelector('#tipoPromocion');
-	
-	console.log(descripBeneficio)
-	console.log(beneficio)
-	
-	let indice = beneficio.selectedIndex
-	console.log(indice);
-	let opcionSeleccionada = beneficio.options[indice];
-	
-	console.log(opcionSeleccionada.text)
-
-	if (opcionSeleccionada.text == 'Super descuentos') {
-		descripBeneficio.innerHTML = 'Ingresar un %';
-	}
-
-	else if (opcionSeleccionada.text == 'Precios locos') {
-		
-		descripBeneficio.innerHTML = 'Ingresar un monto fijo';
-	}
-
-	else {
-		descripBeneficio.innerHTML = 'N° de películas a cobrar';
-	}
-};
-
 function resetear() {
 	let select = document.querySelector('#selectPelicula');
 	let textAreaNombre = document.querySelector('#peliculas');
@@ -156,7 +207,6 @@ function resetear() {
 	/*con la copia del select se reestablecen los valores por defecto*/
 	for (let i = 0; i < copiaNodosOptions.length; i++) {
 		select.appendChild(copiaNodosOptions[i]);
-		console.log(copiaNodosOptions[i])
 	}
 
 	/*se limpia el textArea y el input que envia los id de las peliculas al servlet*/
@@ -164,9 +214,111 @@ function resetear() {
 	inputID.value = '';
 }
 
+function cambiar() {
+
+	var descripBeneficio = document.querySelector('#descrip-beneficio');
+	var beneficio = document.querySelector('#tipoPromocion');
+
+	let indice = beneficio.selectedIndex
+	let opcionSeleccionada = beneficio.options[indice];
+
+	if (opcionSeleccionada.text == 'Super descuentos') {
+		descripBeneficio.innerHTML = 'Ingresar un %';
+	}
+
+	else if (opcionSeleccionada.text == 'Precios locos') {
+
+		descripBeneficio.innerHTML = 'Ingresar un monto fijo';
+	}
+
+	else {
+		descripBeneficio.innerHTML = 'N° de películas a cobrar';
+	}
+};
+
+/* Codigo para completar el modal editar Promocion */
+
+if (!!document.getElementById('selectPeliculaEdit')) {
+	/*se crea una copia del select que contiene a todas las peliculas*/
+	let nodosOptions = document.querySelector('#selectPeliculaEdit').children;
+	let copia = Array();
+	var copiaNodosOptionsEdit = Object.assign(copia, nodosOptions);
+}
+
+function seleccionarPeliculaEdit() {
+	let select = document.querySelector('#selectPeliculaEdit');
+	let textAreaNombre = document.querySelector('#peliculasEdit')
+	let inputID = document.querySelector('#idPeliculasEdit')
+
+	/*se obtiene el option seleccionado*/
+	const indice = select.selectedIndex;
+	const opcionSeleccionada = select.options[indice];
+	/*y el genero de la pelicula elegida*/
+	const genero = opcionSeleccionada.attributes[1].nodeValue
+
+	select.remove(indice);
+
+	/*si es la primera vez que se agrega una pelicula*/
+	if (inputID.value == '') {
+		inputID.value = opcionSeleccionada.value;
+		/*se eliminan las peliculas que no coincidan con el genero de la seleccionada del select*/
+		for (let i = select.options.length - 1; i >= 0; i--) {
+			let generoTemp = select.options[i].attributes[1].nodeValue
+			if (generoTemp != genero) {
+				select.remove(i)
+			}
+		}
+		/*si ya hay una pelicula seleccionada*/
+	} else {
+		inputID.value = inputID.value + ',' + opcionSeleccionada.value;
+	}
+	textAreaNombre.value = opcionSeleccionada.text + '\n' + textAreaNombre.value;
+}
 
 
+function resetearEdit() {
+	let select = document.querySelector('#selectPeliculaEdit');
+	let textAreaNombre = document.querySelector('#peliculasEdit');
+	let inputID = document.querySelector('#idPeliculasEdit');
+	/*se borra todo el contenido del select de peliculas */
+	for (let i = select.options.length - 1; i >= 0; i--) {
+		select.remove(i);
+	}
 
+	/*con la copia del select se reestablecen los valores por defecto*/
+	for (let i = 0; i < copiaNodosOptionsEdit.length; i++) {
+		select.appendChild(copiaNodosOptionsEdit[i]);
+	}
+
+	/*se limpia el textArea y el input que envia los id de las peliculas al servlet*/
+	textAreaNombre.value = '';
+	inputID.value = '';
+}
+
+function cambiarEdit() {
+
+	var descripBeneficio = document.querySelector('#descrip-beneficioEdit');
+	var beneficio = document.querySelector('#tipoPromocionEdit');
+
+	let indice = beneficio.selectedIndex
+	let opcionSeleccionada = beneficio.options[indice];
+
+	if (opcionSeleccionada.text == 'Super descuentos') {
+		descripBeneficio.innerHTML = 'Ingresar un %';
+	}
+
+	else if (opcionSeleccionada.text == 'Precios locos') {
+
+		descripBeneficio.innerHTML = 'Ingresar un monto fijo';
+	}
+
+	else {
+		descripBeneficio.innerHTML = 'N° de películas a cobrar';
+	}
+};
+
+
+/* este metodo es de fede hay que borrarlo */
 function mostrarPelicula(id, esPromo) {
 	const xhr = new XMLHttpRequest();
 	const fd = new FormData;

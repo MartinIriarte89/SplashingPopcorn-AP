@@ -23,31 +23,49 @@ public class ServicioPromocion {
 
 	public Promocion crear(String titulo, ArrayList<Pelicula> peliculas, String descripcion, String urlPortada,
 			String tipoPromocion, double descuento) {
-		
+
 		Promocion promocion;
 
 		if (tipoPromocion.equalsIgnoreCase("Porcentual"))
-			promocion = new PromocionPorcentual(titulo, peliculas, (int) descuento, descripcion, urlPortada);
+			promocion = new PromocionPorcentual(titulo, peliculas, (int) descuento, descripcion, urlPortada,
+					tipoPromocion);
 		else if (tipoPromocion.equalsIgnoreCase("Absoluta"))
-			promocion = new PromocionAbsoluta(titulo, peliculas, descuento, descripcion, urlPortada);
+			promocion = new PromocionAbsoluta(titulo, peliculas, descuento, descripcion, urlPortada, tipoPromocion);
 		else
-			promocion = new PromocionAPorB(titulo, peliculas, (int) descuento, descripcion, urlPortada);
+			promocion = new PromocionAPorB(titulo, peliculas, (int) descuento, descripcion, urlPortada, tipoPromocion);
 
 		if (promocion.esValida()) {
-			promocionDAO.insertar(promocion, descuento, tipoPromocion);
+			promocionDAO.insertar(promocion);
 			ProveedorDeConexion.cerrarConexion();
 		}
 
 		return promocion;
 	}
 
-	public Promocion editar(int id, String titulo, ArrayList<Pelicula> peliculas, String descripcion,
-			String urlPortada) {
+	public Promocion editar(int id, String titulo, ArrayList<Pelicula> peliculas, String descripcion, String urlPortada,
+			String tipoPromocion, double beneficio) {
 		Promocion promocion = buscarPor(id);
 
-		promocion.setTitulo(titulo);
-		promocion.setDescripcion(descripcion);
-		promocion.setUrlPortada(urlPortada);
+		if (!tipoPromocion.equalsIgnoreCase(promocion.getTipoPromocion())) {
+
+			if (tipoPromocion.equalsIgnoreCase("porcentual"))
+				promocion = new PromocionPorcentual(id, titulo, peliculas, (int) beneficio, descripcion, urlPortada,
+						tipoPromocion);
+			else if (tipoPromocion.equalsIgnoreCase("absoluta"))
+				promocion = new PromocionAbsoluta(id, titulo, peliculas, beneficio, descripcion, urlPortada,
+						tipoPromocion);
+			else
+				promocion = new PromocionAPorB(id, titulo, peliculas, (int) beneficio, descripcion, urlPortada,
+						tipoPromocion);
+
+		} else {
+			promocion.setTitulo(titulo);
+			promocion.setPeliculas(peliculas);
+			promocion.setDescripcion(descripcion);
+			promocion.setUrlPortada(urlPortada);
+			promocion.setTipoPromocion(tipoPromocion);
+			promocion.setBeneficio(beneficio);
+		}
 
 		if (promocion.esValida()) {
 			promocionDAO.editar(promocion);
@@ -66,6 +84,6 @@ public class ServicioPromocion {
 		Promocion promocion = promocionDAO.buscarPor(id);
 		ProveedorDeConexion.cerrarConexion();
 		return promocion;
-		
+
 	}
 }

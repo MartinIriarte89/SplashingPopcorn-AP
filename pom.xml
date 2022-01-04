@@ -4,12 +4,12 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>ArgentinaPrograma</groupId>
-  <artifactId>TP_3_SplashingPopcorn_Entrega_Final2</artifactId>
+  <groupId>AP</groupId>
+  <artifactId>Webapp_Proyecto_Final</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
 
-  <name>TP_3_SplashingPopcorn_Entrega_Final2 Maven Webapp</name>
+  <name>/Webapp_Proyecto_Final Maven Webapp</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
@@ -63,7 +63,7 @@
 	</dependencies>
 
   <build>
-    <finalName>TP_3_SplashingPopcorn_Entrega_Final2</finalName>
+    <finalName>Webapp_Proyecto_Final</finalName>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
         <plugin>

@@ -5,7 +5,7 @@ import modelo.Promocion;
 public class PromocionNula extends Promocion {
 
 	public PromocionNula() {
-		super("", null, "", "");
+		super("", null, "", "", 0, "");
 
 	}
 

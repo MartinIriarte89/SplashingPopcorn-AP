@@ -12,9 +12,9 @@
 <jsp:include page="../parciales/librerias.jsp"></jsp:include>
 
 <link rel="stylesheet" type="text/css"
-	href="/TP_3_SplashingPopcorn_Entrega_Final2/css/botones.css">
+	href="/Webapp_Proyecto_Final/css/botones.css">
 <link rel="stylesheet" type="text/css"
-	href="/TP_3_SplashingPopcorn_Entrega_Final2/css/estiloPeliculasYPromos.css">
+	href="/Webapp_Proyecto_Final/css/estiloPeliculasYPromos.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
@@ -22,13 +22,13 @@
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"
 	defer></script>
 <script type="text/javascript"
-	src="/TP_3_SplashingPopcorn_Entrega_Final2/js/filtrarGeneros.js" defer></script>
+	src="/Webapp_Proyecto_Final/js/filtrarGeneros.js" defer></script>
 <script type="text/javascript"
-	src="/TP_3_SplashingPopcorn_Entrega_Final2/js/jquery.pajinate.js" defer></script>
+	src="/Webapp_Proyecto_Final/js/jquery.pajinate.js" defer></script>
 <script type="text/javascript"
-	src="/TP_3_SplashingPopcorn_Entrega_Final2/js/jquery.resize2.js" defer></script>
+	src="/Webapp_Proyecto_Final/js/jquery.resize2.js" defer></script>
 <script type="text/javascript"
-	src="/TP_3_SplashingPopcorn_Entrega_Final2/js/funciones.js" defer></script>
+	src="/Webapp_Proyecto_Final/js/funciones.js" defer></script>
 
 </head>
 
@@ -166,7 +166,7 @@
 												<!-- BOTONES CARD -->
 												<div class="d-flex mt-auto justify-content-center mb-2">
 													<a
-														href="/TP_3_SplashingPopcorn_Entrega_Final2/listarDetallePromocion?id=${promocion.id}"
+														href="/Webapp_Proyecto_Final/listarDetallePromocion?id=${promocion.id}"
 														class="botondes learn-more d-flex"> <span
 														class="circle" aria-hidden="true"> <span
 															class="icon arrow"></span>
@@ -180,14 +180,14 @@
 															class="col-6 d-flex justify-content-center align-items-center">
 															<a href="" type="button" class="boton-card-edit"
 																data-bs-toggle="modal"
-																data-bs-target="#modalEditarPelicula"
+																data-bs-target="#modalEditarPromocion"
 																data-bs-id="${promocion.id}"
 																data-bs-titulo="${promocion.titulo}"
-																data-bs-precio="${promocion.precio}"
-																data-bs-duracion="${promocion.duracion}"
-																data-bs-stock="${promocion.stock}"
 																data-bs-genero="${promocion.genero}"
-																data-bs-descripcion="${promocion.descripcion}"><i
+																data-bs-descripcion="${promocion.descripcion}"
+																data-bs-beneficio="${promocion.beneficio}"
+																data-bs-tipoPromocion="${promocion.tipoPromocion}"
+																data-bs-idPelis="${promocion.getIdPelis()}"><i
 																class="bi bi-pencil-square"></i></a> <span>editar</span>
 														</div>
 														<div
@@ -246,9 +246,9 @@
 									<select onchange="cambiar()" class="form-select"
 										name="tipoPromocion" id="tipoPromocion"
 										aria-label="Floating label select example" required="required">
-										<option value="Porcentual">Super descuentos</option>
-										<option value="Absoluta">Precios locos</option>
-										<option value="AxB">Regaladas</option>
+										<option value="porcentual">Super descuentos</option>
+										<option value="absoluta">Precios locos</option>
+										<option value="axb">Regaladas</option>
 									</select> <label for="tipoPromocion">Tipo de promoción</label>
 								</div>
 
@@ -314,7 +314,7 @@
 							<div class="row">
 								<button type="submit"
 									class="col-6 mx-auto mb-2 btn btn rounded-4 btn-warning">Crear
-									promoción</button>
+								</button>
 							</div>
 						</form>
 					</div>
@@ -331,31 +331,36 @@
 					<!-- ENCABEZADO DEL MODAL -->
 					<div class="modal-header p-5 pb-4 border-bottom-0">
 						<div class="d-inline-flex">
-							<h2 class="align-self-center">CREAR PROMOCIÓN</h2>
+							<h2 class="align-self-center">EDITAR PROMOCIÓN</h2>
 						</div>
 
 						<button type="button" class="btn-close" data-bs-dismiss="modal"
-							aria-label="Close"></button>
+							aria-label="Close" onclick="resetearEdit()"></button>
 					</div>
 
 					<!-- CUERPO DEL MODAL -->
 					<div class="modal-body p-5 pt-0">
 						<!-- FORLMULARIO DEL MODAL -->
-						<form action="crearPromocion.ad" method="post">
+						<form action="editarPromocion.ad" method="post">
 							<div class="form-floating mb-3">
-								<input type="text" class="form-control rounded-4" id="tituloEdit"
-									placeholder="Titulo" required="required" name="tituloEdit">
-								<label for="tituloEdit">Nombre</label>
+								<input type="text" class="form-control rounded-4 d-none"
+									id="idEdit" placeholder="Titulo" required="required"
+									name="idEdit">
+							</div>
+							<div class="form-floating mb-3">
+								<input type="text" class="form-control rounded-4"
+									id="tituloEdit" placeholder="Titulo" required="required"
+									name="tituloEdit"> <label for="tituloEdit">Nombre</label>
 								<div class="invalid-feedback">Introduzca un nombre válido</div>
 							</div>
 							<div class="row align-items-end mb-3">
 								<div class="col-7 form-floating me-auto">
-									<select onchange="" class="form-select"
+									<select onchange="cambiarEdit()" class="form-select"
 										name="tipoPromocionEdit" id="tipoPromocionEdit"
 										aria-label="Floating label select example" required="required">
-										<option value="Porcentual">Super descuentos</option>
-										<option value="Absoluta">Precios locos</option>
-										<option value="AxB">Regaladas</option>
+										<option value="porcentual">Super descuentos</option>
+										<option value="absoluta">Precios locos</option>
+										<option value="axb">Regaladas</option>
 									</select> <label for="tipoPromocionEdit">Tipo de promoción</label>
 								</div>
 
@@ -366,8 +371,9 @@
 										%</small>
 									<div class="col-12 form-floating">
 										<input type="number" class="form-control rounded-4"
-											id="beneficioEdit" placeholder="beneficio" required="required"
-											name="beneficioEdit"> <label for="beneficioEdit">Beneficio</label>
+											id="beneficioEdit" placeholder="beneficio"
+											required="required" name="beneficioEdit"> <label
+											for="beneficioEdit">Beneficio</label>
 										<div class="invalid-feedback">Introduzca un beneficio
 											válido</div>
 									</div>
@@ -379,13 +385,14 @@
 									style="font-size: 10.9px; color: #e1ac0d;">Las
 									películas aparecerán en función del género de la primer
 									película seleccionada</small> <select
-									class="form-select form-select-sm col-9" id="selectPeliculaEdit"
-									name="selectPeliculaEdit" aria-label=".form-select-sm example">
+									class="form-select form-select-sm col-9"
+									id="selectPeliculaEdit" name="selectPeliculaEdit"
+									aria-label=".form-select-sm example">
 									<c:forEach items="${peliculas}" var="pelicula">
 										<option value="${pelicula.id}" data-type="${pelicula.genero}">${pelicula.titulo}</option>
 									</c:forEach>
 								</select>
-								<button onclick=""
+								<button onclick="seleccionarPeliculaEdit()"
 									class="col-3 btn btn-primary" type="button">Agregar</button>
 							</div>
 
@@ -395,19 +402,19 @@
 									name="peliculasEdit" id="peliculasEdit" required="required"
 									style="height: 150px"></textarea>
 								<label for="peliculasEdit">Películas agregadas</label>
-								<button onclick=""
+								<button onclick="resetearEdit()"
 									class="col-3 mx-auto mt-2 btn btn-primary" type="button">Vaciar</button>
 							</div>
 
 							<div>
-								<input type="text" class="form-control d-none" id="idPeliculasEdit"
-									placeholder="idPeliculas" required="required"
-									name="idPeliculasEdit">
+								<input type="text" class="form-control d-none"
+									id="idPeliculasEdit" placeholder="idPeliculas"
+									required="required" name="idPeliculasEdit">
 							</div>
 
 							<div class="">
-								<label for="fotoDePortadaEdit" class="form-label">Foto de
-									portada</label> <input class="form-control" type="file"
+								<label for="fotoDePortadaEdit" class="form-label">Foto
+									de portada</label> <input class="form-control" type="file"
 									id="fotoDePortadaEdit">
 							</div>
 
@@ -419,9 +426,9 @@
 							</div>
 
 							<div class="row">
-								<button type="submit"
-									class="col-6 mx-auto mb-2 btn btn rounded-4 btn-warning">Crear
-									promoción</button>
+								<button type="submit" id="botonEdit"
+									class="col-6 mx-auto mb-2 btn btn rounded-4 btn-warning">Editar
+								</button>
 							</div>
 						</form>
 					</div>

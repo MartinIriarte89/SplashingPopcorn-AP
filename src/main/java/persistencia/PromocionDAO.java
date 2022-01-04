@@ -53,7 +53,7 @@ public class PromocionDAO {
 		return true;
 	}
 
-	public boolean insertar(Promocion promocion, double descuento, String tipo) {
+	public boolean insertar(Promocion promocion) {
 		String sqlPromocion = "INSERT INTO promociones (tipo_promocion, nombre, descuento, descripcion, foto_portada) VALUES (?, ?, ?, ?, ?)";
 		String sqlInsertarPeliculas = "INSERT INTO peliculas_en_promocion (fk_promocion, fk_pelicula) VALUES (?, ?)";
 		String sqlUltimoId = "SELECT max(id) as 'id' FROM promociones";
@@ -63,25 +63,25 @@ public class PromocionDAO {
 			PreparedStatement declarInsertarPelic = conexion.prepareStatement(sqlInsertarPeliculas);
 			PreparedStatement declarUltimoId = conexion.prepareStatement(sqlUltimoId);
 
-			declarPromo.setString(1, tipo);
+			declarPromo.setString(1, promocion.getTipoPromocion());
 			declarPromo.setString(2, promocion.getTitulo());
 
-			switch (tipo) {
-			case "Porcentual":
-				declarPromo.setInt(3, (int) descuento);
+			switch (promocion.getTipoPromocion()) {
+			case "porcentual":
+				declarPromo.setInt(3, (int) promocion.getBeneficio());
 				break;
-			case "Absoluta":
-				declarPromo.setDouble(3, descuento);
+			case "absoluta":
+				declarPromo.setDouble(3, promocion.getBeneficio());
 				break;
-			case "AxB":
-				declarPromo.setInt(3, (int) descuento);
+			case "axb":
+				declarPromo.setInt(3, (int) promocion.getBeneficio());
 				break;
 			}
 			declarPromo.setString(4, promocion.getDescripcion());
 			declarPromo.setString(5, promocion.getUrlPortada());
 
 			declarPromo.executeUpdate();
-			
+
 			ResultSet ultimoId = declarUltimoId.executeQuery();
 			ultimoId.next();
 
@@ -93,7 +93,7 @@ public class PromocionDAO {
 				declarInsertarPelic.setInt(2, pelicula.getId());
 				declarInsertarPelic.executeUpdate();
 			}
-			
+
 			return true;
 		} catch (SQLException e) {
 			throw new DatosPerdidosError(e);
@@ -101,7 +101,7 @@ public class PromocionDAO {
 	}
 
 	public boolean editar(Promocion promocion) {
-		String sqlPromocion = "UPDATE promociones SET titulo = ?, descripcion = ?, foto_portada = ?, WHERE id = ?";
+		String sqlPromocion = "UPDATE promociones SET tipo_promocion = ?, nombre = ?, descuento = ?, descripcion = ?, foto_portada = ? WHERE id = ?";
 		String sqlBorrarPeliculas = "DELETE FROM peliculas_en_promocion WHERE fk_promocion = ?";
 		String sqlInsertarPeliculas = "INSERT INTO peliculas_en_promocion (fk_promocion, fk_pelicula) VALUES (?, ?)";
 
@@ -125,12 +125,25 @@ public class PromocionDAO {
 			}
 
 			// Por ultimo se actualiza los datos de Promocion
-			declarPromo.setString(1, promocion.getTitulo());
-			declarPromo.setString(2, promocion.getDescripcion());
-			declarPromo.setString(3, promocion.getUrlPortada());
-			declarPromo.setInt(4, promocion.getId());
+			declarPromo.setString(1, promocion.getTipoPromocion());
+			declarPromo.setString(2, promocion.getTitulo());
+			switch (promocion.getTipoPromocion()) {
+			case "porcentual":
+				declarPromo.setInt(3, (int) promocion.getBeneficio());
+				break;
+			case "absoluta":
+				declarPromo.setDouble(3, promocion.getBeneficio());
+				break;
+			case "axb":
+				declarPromo.setInt(3, (int) promocion.getBeneficio());
+				break;
+			}
+			declarPromo.setString(4, promocion.getDescripcion());
+			declarPromo.setString(5, promocion.getUrlPortada());
+			declarPromo.setInt(6, promocion.getId());
+
 			declarPromo.executeUpdate();
-			
+
 		} catch (SQLException e) {
 			throw new DatosPerdidosError(e);
 		}
@@ -146,7 +159,7 @@ public class PromocionDAO {
 
 			declaracion.setInt(1, promocion.getId());
 			declaracion.executeUpdate();
-			
+
 			return true;
 		} catch (SQLException e) {
 			throw new DatosPerdidosError(e);
@@ -200,11 +213,14 @@ public class PromocionDAO {
 
 		if (!peliculasDeProm.isEmpty()) {
 			if (tipoPromocion.equalsIgnoreCase("Porcentual"))
-				return new PromocionPorcentual(id, nombre, peliculasDeProm, descuento, descripcion, urlPortada);
+				return new PromocionPorcentual(id, nombre, peliculasDeProm, descuento, descripcion, urlPortada,
+						tipoPromocion);
 			else if (tipoPromocion.equalsIgnoreCase("Absoluta"))
-				return new PromocionAbsoluta(id, nombre, peliculasDeProm, descuento, descripcion, urlPortada);
+				return new PromocionAbsoluta(id, nombre, peliculasDeProm, descuento, descripcion, urlPortada,
+						tipoPromocion);
 			else if (tipoPromocion.equalsIgnoreCase("AxB"))
-				return new PromocionAPorB(id, nombre, peliculasDeProm, descuento, descripcion, urlPortada);
+				return new PromocionAPorB(id, nombre, peliculasDeProm, descuento, descripcion, urlPortada,
+						tipoPromocion);
 			else
 				throw new Error();
 		} else

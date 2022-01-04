@@ -16,11 +16,11 @@
 				class="nav me-auto mt-md-0 mt-2 mb-2 mb-md-0 ms-md-2 d-inline-flex flex-md-row flex-column itemsbarra">
 
 
-				<li><a href="/TP_3_SplashingPopcorn_Entrega_Final2/inicio"
+				<li><a href="/Webapp_Proyecto_Final/inicio"
 					class="nav-link px-2 link-light fs-5">Inicio</a></li>
-				<li><a href="/TP_3_SplashingPopcorn_Entrega_Final2/peliculas"
+				<li><a href="/Webapp_Proyecto_Final/peliculas"
 					class="nav-link px-2 link-light opacity-50 fs-5">Películas</a></li>
-				<li><a href="/TP_3_SplashingPopcorn_Entrega_Final2/promociones"
+				<li><a href="/Webapp_Proyecto_Final/promociones"
 					class="nav-link px-2 link-light opacity-50 fs-5">Promociones</a></li>
 			</ul>
 		</div>
@@ -49,10 +49,10 @@
 					<ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
 						<li><a class="dropdown-item" href="#">Compras de usuario</a></li>
 						<li><a class="dropdown-item"
-							href="/TP_3_SplashingPopcorn_Entrega_Final2/listarUsuarios.ad">Usuarios</a></li>
+							href="/Webapp_Proyecto_Final/listarUsuarios.ad">Usuarios</a></li>
 						<li><hr class="dropdown-divider"></li>
 						<li><a class="dropdown-item"
-							href="/TP_3_SplashingPopcorn_Entrega_Final2/cerrarSesion">Cerrar
+							href="/Webapp_Proyecto_Final/cerrarSesion">Cerrar
 								sesión</a></li>
 					</ul>
 				</c:when>
@@ -60,11 +60,11 @@
 					<ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
 						<li><a class="dropdown-item" href="#">Mi perfil</a></li>
 						<li><a class="dropdown-item"
-							href="/TP_3_SplashingPopcorn_Entrega_Final2/listarItinerario.do">Mis
+							href="/Webapp_Proyecto_Final/listarItinerario.do">Mis
 								compras</a></li>
 						<li><hr class="dropdown-divider"></li>
 						<li><a class="dropdown-item"
-							href="/TP_3_SplashingPopcorn_Entrega_Final2/cerrarSesion">Cerrar
+							href="/Webapp_Proyecto_Final/cerrarSesion">Cerrar
 								sesión</a></li>
 					</ul>
 				</c:otherwise>

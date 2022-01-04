@@ -36,7 +36,6 @@ $(document).ready(function() {
 	let padre = document.querySelector('.contenido');
 
 	// AGREGANDO CLASE ACTIVE AL PRIMER ENLACE ====================
-	console.log($('#todos'));
 	$('.lista-generos .genero-item[data-type="todos"]').click();
 	
 	

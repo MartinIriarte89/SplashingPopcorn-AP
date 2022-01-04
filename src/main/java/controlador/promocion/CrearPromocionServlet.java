@@ -27,11 +27,6 @@ public class CrearPromocionServlet extends HttpServlet implements Servlet {
 		this.servPelicula = new ServicioPelicula();
 	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-	}
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		

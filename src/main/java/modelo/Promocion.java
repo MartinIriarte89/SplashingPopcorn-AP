@@ -14,30 +14,46 @@ public abstract class Promocion implements Sugerencia {
 	private String descripcion;
 	private String urlPortada;
 	private Map<String, String> errores;
+	private double beneficio;
+	private String tipoPromocion;
 
-	public Promocion(String titulo, ArrayList<Pelicula> peliculas, String descripcion, String urlPortada) {
+	public Promocion(String titulo, ArrayList<Pelicula> peliculas, String descripcion, String urlPortada,
+			double beneficio, String tipoPromocion) {
 		this.titulo = titulo;
 		if (peliculas != null) {
 			this.genero = peliculas.get(0).getGenero();
 		}
 		this.peliculas = peliculas;
-		this.descripcion = descripcion;
-		this.urlPortada = urlPortada;
+		setDescripcion(descripcion);
+		setUrlPortada(urlPortada);
+		this.beneficio = beneficio;
+		this.tipoPromocion = tipoPromocion;
 	}
 
-	public Promocion(int id, String titulo, ArrayList<Pelicula> peliculas, String descripcion, String urlPortada) {
+	public Promocion(int id, String titulo, ArrayList<Pelicula> peliculas, String descripcion, String urlPortada,
+			double beneficio, String tipoPromocion) {
 		this.titulo = titulo;
 		if (peliculas != null) {
 			this.genero = peliculas.get(0).getGenero();
 		}
 		this.peliculas = peliculas;
 		this.id = id;
-		this.descripcion = descripcion;
-		this.urlPortada = urlPortada;
+		setDescripcion(descripcion);
+		setUrlPortada(urlPortada);
+		this.beneficio = beneficio;
+		this.tipoPromocion = tipoPromocion;
 	}
 
 	public ArrayList<Pelicula> getPeliculas() {
 		return this.peliculas;
+	}
+
+	public double getBeneficio() {
+		return this.beneficio;
+	}
+
+	public String getTipoPromocion() {
+		return this.tipoPromocion;
 	}
 
 	@Override
@@ -111,11 +127,11 @@ public abstract class Promocion implements Sugerencia {
 	}
 
 	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+		this.descripcion = descripcion == null ? "" : descripcion;
 	}
 
 	public void setUrlPortada(String urlPortada) {
-		this.urlPortada = urlPortada;
+		this.urlPortada = urlPortada == null ? this.urlPortada : urlPortada;
 	}
 
 	@Override
@@ -184,11 +200,6 @@ public abstract class Promocion implements Sugerencia {
 
 		errores = new HashMap<String, String>();
 
-		for (Pelicula pelicula : peliculas) {
-			if (!pelicula.esValida()) {// no sé si vale la pena identificar cada error de las pelis
-				errores.put("", "Los datos de la película no son válidos");
-			}
-		}
 		if (!this.generosIguales(peliculas)) {
 			errores.put("peliculas", "Los géneros de las película deben ser iguales");
 		}
@@ -197,19 +208,36 @@ public abstract class Promocion implements Sugerencia {
 	// SIRVE PARA VALIDAR QUE TODAS LAS PELIS PERTENEZCAN AL MISMO GÉNERO
 	private boolean generosIguales(ArrayList<Pelicula> peliculas) {
 
-		for (int i = 0; i < peliculas.size(); i++) {
-
-			if (peliculas.get(i).getGenero().equals(peliculas.get(i++).getGenero())) {
-				return true;
+		for (int i = 0; i < peliculas.size() - 1; i++) {
+			if (!peliculas.get(i).getGenero().equals(peliculas.get(i++).getGenero())) {
+				return false;
 			}
 		}
-		return false;
+		return true;
 	}
 
 	@Override
 	public String toString() {
 		return "Promocion [id=" + id + ", titulo=" + titulo + "]";
 	}
-	
-	
+
+	public String getIdPelis() {
+		String idPelis = "";
+
+		for (int i = 0; i < peliculas.size(); i++) {
+			if (i == 0) {
+				idPelis = peliculas.get(i).getId() + "";
+			} else
+				idPelis += "," + peliculas.get(i).getId();
+		}
+		return idPelis;
+	}
+
+	public void setTipoPromocion(String tipoPromocion) {
+		this.tipoPromocion = tipoPromocion;
+	}
+
+	public void setBeneficio(double beneficio) {
+		this.beneficio = beneficio;
+	}
 }

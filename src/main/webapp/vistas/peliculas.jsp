@@ -12,22 +12,22 @@
 <jsp:include page="../parciales/librerias.jsp"></jsp:include>
 
 <link rel="stylesheet" type="text/css"
-	href="/TP_3_SplashingPopcorn_Entrega_Final2/css/botones.css">
+	href="/Webapp_Proyecto_Final/css/botones.css">
 <link rel="stylesheet" type="text/css"
-	href="/TP_3_SplashingPopcorn_Entrega_Final2/css/estiloPeliculasYPromos.css">
-<link rel="stylesheet" 
-	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+	href="/Webapp_Proyecto_Final/css/estiloPeliculasYPromos.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
 <script type="text/javascript"
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 <script type="text/javascript"
-	src="/TP_3_SplashingPopcorn_Entrega_Final2/js/filtrarGeneros.js" defer></script>
+	src="/Webapp_Proyecto_Final/js/filtrarGeneros.js" defer></script>
 <script type="text/javascript"
-	src="/TP_3_SplashingPopcorn_Entrega_Final2/js/jquery.pajinate.js" defer></script>
+	src="/Webapp_Proyecto_Final/js/jquery.pajinate.js" defer></script>
 <script type="text/javascript"
-	src="/TP_3_SplashingPopcorn_Entrega_Final2/js/jquery.resize2.js" defer></script>
+	src="/Webapp_Proyecto_Final/js/jquery.resize2.js" defer></script>
 <script type="text/javascript"
-	src="/TP_3_SplashingPopcorn_Entrega_Final2/js/funciones.js" defer></script>
+	src="/Webapp_Proyecto_Final/js/funciones.js" defer></script>
 </head>
 
 <body>
@@ -164,7 +164,7 @@
 												<!-- BOTONES CARD -->
 												<div class="d-flex mt-auto justify-content-center mb-2">
 													<a
-														href="/TP_3_SplashingPopcorn_Entrega_Final2/listarDetallePelicula?id=${pelicula.id}"
+														href="/Webapp_Proyecto_Final/listarDetallePelicula?id=${pelicula.id}"
 														class="botondes learn-more d-flex"> <span
 														class="circle" aria-hidden="true"> <span
 															class="icon arrow"></span>
@@ -215,7 +215,7 @@
 			</div>
 		</div>
 
-		
+
 		<!-- MODAL CREAR PELÍCULA -->
 		<div class="modal fade" id="modalCrearPelicula"
 			data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -318,7 +318,7 @@
 							<div class="row">
 								<button type="submit"
 									class="col-md-4  col-8 mx-auto mb-2 btn btn-lg rounded-4 btn-warning">Crear
-									película</button>
+								</button>
 							</div>
 						</form>
 					</div>
@@ -346,11 +346,10 @@
 						<!-- FORLMULARIO DEL MODAL -->
 						<form action="editarPelicula.ad" method="post">
 							<div class="col-6 form-floating mb-3">
-									<input type="text" class="form-control rounded-4 d-none"
-										id="idEdit" placeholder="Titulo" required="required"
-										name="id">
-								</div>
-							
+								<input type="text" class="form-control rounded-4 d-none"
+									id="idEdit" placeholder="Titulo" required="required" name="id">
+							</div>
+
 							<div class="row mb-3">
 								<div class="col-6 form-floating mb-3">
 									<input type="text" class="form-control rounded-4"
@@ -435,7 +434,7 @@
 							<div class="row">
 								<button type="submit"
 									class="col-md-4  col-8 mx-auto mb-2 btn btn-lg rounded-4 btn-warning"
-									id="botonEdit">Editar película</button>
+									id="botonEdit">Editar</button>
 							</div>
 						</form>
 					</div>
@@ -485,7 +484,7 @@
 
 					<div class="modal-body p-5 pt-0">
 						<form
-							action="/TP_3_SplashingPopcorn_Entrega_Final2/genero/crearGenero.ad"
+							action="/Webapp_Proyecto_Final/genero/crearGenero.ad"
 							method="post">
 
 							<label for="genero">Nuevo género</label>
