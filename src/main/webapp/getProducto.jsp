@@ -25,3 +25,6 @@ if (esPromo) {
 <%
 }
 %>
+
+Server Version: <%= application.getServerInfo() %><br>
+Servlet Version: <%= application.getMajorVersion() %>.<%= application.getMinorVersion() %>

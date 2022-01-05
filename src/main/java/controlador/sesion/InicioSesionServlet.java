@@ -23,7 +23,7 @@ public class InicioSesionServlet extends HttpServlet {
 	public void init() throws ServletException {
 		super.init();
 		servInicioSesion = new ServicioInicioSesion();
-		
+
 	}
 
 	@Override

@@ -13,7 +13,7 @@ import persistencia.commons.ProveedorDeConexion;
 public class GeneroDAO {
 
 	public ArrayList<Genero> cargar() {
-		String sql = "SELECT * FROM generos"; //agregar esto cuando esté en la bd WHERE borrado_logico = 0
+		String sql = "SELECT * FROM generos"; // agregar esto cuando esté en la bd WHERE borrado_logico = 0
 		ArrayList<Genero> generos = new ArrayList<Genero>();
 
 		try {
@@ -24,7 +24,7 @@ public class GeneroDAO {
 			while (resultados.next()) {
 				generos.add(crearGenero(resultados));
 			}
-			
+
 		} catch (Exception e) {
 			throw new DatosPerdidosError(e);
 		}
@@ -39,41 +39,40 @@ public class GeneroDAO {
 
 			declaracion.setString(1, genero.getNombre());
 			declaracion.executeUpdate();
-			
+
 			return true;
 		} catch (SQLException e) {
 			throw new DatosPerdidosError(e);
 		}
 	}
-	
+
 	public boolean insertar(Genero genero) {
-		String sql = "INSERT INTO generos (genero) VALUES (?)"; 
-		
+		String sql = "INSERT INTO generos (genero) VALUES (?)";
+
 		try {
 			Connection conexion = ProveedorDeConexion.getConexion();
 			PreparedStatement declaracion = conexion.prepareStatement(sql);
 
 			declaracion.setString(1, genero.getNombre());
-			
+
 			declaracion.executeUpdate();
-			
+
 			return true;
 		} catch (SQLException e) {
 			throw new DatosPerdidosError(e);
 		}
 	}
-	
-	
+
 	private Genero crearGenero(ResultSet resultados) throws SQLException {
 		String nombre = resultados.getString("genero");
-		
+
 		return new Genero(nombre);
 	}
 
 	public Genero buscarPor(String nombre) {
 		Genero genero;
 		try {
-			String sql = "SELECT * FROM genero WHERE nombre = ?";
+			String sql = "SELECT * FROM generos WHERE genero = ?";
 			Connection conexion = ProveedorDeConexion.getConexion();
 			PreparedStatement declaracion = conexion.prepareStatement(sql);
 			declaracion.setString(1, nombre);
@@ -85,13 +84,12 @@ public class GeneroDAO {
 			if (resultados.next()) {
 				genero = crearGenero(resultados);
 			}
-			
 
 		} catch (Exception e) {
 			throw new DatosPerdidosError(e);
 
 		}
 		return genero;
-		
+
 	}
 }

@@ -12,7 +12,7 @@ public class Pelicula implements Sugerencia, Comparable<Pelicula> {
 	private double precio;
 	private int duracion;
 	private int stock;
-	private String genero;
+	private Genero genero;
 	private String urlFondo;
 	private String urlPortada;
 	private String descripcion;
@@ -20,21 +20,21 @@ public class Pelicula implements Sugerencia, Comparable<Pelicula> {
 	private String lema;
 	private Map<String, String> errores;
 
-	public Pelicula(String titulo, double precio, int duracion, int stock, String genero, String descripcion,
+	public Pelicula(String titulo, double precio, int duracion, int stock, Genero genero, String descripcion,
 			String urlPortada, String urlFondo, int anioLanzamiento, String lema) {
 		this.titulo = titulo;
 		this.precio = precio;
 		this.duracion = duracion;
 		this.stock = stock;
 		this.genero = genero;
-		this.descripcion = descripcion;
-		this.urlPortada = urlPortada;
-		this.urlFondo = urlFondo;
+		setDescripcion(descripcion);
+		this.urlPortada = urlPortada == null ? "" : urlPortada;
+		this.urlFondo = urlFondo == null ? "" : urlFondo;
 		this.anioLanzamiento = anioLanzamiento;
-		this.lema = lema;
+		setLema(lema);
 	}
 
-	public Pelicula(int id, String titulo, double precio, int duracion, int stock, String genero, String descripcion,
+	public Pelicula(int id, String titulo, double precio, int duracion, int stock, Genero genero, String descripcion,
 			String urlPortada, String urlFondo, int anioLanzamiento, String lema) {
 		this.titulo = titulo;
 		this.precio = precio;
@@ -42,13 +42,17 @@ public class Pelicula implements Sugerencia, Comparable<Pelicula> {
 		this.stock = stock;
 		this.genero = genero;
 		this.id = id;
-		this.descripcion = descripcion;
-		this.urlPortada = urlPortada;
-		this.urlFondo = urlFondo;
+		setDescripcion(descripcion);
+		setUrlPortada(urlPortada);
+		setUrlFondo(urlFondo);
 		this.anioLanzamiento = anioLanzamiento;
-		this.lema = lema;
+		setLema(lema);
 	}
 
+	public Map<String,String> getErrores(){
+		return this.errores;
+	}
+	
 	@Override
 	public int getId() {
 		return this.id;
@@ -75,7 +79,7 @@ public class Pelicula implements Sugerencia, Comparable<Pelicula> {
 	}
 
 	@Override
-	public String getGenero() {
+	public Genero getGenero() {
 		return this.genero;
 	}
 
@@ -94,7 +98,7 @@ public class Pelicula implements Sugerencia, Comparable<Pelicula> {
 		return this.descripcion;
 	}
 
-	@Override
+	
 	public int getAnioLanzamiento() {
 		return this.anioLanzamiento;
 	}
@@ -104,7 +108,7 @@ public class Pelicula implements Sugerencia, Comparable<Pelicula> {
 	}
 
 	public void setLema(String lema) {
-		this.lema = lema;
+		this.lema = lema == null ? "" : lema;
 	}
 
 	public void setTitulo(String titulo) {
@@ -123,20 +127,20 @@ public class Pelicula implements Sugerencia, Comparable<Pelicula> {
 		this.stock = stock;
 	}
 
-	public void setGenero(String genero) {
+	public void setGenero(Genero genero) {
 		this.genero = genero;
 	}
 
 	public void setUrlFondo(String urlFondo) {
-		this.urlFondo = urlFondo;
+		this.urlFondo = urlFondo == null ? this.urlFondo : urlFondo;
 	}
 
 	public void setUrlPortada(String urlPortada) {
-		this.urlPortada = urlPortada;
+		this.urlPortada = urlPortada == null ? this.urlPortada : urlPortada;
 	}
 
 	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+		this.descripcion = descripcion == null ? "" : descripcion;
 	}
 
 	public void setAnioLanzamiento(int anioLanzamiento) {
@@ -205,11 +209,11 @@ public class Pelicula implements Sugerencia, Comparable<Pelicula> {
 	public void validar() {
 		errores = new HashMap<String, String>();
 
-		if (precio < 0) {
-			errores.put("precio", "Debe ser positivo");
+		if (precio <= 0) {
+			errores.put("precio", "Debe ser mayor a 0");
 		}
-		if (duracion < 0) {
-			errores.put("duracion", "Debe ser positivo");
+		if (duracion <= 0) {
+			errores.put("duracion", "Debe ser mayor a 0");
 		}
 		if (duracion > 240) {
 			errores.put("duracion", "Excede el tiempo máximo");
@@ -217,8 +221,11 @@ public class Pelicula implements Sugerencia, Comparable<Pelicula> {
 		if (stock < 0) {
 			errores.put("stock", "Debe ser positivo");
 		}
-		if (anioLanzamiento < 1500) {
-			errores.put("anioLanzamiento", "Debe ser posterior a 1500");
+		if (anioLanzamiento < 1895) {
+			errores.put("anioLanzamiento", "Debe ser posterior a 1895");
+		}
+		if(titulo.length() < 2) {
+			errores.put("titulo", "Debe contener al menos dos caracteres");
 		}
 	}
 

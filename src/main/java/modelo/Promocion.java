@@ -10,7 +10,7 @@ public abstract class Promocion implements Sugerencia {
 	private int id;
 	private String titulo;
 	private ArrayList<Pelicula> peliculas;
-	private String genero;
+	private Genero genero;
 	private String descripcion;
 	private String urlPortada;
 	private Map<String, String> errores;
@@ -25,7 +25,7 @@ public abstract class Promocion implements Sugerencia {
 		}
 		this.peliculas = peliculas;
 		setDescripcion(descripcion);
-		setUrlPortada(urlPortada);
+		this.urlPortada = urlPortada == null ? "" : urlPortada;
 		this.beneficio = beneficio;
 		this.tipoPromocion = tipoPromocion;
 	}
@@ -94,7 +94,7 @@ public abstract class Promocion implements Sugerencia {
 	}
 
 	@Override
-	public String getGenero() {
+	public Genero getGenero() {
 		return genero;
 	}
 
@@ -111,11 +111,6 @@ public abstract class Promocion implements Sugerencia {
 	@Override
 	public String getDescripcion() {
 		return this.descripcion;
-	}
-
-	@Override
-	public int getAnioLanzamiento() {
-		return 0;
 	}
 
 	public void setTitulo(String titulo) {
@@ -192,12 +187,11 @@ public abstract class Promocion implements Sugerencia {
 	@Override
 	public boolean esValida() {
 		validar();
-		return errores.isEmpty();
+		return getErrores().isEmpty();
 	}
 
 	@Override
 	public void validar() {
-
 		errores = new HashMap<String, String>();
 
 		if (!this.generosIguales(peliculas)) {
@@ -239,5 +233,9 @@ public abstract class Promocion implements Sugerencia {
 
 	public void setBeneficio(double beneficio) {
 		this.beneficio = beneficio;
+	}
+
+	protected void setErrores(Map<String, String> errores) {
+		this.errores = errores;
 	}
 }

@@ -1,13 +1,14 @@
 package modelo;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class PromocionAbsoluta extends Promocion {
 
 	private double precioDePaquete;
 
 	public PromocionAbsoluta(String nombre, ArrayList<Pelicula> atracciones, double precioDePaquete, String descripcion,
-			 String urlPortada, String tipoPromocion) {
+			String urlPortada, String tipoPromocion) {
 		super(nombre, atracciones, descripcion, urlPortada, precioDePaquete, tipoPromocion);
 		this.precioDePaquete = precioDePaquete;
 	}
@@ -22,4 +23,17 @@ public class PromocionAbsoluta extends Promocion {
 	public double getPrecio() {
 		return this.precioDePaquete;
 	}
+
+	@Override
+	public void validar() {
+		super.validar();
+		Map <String, String> errores = super.getErrores();
+		
+		if (super.getBeneficio() < 0) {
+			errores.put("beneficio", "El precio debe ser un número positivo");
+		}
+		
+		super.setErrores(errores);
+	}
+
 }

@@ -128,7 +128,7 @@
 							<c:forEach items="${promociones}" var="promocion">
 								<div
 									class="inicio display-flex justify-content-center col-md-4 col-5 mt-5 px-md-4 px-sm-5 px-2"
-									data-type="${promocion.genero}">
+									data-type="${promocion.genero.nombre}">
 									<!-- BACKDROP IMAGEN -->
 									<div class="row flex-column fondo-backdrop carta mx-auto m-0"
 										data-type="${promocion.genero}"
@@ -183,7 +183,7 @@
 																data-bs-target="#modalEditarPromocion"
 																data-bs-id="${promocion.id}"
 																data-bs-titulo="${promocion.titulo}"
-																data-bs-genero="${promocion.genero}"
+																data-bs-genero="${promocion.genero.nombre}"
 																data-bs-descripcion="${promocion.descripcion}"
 																data-bs-beneficio="${promocion.beneficio}"
 																data-bs-tipoPromocion="${promocion.tipoPromocion}"
@@ -275,7 +275,7 @@
 									class="form-select form-select-sm col-9" id="selectPelicula"
 									name="pelicula" aria-label=".form-select-sm example">
 									<c:forEach items="${peliculas}" var="pelicula">
-										<option value="${pelicula.id}" data-type="${pelicula.genero}">${pelicula.titulo}</option>
+										<option value="${pelicula.id}" data-type="${pelicula.genero.nombre}">${pelicula.titulo}</option>
 									</c:forEach>
 								</select>
 								<button onclick="seleccionarPelicula()"
@@ -389,7 +389,7 @@
 									id="selectPeliculaEdit" name="selectPeliculaEdit"
 									aria-label=".form-select-sm example">
 									<c:forEach items="${peliculas}" var="pelicula">
-										<option value="${pelicula.id}" data-type="${pelicula.genero}">${pelicula.titulo}</option>
+										<option value="${pelicula.id}" data-type="${pelicula.genero.nombre}">${pelicula.titulo}</option>
 									</c:forEach>
 								</select>
 								<button onclick="seleccionarPeliculaEdit()"

@@ -2,21 +2,22 @@ package servicios;
 
 import java.util.Comparator;
 
+import modelo.Genero;
 import modelo.Sugerencia;
 
 public class ServicioOrdenarSugerencias implements Comparator<Sugerencia> {
 
-	private String usuarioTipo;
+	private Genero usuarioTipo;
 
-	public ServicioOrdenarSugerencias(String usuarioTipo) {
+	public ServicioOrdenarSugerencias(Genero usuarioTipo) {
 		this.usuarioTipo = usuarioTipo;
 	}
 
 	@Override
 	public int compare(Sugerencia o1, Sugerencia o2) {
 		int resultado;
-		String o1Tipo = o1.getGenero();
-		String o2Tipo = o2.getGenero();
+		Genero o1Tipo = o1.getGenero();
+		Genero o2Tipo = o2.getGenero();
 
 		resultado = -Boolean.compare(o1.esPromocion(), o2.esPromocion());
 		if (resultado == 0)

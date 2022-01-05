@@ -10,7 +10,6 @@ import persistencia.commons.ProveedorDeConexion;
 public class ServicioGenero {
 	GeneroDAO generoDAO = FabricaDAO.getGeneroDAO();
 	
-	
 	public ArrayList<Genero> listar() {
 		ArrayList<Genero> generos = generoDAO.cargar();
 		ProveedorDeConexion.cerrarConexion();
@@ -19,7 +18,9 @@ public class ServicioGenero {
 	
 	public void borrar(String nombre) {
 		Genero genero = buscarPor(nombre);
-		generoDAO.borrar(genero);
+		if(!genero.esNulo()) {
+			generoDAO.borrar(genero);
+		}
 		ProveedorDeConexion.cerrarConexion();
 	}
 	

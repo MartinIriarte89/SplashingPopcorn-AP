@@ -20,17 +20,19 @@ public class ServicioComprar {
 		HashMap<String, String> errores = new HashMap<String, String>();
 
 		if (!usuario.puedeComprarA(sugerencia)) {
-			errores.put("usuario", "Su dinero o tiempo no es suficiente");
+			errores.put("usuario", "Su dinero o su tiempo no es suficiente");
 		}
 
 		if (!sugerencia.tieneStock()) {
-			errores.put("pelicula", "No hay stock disponible");
+			errores.put("producto", "No hay stock disponible");
 		}
 
 		if (errores.isEmpty()) {
 			usuario.comprar(sugerencia);
 			sugerencia.restarStock();
-			transaccion.actualizarEnBBDD(usuario, sugerencia);
+			if(!transaccion.actualizarEnBBDD(usuario, sugerencia)) {
+				errores.put("fallo", "Algo salio mal al procesar la compra, intenta nuevamente");
+			}
 		}
 		return errores;
 	}

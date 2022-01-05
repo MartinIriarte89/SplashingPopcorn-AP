@@ -1,6 +1,8 @@
 package servicios;
 
 import java.util.ArrayList;
+
+import modelo.Genero;
 import modelo.Pelicula;
 import persistencia.FabricaDAO;
 import persistencia.PeliculaDAO;
@@ -16,7 +18,7 @@ public class ServicioPelicula {
 		return peliculas;
 	}
 
-	public Pelicula crear(String titulo, double precio, int duracion, int stock, String genero, String descripcion,
+	public Pelicula crear(String titulo, double precio, int duracion, int stock, Genero genero, String descripcion,
 			String urlPortada, String urlFondo, int anioLanzamiento, String lema) {
 
 		Pelicula pelicula = new Pelicula(titulo, precio, duracion, stock, genero, descripcion, urlPortada, urlFondo,
@@ -28,7 +30,7 @@ public class ServicioPelicula {
 		return pelicula;
 	}
 
-	public Pelicula editar(int id, String titulo, double precio, int duracion, int stock, String genero,
+	public Pelicula editar(int id, String titulo, double precio, int duracion, int stock, Genero genero,
 			String descripcion, String urlPortada, String urlFondo, int anioLanzamiento, String lema) {
 		Pelicula pelicula = buscarPor(id);
 
@@ -38,17 +40,11 @@ public class ServicioPelicula {
 		pelicula.setGenero(genero);
 		pelicula.setStock(stock);
 		pelicula.setDescripcion(descripcion);
-		if (urlPortada != null) {
-			pelicula.setUrlPortada(urlPortada);
-		}
-		if (urlFondo != null) {
-			pelicula.setUrlFondo(urlFondo);
-		}
+		pelicula.setUrlPortada(urlPortada);
+		pelicula.setUrlFondo(urlFondo);
 		pelicula.setAnioLanzamiento(anioLanzamiento);
+		pelicula.setLema(lema);
 
-		if (lema != null) {
-			pelicula.setLema(lema);
-		}
 		if (pelicula.esValida()) {
 			peliculaDAO.editar(pelicula);
 			ProveedorDeConexion.cerrarConexion();
@@ -56,10 +52,15 @@ public class ServicioPelicula {
 		return pelicula;
 	}
 
-	public void borrar(int id) {
+	public Pelicula borrar(int id) {
 		Pelicula pelicula = buscarPor(id);
-		peliculaDAO.borrar(pelicula);
+
+		if (!pelicula.esNulo()) {
+			peliculaDAO.borrar(pelicula);
+		}
 		ProveedorDeConexion.cerrarConexion();
+
+		return pelicula;
 	}
 
 	public Pelicula buscarPor(int id) {

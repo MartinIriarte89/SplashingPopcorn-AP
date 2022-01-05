@@ -6,7 +6,7 @@ public class PeliculaNula extends Pelicula{
 	
 	
 	public PeliculaNula() {
-		super("", 0, 0, 0, "", "", "", "", 0, "");
+		super("", 0, 0, 0, null, "", "", "", 0, "");
 	}
 	
 	public static Pelicula construir() {

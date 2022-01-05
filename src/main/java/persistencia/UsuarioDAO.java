@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import modelo.Genero;
 import modelo.Usuario;
 import modelo.objetoNulo.UsuarioNulo;
 import persistencia.commons.ProveedorDeConexion;
@@ -22,7 +23,7 @@ public class UsuarioDAO {
 			declaracion.setInt(4, usuario.esAdmin() ? 1 : 0);
 			declaracion.setDouble(5, usuario.getDineroDisponible());
 			declaracion.setInt(6, usuario.getTiempoDisponible());
-			declaracion.setString(7, usuario.getPreferencia());
+			declaracion.setString(7, usuario.getPreferencia().getNombre());
 			declaracion.setString(8, usuario.getUrlPerfil());
 			declaracion.executeUpdate();
 
@@ -59,7 +60,7 @@ public class UsuarioDAO {
 			declaracion.setString(3, usuario.getContrasena());
 			declaracion.setDouble(4, usuario.getDineroDisponible());
 			declaracion.setInt(5, usuario.getTiempoDisponible());
-			declaracion.setString(6, usuario.getPreferencia());
+			declaracion.setString(6, usuario.getPreferencia().getNombre());
 			declaracion.setString(7, usuario.getUrlPerfil());
 			declaracion.setInt(8, usuario.esAdmin() ? 1 : 0);
 			declaracion.setInt(9, usuario.getId());
@@ -145,13 +146,16 @@ public class UsuarioDAO {
 	}
 
 	private Usuario crearUsuario(ResultSet resultados) throws Exception {
+		GeneroDAO generoDAO = FabricaDAO.getGeneroDAO();
+		
 		int id = resultados.getInt("id");
 		String nombre = resultados.getString("nombre");
 		String usuario = resultados.getString("usuario");
 		String contrasena = resultados.getString("contrasena");
 		double dinero = resultados.getDouble("dinero_disp");
 		int tiempo = resultados.getInt("tiempo_disp");
-		String preferencia = resultados.getString("preferencia");
+		String preferenciaNombre = resultados.getString("preferencia");
+		Genero preferencia = generoDAO.buscarPor(preferenciaNombre);
 		String urlPerfil = resultados.getString("url_perfil");
 		boolean esAdmin = (1 == resultados.getInt("administrador"));
 

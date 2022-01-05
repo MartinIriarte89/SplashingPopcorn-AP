@@ -4,7 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import utilidades.Comparador;
 import utilidades.Encriptacion;
+import utilidades.Patrones;
 
 public class Usuario {
 
@@ -14,25 +16,26 @@ public class Usuario {
 	private String contrasenaEncrip;
 	private double dineroDisponible;
 	private int tiempoDisponible;
-	private String preferencia;
+	private Genero preferencia;
 	private Itinerario itinerario;
 	private boolean esAdmin;
 	private String urlPerfil;
 	private HashMap<String, String> errores;
 
 	public Usuario(String nombre, String usuario, String contrasena, double dineroDisponible, int tiempoDisponible,
-			String preferencia, String urlPerfil, boolean esAdmin) {
+			Genero preferencia, String urlPerfil, boolean esAdmin) {
 		this.nombre = nombre;
 		this.dineroDisponible = dineroDisponible;
 		this.tiempoDisponible = tiempoDisponible;
 		this.preferencia = preferencia;
 		this.contrasenaEncrip = Encriptacion.hash(contrasena);
+		this.urlPerfil = urlPerfil == null ? "" : urlPerfil;
 		this.esAdmin = esAdmin;
 		this.usuario = usuario;
 	}
 
 	public Usuario(int id, String nombre, String usuario, String contrasena, double dineroDisponible, int tiempoDisponible,
-			String preferencia, String urlPerfil, boolean esAdmin) {
+			Genero preferencia, String urlPerfil, boolean esAdmin) {
 		this.id = id;
 		this.nombre = nombre;
 		this.dineroDisponible = dineroDisponible;
@@ -64,7 +67,7 @@ public class Usuario {
 		return this.tiempoDisponible;
 	}
 
-	public String getPreferencia() {
+	public Genero getPreferencia() {
 		return this.preferencia;
 	}
 
@@ -104,7 +107,7 @@ public class Usuario {
 		this.tiempoDisponible = tiempoDisponible;
 	}
 
-	public void setPreferencia(String preferencia) {
+	public void setPreferencia(Genero preferencia) {
 		this.preferencia = preferencia;
 	}
 
@@ -113,7 +116,7 @@ public class Usuario {
 	}
 
 	public void setUrlPerfil(String urlPerfil) {
-		this.urlPerfil = urlPerfil;
+		this.urlPerfil = urlPerfil==null ? this.urlPerfil : urlPerfil ;
 	}
 
 	public void setItinerario(Itinerario itinerario) {
@@ -155,10 +158,16 @@ public class Usuario {
 		errores = new HashMap<String, String>();
 		
 		if(dineroDisponible < 0)
-			errores.put("Dinero", "No debe ser negativo");
+			errores.put("dinero", "No debe ser negativo");
 		
 		if(tiempoDisponible < 0) 
-			errores.put("Tiempo", "No debe ser negativo");
+			errores.put("tiempo", "No debe ser negativo");
+		
+		if (!Comparador.comparar(nombre, Patrones.NOMBRE_APELLIDO_VALIDO))
+			errores.put("nombre", "Nombre invalido");
+		
+		if (!Comparador.comparar(usuario, Patrones.USUARIO_VALIDO))
+			errores.put("usuario", "Usuario invalido");
 		
 	}
 

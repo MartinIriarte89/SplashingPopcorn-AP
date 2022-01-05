@@ -14,7 +14,7 @@ public interface Sugerencia {
 
 	public int getStock();
 
-	public String getGenero();
+	public Genero getGenero();
 
 	public boolean esPromocion();
 
@@ -25,8 +25,6 @@ public interface Sugerencia {
 	public String getUrlPortada();
 	
 	public String getDescripcion();
-	
-	public int getAnioLanzamiento();
 	
 	public boolean tieneStock();
 

@@ -126,7 +126,7 @@
 							<c:forEach items="${peliculas}" var="pelicula">
 								<div
 									class="inicio display-flex justify-content-center col-md-4 col-5 mt-5 px-md-4 px-sm-5 px-2"
-									data-type="${pelicula.genero}">
+									data-type="${pelicula.genero.nombre}">
 									<!-- BACKDROP IMAGEN -->
 									<div class="row flex-column fondo-backdrop carta mx-auto m-0"
 										data-type="${pelicula.genero}"
@@ -185,7 +185,7 @@
 																data-bs-precio="${pelicula.precio}"
 																data-bs-duracion="${pelicula.duracion}"
 																data-bs-stock="${pelicula.stock}"
-																data-bs-genero="${pelicula.genero}"
+																data-bs-genero="${pelicula.genero.nombre}"
 																data-bs-anioLanzamiento="${pelicula.anioLanzamiento}"
 																data-bs-descripcion="${pelicula.descripcion}"><i
 																class="bi bi-pencil-square"></i></a> <span>editar</span>

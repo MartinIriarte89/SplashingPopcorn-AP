@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import modelo.Genero;
 import modelo.Pelicula;
 import modelo.objetoNulo.PeliculaNula;
 import persistencia.commons.ProveedorDeConexion;
@@ -39,7 +41,7 @@ public class PeliculaDAO {
 
 			declaracion.setString(1, pelicula.getTitulo());
 			declaracion.setInt(2, pelicula.getAnioLanzamiento());
-			declaracion.setString(3, pelicula.getGenero());
+			declaracion.setString(3, pelicula.getGenero().getNombre());
 			declaracion.setInt(4, pelicula.getDuracion());
 			declaracion.setDouble(5, pelicula.getPrecio());
 			declaracion.setInt(6, pelicula.getStock());
@@ -81,7 +83,7 @@ public class PeliculaDAO {
 			declaracion.setDouble(2, pelicula.getPrecio());
 			declaracion.setInt(3, pelicula.getDuracion());
 			declaracion.setInt(4, pelicula.getStock());
-			declaracion.setString(5, pelicula.getGenero());
+			declaracion.setString(5, pelicula.getGenero().getNombre());
 			declaracion.setString(6, pelicula.getDescripcion());
 			declaracion.setString(7, pelicula.getUrlPortada());
 			declaracion.setString(8, pelicula.getUrlFondo());
@@ -137,12 +139,15 @@ public class PeliculaDAO {
 	}
 
 	private Pelicula crearPelicula(ResultSet resultados) throws Exception {
+		GeneroDAO generoDAO = FabricaDAO.getGeneroDAO();
+		
 		int id = resultados.getInt("id");
 		String titulo = resultados.getString("titulo");
 		int precio = resultados.getInt("precio");
 		int duracion = resultados.getInt("duracion_min");
 		int stock = resultados.getInt("stock");
-		String genero = resultados.getString("fk_genero");
+		String generoNombre = resultados.getString("fk_genero");
+		Genero genero = generoDAO.buscarPor(generoNombre);
 		String descripcion = resultados.getString("descripcion");
 		String urlPortada = resultados.getString("foto_portada");
 		String urlBackdrop = resultados.getString("foto_fondo");

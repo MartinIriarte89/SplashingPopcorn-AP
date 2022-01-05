@@ -2,6 +2,7 @@ package modelo;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Map;
 
 public class PromocionAPorB extends Promocion {
 
@@ -34,5 +35,17 @@ public class PromocionAPorB extends Promocion {
 			importeACobrar += atraccion.getPrecio();
 		}
 		return importeACobrar;
+	}
+
+	@Override
+	public void validar() {
+		super.validar();
+		Map <String, String> errores = super.getErrores();
+		
+		if (super.getPeliculas().size() < super.getBeneficio()) {
+			errores.put("beneficio", "Las películas a regalar no pueden superar la cantidad de películas en promoción");
+		}
+		
+		super.setErrores(errores);
 	}
 }
