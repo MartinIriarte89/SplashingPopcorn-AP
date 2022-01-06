@@ -6,7 +6,7 @@ import java.util.Objects;
 
 import utilidades.Comparador;
 import utilidades.Encriptacion;
-import utilidades.Patrones;
+import utilidades.Patron;
 
 public class Usuario {
 
@@ -163,10 +163,10 @@ public class Usuario {
 		if(tiempoDisponible < 0) 
 			errores.put("tiempo", "No debe ser negativo");
 		
-		if (!Comparador.comparar(nombre, Patrones.NOMBRE_APELLIDO_VALIDO))
+		if (!Comparador.comparar(nombre, Patron.NOMBRE_APELLIDO_VALIDO))
 			errores.put("nombre", "Nombre invalido");
 		
-		if (!Comparador.comparar(usuario, Patrones.USUARIO_VALIDO))
+		if (!Comparador.comparar(usuario, Patron.USUARIO_VALIDO))
 			errores.put("usuario", "Usuario invalido");
 		
 	}

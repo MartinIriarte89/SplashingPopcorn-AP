@@ -42,6 +42,7 @@
 		<jsp:include page="../parciales/inicioSesionModal.jsp"></jsp:include>
 
 
+		
 
 		<div class="container-fluid p-0">
 			<!-- TITULO -->
@@ -238,41 +239,40 @@
 							<div class="row mb-3">
 								<div class="col-6 form-floating mb-3">
 									<input type="text" class="form-control rounded-4" id="titulo"
-										placeholder="Titulo" required="required" name="titulo">
-									<label for="titulo">Título</label>
-									<div class="invalid-feedback">Introduzca un título válido</div>
+										placeholder="Titulo" required="required" name="titulo" value="${peliCrear.titulo}">
+									<label class='${peliCrear.errores.get("titulo") != null ? "is-invalid" : ""}' for="titulo">Título</label>
+									<div class="invalid-tooltip"> <c:out value='${peliCrear.errores.get("titulo")}'></c:out> </div>
 								</div>
 
 								<div class="col-6 form-floating mb-3">
 									<input type="text" class="form-control rounded-4" id="lema"
-										placeholder="Lema" required="required" name="lema"> <label
-										for="lema">Lema</label>
-									<div class="invalid-feedback">Introduzca un texto válido</div>
+										placeholder="Lema" required="required" name="lema" value="${peliCrear.lema}"> <label
+										class='${peliCrear.errores.get("lema") != null ? "is-invalid" : ""}' for="lema">Lema</label>
+									<div class="invalid-tooltip"><c:out value='${peliCrear.errores.get("lema")}'></c:out></div>
 								</div>
 
 							</div>
 							<div class="row mb-3">
 								<div class="col-4 form-floating mb-3">
 									<input type="number" class="form-control rounded-4" id="precio"
-										placeholder="Precio" required="required" name="precio">
-									<label for="precio">Precio</label>
-									<div class="invalid-feedback">Introduzca un precio válido</div>
+										placeholder="Precio" required="required" name="precio" value="${peliCrear.precio}">
+									<label class='${peliCrear.errores.get("precio") != null ? "is-invalid" : ""}' for="precio">Precio</label>
+									<div class="invalid-tooltip"><c:out value='${peliCrear.errores.get("precio")}'></c:out></div>
 								</div>
 
 
 								<div class="col-4 form-floating mb-3">
 									<input type="number" class="form-control rounded-4"
 										id="duracion" placeholder="Duracion" required="required"
-										name="duracion"> <label for="duracion">Duración
+										name="duracion" value="${peliCrear.duracion}"> <label class='${peliCrear.errores.get("duracion") != null ? "is-invalid" : ""}' for="duracion">Duración
 										en min.</label>
-									<div class="invalid-feedback">Introduzca una duración
-										válida</div>
+									<div class="invalid-tooltip"><c:out value='${peliCrear.errores.get("duracion")}'></c:out></div>
 								</div>
 								<div class="col-4 form-floating mb-3">
 									<input type="number" class="form-control rounded-4" id="stock"
-										placeholder="Stock" required="required" name="stock">
-									<label for="stock">Stock</label>
-									<div class="invalid-feedback">Introduzca una stock válido</div>
+										placeholder="Stock" required="required" name="stock" value="${peliCrear.stock}">
+									<label class='${peliCrear.errores.get("stock") != null ? "is-invalid" : ""}' for="stock">Stock</label>
+									<div class="invalid-tooltip"><c:out value='${peliCrear.errores.get("stock")}'></c:out></div>
 								</div>
 							</div>
 
@@ -284,14 +284,15 @@
 											<option value="${genero.nombre}">${genero.nombre}</option>
 										</c:forEach>
 									</select> <label for="floatingSelect">Género</label>
+									<div class="invalid-tooltip"><c:out value='${peliCrear.errores.get("genero")}'></c:out></div>
 								</div>
 
 								<div class="col-4 mx-auto form-floating mb-3">
 									<input type="number" class="form-control rounded-4"
 										id="anioLanzamiento" placeholder="AnioLanzamiento"
-										required="required" name="anioLanzamiento"> <label
-										for="anioLanzamiento">Año de estreno</label>
-									<div class="invalid-feedback">Introduzca un año válido</div>
+										required="required" name="anioLanzamiento" value="${peliCrear.anioLanzamiento}"> <label
+										class='${peliCrear.errores.get("anioLanzamiento") != null ? "is-invalid" : ""}' for="anioLanzamiento">Año de estreno</label>
+									<div class="invalid-tooltip"><c:out value='${peliCrear.errores.get("anioLanzamiento")}'></c:out></div>
 								</div>
 							</div>
 
@@ -309,8 +310,9 @@
 							<div class="form-floating my-3 col-md-10 col-12 mx-auto">
 								<textarea class="form-control"
 									placeholder="Leave a comment here" name="descripcion"
-									id="descripcion" style="height: 100px"></textarea>
-								<label for="descripcion">Descripción</label>
+									id="descripcion" style="height: 100px">${peliCrear.descripcion}</textarea>
+								<label class='${peliCrear.errores.get("descripcion") != null ? "is-invalid" : ""}' for="descripcion">Descripción</label>
+								<div class="invalid-tooltip"><c:out value='${peliCrear.errores.get("descripcion")}'></c:out></div>
 							</div>
 
 							<hr class="my-4">
@@ -346,23 +348,23 @@
 						<!-- FORLMULARIO DEL MODAL -->
 						<form action="editarPelicula.ad" method="post">
 							<div class="col-6 form-floating mb-3">
-								<input type="text" class="form-control rounded-4 d-none"
-									id="idEdit" placeholder="Titulo" required="required" name="id">
+								<input type="number" class="form-control rounded-4 d-none"
+									id="idEdit" placeholder="Id" required="required" name="id">
 							</div>
 
 							<div class="row mb-3">
 								<div class="col-6 form-floating mb-3">
 									<input type="text" class="form-control rounded-4"
 										id="tituloEdit" placeholder="Titulo" required="required"
-										name="titulo"> <label for="tituloEdit">Título</label>
-									<div class="invalid-feedback">Introduzca un título válido</div>
+										name="titulo" value="${peliEditar.titulo}"> <label class='${peliEditar.errores.get("titulo") != null ? "is-invalid" : ""}' for="tituloEdit">Título</label>
+									<div class="invalid-tooltip"> <c:out value='${peliEditar.errores.get("titulo")}'></c:out> </div>
 								</div>
 
 								<div class="col-6 form-floating mb-3">
 									<input type="text" class="form-control rounded-4" id="lemaEdit"
-										placeholder="Lema" required="required" name="lema"> <label
-										for="lemaEdit">Lema</label>
-									<div class="invalid-feedback">Introduzca un texto válido</div>
+										placeholder="Lema" required="required" name="lema" value="${peliEditar.lema}"> <label
+										class='${peliEditar.errores.get("lema") != null ? "is-invalid" : ""}' for="lemaEdit">Lema</label>
+									<div class="invalid-tooltip"> <c:out value='${peliEditar.errores.get("lema")}'></c:out> </div>
 								</div>
 
 							</div>
@@ -370,24 +372,23 @@
 								<div class="col-4 form-floating mb-3">
 									<input type="number" class="form-control rounded-4"
 										id="precioEdit" placeholder="Precio" required="required"
-										name="precio"> <label for="precioEdit">Precio</label>
-									<div class="invalid-feedback">Introduzca un precio válido</div>
+										name="precio" value="${peliEditar.precio}"> <label class='${peliEditar.errores.get("precio") != null ? "is-invalid" : ""}' for="precioEdit">Precio</label>
+									<div class="invalid-tooltip"> <c:out value='${peliEditar.errores.get("precio")}'></c:out> </div>
 								</div>
 
 
 								<div class="col-4 form-floating mb-3">
 									<input type="number" class="form-control rounded-4"
 										id="duracionEdit" placeholder="Duracion" required="required"
-										name="duracion"> <label for="duracionEdit">Duración
+										name="duracion" value="${peliEditar.duracion}"> <label class='${peliEditar.errores.get("duracion") != null ? "is-invalid" : ""}' for="duracionEdit">Duración
 										en min.</label>
-									<div class="invalid-feedback">Introduzca una duración
-										válida</div>
+									<div class="invalid-tooltip"> <c:out value='${peliEditar.errores.get("duracion")}'></c:out> </div>
 								</div>
 								<div class="col-4 form-floating mb-3">
 									<input type="number" class="form-control rounded-4"
 										id="stockEdit" placeholder="Stock" required="required"
-										name="stock"> <label for="stockEdit">Stock</label>
-									<div class="invalid-feedback">Introduzca una stock válido</div>
+										name="stock" value="${peliEditar.stock}"> <label class='${peliEditar.errores.get("stock") != null ? "is-invalid" : ""}' for="stockEdit">Stock</label>
+									<div class="invalid-tooltip"> <c:out value='${peliEditar.errores.get("stock")}'></c:out> </div>
 								</div>
 							</div>
 
@@ -399,14 +400,15 @@
 											<option value="${genero.nombre}">${genero.nombre}</option>
 										</c:forEach>
 									</select> <label for="generoEdit">Género</label>
+									<div class="invalid-tooltip"> <c:out value='${peliEditar.errores.get("genero")}'></c:out> </div>
 								</div>
 
 								<div class="col-4 mx-auto form-floating mb-3">
 									<input type="number" class="form-control rounded-4"
 										id="anioLanzamientoEdit" placeholder="AnioLanzamiento"
-										required="required" name="anioLanzamiento"> <label
-										for="anioLanzamientoEdit">Año de estreno</label>
-									<div class="invalid-feedback">Introduzca un año válido</div>
+										required="required" name="anioLanzamiento" value="${peliEditar.anioLanzamiento}"> <label
+										class='${peliEditar.errores.get("anioLanzamiento") != null ? "is-invalid" : ""}' for="anioLanzamientoEdit">Año de estreno</label>
+									<div class="invalid-tooltip"> <c:out value='${peliEditar.errores.get("anioLanzamiento")}'></c:out> </div>
 								</div>
 							</div>
 
@@ -425,8 +427,9 @@
 							<div class="form-floating my-3 col-md-10 col-12 mx-auto">
 								<textarea class="form-control"
 									placeholder="Leave a comment here" name="descripcion"
-									id="descripcionEdit" style="height: 100px"></textarea>
-								<label for="descripcionEdit">Descripción</label>
+									id="descripcionEdit" style="height: 100px">${peliEditar.descripcion}</textarea>
+								<label class='${peliEditar.errores.get("descripcion") != null ? "is-invalid" : ""}' for="descripcionEdit">Descripción</label>
+								<div class="invalid-tooltip"> <c:out value='${peliEditar.errores.get("descripcion")}'></c:out> </div>
 							</div>
 
 							<hr class="my-4">
@@ -441,7 +444,6 @@
 				</div>
 			</div>
 		</div>
-
 
 		<!-- MODAL ELIMINAR PELÍCULA -->
 		<div class="modal fade" id="modalEliminarPelicula"

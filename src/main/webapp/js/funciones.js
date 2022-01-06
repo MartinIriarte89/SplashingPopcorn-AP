@@ -33,8 +33,7 @@ if (!!document.getElementById('modalEditarPelicula')) {
 		let anioLanzamiento = boton.getAttribute('data-bs-anioLanzamiento')
 		let descripcion = boton.getAttribute('data-bs-descripcion')
 
-
-		let botonEnviar = modalEditar.querySelector('#botonEdit')
+	
 		let idEdit = modalEditar.querySelector('#idEdit')
 		let tituloEdit = modalEditar.querySelector('#tituloEdit')
 		let lemaEdit = modalEditar.querySelector('#lemaEdit')
@@ -44,8 +43,7 @@ if (!!document.getElementById('modalEditarPelicula')) {
 		let generoEdit = modalEditar.querySelector('#generoEdit')
 		let anioLanzamientoEdit = modalEditar.querySelector('#anioLanzamientoEdit')
 		let descripcionEdit = modalEditar.querySelector('#descripcionEdit')
-
-		botonEnviar.setAttribute('href', "/Webapp_Proyecto_Final/editarPelicula.ad")
+	
 		idEdit.value = id;
 		tituloEdit.value = titulo;
 		lemaEdit.value = lema;
@@ -89,9 +87,6 @@ if (!!document.getElementById('modalEditarPromocion')) {
 		let descripcion = boton.getAttribute('data-bs-descripcion')
 		let beneficio = boton.getAttribute('data-bs-beneficio')
 		let tipoPromocion = boton.getAttribute('data-bs-tipoPromocion')
-		
-		console.log(idPelis)
-		console.log(arrayIdPelis)
 
 		let idEdit = modalEditarPromocion.querySelector('#idEdit')
 		let tituloEdit = modalEditarPromocion.querySelector('#tituloEdit')
@@ -113,11 +108,7 @@ if (!!document.getElementById('modalEditarPromocion')) {
 			
 			selectPeliculaEdit.value = arrayIdPelis[x];
 			let index = selectPeliculaEdit.selectedIndex;
-			let opcion = selectPeliculaEdit.options[index];
-			
-			console.log(selectPeliculaEdit.value)
-			console.log(index)
-			console.log(opcion.text)
+		
 			peliculasEdit.value = selectPeliculaEdit.options[index].text + '\n' + peliculasEdit.value;
 			if (idPeliculasEdit.value == '') {
 				idPeliculasEdit.value = selectPeliculaEdit.options[index].value;

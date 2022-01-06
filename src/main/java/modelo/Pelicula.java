@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import utilidades.Comparador;
+import utilidades.Patron;
+
 public class Pelicula implements Sugerencia, Comparable<Pelicula> {
 
 	private int id;
@@ -49,10 +52,10 @@ public class Pelicula implements Sugerencia, Comparable<Pelicula> {
 		setLema(lema);
 	}
 
-	public Map<String,String> getErrores(){
+	public Map<String, String> getErrores() {
 		return this.errores;
 	}
-	
+
 	@Override
 	public int getId() {
 		return this.id;
@@ -98,7 +101,6 @@ public class Pelicula implements Sugerencia, Comparable<Pelicula> {
 		return this.descripcion;
 	}
 
-	
 	public int getAnioLanzamiento() {
 		return this.anioLanzamiento;
 	}
@@ -221,11 +223,45 @@ public class Pelicula implements Sugerencia, Comparable<Pelicula> {
 		if (stock < 0) {
 			errores.put("stock", "Debe ser positivo");
 		}
+
+		if (precio == Patron.NUMERO_NO_VALIDO) {
+			errores.put("precio", "Formato incorrecto, debe ser un número");
+		}
+
+		if (duracion == Patron.NUMERO_NO_VALIDO) {
+			errores.put("duracion", "Formato incorrecto, debe ser un número");
+		}
+
+		if (stock == Patron.NUMERO_NO_VALIDO) {
+			errores.put("stock", "Formato incorrecto, debe ser un número");
+		}
+
 		if (anioLanzamiento < 1895) {
 			errores.put("anioLanzamiento", "Debe ser posterior a 1895");
 		}
-		if(titulo.length() < 2) {
+
+		if (anioLanzamiento == Patron.NUMERO_NO_VALIDO) {
+			errores.put("anioLanzamiento", "Formato incorrecto, debe ser un número");
+		}
+
+		if (titulo.length() < 2) {
 			errores.put("titulo", "Debe contener al menos dos caracteres");
+		}
+
+		if (!Comparador.comparar(titulo, Patron.SIN_CARACTERES_ESPECIALES)) {
+			errores.put("titulo", "No puede contener caracteres especiales");
+		}
+
+		if (!Comparador.comparar(descripcion, Patron.NULO_SIN_CARACTERES_ESPECIALES)) {
+			errores.put("descripcion", "No puede contener caracteres especiales");
+		}
+
+		if (!Comparador.comparar(lema, Patron.NULO_SIN_CARACTERES_ESPECIALES)) {
+			errores.put("lema", "No puede contener caracteres especiales");
+		}
+
+		if (genero.esNulo()) {
+			errores.put("genero", "El genero debe ser válido");
 		}
 	}
 

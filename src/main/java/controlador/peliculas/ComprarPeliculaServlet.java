@@ -15,7 +15,7 @@ import modelo.Usuario;
 import persistencia.FabricaDAO;
 import servicios.ServicioComprar;
 import servicios.ServicioPelicula;
-import servicios.validaciones.ValidacionDatosPelicula;
+import utilidades.Validacion;
 
 @WebServlet("/comprarPelicula.do")
 public class ComprarPeliculaServlet extends HttpServlet implements Servlet {
@@ -23,32 +23,22 @@ public class ComprarPeliculaServlet extends HttpServlet implements Servlet {
 	private static final long serialVersionUID = -4083616287286069135L;
 	private ServicioComprar servicioComprarPeli;
 	private ServicioPelicula servPelicula;
-	private ValidacionDatosPelicula validarDatos;
+	private Validacion validarDatos;
 
 	@Override
 	public void init() throws ServletException {
 		super.init();
 		this.servicioComprarPeli = new ServicioComprar();
 		this.servPelicula = new ServicioPelicula();
-		this.validarDatos = new ValidacionDatosPelicula();
+		this.validarDatos = new Validacion();
 	}
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String idString = request.getParameter("id");
-
-		if (!validarDatos.esNumeroValido(idString)) {
-			request.setAttribute("flash", "La película no existe");
-
-			RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/peliculas");
-			dispatcher.forward(request, response);
-			return;
-		}
-
-		int peliculaId = Integer.parseInt(idString);
-		Pelicula pelicula = servPelicula.buscarPor(peliculaId);
+		int id = validarDatos.esNumeroEnteroValido(request.getParameter("id"));
+		Pelicula pelicula = servPelicula.buscarPor(id);
 
 		if (!pelicula.esNulo()) {
 			Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");

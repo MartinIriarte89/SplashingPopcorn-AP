@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import utilidades.Comparador;
-import utilidades.Patrones;
+import utilidades.Patron;
 
 public class ValidacionDatosUsuario {
 	private Map<String, String> errores;
@@ -14,7 +14,7 @@ public class ValidacionDatosUsuario {
 	}
 
 	public boolean esNumeroValido(String numero) {
-		return Comparador.comparar(numero, Patrones.NUMERO_ENTERO);
+		return Comparador.comparar(numero, Patron.NUMERO_ENTERO);
 	}
 
 	public boolean datosSonValidos(String nombre, String usuario, String contrasena) {
@@ -42,7 +42,7 @@ public class ValidacionDatosUsuario {
 			errores.put("nombre", "Nombre invalido");
 		if (usuario == null || usuario.equals(""))
 			errores.put("usuario", "Usuario invalido");
-		if (!Comparador.comparar(contrasena, Patrones.CONTRASENA_VALIDA))
+		if (!Comparador.comparar(contrasena, Patron.CONTRASENA_VALIDA))
 			errores.put("contrasena", "Contraseña invalida");
 	}
 	
@@ -54,11 +54,11 @@ public class ValidacionDatosUsuario {
 			errores.put("nombre", "Nombre invalido");
 		if (usuario == null || usuario.equals(""))
 			errores.put("usuario", "Usuario invalido");
-		if (!Comparador.comparar(contrasena, Patrones.CONTRASENA_VALIDA))
+		if (!Comparador.comparar(contrasena, Patron.CONTRASENA_VALIDA))
 			errores.put("contrasena", "Contraseña invalida");
-		if (!Comparador.comparar(dineroDisponible, Patrones.NUMERO_DOUBLE))
+		if (!Comparador.comparar(dineroDisponible, Patron.NUMERO_DOUBLE))
 			errores.put("dinero", "Formato invalido");
-		if (!Comparador.comparar(tiempoDisponible, Patrones.NUMERO_ENTERO))
+		if (!Comparador.comparar(tiempoDisponible, Patron.NUMERO_ENTERO))
 			errores.put("tiempo", "Formato invalido");
 	}
 
@@ -66,17 +66,17 @@ public class ValidacionDatosUsuario {
 			String dineroDisponible, String tiempoDisponible) {
 		errores = new HashMap<String, String>();
 
-		if (!Comparador.comparar(id, Patrones.NUMERO_ENTERO))
+		if (!Comparador.comparar(id, Patron.NUMERO_ENTERO))
 			errores.put("id", "El usuario no existe");
 		if (nombre == null || nombre.equals(""))
 			errores.put("nombre", "Nombre invalido");
 		if (usuario == null || usuario.equals(""))
 			errores.put("usuario", "Usuario invalido");
-		if (!Comparador.comparar(contrasena, Patrones.CONTRASENA_VALIDA))
+		if (!Comparador.comparar(contrasena, Patron.CONTRASENA_VALIDA))
 			errores.put("contrasena", "Contraseña invalida");
-		if (!Comparador.comparar(dineroDisponible, Patrones.NUMERO_DOUBLE))
+		if (!Comparador.comparar(dineroDisponible, Patron.NUMERO_DOUBLE))
 			errores.put("dinero", "Formato invalido");
-		if (!Comparador.comparar(tiempoDisponible, Patrones.NUMERO_ENTERO))
+		if (!Comparador.comparar(tiempoDisponible, Patron.NUMERO_ENTERO))
 			errores.put("tiempo", "Formato invalido");
 	}
 
