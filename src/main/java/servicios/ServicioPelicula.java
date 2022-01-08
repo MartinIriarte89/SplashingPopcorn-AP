@@ -34,20 +34,22 @@ public class ServicioPelicula {
 			String descripcion, String urlPortada, String urlFondo, int anioLanzamiento, String lema) {
 		Pelicula pelicula = buscarPor(id);
 
-		pelicula.setTitulo(titulo);
-		pelicula.setPrecio(precio);
-		pelicula.setDuracion(duracion);
-		pelicula.setGenero(genero);
-		pelicula.setStock(stock);
-		pelicula.setDescripcion(descripcion);
-		pelicula.setUrlPortada(urlPortada);
-		pelicula.setUrlFondo(urlFondo);
-		pelicula.setAnioLanzamiento(anioLanzamiento);
-		pelicula.setLema(lema);
-
-		if (pelicula.esValida()) {
-			peliculaDAO.editar(pelicula);
-			ProveedorDeConexion.cerrarConexion();
+		if (!pelicula.esNulo()) {
+			pelicula.setTitulo(titulo);
+			pelicula.setPrecio(precio);
+			pelicula.setDuracion(duracion);
+			pelicula.setGenero(genero);
+			pelicula.setStock(stock);
+			pelicula.setDescripcion(descripcion);
+			pelicula.setUrlPortada(urlPortada);
+			pelicula.setUrlFondo(urlFondo);
+			pelicula.setAnioLanzamiento(anioLanzamiento);
+			pelicula.setLema(lema);
+			
+			if (pelicula.esValida()) {
+				peliculaDAO.editar(pelicula);
+				ProveedorDeConexion.cerrarConexion();
+			}
 		}
 		return pelicula;
 	}

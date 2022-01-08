@@ -46,37 +46,39 @@ public class ServicioPromocion {
 			String tipoPromocion, double beneficio) {
 		Promocion promocion = buscarPor(id);
 
-		if (!tipoPromocion.equalsIgnoreCase(promocion.getTipoPromocion())) {
+		if (!promocion.esNulo()) {
+			if (!tipoPromocion.equalsIgnoreCase(promocion.getTipoPromocion())) {
 
-			if (tipoPromocion.equalsIgnoreCase("porcentual"))
-				promocion = new PromocionPorcentual(id, titulo, peliculas, (int) beneficio, descripcion, urlPortada,
-						tipoPromocion);
-			else if (tipoPromocion.equalsIgnoreCase("absoluta"))
-				promocion = new PromocionAbsoluta(id, titulo, peliculas, beneficio, descripcion, urlPortada,
-						tipoPromocion);
-			else
-				promocion = new PromocionAPorB(id, titulo, peliculas, (int) beneficio, descripcion, urlPortada,
-						tipoPromocion);
+				if (tipoPromocion.equalsIgnoreCase("porcentual"))
+					promocion = new PromocionPorcentual(id, titulo, peliculas, (int) beneficio, descripcion, urlPortada,
+							tipoPromocion);
+				else if (tipoPromocion.equalsIgnoreCase("absoluta"))
+					promocion = new PromocionAbsoluta(id, titulo, peliculas, beneficio, descripcion, urlPortada,
+							tipoPromocion);
+				else
+					promocion = new PromocionAPorB(id, titulo, peliculas, (int) beneficio, descripcion, urlPortada,
+							tipoPromocion);
 
-		} else {
-			promocion.setTitulo(titulo);
-			promocion.setPeliculas(peliculas);
-			promocion.setDescripcion(descripcion);
-			promocion.setUrlPortada(urlPortada);
-			promocion.setTipoPromocion(tipoPromocion);
-			promocion.setBeneficio(beneficio);
-		}
+			} else {
+				promocion.setTitulo(titulo);
+				promocion.setPeliculas(peliculas);
+				promocion.setDescripcion(descripcion);
+				promocion.setUrlPortada(urlPortada);
+				promocion.setTipoPromocion(tipoPromocion);
+				promocion.setBeneficio(beneficio);
+			}
 
-		if (promocion.esValida()) {
-			promocionDAO.editar(promocion);
-			ProveedorDeConexion.cerrarConexion();
+			if (promocion.esValida()) {
+				promocionDAO.editar(promocion);
+				ProveedorDeConexion.cerrarConexion();
+			}
 		}
 		return promocion;
 	}
 
 	public Promocion borrar(int id) {
 		Promocion promocion = buscarPor(id);
-		if(!promocion.esNulo()) {
+		if (!promocion.esNulo()) {
 			promocionDAO.borrar(promocion);
 		}
 		ProveedorDeConexion.cerrarConexion();

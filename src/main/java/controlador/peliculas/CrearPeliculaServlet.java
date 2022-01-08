@@ -32,7 +32,8 @@ public class CrearPeliculaServlet extends HttpServlet implements Servlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		doPost(req,resp);
+		RequestDispatcher dispatcher = req.getServletContext().getRequestDispatcher("/peliculas");
+		dispatcher.forward(req, resp);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

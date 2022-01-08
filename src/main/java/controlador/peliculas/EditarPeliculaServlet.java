@@ -30,10 +30,11 @@ public class EditarPeliculaServlet extends HttpServlet implements Servlet {
 		this.servGenero = new ServicioGenero();
 		validarDatos = new Validacion();
 	}
-	
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		doPost(req,resp);
+		RequestDispatcher dispatcher = req.getServletContext().getRequestDispatcher("/peliculas");
+		dispatcher.forward(req, resp);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -55,14 +56,21 @@ public class EditarPeliculaServlet extends HttpServlet implements Servlet {
 
 		Pelicula pelicula = servicioPelicula.editar(id, titulo, precio, duracion, stock, genero, descripcion,
 				urlPortada, urlFondo, anioLanzamiento, lema);
+		
+		if (!pelicula.esNulo()) {
+			if (pelicula.esValida()) {
+				response.sendRedirect("peliculas");
+			} else {
+				request.setAttribute("peliEditar", pelicula);
+				request.setAttribute("serv", "editar");
 
-		if (pelicula.esValida()) {
-			response.sendRedirect("peliculas");
-		} else {
-			request.setAttribute("peliEditar", pelicula);
-			request.setAttribute("serv", "editar");
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/peliculas");
+				dispatcher.forward(request, response);
+			}
+		}else {
+			request.setAttribute("flash", "La película no existe");
 
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/peliculas");
+			RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/peliculas");
 			dispatcher.forward(request, response);
 		}
 	}

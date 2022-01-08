@@ -30,6 +30,12 @@ public class EditarPromocionServlet extends HttpServlet implements Servlet {
 		this.servPelicula = new ServicioPelicula();
 		this.validarDatos = new Validacion();
 	}
+	
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		RequestDispatcher dispatcher = req.getServletContext().getRequestDispatcher("/promociones");
+		dispatcher.forward(req, resp);
+	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -51,13 +57,20 @@ public class EditarPromocionServlet extends HttpServlet implements Servlet {
 		Promocion promocion = servPromocion.editar(id, titulo, peliculas, descripcion, urlPortada, tipoPromocion,
 				beneficio);
 
-		if (promocion.esValida()) {
-			response.sendRedirect("promociones");
+		if (!promocion.esNulo()) {
+			if (promocion.esValida()) {
+				response.sendRedirect("promociones");
+			} else {
+				request.setAttribute("promocionTempEdit", promocion);
+				request.setAttribute("serv", "editar");
+
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/promociones");
+				dispatcher.forward(request, response);
+			}
 		} else {
-			request.setAttribute("promocionTempEdit", promocion);
-			request.setAttribute("serv", "editar");
-			
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/promociones");
+			request.setAttribute("flash", "La promoción no existe");
+
+			RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/promociones");
 			dispatcher.forward(request, response);
 		}
 	}

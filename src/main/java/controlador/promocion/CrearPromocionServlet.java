@@ -30,6 +30,12 @@ public class CrearPromocionServlet extends HttpServlet implements Servlet {
 		this.validarDatos = new Validacion();
 	}
 
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		RequestDispatcher dispatcher = req.getServletContext().getRequestDispatcher("/promociones");
+		dispatcher.forward(req, resp);
+	}
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
