@@ -14,44 +14,48 @@ import modelo.Pelicula;
 import modelo.Promocion;
 import servicios.ServicioPelicula;
 import servicios.ServicioPromocion;
+import utilidades.Validacion;
 
 @WebServlet("/crearPromocion.ad")
 public class CrearPromocionServlet extends HttpServlet implements Servlet {
 	private static final long serialVersionUID = -6648217727244375105L;
 	private ServicioPromocion servPromocion;
 	private ServicioPelicula servPelicula;
+	private Validacion validarDatos;
 
 	public void init() throws ServletException {
 		super.init();
 		this.servPromocion = new ServicioPromocion();
 		this.servPelicula = new ServicioPelicula();
+		this.validarDatos = new Validacion();
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		ArrayList<Pelicula> peliculas = new ArrayList<Pelicula>();
 
 		String titulo = request.getParameter("titulo");
-		String[] idPeliculas = request.getParameter("idPeliculas").split(",");
+		String[] idPeliculas = validarDatos.split(request.getParameter("idPeliculas"), ",");
 		String descripcion = request.getParameter("descripcion");
 		String urlPortada = request.getParameter("urlPortada");
 		String tipoPromocion = request.getParameter("tipoPromocion");
-		double beneficio = Double.parseDouble(request.getParameter("beneficio"));
+		double beneficio = validarDatos.esNumeroDoubleValido(request.getParameter("beneficio"));
 
 		for (String id : idPeliculas) {
-			peliculas.add(servPelicula.buscarPor(Integer.parseInt(id)));
+			peliculas.add(servPelicula.buscarPor(validarDatos.esNumeroEnteroValido(id)));
 		}
 
 		Promocion promocion = servPromocion.crear(titulo, peliculas, descripcion, urlPortada, tipoPromocion, beneficio);
-	
+
 		if (promocion.esValida()) {
 			response.sendRedirect("promociones");
-			
-		} else {
-			request.setAttribute("promocion", promocion);
 
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/promocion");
+		} else {
+			request.setAttribute("promocionTempCrear", promocion);
+			request.setAttribute("serv", "crear");
+
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/promociones");
 			dispatcher.forward(request, response);
 		}
 	}

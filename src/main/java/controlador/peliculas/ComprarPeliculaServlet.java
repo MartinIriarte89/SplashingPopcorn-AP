@@ -19,7 +19,6 @@ import utilidades.Validacion;
 
 @WebServlet("/comprarPelicula.do")
 public class ComprarPeliculaServlet extends HttpServlet implements Servlet {
-
 	private static final long serialVersionUID = -4083616287286069135L;
 	private ServicioComprar servicioComprarPeli;
 	private ServicioPelicula servPelicula;

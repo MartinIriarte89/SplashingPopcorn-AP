@@ -243,13 +243,16 @@ public class Pelicula implements Sugerencia, Comparable<Pelicula> {
 		if (anioLanzamiento == Patron.NUMERO_NO_VALIDO) {
 			errores.put("anioLanzamiento", "Formato incorrecto, debe ser un número");
 		}
-
-		if (titulo.length() < 2) {
-			errores.put("titulo", "Debe contener al menos dos caracteres");
+		if (titulo == null) {
+			errores.put("titulo", "El campo no puede estar vacío");
 		}
-
-		if (!Comparador.comparar(titulo, Patron.SIN_CARACTERES_ESPECIALES)) {
-			errores.put("titulo", "No puede contener caracteres especiales");
+		if (titulo != null) {
+			if (titulo.length() < 2) {
+				errores.put("titulo", "Debe contener al menos dos caracteres");
+			}
+			if (!Comparador.comparar(titulo, Patron.SIN_CARACTERES_ESPECIALES)) {
+				errores.put("titulo", "No puede contener caracteres especiales");
+			}
 		}
 
 		if (!Comparador.comparar(descripcion, Patron.NULO_SIN_CARACTERES_ESPECIALES)) {

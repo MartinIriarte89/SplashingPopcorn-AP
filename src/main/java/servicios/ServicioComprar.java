@@ -31,7 +31,7 @@ public class ServicioComprar {
 			usuario.comprar(sugerencia);
 			sugerencia.restarStock();
 			if(!transaccion.actualizarEnBBDD(usuario, sugerencia)) {
-				errores.put("fallo", "Algo salio mal al procesar la compra, intenta nuevamente");
+				errores.put("fallo", "Algo salió mal al procesar la compra, intenta nuevamente");
 			}
 		}
 		return errores;

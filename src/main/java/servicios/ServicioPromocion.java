@@ -74,10 +74,13 @@ public class ServicioPromocion {
 		return promocion;
 	}
 
-	public void borrar(int id) {
+	public Promocion borrar(int id) {
 		Promocion promocion = buscarPor(id);
-		promocionDAO.borrar(promocion);
+		if(!promocion.esNulo()) {
+			promocionDAO.borrar(promocion);
+		}
 		ProveedorDeConexion.cerrarConexion();
+		return promocion;
 	}
 
 	public Promocion buscarPor(int id) {

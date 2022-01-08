@@ -30,6 +30,11 @@ public class EditarPeliculaServlet extends HttpServlet implements Servlet {
 		this.servGenero = new ServicioGenero();
 		validarDatos = new Validacion();
 	}
+	
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		doPost(req,resp);
+	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

@@ -31,18 +31,17 @@ public class ListarDetallePeliculaServlet extends HttpServlet implements Servlet
 			throws ServletException, IOException {
 		int id = validarDatos.esNumeroEnteroValido(request.getParameter("id"));
 		Pelicula pelicula = servicioPelicula.buscarPor(id);
-		
-		if(pelicula.esNulo()) {
-			request.setAttribute("flash", "usuario no encontrado");
+
+		if (!pelicula.esNulo()) {
+			request.setAttribute("pelicula", pelicula);
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/vistas/detalles.jsp");
+
+			dispatcher.forward(request, response);
+		} else {
+			request.setAttribute("flash", "Película no encontrada");
 
 			RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/peliculas");
 			dispatcher.forward(request, response);
-			return;
 		}
-		
-		request.setAttribute("pelicula", pelicula);
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/vistas/detalles.jsp");
-
-		dispatcher.forward(request, response);
 	}
 }

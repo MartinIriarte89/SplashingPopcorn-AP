@@ -1,7 +1,6 @@
 package controlador.usuarios;
 
 import java.io.IOException;
-import java.util.Map;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.Servlet;
@@ -14,7 +13,7 @@ import modelo.Genero;
 import modelo.Usuario;
 import servicios.ServicioGenero;
 import servicios.ServicioUsuario;
-import servicios.validaciones.ValidacionDatosUsuario;
+import utilidades.Validacion;
 
 @WebServlet("/crearUsuario.ad")
 public class CrearUsuarioServlet extends HttpServlet implements Servlet {
@@ -22,14 +21,14 @@ public class CrearUsuarioServlet extends HttpServlet implements Servlet {
 	private static final long serialVersionUID = -6626649526922232487L;
 	private ServicioUsuario servUsuario;
 	private ServicioGenero servGenero;
-	private ValidacionDatosUsuario validarDatos;
+	private Validacion validarDatos;
 
 	@Override
 	public void init() throws ServletException {
 		super.init();
 		this.servUsuario = new ServicioUsuario();
 		this.servGenero = new ServicioGenero();
-		validarDatos = new ValidacionDatosUsuario();
+		validarDatos = new Validacion();
 	}
 
 	@Override
@@ -37,36 +36,15 @@ public class CrearUsuarioServlet extends HttpServlet implements Servlet {
 
 		String nombre = req.getParameter("nombre");
 		String usuario = req.getParameter("usuario");
-		String contrasena = req.getParameter("contrasena");
+		String contrasena = validarDatos.esContrasenaValida(req.getParameter("contrasena"));
 		String admin = req.getParameter("admin");
-		String dineroDisponibleString = req.getParameter("dinero");
-		String tiempoDisponibleString = req.getParameter("tiempo");
+		double dineroDisponible = validarDatos.esNumeroDoubleValido(req.getParameter("dinero"));
+		int tiempoDisponible = validarDatos.esNumeroEnteroValido(req.getParameter("tiempo"));
 		String urlPerfil = req.getParameter("fotoPerfil");
 		String preferenciaNombre = req.getParameter("genero");
-
-		Genero preferencia = servGenero.buscarPor(preferenciaNombre);
-
-		if (!validarDatos.datosSonValidos(nombre, usuario, contrasena, dineroDisponibleString,
-				tiempoDisponibleString)) {
-			Map<String, String> errores = validarDatos.getErrores();
-			req.setAttribute("errores", errores);
-
-			RequestDispatcher dispatcher = req.getServletContext().getRequestDispatcher("/listarUsuarios.ad");
-			dispatcher.forward(req, resp);
-			return;
-		}
-
-		if (preferencia.esNulo()) {
-			req.setAttribute("flash", "El genero no existe");
-
-			RequestDispatcher dispatcher = req.getServletContext().getRequestDispatcher("/listarUsuarios.ad");
-			dispatcher.forward(req, resp);
-			return;
-		}
-
-		double dineroDisponible = Double.parseDouble(dineroDisponibleString);
-		int tiempoDisponible = Integer.parseInt(tiempoDisponibleString);
 		boolean esAdmin = false;
+		
+		Genero preferencia = servGenero.buscarPor(preferenciaNombre);		
 		if (admin != null) {
 			esAdmin = true;
 		}
@@ -77,7 +55,7 @@ public class CrearUsuarioServlet extends HttpServlet implements Servlet {
 		if (usuarioTemp.esValido()) {
 			resp.sendRedirect("listarUsuarios.ad");
 		} else {
-			req.setAttribute("errores", usuarioTemp.getErrors());
+			req.setAttribute("usuarioTemp", usuarioTemp);
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/listarUsuarios.ad");
 			dispatcher.forward(req, resp);
 		}

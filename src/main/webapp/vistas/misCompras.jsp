@@ -70,7 +70,8 @@
 											<div class="d-flex">
 												<p
 													class="titulo-carta h3 mx-xl-0 mx-auto text-center text-white">
-													${compra.titulo} <span>(${compra.anioLanzamiento})</span>
+													${compra.titulo} <span> <c:if
+															test="${!compra.esPromocion()}">(${compra.anioLanzamiento})</c:if></span>
 												</p>
 											</div>
 											<div class="d-flex align-items-start mt-3 d-none d-xl-block">
@@ -78,7 +79,8 @@
 													style="max-height: 120px;">${compra.descripcion}</p>
 											</div>
 											<div class="d-flex mt-auto justify-content-center">
-												<button type="button" class="btn btn-neon" onclick="mostrarPelicula(${compra.id}, ${compra.esPromocion()})">
+												<button type="button" class="btn btn-neon"
+													onclick="mostrarPelicula(${compra.id}, ${compra.esPromocion()})">
 													<span id="span1"></span> <span id="span2"></span> <span
 														id="span3"></span> <span id="span4"></span>Detalle compra
 												</button>
@@ -117,29 +119,29 @@
 								<div class="row pt-2 text-modal">
 									<div class="col-4 fs-4 text-end font-merriweather-light">Título:</div>
 									<div
-										class="col-8 text-center align-self-center font-merriweather-light" id="modalTitulo">"Nombre
-										de la película"</div>
+										class="col-8 text-center align-self-center font-merriweather-light"
+										id="modalTitulo">"Nombre de la película"</div>
 								</div>
 
 								<div class="row mt-3 text-modal ">
 									<div class="col-4 fs-4 text-end font-merriweather-light ">Género:</div>
 									<div
-										class="col-8 text-center align-self-center font-merriweather-light" id="modalGenero">"Género
-										de la Película"</div>
+										class="col-8 text-center align-self-center font-merriweather-light"
+										id="modalGenero">"Género de la Película"</div>
 								</div>
 
 								<div class="row mt-3 text-modal">
 									<div class="col-4 fs-4 text-end font-merriweather-light">Costo:</div>
 									<div
-										class="col-8 text-center align-self-center font-merriweather-light" id="modalPrecio">"Costo
-										de la Película"</div>
+										class="col-8 text-center align-self-center font-merriweather-light"
+										id="modalPrecio">"Costo de la Película"</div>
 								</div>
 
 								<div class="row mt-3 text-modal">
 									<div class="col-4 fs-4 text-end font-merriweather-light">Duración:</div>
 									<div
-										class="col-8 text-center align-self-center font-merriweather-light" id="modalDuracion">"Duración
-										de la Película"</div>
+										class="col-8 text-center align-self-center font-merriweather-light"
+										id="modalDuracion">"Duración de la Película"</div>
 								</div>
 							</div>
 

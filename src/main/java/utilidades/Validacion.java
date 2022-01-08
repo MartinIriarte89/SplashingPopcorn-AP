@@ -3,29 +3,45 @@ package utilidades;
 public class Validacion {
 
 	public int esNumeroEnteroValido(String numero) {
-		if(!Comparador.comparar(numero, Patron.NUMERO_ENTERO)) {
-			numero = Patron.FORMATO_INCORRECTO;
+		int num;
+		try {
+			num = Integer.parseInt(numero);
+		} catch (NumberFormatException e) {
+			num = Patron.NUMERO_NO_VALIDO;
+		}catch (NullPointerException e) {
+			num = Patron.NUMERO_NO_VALIDO;
 		}
-		int num = Integer.parseInt(numero);
-		
 		return num;
 	}
 
 	public double esNumeroDoubleValido(String numero) {
-		if(!Comparador.comparar(numero, Patron.NUMERO_DOUBLE)) {
-			numero = Patron.FORMATO_INCORRECTO;
+		double num;
+		try {
+			num = Double.parseDouble(numero);
+		} catch (NumberFormatException e) {
+			num = Patron.NUMERO_NO_VALIDO;
+		}catch (NullPointerException e) {
+			num = Patron.NUMERO_NO_VALIDO;
 		}
-		double num = Double.parseDouble(numero);
-		
+
 		return num;
 	}
-	
+
 	public String esContrasenaValida(String contrasena) {
-		if(!Comparador.comparar(contrasena, Patron.NUMERO_DOUBLE)) {
+		if (!Comparador.comparar(contrasena, Patron.CONTRASENA_VALIDA)) {
 			contrasena = Patron.CONTRASEÑA_INVALIDA;
 		}
-		
 		return contrasena;
 	}
-
+	
+	public String [] split(String texto , String regex) {
+		String [] array = null;
+		try {
+			array = texto.split(regex);
+		}catch (NullPointerException e) {
+			array = new String[1];
+			array [0] = "0";
+		}
+		return array;
+	}	
 }

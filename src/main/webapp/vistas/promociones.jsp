@@ -18,15 +18,15 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
+
 <script type="text/javascript"
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"
-	defer></script>
+	src="/Webapp_Proyecto_Final/js/filtrarGeneros.js"></script>
 <script type="text/javascript"
-	src="/Webapp_Proyecto_Final/js/filtrarGeneros.js" defer></script>
+	src="/Webapp_Proyecto_Final/js/jquery.pajinate.js"></script>
 <script type="text/javascript"
-	src="/Webapp_Proyecto_Final/js/jquery.pajinate.js" defer></script>
+	src="/Webapp_Proyecto_Final/js/jquery.resize2.js"></script>
 <script type="text/javascript"
-	src="/Webapp_Proyecto_Final/js/jquery.resize2.js" defer></script>
+	src="/Webapp_Proyecto_Final/js/modales.js"></script>
 <script type="text/javascript"
 	src="/Webapp_Proyecto_Final/js/funciones.js" defer></script>
 
@@ -42,6 +42,10 @@
 
 		<!-- MODAL INICIO SESION -->
 		<jsp:include page="../parciales/inicioSesionModal.jsp"></jsp:include>
+		<!-- MODAL MSJ ERROR -->
+		<jsp:include page="../parciales/modalMsjError.jsp"></jsp:include>
+		<!-- MODAL ERROR -->
+		<jsp:include page="../parciales/modalesCompra.jsp"></jsp:include>
 
 		<div class="container-fluid p-0">
 			<!-- TITULO -->
@@ -237,19 +241,34 @@
 						<form action="crearPromocion.ad" method="post">
 							<div class="form-floating mb-3">
 								<input type="text" class="form-control rounded-4" id="titulo"
-									placeholder="Titulo" required="required" name="titulo">
-								<label for="titulo">Nombre</label>
-								<div class="invalid-feedback">Introduzca un nombre válido</div>
+									placeholder="Titulo" required="required" name="titulo"
+									value="${promocionTempCrear.titulo}"><label
+									for="titulo"
+									class='${promocionTempCrear.errores.get("titulo") != null ? "is-invalid" : ""}'>Nombre</label>
+								<div class="invalid-tooltip">
+									<c:out value='${promocionTempCrear.errores.get("titulo")}'></c:out>
+								</div>
 							</div>
 							<div class="row align-items-end mb-3">
 								<div class="col-7 form-floating me-auto">
 									<select onchange="cambiar()" class="form-select"
 										name="tipoPromocion" id="tipoPromocion"
 										aria-label="Floating label select example" required="required">
-										<option value="porcentual">Super descuentos</option>
-										<option value="absoluta">Precios locos</option>
-										<option value="axb">Regaladas</option>
-									</select> <label for="tipoPromocion">Tipo de promoción</label>
+										<option value="porcentual"
+											${promocionTempCrear.tipoPromocion.equals("porcentual") ? "selected= 'selected'" : ""}>Super
+											descuentos</option>
+										<option value="absoluta"
+											${promocionTempCrear.tipoPromocion.equals("absoluta") ? "selected= 'selected'" : ""}>Precios
+											locos</option>
+										<option value="axb"
+											${promocionTempCrear.tipoPromocion.equals("axb") ? "selected= 'selected'" : ""}>Regaladas</option>
+									</select> <label for="tipoPromocion"
+										class='${promocionTempCrear.errores.get("tipoPromocion") != null ? "is-invalid" : ""}'>Tipo
+										de promoción</label>
+									<div class="invalid-tooltip">
+										<c:out
+											value='${promocionTempCrear.errores.get("tipoPromocion")}'></c:out>
+									</div>
 								</div>
 
 								<div class="row col-5">
@@ -260,9 +279,12 @@
 									<div class="col-12 form-floating">
 										<input type="number" class="form-control rounded-4"
 											id="beneficio" placeholder="beneficio" required="required"
-											name="beneficio"> <label for="beneficio">Beneficio</label>
-										<div class="invalid-feedback">Introduzca un beneficio
-											válido</div>
+											name="beneficio" value="${promocionTempCrear.beneficio}">
+										<label for="beneficio"
+											class='${promocionTempCrear.errores.get("beneficio") != null ? "is-invalid" : ""}'>Beneficio</label>
+										<div class="invalid-tooltip">
+											<c:out value='${promocionTempCrear.errores.get("beneficio")}'></c:out>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -275,7 +297,8 @@
 									class="form-select form-select-sm col-9" id="selectPelicula"
 									name="pelicula" aria-label=".form-select-sm example">
 									<c:forEach items="${peliculas}" var="pelicula">
-										<option value="${pelicula.id}" data-type="${pelicula.genero.nombre}">${pelicula.titulo}</option>
+										<option value="${pelicula.id}"
+											data-type="${pelicula.genero.nombre}">${pelicula.titulo}</option>
 									</c:forEach>
 								</select>
 								<button onclick="seleccionarPelicula()"
@@ -287,7 +310,12 @@
 									class="col-10 mx-auto form-control" placeholder="peliculas"
 									name="peliculas" id="peliculas" required="required"
 									style="height: 150px"></textarea>
-								<label for="peliculas">Películas agregadas</label>
+								<label for="peliculas"
+									class='${promocionTempCrear.errores.get("peliculas") != null ? "is-invalid" : ""}'>Películas
+									agregadas</label>
+								<div class="invalid-tooltip">
+									<c:out value='${promocionTempCrear.errores.get("peliculas")}'></c:out>
+								</div>
 								<button onclick="resetear()"
 									class="col-3 mx-auto mt-2 btn btn-primary" type="button">Vaciar</button>
 							</div>
@@ -307,8 +335,13 @@
 							<div class="form-floating my-3 col-12 mx-auto">
 								<textarea class="form-control"
 									placeholder="Leave a comment here" name="descripcion"
-									id="descripcion" style="height: 100px"></textarea>
-								<label for="descripcion">Descripción de la promoción</label>
+									id="descripcion" style="height: 100px">${promocionTempCrear.descripcion}</textarea>
+								<label for="descripcion"
+									class='${promocionTempCrear.errores.get("descripcion") != null ? "is-invalid" : ""}'>Descripción
+									de la promoción</label>
+								<div class="invalid-tooltip">
+									<c:out value='${promocionTempCrear.errores.get("descripcion")}'></c:out>
+								</div>
 							</div>
 
 							<div class="row">
@@ -345,23 +378,38 @@
 							<div class="form-floating mb-3">
 								<input type="text" class="form-control rounded-4 d-none"
 									id="idEdit" placeholder="Titulo" required="required"
-									name="idEdit">
+									name="idEdit" value="${promocionTempEdit.id}">
 							</div>
 							<div class="form-floating mb-3">
 								<input type="text" class="form-control rounded-4"
 									id="tituloEdit" placeholder="Titulo" required="required"
-									name="tituloEdit"> <label for="tituloEdit">Nombre</label>
-								<div class="invalid-feedback">Introduzca un nombre válido</div>
+									name="tituloEdit" value="${promocionTempEdit.titulo}">
+								<label for="tituloEdit"
+									class='${promocionTempEdit.errores.get("titulo") != null ? "is-invalid" : ""}'>Nombre</label>
+								<div class="invalid-tooltip">
+									<c:out value='${promocionTempEdit.errores.get("titulo")}'></c:out>
+								</div>
 							</div>
 							<div class="row align-items-end mb-3">
 								<div class="col-7 form-floating me-auto">
 									<select onchange="cambiarEdit()" class="form-select"
 										name="tipoPromocionEdit" id="tipoPromocionEdit"
 										aria-label="Floating label select example" required="required">
-										<option value="porcentual">Super descuentos</option>
-										<option value="absoluta">Precios locos</option>
-										<option value="axb">Regaladas</option>
-									</select> <label for="tipoPromocionEdit">Tipo de promoción</label>
+										<option value="porcentual"
+											${promocionTempEdit.tipoPromocion.equals("porcentual") ? "selected= 'selected'" : ""}>Super
+											descuentos</option>
+										<option value="absoluta"
+											${promocionTempEdit.tipoPromocion.equals("absoluta") ? "selected= 'selected'" : ""}>Precios
+											locos</option>
+										<option value="axb"
+											${promocionTempEdit.tipoPromocion.equals("axb") ? "selected= 'selected'" : ""}>Regaladas</option>
+									</select> <label for="tipoPromocionEdit"
+										class='${promocionTempEdit.errores.get("tipoPromocion") != null ? "is-invalid" : ""}'>Tipo
+										de promoción</label>
+									<div class="invalid-tooltip">
+										<c:out
+											value='${promocionTempEdit.errores.get("tipoPromocion")}'></c:out>
+									</div>
 								</div>
 
 								<div class="row col-5">
@@ -372,10 +420,13 @@
 									<div class="col-12 form-floating">
 										<input type="number" class="form-control rounded-4"
 											id="beneficioEdit" placeholder="beneficio"
-											required="required" name="beneficioEdit"> <label
+											required="required" name="beneficioEdit"
+											value="${promocionTempEdit.beneficio}"> <label
+											class='${promocionTempEdit.errores.get("beneficio") != null ? "is-invalid" : ""}'
 											for="beneficioEdit">Beneficio</label>
-										<div class="invalid-feedback">Introduzca un beneficio
-											válido</div>
+										<div class="invalid-tooltip">
+											<c:out value='${promocionTempEdit.errores.get("beneficio")}'></c:out>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -389,7 +440,8 @@
 									id="selectPeliculaEdit" name="selectPeliculaEdit"
 									aria-label=".form-select-sm example">
 									<c:forEach items="${peliculas}" var="pelicula">
-										<option value="${pelicula.id}" data-type="${pelicula.genero.nombre}">${pelicula.titulo}</option>
+										<option value="${pelicula.id}"
+											data-type="${pelicula.genero.nombre}">${pelicula.titulo}</option>
 									</c:forEach>
 								</select>
 								<button onclick="seleccionarPeliculaEdit()"
@@ -401,7 +453,12 @@
 									class="col-10 mx-auto form-control" placeholder="peliculas"
 									name="peliculasEdit" id="peliculasEdit" required="required"
 									style="height: 150px"></textarea>
-								<label for="peliculasEdit">Películas agregadas</label>
+								<label
+									class='${promocionTempEdit.errores.get("peliculas") != null ? "is-invalid" : ""}'
+									for="peliculasEdit">Películas agregadas</label>
+								<div class="invalid-tooltip">
+									<c:out value='${promocionTempEdit.errores.get("peliculas")}'></c:out>
+								</div>
 								<button onclick="resetearEdit()"
 									class="col-3 mx-auto mt-2 btn btn-primary" type="button">Vaciar</button>
 							</div>
@@ -419,10 +476,15 @@
 							</div>
 
 							<div class="form-floating my-3 col-12 mx-auto">
-								<textarea class="form-control"
-									placeholder="Leave a comment here" name="descripcionEdit"
-									id="descripcionEdit" style="height: 100px"></textarea>
-								<label for="descripcionEdit">Descripción de la promoción</label>
+								<textarea class="form-control" placeholder="Descripcion"
+									name="descripcionEdit" id="descripcionEdit"
+									style="height: 100px">${promocionTempEdit.descripcion}</textarea>
+								<label
+									class='${promocionTempEdit.errores.get("descripcion") != null ? "is-invalid" : ""}'
+									for="descripcionEdit">Descripción de la promoción</label>
+								<div class="invalid-tooltip">
+									<c:out value='${promocionTempEdit.errores.get("descripcion")}'></c:out>
+								</div>
 							</div>
 
 							<div class="row">
@@ -464,5 +526,26 @@
 		<!-- ELEMENTO FOOTER -->
 		<jsp:include page="../parciales/footer.jsp"></jsp:include>
 	</footer>
+
+	<script type="text/javascript">
+		abrirModalPromo('${serv}');
+	</script>
+
+	<c:if test="${flash != null }">
+		<script type="text/javascript">
+			abrirModalFlash();
+		</script>
+	</c:if>
+	<c:if test="${success != null }">
+		<script type="text/javascript">
+			abrirModalSuccess();
+		</script>
+	</c:if>
+
+	<c:if test="${error != null }">
+		<script type="text/javascript">
+			abrirModalError();
+		</script>
+	</c:if>
 </body>
 </html>

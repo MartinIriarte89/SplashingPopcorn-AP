@@ -33,8 +33,6 @@ public class ListarPromocionesServlet extends HttpServlet implements Servlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Promocion promocion = (Promocion) request.getAttribute("promocion");
-		
 		ArrayList<Pelicula> peliculas = servicioPelicula.listar();
 		ArrayList<Genero> generos = servicioGenero.listar();
 		ArrayList<Promocion> promociones = servicioPromocion.listar();
@@ -42,11 +40,24 @@ public class ListarPromocionesServlet extends HttpServlet implements Servlet {
 		request.setAttribute("peliculas", peliculas);
 		request.setAttribute("generos", generos);
 		request.setAttribute("promociones", promociones);
-		request.setAttribute("promocion", promocion);
 
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/vistas/promociones.jsp");
 
 		dispatcher.forward(request, response);
 	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		ArrayList<Pelicula> peliculas = servicioPelicula.listar();
+		ArrayList<Genero> generos = servicioGenero.listar();
+		ArrayList<Promocion> promociones = servicioPromocion.listar();
 
+		req.setAttribute("peliculas", peliculas);
+		req.setAttribute("generos", generos);
+		req.setAttribute("promociones", promociones);
+
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/vistas/promociones.jsp");
+
+		dispatcher.forward(req, resp);
+	}
 }

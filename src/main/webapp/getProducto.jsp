@@ -17,14 +17,11 @@ if (esPromo) {
 <%
 if (esPromo) {
 %>
-{"titulo":"<c:out value="${promo.titulo}"></c:out>","genero":"<c:out value="${promo.genero}"></c:out>","costo":"<c:out value="${promo.getPrecio()}"></c:out>","duracion":"<c:out value="${promo.getDuracion()}"></c:out>"}
+{"titulo":"<c:out value="${promo.titulo}"></c:out>","genero":"<c:out value="${promo.genero.nombre}"></c:out>","costo":"<c:out value="${promo.getPrecio()}"></c:out>","duracion":"<c:out value="${promo.getDuracion()}"></c:out>"}
 <%
 } else {
 %>
-{"titulo":"<c:out value="${pelicula.titulo}"></c:out>","genero":"<c:out value="${pelicula.genero}"></c:out>","costo":"<c:out value="${pelicula.precio}"></c:out>","duracion":"<c:out value="${pelicula.duracion}"></c:out>"}
+{"titulo":"<c:out value="${pelicula.titulo}"></c:out>","genero":"<c:out value="${pelicula.genero.nombre}"></c:out>","costo":"<c:out value="${pelicula.precio}"></c:out>","duracion":"<c:out value="${pelicula.duracion}"></c:out>"}
 <%
 }
 %>
-
-Server Version: <%= application.getServerInfo() %><br>
-Servlet Version: <%= application.getMajorVersion() %>.<%= application.getMinorVersion() %>

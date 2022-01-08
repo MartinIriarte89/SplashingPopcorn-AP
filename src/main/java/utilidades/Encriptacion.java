@@ -7,11 +7,12 @@ public class Encriptacion {
 	private static final int RONDAS = 13;
 
 	public static String hash(String contrasena) {
-		if (contrasena != null) {
+		if (contrasena.equals("")) {
+			return "";
+		} else {
 			String salt = BCrypt.gensalt(RONDAS);
 			return BCrypt.hashpw(contrasena, salt);
-		} else
-			return "";
+		}
 	}
 
 	public static boolean coincidencia(String contrasena, String contrasenaEncrip) {

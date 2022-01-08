@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import utilidades.Comparador;
+import utilidades.Patron;
+
 public abstract class Promocion implements Sugerencia {
 
 	private int id;
@@ -194,20 +197,75 @@ public abstract class Promocion implements Sugerencia {
 	public void validar() {
 		errores = new HashMap<String, String>();
 
-		if (!this.generosIguales(peliculas)) {
-			errores.put("peliculas", "Los géneros de las película deben ser iguales");
+		if (!this.sonPeliculasGenerosIguales()) {
+			errores.put("peliculas", "Los géneros de las película deben coincidir");
+		}
+
+		if (peliculas.isEmpty()) {
+			errores.put("peliculas", "Debe contar por lo menos con una película");
+		}
+
+		if (!sonPeliculasValidas()) {
+			errores.put("peliculas", "Una o mas películas no existen");
+		}
+		if (titulo.length() < 2) {
+			errores.put("titulo", "Debe contener al menos dos caracteres");
+		}
+		if (!Comparador.comparar(titulo, Patron.SIN_CARACTERES_ESPECIALES)) {
+			errores.put("titulo", "No puede contener caracteres especiales");
+		}
+		if (!Comparador.comparar(descripcion, Patron.NULO_SIN_CARACTERES_ESPECIALES)) {
+			errores.put("descripcion", "No puede contener caracteres especiales");
+		}
+		if (beneficio == Patron.NUMERO_NO_VALIDO) {
+			errores.put("beneficio", "Formato incorrecto, debe ser un número");
+		}
+		if (tipoPromocion.equals("absoluta")) {
+			if (beneficio < 0) {
+				errores.put("beneficio", "Debe ser mayor a 0");
+			}
+		}
+		if (tipoPromocion.equals("porcentual")) {
+			if (beneficio < 0 || beneficio > 100) {
+				errores.put("beneficio", "El valor debe ser entre 0 y 100");
+			}
+		}
+		if (tipoPromocion.equals("axb")) {
+			if (beneficio < 0) {
+				errores.put("beneficio", "Debe ser mayor a 0");
+			}
+			if (beneficio > peliculas.size()) {
+				errores.put("beneficio", "No puede ser mayor a la cantidad de películas en promoción");
+			}
+		}
+		if(!tipoPromocion.equals("porcentual") && !tipoPromocion.equals("absoluta") && !tipoPromocion.equals("axb")) {
+			errores.put("tipoPromocion", "No existe este tipo de promoción");
+		}
+		if(titulo == null) {
+			errores.put("titulo", "El campo no puede estar vacío");
+		}
+		if(tipoPromocion == null) {
+			errores.put("titulo", "El campo no puede estar vacío");
 		}
 	}
 
 	// SIRVE PARA VALIDAR QUE TODAS LAS PELIS PERTENEZCAN AL MISMO GÉNERO
-	private boolean generosIguales(ArrayList<Pelicula> peliculas) {
-
+	private boolean sonPeliculasGenerosIguales() {
 		for (int i = 0; i < peliculas.size() - 1; i++) {
 			if (!peliculas.get(i).getGenero().equals(peliculas.get(i++).getGenero())) {
 				return false;
 			}
 		}
 		return true;
+	}
+
+	private boolean sonPeliculasValidas() {
+		boolean sonValidas = true;
+		for (Pelicula pelicula : peliculas) {
+			if (pelicula.esNulo())
+				sonValidas = false;
+		}
+		return sonValidas;
 	}
 
 	@Override

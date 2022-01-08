@@ -34,8 +34,8 @@ public class Usuario {
 		this.usuario = usuario;
 	}
 
-	public Usuario(int id, String nombre, String usuario, String contrasena, double dineroDisponible, int tiempoDisponible,
-			Genero preferencia, String urlPerfil, boolean esAdmin) {
+	public Usuario(int id, String nombre, String usuario, String contrasena, double dineroDisponible,
+			int tiempoDisponible, Genero preferencia, String urlPerfil, boolean esAdmin) {
 		this.id = id;
 		this.nombre = nombre;
 		this.dineroDisponible = dineroDisponible;
@@ -43,10 +43,10 @@ public class Usuario {
 		this.preferencia = preferencia;
 		this.contrasenaEncrip = contrasena;
 		this.esAdmin = esAdmin;
-		this.urlPerfil = urlPerfil;
+		setUrlPerfil(urlPerfil);
 		this.usuario = usuario;
 	}
-	
+
 	public int getId() {
 		return this.id;
 	}
@@ -54,7 +54,7 @@ public class Usuario {
 	public String getNombre() {
 		return this.nombre;
 	}
-	
+
 	public String getUsuario() {
 		return this.usuario;
 	}
@@ -78,11 +78,11 @@ public class Usuario {
 	public String getUrlPerfil() {
 		return this.urlPerfil;
 	}
-	
+
 	public String getContrasena() {
 		return this.contrasenaEncrip;
 	}
-	
+
 	public Map<String, String> getErrors() {
 		return this.errores;
 	}
@@ -116,7 +116,7 @@ public class Usuario {
 	}
 
 	public void setUrlPerfil(String urlPerfil) {
-		this.urlPerfil = urlPerfil==null ? this.urlPerfil : urlPerfil ;
+		this.urlPerfil = urlPerfil == null ? this.urlPerfil : urlPerfil;
 	}
 
 	public void setItinerario(Itinerario itinerario) {
@@ -148,7 +148,7 @@ public class Usuario {
 	public boolean esAdmin() {
 		return this.esAdmin;
 	}
-	
+
 	public boolean esValido() {
 		validar();
 		return errores.isEmpty();
@@ -156,19 +156,41 @@ public class Usuario {
 
 	private void validar() {
 		errores = new HashMap<String, String>();
-		
-		if(dineroDisponible < 0)
+
+		if (dineroDisponible < 0) {
 			errores.put("dinero", "No debe ser negativo");
-		
-		if(tiempoDisponible < 0) 
+		}
+		if (tiempoDisponible < 0) {
 			errores.put("tiempo", "No debe ser negativo");
-		
-		if (!Comparador.comparar(nombre, Patron.NOMBRE_APELLIDO_VALIDO))
-			errores.put("nombre", "Nombre invalido");
-		
-		if (!Comparador.comparar(usuario, Patron.USUARIO_VALIDO))
-			errores.put("usuario", "Usuario invalido");
-		
+		}
+		if (dineroDisponible == Patron.NUMERO_NO_VALIDO) {
+			errores.put("dinero", "Formato incorrecto, debe ser un número");
+		}
+		if (tiempoDisponible == Patron.NUMERO_NO_VALIDO) {
+			errores.put("tiempo", "Formato incorrecto, debe ser un número");
+		}
+		if (contrasenaEncrip.equals("")) {
+			errores.put("contrasena", "No debe contener caracteres especiales, y su longitud debe ser mayor a 4");
+		}
+		if (!Comparador.comparar(nombre, Patron.NOMBRE_APELLIDO_VALIDO)) {
+			errores.put("nombre", "No debe contener caracteres especiales, ingrese nombre y apellido");
+		}
+		if (!Comparador.comparar(usuario, Patron.USUARIO_VALIDO)) {
+			errores.put("usuario", "No debe contener caracteres especiales");
+		}
+		if (preferencia.esNulo()) {
+			errores.put("genero", "El genero no existe");
+		}
+		if (nombre == null) {
+			errores.put("nombre", "El campo no puede estar vacío");
+		}
+		if (usuario == null) {
+			errores.put("usuario", "El campo no puede estar vacío");
+		}
+		if (preferencia == null) {
+			errores.put("genero", "El campo no puede estar vacío");
+		}
+
 	}
 
 	@Override
@@ -195,6 +217,5 @@ public class Usuario {
 	public String toString() {
 		return "Usuario [nombre=" + nombre + "]";
 	}
-	
-	
+
 }

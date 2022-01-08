@@ -18,19 +18,22 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
+
 <script type="text/javascript"
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+	src="/Webapp_Proyecto_Final/js/filtrarGeneros.js"></script>
 <script type="text/javascript"
-	src="/Webapp_Proyecto_Final/js/filtrarGeneros.js" defer></script>
+	src="/Webapp_Proyecto_Final/js/jquery.pajinate.js"></script>
 <script type="text/javascript"
-	src="/Webapp_Proyecto_Final/js/jquery.pajinate.js" defer></script>
+	src="/Webapp_Proyecto_Final/js/jquery.resize2.js"></script>
 <script type="text/javascript"
-	src="/Webapp_Proyecto_Final/js/jquery.resize2.js" defer></script>
+	src="/Webapp_Proyecto_Final/js/modales.js"></script>
 <script type="text/javascript"
-	src="/Webapp_Proyecto_Final/js/funciones.js" defer></script>
+	src="/Webapp_Proyecto_Final/js/funciones.js"></script>
+
 </head>
 
 <body>
+
 	<header>
 		<!-- ELEMENTO HEADER -->
 		<jsp:include page="../parciales/header.jsp"></jsp:include>
@@ -40,10 +43,11 @@
 
 		<!-- MODAL INICIO SESION -->
 		<jsp:include page="../parciales/inicioSesionModal.jsp"></jsp:include>
-
-
+		<!-- MODAL MSJ ERROR -->
+		<jsp:include page="../parciales/modalMsjError.jsp"></jsp:include>
+		<!-- MODAL ERROR -->
+		<jsp:include page="../parciales/modalesCompra.jsp"></jsp:include>
 		
-
 		<div class="container-fluid p-0">
 			<!-- TITULO -->
 			<div class="h1 text-center font-lato m-0 titulo">
@@ -239,40 +243,59 @@
 							<div class="row mb-3">
 								<div class="col-6 form-floating mb-3">
 									<input type="text" class="form-control rounded-4" id="titulo"
-										placeholder="Titulo" required="required" name="titulo" value="${peliCrear.titulo}">
-									<label class='${peliCrear.errores.get("titulo") != null ? "is-invalid" : ""}' for="titulo">Título</label>
-									<div class="invalid-tooltip"> <c:out value='${peliCrear.errores.get("titulo")}'></c:out> </div>
+										placeholder="Titulo" required="required" name="titulo"
+										value="${peliCrear.titulo}"> <label
+										class='${peliCrear.errores.get("titulo") != null ? "is-invalid" : ""}'
+										for="titulo">Título</label>
+									<div class="invalid-tooltip">
+										<c:out value='${peliCrear.errores.get("titulo")}'></c:out>
+									</div>
 								</div>
 
 								<div class="col-6 form-floating mb-3">
 									<input type="text" class="form-control rounded-4" id="lema"
-										placeholder="Lema" required="required" name="lema" value="${peliCrear.lema}"> <label
-										class='${peliCrear.errores.get("lema") != null ? "is-invalid" : ""}' for="lema">Lema</label>
-									<div class="invalid-tooltip"><c:out value='${peliCrear.errores.get("lema")}'></c:out></div>
+										placeholder="Lema" required="required" name="lema"
+										value="${peliCrear.lema}"> <label
+										class='${peliCrear.errores.get("lema") != null ? "is-invalid" : ""}'
+										for="lema">Lema</label>
+									<div class="invalid-tooltip">
+										<c:out value='${peliCrear.errores.get("lema")}'></c:out>
+									</div>
 								</div>
 
 							</div>
 							<div class="row mb-3">
 								<div class="col-4 form-floating mb-3">
-									<input type="number" class="form-control rounded-4" id="precio"
-										placeholder="Precio" required="required" name="precio" value="${peliCrear.precio}">
-									<label class='${peliCrear.errores.get("precio") != null ? "is-invalid" : ""}' for="precio">Precio</label>
-									<div class="invalid-tooltip"><c:out value='${peliCrear.errores.get("precio")}'></c:out></div>
+									<input type="number" step="any" class="form-control rounded-4"
+										id="precio" placeholder="Precio" required="required"
+										name="precio" value="${peliCrear.precio}"> <label
+										class='${peliCrear.errores.get("precio") != null ? "is-invalid" : ""}'
+										for="precio">Precio</label>
+									<div class="invalid-tooltip">
+										<c:out value='${peliCrear.errores.get("precio")}'></c:out>
+									</div>
 								</div>
 
 
 								<div class="col-4 form-floating mb-3">
 									<input type="number" class="form-control rounded-4"
 										id="duracion" placeholder="Duracion" required="required"
-										name="duracion" value="${peliCrear.duracion}"> <label class='${peliCrear.errores.get("duracion") != null ? "is-invalid" : ""}' for="duracion">Duración
-										en min.</label>
-									<div class="invalid-tooltip"><c:out value='${peliCrear.errores.get("duracion")}'></c:out></div>
+										name="duracion" value="${peliCrear.duracion}"> <label
+										class='${peliCrear.errores.get("duracion") != null ? "is-invalid" : ""}'
+										for="duracion">Duración en min.</label>
+									<div class="invalid-tooltip">
+										<c:out value='${peliCrear.errores.get("duracion")}'></c:out>
+									</div>
 								</div>
 								<div class="col-4 form-floating mb-3">
 									<input type="number" class="form-control rounded-4" id="stock"
-										placeholder="Stock" required="required" name="stock" value="${peliCrear.stock}">
-									<label class='${peliCrear.errores.get("stock") != null ? "is-invalid" : ""}' for="stock">Stock</label>
-									<div class="invalid-tooltip"><c:out value='${peliCrear.errores.get("stock")}'></c:out></div>
+										placeholder="Stock" required="required" name="stock"
+										value="${peliCrear.stock}"> <label
+										class='${peliCrear.errores.get("stock") != null ? "is-invalid" : ""}'
+										for="stock">Stock</label>
+									<div class="invalid-tooltip">
+										<c:out value='${peliCrear.errores.get("stock")}'></c:out>
+									</div>
 								</div>
 							</div>
 
@@ -284,15 +307,21 @@
 											<option value="${genero.nombre}">${genero.nombre}</option>
 										</c:forEach>
 									</select> <label for="floatingSelect">Género</label>
-									<div class="invalid-tooltip"><c:out value='${peliCrear.errores.get("genero")}'></c:out></div>
+									<div class="invalid-tooltip">
+										<c:out value='${peliCrear.errores.get("genero")}'></c:out>
+									</div>
 								</div>
 
 								<div class="col-4 mx-auto form-floating mb-3">
 									<input type="number" class="form-control rounded-4"
 										id="anioLanzamiento" placeholder="AnioLanzamiento"
-										required="required" name="anioLanzamiento" value="${peliCrear.anioLanzamiento}"> <label
-										class='${peliCrear.errores.get("anioLanzamiento") != null ? "is-invalid" : ""}' for="anioLanzamiento">Año de estreno</label>
-									<div class="invalid-tooltip"><c:out value='${peliCrear.errores.get("anioLanzamiento")}'></c:out></div>
+										required="required" name="anioLanzamiento"
+										value="${peliCrear.anioLanzamiento}"> <label
+										class='${peliCrear.errores.get("anioLanzamiento") != null ? "is-invalid" : ""}'
+										for="anioLanzamiento">Año de estreno</label>
+									<div class="invalid-tooltip">
+										<c:out value='${peliCrear.errores.get("anioLanzamiento")}'></c:out>
+									</div>
 								</div>
 							</div>
 
@@ -311,8 +340,12 @@
 								<textarea class="form-control"
 									placeholder="Leave a comment here" name="descripcion"
 									id="descripcion" style="height: 100px">${peliCrear.descripcion}</textarea>
-								<label class='${peliCrear.errores.get("descripcion") != null ? "is-invalid" : ""}' for="descripcion">Descripción</label>
-								<div class="invalid-tooltip"><c:out value='${peliCrear.errores.get("descripcion")}'></c:out></div>
+								<label
+									class='${peliCrear.errores.get("descripcion") != null ? "is-invalid" : ""}'
+									for="descripcion">Descripción</label>
+								<div class="invalid-tooltip">
+									<c:out value='${peliCrear.errores.get("descripcion")}'></c:out>
+								</div>
 							</div>
 
 							<hr class="my-4">
@@ -349,46 +382,66 @@
 						<form action="editarPelicula.ad" method="post">
 							<div class="col-6 form-floating mb-3">
 								<input type="number" class="form-control rounded-4 d-none"
-									id="idEdit" placeholder="Id" required="required" name="id">
+									id="idEdit" placeholder="Id" required="required" name="id"
+									value="${peliEditar.id}">
 							</div>
 
 							<div class="row mb-3">
 								<div class="col-6 form-floating mb-3">
 									<input type="text" class="form-control rounded-4"
 										id="tituloEdit" placeholder="Titulo" required="required"
-										name="titulo" value="${peliEditar.titulo}"> <label class='${peliEditar.errores.get("titulo") != null ? "is-invalid" : ""}' for="tituloEdit">Título</label>
-									<div class="invalid-tooltip"> <c:out value='${peliEditar.errores.get("titulo")}'></c:out> </div>
+										name="titulo" value="${peliEditar.titulo}"> <label
+										class='${peliEditar.errores.get("titulo") != null ? "is-invalid" : ""}'
+										for="tituloEdit">Título</label>
+									<div class="invalid-tooltip">
+										<c:out value='${peliEditar.errores.get("titulo")}'></c:out>
+									</div>
 								</div>
 
 								<div class="col-6 form-floating mb-3">
 									<input type="text" class="form-control rounded-4" id="lemaEdit"
-										placeholder="Lema" required="required" name="lema" value="${peliEditar.lema}"> <label
-										class='${peliEditar.errores.get("lema") != null ? "is-invalid" : ""}' for="lemaEdit">Lema</label>
-									<div class="invalid-tooltip"> <c:out value='${peliEditar.errores.get("lema")}'></c:out> </div>
+										placeholder="Lema" required="required" name="lema"
+										value="${peliEditar.lema}"> <label
+										class='${peliEditar.errores.get("lema") != null ? "is-invalid" : ""}'
+										for="lemaEdit">Lema</label>
+									<div class="invalid-tooltip">
+										<c:out value='${peliEditar.errores.get("lema")}'></c:out>
+									</div>
 								</div>
 
 							</div>
 							<div class="row mb-3">
 								<div class="col-4 form-floating mb-3">
-									<input type="number" class="form-control rounded-4"
+									<input type="number" step="any" class="form-control rounded-4"
 										id="precioEdit" placeholder="Precio" required="required"
-										name="precio" value="${peliEditar.precio}"> <label class='${peliEditar.errores.get("precio") != null ? "is-invalid" : ""}' for="precioEdit">Precio</label>
-									<div class="invalid-tooltip"> <c:out value='${peliEditar.errores.get("precio")}'></c:out> </div>
+										name="precio" value="${peliEditar.precio}"> <label
+										class='${peliEditar.errores.get("precio") != null ? "is-invalid" : ""}'
+										for="precioEdit">Precio</label>
+									<div class="invalid-tooltip">
+										<c:out value='${peliEditar.errores.get("precio")}'></c:out>
+									</div>
 								</div>
 
 
 								<div class="col-4 form-floating mb-3">
 									<input type="number" class="form-control rounded-4"
 										id="duracionEdit" placeholder="Duracion" required="required"
-										name="duracion" value="${peliEditar.duracion}"> <label class='${peliEditar.errores.get("duracion") != null ? "is-invalid" : ""}' for="duracionEdit">Duración
-										en min.</label>
-									<div class="invalid-tooltip"> <c:out value='${peliEditar.errores.get("duracion")}'></c:out> </div>
+										name="duracion" value="${peliEditar.duracion}"> <label
+										class='${peliEditar.errores.get("duracion") != null ? "is-invalid" : ""}'
+										for="duracionEdit">Duración en min.</label>
+									<div class="invalid-tooltip">
+										<c:out value='${peliEditar.errores.get("duracion")}'></c:out>
+									</div>
 								</div>
 								<div class="col-4 form-floating mb-3">
 									<input type="number" class="form-control rounded-4"
 										id="stockEdit" placeholder="Stock" required="required"
-										name="stock" value="${peliEditar.stock}"> <label class='${peliEditar.errores.get("stock") != null ? "is-invalid" : ""}' for="stockEdit">Stock</label>
-									<div class="invalid-tooltip"> <c:out value='${peliEditar.errores.get("stock")}'></c:out> </div>
+										name="stock" value="${peliEditar.stock}"> <label
+										class='${peliEditar.errores.get("stock") != null ? "is-invalid" : ""}'
+										for="stockEdit">Stock</label>
+									<div class="invalid-tooltip">
+										<c:out value='${peliEditar.errores.get("stock")}'></c:out>
+									</div>
 								</div>
 							</div>
 
@@ -400,15 +453,21 @@
 											<option value="${genero.nombre}">${genero.nombre}</option>
 										</c:forEach>
 									</select> <label for="generoEdit">Género</label>
-									<div class="invalid-tooltip"> <c:out value='${peliEditar.errores.get("genero")}'></c:out> </div>
+									<div class="invalid-tooltip">
+										<c:out value='${peliEditar.errores.get("genero")}'></c:out>
+									</div>
 								</div>
 
 								<div class="col-4 mx-auto form-floating mb-3">
 									<input type="number" class="form-control rounded-4"
 										id="anioLanzamientoEdit" placeholder="AnioLanzamiento"
-										required="required" name="anioLanzamiento" value="${peliEditar.anioLanzamiento}"> <label
-										class='${peliEditar.errores.get("anioLanzamiento") != null ? "is-invalid" : ""}' for="anioLanzamientoEdit">Año de estreno</label>
-									<div class="invalid-tooltip"> <c:out value='${peliEditar.errores.get("anioLanzamiento")}'></c:out> </div>
+										required="required" name="anioLanzamiento"
+										value="${peliEditar.anioLanzamiento}"> <label
+										class='${peliEditar.errores.get("anioLanzamiento") != null ? "is-invalid" : ""}'
+										for="anioLanzamientoEdit">Año de estreno</label>
+									<div class="invalid-tooltip">
+										<c:out value='${peliEditar.errores.get("anioLanzamiento")}'></c:out>
+									</div>
 								</div>
 							</div>
 
@@ -428,8 +487,12 @@
 								<textarea class="form-control"
 									placeholder="Leave a comment here" name="descripcion"
 									id="descripcionEdit" style="height: 100px">${peliEditar.descripcion}</textarea>
-								<label class='${peliEditar.errores.get("descripcion") != null ? "is-invalid" : ""}' for="descripcionEdit">Descripción</label>
-								<div class="invalid-tooltip"> <c:out value='${peliEditar.errores.get("descripcion")}'></c:out> </div>
+								<label
+									class='${peliEditar.errores.get("descripcion") != null ? "is-invalid" : ""}'
+									for="descripcionEdit">Descripción</label>
+								<div class="invalid-tooltip">
+									<c:out value='${peliEditar.errores.get("descripcion")}'></c:out>
+								</div>
 							</div>
 
 							<hr class="my-4">
@@ -485,8 +548,7 @@
 
 
 					<div class="modal-body p-5 pt-0">
-						<form
-							action="/Webapp_Proyecto_Final/genero/crearGenero.ad"
+						<form action="/Webapp_Proyecto_Final/genero/crearGenero.ad"
 							method="post">
 
 							<label for="genero">Nuevo género</label>
@@ -513,5 +575,25 @@
 		<!-- ELEMENTO FOOTER -->
 		<jsp:include page="../parciales/footer.jsp"></jsp:include>
 	</footer>
+	<script type="text/javascript">
+		abrirModal('${serv}');
+	</script>
+
+	<c:if test="${flash != null }">
+		<script type="text/javascript">
+			abrirModalFlash();
+		</script>
+	</c:if>
+	<c:if test="${success != null }">
+		<script type="text/javascript">
+			abrirModalSuccess();
+		</script>
+	</c:if>
+
+	<c:if test="${error != null }">
+		<script type="text/javascript">
+			abrirModalError();
+		</script>
+	</c:if>
 </body>
 </html>
