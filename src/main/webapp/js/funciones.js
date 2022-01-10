@@ -1,3 +1,39 @@
+var contenido = document.querySelector('#contenidoDetalle');
+var foto = document.querySelector('#foto');
+
+var copiaFondo = contenido.style.backgroundImage.split('),')[1];
+var copiaPortada = foto.style.backgroundImage;
+$(document).ready(function() {
+	
+	let imagenFondo = window.getComputedStyle(contenido).getPropertyValue('background-image');
+	let imagenPortada = window.getComputedStyle(foto).getPropertyValue('background-image');
+
+	imagenFondo = imagenFondo.split('),')
+
+	if ($(window).width() < 992) {
+		contenido.style.backgroundImage = 'linear-gradient(90deg, rgba(22, 26, 29, 1) 30%, rgba(22, 26, 29, 0.5) 80%), ' + imagenPortada;
+		foto.style.backgroundImage = imagenFondo[1];
+	}
+});
+
+$(window).resize(function() {
+
+	if ($(window).width() > 992) {
+
+		contenido.style.backgroundImage = 'linear-gradient(90deg, rgba(22, 26, 29, 1) 30%, rgba(22, 26, 29, 0.5) 80%), ' + copiaFondo ;
+		foto.style.backgroundImage = copiaPortada;
+
+	}
+	if ($(window).width() <= 992) {
+		contenido.style.backgroundImage = 'linear-gradient(90deg, rgba(22, 26, 29, 1) 30%, rgba(22, 26, 29, 0.5) 80%), ' + copiaPortada;
+		foto.style.backgroundImage = copiaFondo;
+
+	}
+
+});
+
+
+
 
 /* este metodo es de fede hay que borrarlo */
 function mostrarPelicula(id, esPromo) {

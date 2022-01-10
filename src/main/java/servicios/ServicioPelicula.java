@@ -64,6 +64,11 @@ public class ServicioPelicula {
 
 		return pelicula;
 	}
+	
+	public ArrayList<Integer> idPromocionesEnLasQueSeEncuentra(int idPelicula){
+		ArrayList<Integer> idsPromos = peliculaDAO.idPromocionesEnLasQueSeEncuentra(idPelicula);
+		return idsPromos;
+	}
 
 	public Pelicula buscarPor(int id) {
 		Pelicula pelicula = peliculaDAO.buscarPor(id);

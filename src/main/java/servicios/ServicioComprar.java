@@ -26,6 +26,10 @@ public class ServicioComprar {
 		if (!sugerencia.tieneStock()) {
 			errores.put("producto", "No hay stock disponible");
 		}
+		
+		if(!usuario.getItinerario().noTieneA(sugerencia)) {
+			errores.put("usuario", "Ya tiene este producto en su repertorio");
+		}
 
 		if (errores.isEmpty()) {
 			usuario.comprar(sugerencia);

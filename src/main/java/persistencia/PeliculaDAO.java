@@ -13,7 +13,6 @@ import persistencia.commons.ProveedorDeConexion;
 
 public class PeliculaDAO {
 
-
 	public ArrayList<Pelicula> cargar() {
 		String sql = "SELECT * FROM peliculas WHERE borrado_logico = 0";
 		ArrayList<Pelicula> peliculas = new ArrayList<Pelicula>();
@@ -90,7 +89,7 @@ public class PeliculaDAO {
 			declaracion.setInt(9, pelicula.getAnioLanzamiento());
 			declaracion.setString(10, pelicula.getLema());
 			declaracion.setInt(11, pelicula.getId());
-			
+
 			filasModificadas = declaracion.executeUpdate();
 		} catch (SQLException e) {
 			throw new DatosPerdidosError(e);
@@ -115,11 +114,30 @@ public class PeliculaDAO {
 		return filasModificadas;
 	}
 
+	public ArrayList<Integer> idPromocionesEnLasQueSeEncuentra(int idPelicula) {
+		ArrayList<Integer> idsPromos = new ArrayList<Integer>();
+		String sql = "SELECT fk_promocion FROM peliculas_en_promocion WHERE fk_pelicula = ?";
+
+		try {
+			Connection conexion = ProveedorDeConexion.getConexion();
+			PreparedStatement declaracion = conexion.prepareStatement(sql);
+			declaracion.setInt(1, idPelicula);
+			ResultSet resultados = declaracion.executeQuery();
+
+			
+			while (resultados.next()) {
+				idsPromos.add(resultados.getInt("fk_promocion"));
+			}
+		} catch (Exception e) {
+			throw new DatosPerdidosError(e);
+		}
+		return idsPromos;
+	}
 
 	public Pelicula buscarPor(int id) {
 		Pelicula pelicula;
+		String sql = "SELECT * FROM peliculas WHERE id = ? and borrado_logico = 0";
 		try {
-			String sql = "SELECT * FROM peliculas WHERE id = ? and borrado_logico = 0";
 			Connection conexion = ProveedorDeConexion.getConexion();
 			PreparedStatement declaracion = conexion.prepareStatement(sql);
 			declaracion.setInt(1, id);
@@ -140,7 +158,7 @@ public class PeliculaDAO {
 
 	private Pelicula crearPelicula(ResultSet resultados) throws Exception {
 		GeneroDAO generoDAO = FabricaDAO.getGeneroDAO();
-		
+
 		int id = resultados.getInt("id");
 		String titulo = resultados.getString("titulo");
 		int precio = resultados.getInt("precio");

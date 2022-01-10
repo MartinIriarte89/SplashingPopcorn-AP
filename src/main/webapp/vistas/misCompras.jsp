@@ -61,7 +61,9 @@
 									<div class="col-auto ms-xl-5 mx-auto">
 										<div class="fondo-portada"
 											style="background-image: url('../${compra.urlPortada}');">
-											<a href="#"><img class="w-100 h-100" style="opacity: 0%"></a>
+											<a
+												href='/Webapp_Proyecto_Final/${compra.esPromocion() ? "listarDetallePromocion" : "listarDetallePelicula"}?id=${compra.id}'><img
+												class="w-100 h-100" style="opacity: 0%"></a>
 										</div>
 									</div>
 									<!-- DESCRIPCION CARD -->

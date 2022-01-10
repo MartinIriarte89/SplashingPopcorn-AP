@@ -1,78 +1,185 @@
-.container, #informacion {
-	padding: 12px;
+body{
+	background-image: url(../imagenes/spikes.png);
+	background-attachment: fixed;
+}
+#cuerpo{
+	min-height: calc(100vh - 200px);	
+	margin-top: 100px;
+	
 }
 
-#detalles {
-	margin-top: 62px;
+#contenidoDetalle{
+	background-size: cover;
+	background-position: initial;
 }
 
-#titulo, h3, .header_info {
-	color: rgb(255, 255, 255);
-	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
-		'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+#foto{
+	margin-left: 60px;
+	height: calc(100vh - 180px);
+	width: 430px;
+	background-size: cover;
+	background-position: right;
+	clip-path: polygon(0% 0%, 80% 0, 100% 50%, 80% 100%, 0% 100%);
 }
 
-.d-flex {
-	justify-content: center;
+#contenedor-descripcion{
+	color: lightyellow;
 }
 
-.datos {
-	color: #b1a7a6;
+#comprada{
+	color: #cf0014;
+    text-decoration: underline overline;
+    font-size: 27px;
+    text-shadow: 1px 2px 1px #000000de;
+    transform: scale(1.5) rotate(326deg) scaleX(1.5) scaleY(1.3);
+
 }
 
-.tagline, .character {
-	font-style: italic;
+#tituloDescrip{
+    font-weight: 900;
+    letter-spacing: 1.5px;
+   text-shadow: 1px 6px 10px #000000;
+    border-bottom: solid 1.5px;
 }
 
-.resumen {
+#genero{
+	color: #ffffe080;
+}
+
+#div-promos{
+	font-size: 21px;
+}
+
+#promos{
+	height: 90px;
+	border: 2px outset !important;
+}
+
+#descripcion{
+	letter-spacing: 1px;
 	text-align: justify;
 }
 
-#precio-bloque {
-	align-items: center;
-	display: flex;
-	justify-content: center;
-	padding: 12px;
+#precio{
+	font-size: 30px;
+	color: red;
+	text-shadow: 0px 0px 20px #f60606;
 }
 
-#precio {
-	text-shadow: #b1a7a6 1px 2px 5px;
+.link{
+	text-decoration: none;
 	text-align: center;
-	background-color: yellow;
-}
-
-#precio>h2 {
+	font-size: 14px;
+	font-weight: 700;
+	width: 80px;
+	height: 50px;
 	color: black;
-	margin: 0;
+	background-color: red;
+	background-size: cover;
+	background-position: center;
+	border: solid 1px black;
+	border-radius: 8px;
+	padding: 4px;
+	transition: 0.2s;
 }
 
-#imagen-pelicula {
-	padding-top: 24px;
-	padding-bottom: 12px;
-	height: 80vh;
+.link:hover{
+	color: black;
+	filter: brightness(0.6);
+	transform: scale(0.95);
 }
 
-#comprar {
-	text-align: center;
-	margin: 0;
+.btn-neon{
+	padding-left: 20px!important;
+    padding-right: 20px !important;
+    font-size: 30px !important;
 }
 
-#mensaje_error {
-	margin-top: 10px;
+@media (min-width: 0px) and (max-width: 991.99px){
+	
+	#foto{	
+	width: 100%;
+	background-size: cover;
+	background-position: top;
+	clip-path: polygon(0% 0%, 100% 1%, 100% 75%, 50% 100%, 0 75%);
+	margin: 0px;
+	max-height: 500px;
+}
+	#tituloDescrip{
+		letter-spacing: 1;
+		font-size: 28px;
+	}
+	#genero{
+		font-size: 15px;
+	}
+	#lema{
+		font-size: 19px;
+	}
+	#descripcion{
+		font-size: 12px;
+	}
+	#div-promos{
+		font-size: 16px;
+	}
+	#precio{
+		font-size: 25px;
+	}
+	
+	#promos{
+		height: 70px;
+	}
+	
+	.link{
+		font-size: 12px;
+		width: 80px;
+		height: 40px;
+		padding: 4px;
+	}
+	
+	.btn-neon{
+		width: 150px;
+	    height: 60px;
+	    font-size: 24px !important;
+	}
 }
 
-#boton-comprar, #boton-editar, #boton-eliminar {
-	color: #f5f3f4;
-	border-color: #a4161a;
-	background-color: #a4161a;
+@media (min-width: 992px) and (max-width: 1199.99px){
+	#foto{
+		margin-left: 30px;
+		height: calc(100vh - 250px);
+		width: 350px;
+	}
+	#tituloDescrip{
+		letter-spacing: 1;
+		font-size: 28px;
+	}
+	#genero{
+		font-size: 20px;
+	}
+	#lema{
+		font-size: 24px;
+	}
+	#descripcion{
+		font-size: 12px;
+	}
+	#div-promos{
+		font-size: 18px;
+	}
+	#precio{
+		font-size: 25px;
+	}
 }
 
-#boton-comprar:hover, #boton-editar:hover, #boton-eliminar:hover {
-	color: #a4161a;
-	border-color: #a4161a;
-	background-color: black;
+@media (min-width: 1200px) and (max-width: 1400px){
+	#foto{
+		margin-left: 30px;
+	}
+	#tituloDescrip{
+		letter-spacing: 1;
+		font-size: 30px;
+	}
+	
 }
 
-#boton-comprar:focus, #boton-editar:focus, #boton-eliminar:focus {
-	box-shadow: 0 0 20px #e5383b;
-}
+
+

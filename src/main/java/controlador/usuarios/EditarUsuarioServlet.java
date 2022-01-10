@@ -80,12 +80,19 @@ public class EditarUsuarioServlet extends HttpServlet implements Servlet {
 		Usuario usuarioTemp = servUsuario.editar(id, nombre, usuario, contrasena, dineroDisponible, tiempoDisponible,
 				preferencia, urlPerfil, esAdmin);
 
-		if (usuarioTemp.esValido()) {
-			resp.sendRedirect("/vistas/usuarios.jsp");
-		} else {
-			req.setAttribute("usuarioTemp", usuarioTemp);
+		if (!usuarioTemp.esNulo()) {
+			if (usuarioTemp.esValido()) {
+				resp.sendRedirect("/vistas/usuarios.jsp");
+			} else {
+				req.setAttribute("usuarioTemp", usuarioTemp);
 
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("vistas/usuarios.jsp");
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("vistas/usuarios.jsp");
+				dispatcher.forward(req, resp);
+			}
+		} else {
+			req.setAttribute("flash", "El usuario no existe");
+
+			RequestDispatcher dispatcher = req.getServletContext().getRequestDispatcher("/listarUsuarios.ad");
 			dispatcher.forward(req, resp);
 		}
 	}

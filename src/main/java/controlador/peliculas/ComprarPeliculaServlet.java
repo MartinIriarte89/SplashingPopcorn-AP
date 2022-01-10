@@ -22,6 +22,7 @@ public class ComprarPeliculaServlet extends HttpServlet implements Servlet {
 	private static final long serialVersionUID = -4083616287286069135L;
 	private ServicioComprar servicioComprarPeli;
 	private ServicioPelicula servPelicula;
+	
 	private Validacion validarDatos;
 
 	@Override
@@ -50,6 +51,9 @@ public class ComprarPeliculaServlet extends HttpServlet implements Servlet {
 				request.setAttribute("success", "¡Gracias por comprar!");
 			} else {
 				request.setAttribute("error", errores);
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/listarDetallePelicula");
+				dispatcher.forward(request, response);
+				return;
 			}
 
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/peliculas");

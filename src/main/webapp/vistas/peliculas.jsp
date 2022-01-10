@@ -47,11 +47,11 @@
 		<jsp:include page="../parciales/modalMsjError.jsp"></jsp:include>
 		<!-- MODAL ERROR -->
 		<jsp:include page="../parciales/modalesCompra.jsp"></jsp:include>
-		
+
 		<div class="container-fluid p-0">
 			<!-- TITULO -->
 			<div class="h1 text-center font-lato m-0 titulo">
-				<div class="animate__animated animate__backInLeft">Películas</div>
+				<div class="animate__animated animate__bounceInDown">Películas</div>
 			</div>
 			<div class="triangulo"></div>
 
@@ -513,16 +513,16 @@
 			data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
 			aria-labelledby="staticBackdropLabel1" aria-hidden="true">
 			<div class="modal-dialog modal-dialog-centered">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="staticBackdropLabel1">Atención</h5>
-						<button type="button" class="btn-close" data-bs-dismiss="modal"
-							aria-label="Close"></button>
+				<div class="modal-content bg-warning">
+					<div class="modal-header border-0">
+						<h5 class="modal-title mx-auto fw-bold" id="exampleModalLabel"
+							style="text-decoration: underline;">¡ATENCIÓN!</h5>
 					</div>
-					<div class="modal-body">Estas a punto de eliminar esta
-						película. ¿Estas seguro?</div>
-					<div class="modal-footer">
-						<a id="botonElim" type="button" href="" class="btn btn-primary">Aceptar</a>
+					<div class="modal-body mx-auto fw-bold">Estas a punto de
+						eliminar esta película. ¿Estas seguro?</div>
+					<div class="modal-footer d-flex border-0 justify-content-center">
+						<a id="botonElim" type="button" href=""
+							class="btn btn-success">Aceptar</a>
 						<button type="button" class="btn btn-secondary"
 							data-bs-dismiss="modal">Cancelar</button>
 					</div>
