@@ -71,7 +71,7 @@ public class ServicioPelicula {
 	}
 
 	public Pelicula buscarPor(int id) {
-		Pelicula pelicula = peliculaDAO.buscarPor(id);
+		Pelicula pelicula = peliculaDAO.buscarSinEliminadasPor(id);
 		ProveedorDeConexion.cerrarConexion();
 		return pelicula;
 	}

@@ -1,7 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -10,11 +9,27 @@
 <link rel="stylesheet" type="text/css" href="./css/index.css">
 <link rel="stylesheet" type="text/css" href="./css/botones.css">
 <link rel="stylesheet" type="text/css" href="./css/detalles.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+<style type="text/css">
+#promos {
+	height: 250px;
+}
 
-<script type="text/javascript" src="./js/boton_comprar_mje_error.js"
-	defer></script>
+#promos a {
+	width: 130px;
+	height: 230px;
+}
 
-<title>Detalle Promoci贸n || Splashing Popcorn</title>
+@media ( min-width : 0px) and (max-width: 991.99px) {
+}
+</style>
+
+<script type="text/javascript"
+	src="/Webapp_Proyecto_Final/js/modales.js"></script>
+<script type="text/javascript" src="./js/funciones.js" defer></script>
+
+<title>Detalle de Pel韈ula</title>
 
 </head>
 <body>
@@ -23,230 +38,152 @@
 		<jsp:include page="../parciales/header.jsp"></jsp:include>
 	</header>
 	<main>
-		<c:if test="${usuario == null }">
-			<jsp:include page="../parciales/inicioSesionModal.jsp"></jsp:include>
-		</c:if>
+		<!-- MODAL INICIO SESION -->
+		<jsp:include page="../parciales/inicioSesionModal.jsp"></jsp:include>
+		<!-- MODAL ERROR -->
+		<jsp:include page="../parciales/modalesCompra.jsp"></jsp:include>
+
 		<!-- CONTENEDOR DEL CUERPO -->
-		<div class="container" id="detalles">
-			<div class="row row-cols-md-2 row-cols-sm1 flex-colum">
-				<!-- LADO IZQUIERZO PANTALLA: IMAGEN PEL脥CULA -->
-				<div class="d-flex col-sm-12 col-md-10 col-xl-9">
-					<section id="cardsPeliculas" class="row">
-						<div class="row contenido">
-							<!-- CARDS -->
-							<c:forEach items="${peliculas}" var="pelicula">
-
-								<div class="col-6 col-md-4 col-lg-4 display-flex">
-									<div class="card" data-type="${pelicula.genero}">
-										<div class="card-body">
-											<img src="${pelicula.urlPortada}" class="d-block w-100"
-												alt="">
-											<h5 class="card-title">
-												<c:out value="${pelicula.titulo}"></c:out>
-											</h5>
-											<p class="card-text">
-												<c:out value="Duraci贸n: ${pelicula.duracion}"></c:out>
-											</p>
-											<p class="card-text">
-												<c:out value="Precio: ${pelicula.precio}"></c:out>
-											</p>
-											<a
-												href="/Webapp_Proyecto_Final/listarDetallePelicula?id=${pelicula.id}"
-												class="btn btn-primary" id="botonDetalles">Ver</a>
-
-											<c:if test="${usuario.esAdmin()}">
-												<a
-													href="/Webapp_Proyecto_Final/editarPelicula?id=${pelicula.id}"
-													data-bs-toggle="modal"
-													data-bs-target="#modalEditarPelicula"
-													class="btn btn-success" id="botonEditar">Editar</a>
-
-												<a
-													href="/Webapp_Proyecto_Final/borrarPelicula?id=${pelicula.id}"
-													data-bs-toggle="modal" data-bs-target="#modalEliminar"
-													class="btn btn-success" id="botonEliminar">Eliminar</a>
-
-											</c:if>
-
-										</div>
-									</div>
-								</div>
-
-
-							</c:forEach>
+		<div class="container-fluid m-0 p-0">
+			<div id="cuerpo" class="mb-5">
+				<div class="row justify-content-around m-0 p-0"
+					id="contenidoDetallePromo"
+					style="background-image: linear-gradient(145deg, rgb(22 26 29/ 98%) 40%, rgba(50, 105, 147, 0.8) 90%)">
+					<!-- IMAGEN -->
+					<div class="col-xxl-4 col-lg-5 col-12 my-3 m-0 p-0">
+						<div id="foto"
+							class="d-flex p-0 justify-content-center align-items-center animate__animated animate__backInLeft"
+							style="background-image: url('${promocion.urlPortada}');">
+							<c:choose>
+								<c:when
+									test='${!usuario.itinerario.noTieneA(promocion) && (sessionScope.usuario != null)}'>
+									<div id="comprada" class="font-lato">INHABILITADA</div>
+								</c:when>
+								<c:when
+									test='${usuario.itinerario.noTieneA(promocion) && (!promocion.tieneStock()) || (!promocion.tieneStock()) && (sessionScope.usuario == null)}'>
+									<div id="comprada" class="font-lato">SIN STOCK</div>
+								</c:when>
+							</c:choose>
 						</div>
-					</section>
-				</div>
+					</div>
+					<!-- DESCRIPCION DE PELICULA-->
+					<div
+						class="col-xxl-7 col-lg-6 col-12 p-0 me-lg-auto ms-lg-4 my-3 mt-lg-0 mt-5 d-flex flex-column animate__animated animate__backInRight"
+						id="contenedor-descripcion">
+						<!-- DESCRIPCION -->
+						<div class="row flex-column h-100 m-0 p-0">
+							<!-- TITULO -->
+							<div id="tituloDescrip"
+								class="h1 col d-flex mt-lg-3 mx-auto justify-content-center align-items-center font-lato">
+								${promocion.titulo}</div>
 
-				<!-- LADO DERECHO: PRECIO/BOTONES -->
-				<div class="d-flex col-sm-12 col-md-2 col-xl-3" id="botones">
-					<div class="row row-cols-1">
-						<!-- PRECIO PEL脥CULA -->
-						<div class="col" id="precio-bloque">
-							<div class="align-self-center" id="precio">
-								<h2>
-									<c:out value="$ ${promocion.precio}0"></c:out>
-								</h2>
+							<!-- GENERO -->
+							<div id="genero" class="col-auto mb-lg-4 mb-0 mt-lg-2 mt-4 h4">
+								G閚ero: ${promocion.genero.nombre} <span class="mt-4 ms-3 h6">duraci髇:
+									${promocion.getDuracion()} min.</span>
 							</div>
-						</div>
-						<!-- ACCESO COMPRA/EDICI脫N -->
-						<c:choose>
-							<c:when test="${usuario.esAdmin()}">
-								<div class="d-flex col">
-									<div class="btn-group align-self-center" role="group"
-										id="acceso_compra">
+
+							<!-- DESCRIPCION -->
+							<div id="descripcion"
+								class="col-lg col-12 mb-3 overflow-auto font-merriweather"
+								style="max-height: 120px;">${promocion.descripcion}</div>
+
+							<div class="col mt-xl-4 mt-lg-2 mt-4">
+								<!-- PROMOS -->
+								<div id="div-promos">Pel韈ulas:</div>
+								<div id="promos"
+									class="w-100 overflow-auto border border-2 d-flex">
+									<c:forEach items="${promocion.getPeliculas()}" var="pelicula">
 										<a
-											href="/Webapp_Proyecto_Final/editarPromocion.ad"
-											role="button" class="btn btn-lg" data-bs-toggle="modal"
-											data-bs-target="#modalEditar" id="boton-editar"> <strong>Editar</strong>
-										</a> <a
-											href="/Webapp_Proyecto_Final/borrarPromocion.ad"
-											role="button" class="btn btn-lg" data-bs-toggle="modal"
-											data-bs-target="#modalEliminar" id="boton-eliminar"><strong>Eliminar</strong>
+											href="/Webapp_Proyecto_Final/listarDetallePelicula?id=${pelicula.id}"
+											class="col-4 link overflow-hidden my-auto ms-2 p-0 justify-content-center align-items-center d-flex"
+											style="background-image: url('${pelicula.urlPortada}');">
+											<c:choose>
+												<c:when
+													test='${!usuario.itinerario.noTieneA(pelicula) && (sessionScope.usuario != null)}'>
+													<span
+														class="w-100 span font-lato d-flex justify-content-center align-items-center">COMPRADA</span>
+												</c:when>
+												<c:when
+													test='${usuario.itinerario.noTieneA(pelicula) && (!pelicula.tieneStock()) || (!pelicula.tieneStock()) && (sessionScope.usuario == null)}'>
+													<span
+														class="w-100 span font-lato d-flex justify-content-center align-items-center">SIN
+														STOCK</span>
+												</c:when>
+												<c:otherwise>${pelicula.titulo}</c:otherwise>
+											</c:choose>
 										</a>
-									</div>
-
+									</c:forEach>
 								</div>
-							</c:when>
-							<c:when test="${usuario!=null && !usuario.esAdmin()}">
-								<div class="col">
-									<div class="align-self-center" id="comprar">
-										<c:if
-											test="${usuario.puedeComprarA(promocion) && promocion.tieneStock()}">
-											<a class="btn btn-lg"
-												href="/Webapp_Proyecto_Final/comprarPromocion.do?id=${promocion.id}&usuario=${usuario.id}"
-												role="button" id="boton-comprar"><strong>Comprar</strong></a>
-										</c:if>
-										<c:if test="${!usuario.puedeComprarA(promocion) && !promocion.tieneStock()}">
-											<button class="btn btn-lg" type="button" id="boton-comprar"
-												disabled>Comprar</button>
-										</c:if>
-									</div>
-								</div>
-							</c:when>
-							<c:otherwise>
-								<div class="col">
-									<div class="align-self-center" id="comprar">
-										<button type="button" class="btn btn-lg" id="boton-comprar">
-											<strong>Comprar</strong>
-										</button>
-									</div>
-									<div class="align-self-center" id="mensaje_error"></div>
-								</div>
-							</c:otherwise>
-						</c:choose>
-					</div>
-				</div>
-			</div>
-
-
-			<!-- 	<!-- MODAL COMPRAR -->
-			<div class="modal fade" id="modalComprar" tabindex="-1"
-				aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div class="modal-dialog modal-dialog-centered">
-					<div class="modal-content rounded-5 shadow"
-						id="ventanaModalComprar">
-						<div class="modal-body">
-							<p>Su compra se ha registrado existosamente.</p>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary"
-								data-bs-dismiss="modal">Cerrar</button>
-
-						</div>
-					</div>
-				</div>
-			</div>
-			-->
-			<!-- MODAL ELIMINAR -->
-			<div class="modal fade" id="modalEliminar" data-bs-backdrop="static"
-				data-bs-keyboard="false" tabindex="-1"
-				aria-labelledby="staticBackdropLabel" aria-hidden="true">
-				<div class="modal-dialog modal-dialog-centered">
-					<div class="modal-content rounded-5 shadow">
-						<div class="modal-header">
-							<h5 class="modal-title" id="staticBackdropLabel">Eliminar
-								promoci贸n</h5>
-							<button type="button" class="btn-close" data-bs-dismiss="modal"
-								aria-label="Close"></button>
-						</div>
-						<div class="modal-body">
-							<p>驴Est谩 seguro de eliminar esta promoci贸n?</p>
-						</div>
-						<div class="modal-footer">
-							<a class="btn btn-primary"
-								href="controlador/promociones/borrarPromocion.do?id=${promocion.id}"
-								role="button" id="aceptar-eliminar">Aceptar</a>
-							<button type="button" class="btn btn-secondary"
-								data-bs-dismiss="modal">Cerrar</button>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<!-- MODAL EDITAR PROMOCI脫N -->
-			<div class="modal fade" id="modalEditarPromocion" tabindex="-1"
-				aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div class="modal-dialog modal-dialog-centered">
-					<div class="modal-content rounded-5 shadow">
-						<div class="modal-header p-5 pb-4 border-bottom-0">
-							<div class="d-inline-flex">
-								<img alt="" src="imagenes/logo.png"
-									style="width: 30%; margin: -20px;">
-								<h2 class="align-self-center">Editar promoci贸n</h2>
 							</div>
 
-							<button type="button" class="btn-close" data-bs-dismiss="modal"
-								aria-label="Close"></button>
+							<c:set var="precioSinDesc" value="${0}" />
+							<c:forEach var="pelicula" items="${promocion.getPeliculas()}">
+								<c:set var="precioSinDesc"
+									value="${precioSinDesc + pelicula.precio}" />
+							</c:forEach>
+
+							<!-- PRECIO -->
+							<div class="col-auto my-xxl-5 my-xl-4 my-lg-2 my-4 d-flex">
+								<div id="precio"
+									class="mx-auto d-inline-flex font-lato align-items-end"
+									style="height: 55px;">
+									<div class="me-1" style="color: lightyellow;">Precio:</div>
+									$${promocion.getPrecio()} <span class="ms-2 mb-auto"
+										style="text-decoration: line-through; text-decoration-color: red;">
+										$${precioSinDesc}</span>
+								</div>
+
+							</div>
 						</div>
-
-						<div class="modal-body p-5 pt-0">
-							<form action="/Webapp_Proyecto_Final/editarPromocion.do"
-								method="post">
-								<label for="titulo">Titulo de promoci贸n</label>
-								<div class="form-floating mb-3">
-									<input type="text" class="form-control rounded-4" id="titulo"
-										name="titulo" required value="${promocion.titulo}">
-									<div class="invalid-feedback">Introduzca su nombre por
-										favor</div>
-								</div>
-
-								<div class="form-floating mt-5 mb-3">
-									<label for="peliculasEnPromos">Elija las pel铆culas:</label> <input
-										list="listaPeliculas" id="peliculasEnPromos"
-										name="peliculasEnPromos" />
-
-									<datalist id="listaPeliculas">
-										<c:forEach items="${peliculas}" var="peliculas">
-											<option value="${peliculas.titulo}">
-										</c:forEach>
-									</datalist>
-
-								</div>
-								<label for="descripcion">Descripci贸n de promoci贸n</label>
-								<div class="form-floating mb-3">
-									<input type="text" class="form-control rounded-4"
-										id="descripcion" name="descripcion" required
-										value="${promocion.descripcion}">
-									<div class="invalid-feedback">Introduzca la descripci贸n
-										por favor</div>
-								</div>
-
-
-								<button type="submit"
-									class="w-100 mb-2 btn btn-lg rounded-4 btn-warning">Guardar
-									cambios</button>
-
-							</form>
+						<!-- BOTONES -->
+						<div class="row mt-auto m-0 p-0 mb-2">
+							<div id="boton-comprar" class="text-center">
+								<a type="button"
+									class='btn btn-neon font-lato ${usuario.puedeComprarA(promocion) && promocion.tieneStock() && !usuario.esAdmin() ? "" : " disabled" }'
+									data-bs-toggle="modal" data-bs-target="#modalConfirmacion"><span
+									id="span1"></span> <span id="span2"></span> <span id="span3"></span>
+									<span id="span4"></span>Comprar</a>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+
+		<!-- MODAL CONFIRMACION COMPRA -->
+		<div class="modal fade" id="modalConfirmacion"
+			data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+			aria-labelledby="staticBackdropLabel1" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content bg-warning">
+					<div class="modal-header border-0">
+						<h5 class="modal-title mx-auto fw-bold" id="exampleModalLabel"
+							style="text-decoration: underline;">TENCI覰!</h5>
+					</div>
+					<div class="modal-body mx-auto fw-bold">Estas a punto de
+						comprar esta promoci髇. 縀stas seguro?</div>
+					<div class="modal-footer d-flex border-0 justify-content-center">
+						<a id="botonConfirm" type="button"
+							href="/Webapp_Proyecto_Final/comprarPromocion.do?id=${promocion.id}"
+							class="btn btn-success">Aceptar</a>
+						<button type="button" class="btn btn-secondary"
+							data-bs-dismiss="modal">Cancelar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
 	</main>
-	<footer class="m-1">
+	<footer>
 		<!-- ELEMENTO FOOTER -->
-		<jsp:include page="/parciales/footer.jsp"></jsp:include>
+		<jsp:include page="../parciales/footer.jsp"></jsp:include>
 	</footer>
+
+	<c:if test="${error != null }">
+		<script type="text/javascript">
+			abrirModalError();
+		</script>
+	</c:if>
 </body>
 </html>

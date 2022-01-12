@@ -162,6 +162,18 @@ span{
 	color:var(--col-primario) !important;
 }	
 
+#comprada{
+		background-color: #cc323282;
+	    width: 100%;
+	    color: black;
+	    font-size: 30px;
+	  	padding-top: 25px;
+		padding-bottom: 25px;
+	    text-align: center;
+		white-space: nowrap;
+		text-shadow: 4px 2px 5px #242222;
+	}
+
 @media (min-width: 0px) and (max-width: 575.99px){
 	
 	.fondo-portada{
@@ -229,6 +241,12 @@ span{
 	    font-size: 12px;
 		height: 35px;
 		width: 70px;
+	}
+	
+	#comprada{ 
+	    font-size: 16px;
+	    padding-top: 10px;
+		padding-bottom: 10px;;
 	}
 }
 

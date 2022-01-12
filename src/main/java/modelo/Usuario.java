@@ -83,7 +83,7 @@ public class Usuario {
 		return this.contrasenaEncrip;
 	}
 
-	public Map<String, String> getErrors() {
+	public Map<String, String> getErrores() {
 		return this.errores;
 	}
 

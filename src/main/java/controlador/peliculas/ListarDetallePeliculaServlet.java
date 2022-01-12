@@ -43,7 +43,6 @@ public class ListarDetallePeliculaServlet extends HttpServlet implements Servlet
 			for (Integer idPromo : idsPromos) {
 				promos.add(servPromocion.buscarPor(idPromo));
 			}
-
 			request.setAttribute("pelicula", pelicula);
 			request.setAttribute("promos", promos);
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/vistas/detallesPeliculas.jsp");

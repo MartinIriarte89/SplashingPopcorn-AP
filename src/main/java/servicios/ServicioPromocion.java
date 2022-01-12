@@ -86,7 +86,7 @@ public class ServicioPromocion {
 	}
 
 	public Promocion buscarPor(int id) {
-		Promocion promocion = promocionDAO.buscarPor(id);
+		Promocion promocion = promocionDAO.buscarSinEliminadasPor(id);
 		ProveedorDeConexion.cerrarConexion();
 		return promocion;
 

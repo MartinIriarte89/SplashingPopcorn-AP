@@ -166,7 +166,34 @@ public class PromocionDAO {
 		}
 	}
 
-	public Promocion buscarPor(int id) {
+	public Promocion buscarSinEliminadasPor(int id) {
+		Promocion promocion;
+		String sql = "SELECT * FROM promociones WHERE id = ? and borrado_logico = 0";
+		String idPeliculas = "SELECT fk_pelicula AS 'id pelicula' FROM peliculas_en_promocion WHERE fk_promocion = ?";
+		try {
+
+			Connection conexion = ProveedorDeConexion.getConexion();
+			PreparedStatement declaracion = conexion.prepareStatement(sql);
+			PreparedStatement declarIdPeliculas = conexion.prepareStatement(idPeliculas);
+
+			declaracion.setInt(1, id);
+			declarIdPeliculas.setInt(1, id);
+
+			ResultSet resultados = declaracion.executeQuery();
+			ResultSet resultIdPeliculas = declarIdPeliculas.executeQuery();
+
+			promocion = PromocionNula.construir();
+
+			if (resultados.next()) {
+				promocion = crearPromocion(resultados, resultIdPeliculas);
+			}
+		} catch (Exception e) {
+			throw new DatosPerdidosError(e);
+		}
+		return promocion;
+	}
+	
+	public Promocion buscarConEliminadasPor(int id) {
 		Promocion promocion;
 		String sql = "SELECT * FROM promociones WHERE id = ?";
 		String idPeliculas = "SELECT fk_pelicula AS 'id pelicula' FROM peliculas_en_promocion WHERE fk_promocion = ?";
@@ -205,7 +232,7 @@ public class PromocionDAO {
 		ArrayList<Pelicula> peliculasDeProm = new ArrayList<Pelicula>();
 
 		while (resultadosIdPelic.next()) {
-			Pelicula pelicula = peliculaDAO.buscarPor(resultadosIdPelic.getInt("id pelicula"));
+			Pelicula pelicula = peliculaDAO.buscarSinEliminadasPor(resultadosIdPelic.getInt("id pelicula"));
 			if (!pelicula.esNulo()) {
 				peliculasDeProm.add(pelicula);
 			}

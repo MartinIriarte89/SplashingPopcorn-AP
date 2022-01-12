@@ -43,8 +43,8 @@ public class CrearUsuarioServlet extends HttpServlet implements Servlet {
 		String urlPerfil = req.getParameter("fotoPerfil");
 		String preferenciaNombre = req.getParameter("genero");
 		boolean esAdmin = false;
-		
-		Genero preferencia = servGenero.buscarPor(preferenciaNombre);		
+
+		Genero preferencia = servGenero.buscarPor(preferenciaNombre);
 		if (admin != null) {
 			esAdmin = true;
 		}
@@ -55,7 +55,9 @@ public class CrearUsuarioServlet extends HttpServlet implements Servlet {
 		if (usuarioTemp.esValido()) {
 			resp.sendRedirect("listarUsuarios.ad");
 		} else {
-			req.setAttribute("usuarioTemp", usuarioTemp);
+			req.setAttribute("usuarioCrear", usuarioTemp);
+			req.setAttribute("serv", "crear");
+			
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/listarUsuarios.ad");
 			dispatcher.forward(req, resp);
 		}

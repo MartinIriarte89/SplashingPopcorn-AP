@@ -41,10 +41,16 @@
 						<div id="foto"
 							class="d-flex p-0 justify-content-center align-items-center animate__animated animate__backInLeft"
 							style="background-image: url('${pelicula.urlPortada}');">
-							<c:if
-								test='${!usuario.itinerario.noTieneA(pelicula) && (sessionScope.usuario != null)}'>
-								<div id="comprada">COMPRADA</div>
-							</c:if>
+							<c:choose>
+								<c:when
+									test='${!usuario.itinerario.noTieneA(pelicula) && (sessionScope.usuario != null)}'>
+									<div id="comprada" class="font-lato">COMPRADA</div>
+								</c:when>
+								<c:when
+									test='${usuario.itinerario.noTieneA(pelicula) && (!pelicula.tieneStock()) || (!pelicula.tieneStock()) && (sessionScope.usuario == null)}'>
+									<div id="comprada" class="font-lato">SIN STOCK</div>
+								</c:when>
+							</c:choose>
 						</div>
 					</div>
 					<!-- DESCRIPCION DE PELICULA-->
@@ -55,7 +61,7 @@
 						<div class="row flex-column h-100 m-0 p-0">
 							<!-- TITULO -->
 							<div id="tituloDescrip"
-								class="h1 col d-flex justify-content-center align-items-center font-lato">
+								class="h1 col d-flex mt-lg-3 mx-auto justify-content-center align-items-center font-lato">
 								${pelicula.titulo} <span class="mt-4 ms-3 h6">(${pelicula.anioLanzamiento})</span>
 							</div>
 
@@ -90,7 +96,7 @@
 							</div>
 							<!-- PRECIO -->
 							<div class="col-auto my-xxl-5 my-xl-4 my-lg-3 my-4 d-flex">
-								<div id="precio" class="mx-auto d-inline-flex">
+								<div id="precio" class="mx-auto d-inline-flex font-lato">
 									<div class="me-1" style="color: lightyellow;">Precio:</div>
 									$${pelicula.precio}
 								</div>
@@ -100,8 +106,8 @@
 						<div class="row mt-auto m-0 p-0 mb-3">
 							<div id="boton-comprar" class="text-center">
 								<a type="button"
-									class='btn btn-neon ${usuario.puedeComprarA(pelicula) && pelicula.tieneStock() && !usuario.esAdmin() ? "" : " disabled" }'
-									href="/Webapp_Proyecto_Final/comprarPelicula.do?id=${pelicula.id}"><span
+									class='btn btn-neon font-lato ${usuario.puedeComprarA(pelicula) && pelicula.tieneStock() && !usuario.esAdmin() ? "" : " disabled" }'
+									data-bs-toggle="modal" data-bs-target="#modalConfirmacion"><span
 									id="span1"></span> <span id="span2"></span> <span id="span3"></span>
 									<span id="span4"></span>Comprar</a>
 							</div>
@@ -110,6 +116,30 @@
 				</div>
 			</div>
 		</div>
+
+		<!-- MODAL CONFIRMACION COMPRA -->
+		<div class="modal fade" id="modalConfirmacion"
+			data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+			aria-labelledby="staticBackdropLabel1" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content bg-warning">
+					<div class="modal-header border-0">
+						<h5 class="modal-title mx-auto fw-bold" id="exampleModalLabel"
+							style="text-decoration: underline;">¡ATENCIÓN!</h5>
+					</div>
+					<div class="modal-body mx-auto fw-bold">Estas a punto de
+						comprar esta película. ¿Estas seguro?</div>
+					<div class="modal-footer d-flex border-0 justify-content-center">
+						<a id="botonConfirm" type="button"
+							href="/Webapp_Proyecto_Final/comprarPelicula.do?id=${pelicula.id}"
+							class="btn btn-success">Aceptar</a>
+						<button type="button" class="btn btn-secondary"
+							data-bs-dismiss="modal">Cancelar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
 	</main>
 	<footer>
 		<!-- ELEMENTO FOOTER -->

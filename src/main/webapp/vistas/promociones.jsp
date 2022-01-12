@@ -28,7 +28,9 @@
 <script type="text/javascript"
 	src="/Webapp_Proyecto_Final/js/modales.js"></script>
 <script type="text/javascript"
-	src="/Webapp_Proyecto_Final/js/funciones.js" defer></script>
+	src="/Webapp_Proyecto_Final/js/completarModales.js" defer></script>
+
+
 
 </head>
 
@@ -50,7 +52,7 @@
 		<div class="container-fluid p-0">
 			<!-- TITULO -->
 			<div class="h1 text-center font-lato m-0 titulo">
-				<div class="animate__animated animate__backInLeft">Promociones</div>
+				<div class="animate__animated animate__bounceInDown">Promociones</div>
 			</div>
 			<div class="triangulo"></div>
 
@@ -138,8 +140,19 @@
 										data-type="${promocion.genero}"
 										style="background-image: linear-gradient(130deg, rgb(0 0 0) 30%, rgb(13 13 13/ 88%) 80%);">
 										<!-- IMAGEN CARD -->
-										<div class="fondo-portada mx-auto"
+										<div
+											class="fondo-portada mx-auto p-0 d-flex justify-content-center align-items-center"
 											style="background-image: url('${promocion.urlPortada}');">
+											<c:choose>
+												<c:when
+													test='${!usuario.itinerario.noTieneA(promocion) && (sessionScope.usuario != null)}'>
+													<div id="comprada" class="font-lato">INHABILITADA</div>
+												</c:when>
+												<c:when
+													test='${usuario.itinerario.noTieneA(promocion) && (!promocion.tieneStock()) || (!promocion.tieneStock()) && (sessionScope.usuario == null)}'>
+													<div id="comprada" class="font-lato">SIN STOCK</div>
+												</c:when>
+											</c:choose>
 										</div>
 
 										<!-- DESCRIPCION CARD -->
@@ -298,7 +311,8 @@
 									name="pelicula" aria-label=".form-select-sm example">
 									<c:forEach items="${peliculas}" var="pelicula">
 										<option value="${pelicula.id}"
-											data-type="${pelicula.genero.nombre}">${pelicula.titulo}</option>
+											data-type="${pelicula.genero.nombre}"
+											data-precio="${pelicula.precio}">${pelicula.titulo}</option>
 									</c:forEach>
 								</select>
 								<button onclick="seleccionarPelicula()"
@@ -441,7 +455,8 @@
 									aria-label=".form-select-sm example">
 									<c:forEach items="${peliculas}" var="pelicula">
 										<option value="${pelicula.id}"
-											data-type="${pelicula.genero.nombre}">${pelicula.titulo}</option>
+											data-type="${pelicula.genero.nombre}"
+											data-precio="${pelicula.precio}">${pelicula.titulo}</option>
 									</c:forEach>
 								</select>
 								<button onclick="seleccionarPeliculaEdit()"
@@ -508,8 +523,8 @@
 						<h5 class="modal-title mx-auto fw-bold" id="exampleModalLabel"
 							style="text-decoration: underline;">¡ATENCIÓN!</h5>
 					</div>
-					<div class="modal-body mx-auto fw-bold">Estas a punto de eliminar esta
-						promoción. ¿Estas seguro?</div>
+					<div class="modal-body mx-auto fw-bold">Estas a punto de
+						eliminar esta promoción. ¿Estas seguro?</div>
 					<div class="modal-footer d-flex border-0 justify-content-center">
 						<a id="botonElim" type="button" href="" class="btn btn-success">Aceptar</a>
 						<button type="button" class="btn btn-secondary"

@@ -129,11 +129,11 @@ public class ItinerarioDAO {
 
 		while (resultIdPromo.next()) {
 			int idPromocion = resultIdPromo.getInt("fk_promocion");
-			compras.add(promocionDAO.buscarPor(idPromocion));
+			compras.add(promocionDAO.buscarConEliminadasPor(idPromocion));
 		}
 		while (resultIdPelicula.next()) {
 			int idPelicula = resultIdPelicula.getInt("fk_pelicula");
-			compras.add(peliculaDAO.buscarPor(idPelicula));
+			compras.add(peliculaDAO.buscarConEliminadasPor(idPelicula));
 		}
 		
 		return new Itinerario(fkUsuario, compras, costo, duracion);

@@ -50,6 +50,9 @@ public class ComprarPromocionServlet extends HttpServlet implements Servlet {
 				request.setAttribute("success", "¡Gracias por comprar!");
 			} else {
 				request.setAttribute("error", errores);
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/listarDetallePromocion");
+				dispatcher.forward(request, response);
+				return;
 			}
 
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/promociones");

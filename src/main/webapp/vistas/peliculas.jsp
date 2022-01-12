@@ -28,7 +28,7 @@
 <script type="text/javascript"
 	src="/Webapp_Proyecto_Final/js/modales.js"></script>
 <script type="text/javascript"
-	src="/Webapp_Proyecto_Final/js/funciones.js"></script>
+	src="/Webapp_Proyecto_Final/js/completarModales.js" defer></script>
 
 </head>
 
@@ -137,8 +137,19 @@
 										data-type="${pelicula.genero}"
 										style="background-image: linear-gradient(90deg, rgba(22, 26, 29, 1) 30%, rgba(22, 26, 29, 0.5) 80%), url('${pelicula.urlFondo}');">
 										<!-- IMAGEN CARD -->
-										<div class="fondo-portada mx-auto"
+										<div
+											class="fondo-portada mx-auto p-0 d-flex justify-content-center align-items-center"
 											style="background-image: url('${pelicula.urlPortada}');">
+											<c:choose>
+												<c:when
+													test='${!usuario.itinerario.noTieneA(pelicula) && (sessionScope.usuario != null)}'>
+													<div id="comprada" class="font-lato">COMPRADA</div>
+												</c:when>
+												<c:when
+													test='${usuario.itinerario.noTieneA(pelicula) && (!pelicula.tieneStock()) || (!pelicula.tieneStock()) && (sessionScope.usuario == null)}'>
+													<div id="comprada" class="font-lato">SIN STOCK</div>
+												</c:when>
+											</c:choose>
 										</div>
 
 										<!-- DESCRIPCION CARD -->
@@ -521,8 +532,7 @@
 					<div class="modal-body mx-auto fw-bold">Estas a punto de
 						eliminar esta película. ¿Estas seguro?</div>
 					<div class="modal-footer d-flex border-0 justify-content-center">
-						<a id="botonElim" type="button" href=""
-							class="btn btn-success">Aceptar</a>
+						<a id="botonElim" type="button" href="" class="btn btn-success">Aceptar</a>
 						<button type="button" class="btn btn-secondary"
 							data-bs-dismiss="modal">Cancelar</button>
 					</div>

@@ -116,7 +116,7 @@ public class PeliculaDAO {
 
 	public ArrayList<Integer> idPromocionesEnLasQueSeEncuentra(int idPelicula) {
 		ArrayList<Integer> idsPromos = new ArrayList<Integer>();
-		String sql = "SELECT fk_promocion FROM peliculas_en_promocion WHERE fk_pelicula = ?";
+		String sql = "SELECT fk_promocion FROM peliculas_en_promocion JOIN promociones ON fk_promocion = id WHERE fk_pelicula = ? AND borrado_logico = 0;";
 
 		try {
 			Connection conexion = ProveedorDeConexion.getConexion();
@@ -134,9 +134,31 @@ public class PeliculaDAO {
 		return idsPromos;
 	}
 
-	public Pelicula buscarPor(int id) {
+	public Pelicula buscarSinEliminadasPor(int id) {
 		Pelicula pelicula;
 		String sql = "SELECT * FROM peliculas WHERE id = ? and borrado_logico = 0";
+		try {
+			Connection conexion = ProveedorDeConexion.getConexion();
+			PreparedStatement declaracion = conexion.prepareStatement(sql);
+			declaracion.setInt(1, id);
+
+			ResultSet resultados = declaracion.executeQuery();
+
+			pelicula = PeliculaNula.construir();
+
+			if (resultados.next()) {
+				pelicula = crearPelicula(resultados);
+			}
+		} catch (Exception e) {
+			throw new DatosPerdidosError(e);
+
+		}
+		return pelicula;
+	}
+	
+	public Pelicula buscarConEliminadasPor(int id) {
+		Pelicula pelicula;
+		String sql = "SELECT * FROM peliculas WHERE id = ?";
 		try {
 			Connection conexion = ProveedorDeConexion.getConexion();
 			PreparedStatement declaracion = conexion.prepareStatement(sql);

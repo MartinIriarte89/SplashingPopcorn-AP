@@ -47,6 +47,15 @@ body{
 	color: #F5F3FF;	
 }
 
+#info-barra{
+	color: bisque;
+	font-size: 20px; 
+	text-shadow: 4px 4px 3px black;
+}
+
+#info-barra i {
+	color: yellow;
+}
 
 /*-------------ESTILO DE BOTONES EN LA BARRA-----------*/
 
@@ -212,6 +221,16 @@ footer a svg{
 	
 	.boton-mt{
 		margin-top: 15.5px;
+	}
+	
+	#info-barra{
+		margin-top: 20px;
+		font-size: 16px; 
+		text-shadow: 4px 4px 3px black;
+	}
+
+	#info-barra i {
+		margin-top: 20px;
 	}
 	
 	/*ESTILOS DE BOTONES EN LA BARRA*/
