@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -286,7 +286,6 @@
 										<c:out value='${peliCrear.errores.get("precio")}'></c:out>
 									</div>
 								</div>
-
 
 								<div class="col-4 form-floating mb-3">
 									<input type="number" class="form-control rounded-4"

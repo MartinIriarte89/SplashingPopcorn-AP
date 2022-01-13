@@ -28,9 +28,13 @@ public class Validacion {
 	}
 
 	public String esContrasenaValida(String contrasena) {
-		if (!Comparador.comparar(contrasena, Patron.CONTRASENA_VALIDA)) {
-			contrasena = Patron.CONTRASEÑA_INVALIDA;
-		}
+		try {
+			if (!Comparador.comparar(contrasena, Patron.CONTRASENA_VALIDA)) {
+				contrasena = Patron.CONTRASEÑA_INVALIDA;
+			}
+		}catch (NullPointerException e) {
+			contrasena = "";
+		}	
 		return contrasena;
 	}
 	

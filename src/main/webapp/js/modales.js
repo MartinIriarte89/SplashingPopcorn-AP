@@ -23,7 +23,7 @@ function abrirModalPromo(texto) {
 
 function abrirModalUsuario(texto) {
 	if (texto == 'editar') {
-		let myModal = new bootstrap.Modal(document.getElementById('modalEditarPelicula'));
+		let myModal = new bootstrap.Modal(document.getElementById('modalEditarUsuario'));
 		myModal.show();
 	}
 	if (texto == 'crear') {
@@ -49,6 +49,7 @@ function abrirModalError() {
 	myModal.show();
 }
 
-
-
-
+function abrirModalInicioSesion() {
+	let myModal = new bootstrap.Modal(document.getElementById('modalInicioSesion'));
+	myModal.show();
+}

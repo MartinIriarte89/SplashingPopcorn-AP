@@ -15,7 +15,35 @@ $(document).ready(function() {
 		});
 	}
 	
-	
+	if (!!document.getElementById('modalEditarUsuario')) {
+
+		var modalEditarUsuario = document.getElementById('modalEditarUsuario')
+		modalEditarUsuario.addEventListener('show.bs.modal', function(event) {
+
+			let boton = event.relatedTarget
+
+			let id = boton.getAttribute('data-bs-id')
+			let nombre = boton.getAttribute('data-bs-nombre')
+			let usuario = boton.getAttribute('data-bs-usuario')
+			let dineroDisp = boton.getAttribute('data-bs-dineroDisp')
+			let tiempoDisp = boton.getAttribute('data-bs-tiempoDisp')
+			let preferencia = boton.getAttribute('data-bs-preferencia')
+
+			let idEdit = modalEditarUsuario.querySelector('#idEdit')
+			let nombreEdit = modalEditarUsuario.querySelector('#nombreEdit')
+			let usuarioEdit = modalEditarUsuario.querySelector('#usuarioEdit')
+			let dineroEdit = modalEditarUsuario.querySelector('#dineroEdit')
+			let tiempoEdit = modalEditarUsuario.querySelector('#tiempoEdit')
+			let preferenciaEdit = modalEditarUsuario.querySelector('#generoEdit')
+
+			idEdit.value = id;
+			nombreEdit.value = nombre;
+			usuarioEdit.value = usuario;
+			dineroEdit.value = dineroDisp;
+			tiempoEdit.value = tiempoDisp;
+			preferenciaEdit.value = preferencia;
+		});
+	}
 
 	/*CODIGO USADO PARA CARGAR MODALES DE ELIMINAR Y EDITAR DE PELICULAS*/
 

@@ -52,41 +52,46 @@ public class EditarUsuarioServlet extends HttpServlet implements Servlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		super.doPost(req, resp);
-
 		Usuario user = (Usuario) req.getSession().getAttribute("usuario");
 
 		String nombre = req.getParameter("nombre");
 		String usuario = req.getParameter("usuario");
 		String contrasena = validarDatos.esContrasenaValida(req.getParameter("contrasena"));
 		String urlPerfil = req.getParameter("url perfil");
-		String preferenciaNombre = req.getParameter("preferencia");
+		String preferenciaNombre = req.getParameter("genero");
 		boolean esAdmin = false;
 		int id = user.getId();
 		double dineroDisponible = user.getDineroDisponible();
 		int tiempoDisponible = user.getTiempoDisponible();
 
 		Genero preferencia = servGenero.buscarPor(preferenciaNombre);
-
+		Usuario usuarioTemp;
+		
 		// Para que un usuario comun no pueda vulnerar el html y editar valores que no
 		// tiene permitido se verifica si es admin o no.
 		if (user.esAdmin()) {
 			id = validarDatos.esNumeroEnteroValido(req.getParameter("id"));
-			dineroDisponible = validarDatos.esNumeroDoubleValido(req.getParameter("dinero disponible"));
-			tiempoDisponible = validarDatos.esNumeroEnteroValido(req.getParameter("tiempo disponible"));
-			esAdmin = req.getParameter("administrador").equals("Si") ? true : false;
-		}
+			dineroDisponible = validarDatos.esNumeroDoubleValido(req.getParameter("dinero"));
+			tiempoDisponible = validarDatos.esNumeroEnteroValido(req.getParameter("tiempo"));
+			esAdmin = req.getParameter("admin").equals("admin") ? true : false;
 
-		Usuario usuarioTemp = servUsuario.editar(id, nombre, usuario, contrasena, dineroDisponible, tiempoDisponible,
-				preferencia, urlPerfil, esAdmin);
+			usuarioTemp = servUsuario.editar(id, nombre, usuario, dineroDisponible, tiempoDisponible, preferencia,
+					urlPerfil, esAdmin);
+		} else {
+			usuarioTemp = servUsuario.editar(id, nombre, usuario, contrasena, preferencia, urlPerfil);
+		}
 
 		if (!usuarioTemp.esNulo()) {
 			if (usuarioTemp.esValido()) {
-				resp.sendRedirect("/vistas/usuarios.jsp");
+				req.setAttribute("success", "¡Usuario editado correctamente!");
+				
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/listarUsuarios.ad");
+				dispatcher.forward(req, resp);
 			} else {
-				req.setAttribute("usuarioTemp", usuarioTemp);
+				req.setAttribute("usuarioEditar", usuarioTemp);
+				req.setAttribute("serv", "editar");
 
-				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("vistas/usuarios.jsp");
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/listarUsuarios.ad");
 				dispatcher.forward(req, resp);
 			}
 		} else {

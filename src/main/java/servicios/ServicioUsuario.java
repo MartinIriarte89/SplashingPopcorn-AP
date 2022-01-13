@@ -42,15 +42,33 @@ public class ServicioUsuario {
 		}
 		return nuevoUsuario;
 	}
-
-	public Usuario editar(int id, String nombre, String usuario, String contrasena, double dineroDisponible,
-			int tiempoDisponible, Genero preferencia, String urlPerfil, boolean esAdmin) {
+	
+	public Usuario editar(int id, String nombre, String usuario, String contrasena,
+			Genero preferencia, String urlPerfil) {
 		Usuario usuarioBBDD = usuarioDao.buscarPorId(id);
 
 		if (!usuarioBBDD.esNulo()) {
 			usuarioBBDD.setNombre(nombre);
 			usuarioBBDD.setUsuario(usuario);
 			usuarioBBDD.setContrasena(contrasena);
+			usuarioBBDD.setPreferencia(preferencia);
+			usuarioBBDD.setUrlPerfil(urlPerfil);
+
+			if (usuarioBBDD.esValido()) {
+				usuarioDao.actualizar(usuarioBBDD);
+				ProveedorDeConexion.cerrarConexion();
+			}
+		}
+		return usuarioBBDD;
+	}
+	
+	public Usuario editar(int id, String nombre, String usuario, double dineroDisponible,
+			int tiempoDisponible, Genero preferencia, String urlPerfil, boolean esAdmin) {
+		Usuario usuarioBBDD = usuarioDao.buscarPorId(id);
+
+		if (!usuarioBBDD.esNulo()) {
+			usuarioBBDD.setNombre(nombre);
+			usuarioBBDD.setUsuario(usuario);
 			usuarioBBDD.setDineroDisponible(dineroDisponible);
 			usuarioBBDD.setTiempoDisponible(tiempoDisponible);
 			usuarioBBDD.setPreferencia(preferencia);

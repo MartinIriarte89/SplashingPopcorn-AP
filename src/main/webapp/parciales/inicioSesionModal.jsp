@@ -1,3 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <div class="modal fade" id="modalInicioSesion" tabindex="-1"
 	aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered">
@@ -19,24 +24,27 @@
 				<form action="inicioSesion" method="post">
 					<div class="form-floating mb-3">
 						<input type="text" class="form-control rounded-4" id="usuario"
-							placeholder="User" required="required" name="usuario"> <label
+							placeholder="User" required="required" name="usuario"
+							value="${usuario.usuario}"> <label
+							class='${erroresSesion.get("usuario") != null ? "is-invalid" : ""}'
 							for="usuario">Usuario</label>
-						<div class="invalid-feedback">Introduzca su nombre de
-							usuario por favor</div>
+						<div class="invalid-tooltip">
+							${erroresSesion.get("usuario")}</div>
 					</div>
 					<div class="form-floating mt-5 mb-3">
 						<input type="password" class="form-control rounded-4"
-							id="contrasena" placeholder="Password" required="required" name="contrasena">
-						<label for="contrasena">Contraseña</label>
-						<div class="invalid-feedback">Introduzca su contraseña por
-							favor</div>
+							id="contrasena" placeholder="Password" required="required"
+							name="contrasena"> <label
+							class='${erroresSesion.get("contrasena") != null ? "is-invalid" : ""}'
+							for="contrasena">ContraseÃ±a</label>
+						<div class="invalid-tooltip">${erroresSesion.get("contrasena")}</div>
 					</div>
 					<!-- BOTON DE INICIO -->
 					<button type="submit"
 						class="w-100 mb-2 btn btn-lg rounded-4 btn-warning">Iniciar
-						Sesión</button>
+						SesiÃ³n</button>
 					<small class="text-muted"> Al hacer click en Iniciar
-						Sesión, acepta los términos de uso.</small>
+						SesiÃ³n, acepta los tÃ©rminos de uso.</small>
 				</form>
 			</div>
 		</div>

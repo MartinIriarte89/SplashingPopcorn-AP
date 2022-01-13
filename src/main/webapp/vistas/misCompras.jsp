@@ -56,7 +56,7 @@
 								class="display-flex justify-content-center col-xl-12 col-md-4 col-5 mt-5 px-md-4 px-sm-5 px-2">
 								<div
 									class="row flex-xl-row flex-column fondo-backdrop carta h-100 m-0"
-									style="background-image: linear-gradient(90deg, rgba(22, 26, 29, 1) 30%, rgba(22, 26, 29, 0.5) 80%), url('../${compra.urlFondo}');">
+									style='background-image:${compra.esPromocion() ? "linear-gradient(130deg , rgb(0 0 0) 30%, rgb(13 13 13/ 88%) 80%)" : "linear-gradient(90deg, rgba(22, 26, 29, 1) 30%, rgba(22, 26, 29, 0.5) 80%)"} , url("../${compra.urlFondo}");'>
 									<!-- IMAGEN CARD -->
 									<div class="col-auto ms-xl-5 mx-auto">
 										<div class="fondo-portada"

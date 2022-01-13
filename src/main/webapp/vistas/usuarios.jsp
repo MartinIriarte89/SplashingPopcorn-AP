@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!doctype html>
 <html lang="es">
@@ -33,6 +33,20 @@
 		<!-- MODAL ERROR -->
 		<jsp:include page="../parciales/modalesCompra.jsp"></jsp:include>
 
+		<!-- MODAL SUCCESS -->
+		<div class="modal fade" id="success" tabindex="-1"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content bg-success">
+					<div class="modal-body mx-auto my-4 text-white fw-bold fs-5">${success}</div>
+					<div class="modal-footer d-flex border-0">
+						<button type="button" class="btn btn-outline-light mx-auto"
+							data-bs-dismiss="modal">Aceptar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<div class="container pt-5 " style="min-height: 100vh;">
 			<div class="f1 h1 text-center mt-5 mb-3 font-lato">Tabla de
 				Usuarios</div>
@@ -53,13 +67,27 @@
 								<th scope="row">${user.id}</th>
 								<td>${user.nombre}</td>
 								<td>${user.usuario}</td>
-								<td><a href=""><i class="far fa-eye"></i></a> <a
-									href="/Webapp_Proyecto_Final/listarItinerario.do?id=${user.id}"><i
-										class="fas fa-shopping-cart"></i></a> <a href=""><i
-										class="fas fa-pencil-alt"></i></a> <a href=""
-									data-bs-toggle="modal" data-bs-target="#modalEliminarUsuario"
-									data-bs-id="${user.id}"> <i class="fas fa-trash-alt"></i>
-								</a></td>
+								<c:choose>
+									<c:when test="${user.esAdmin()}">
+										<td class="font-lato" style="color: dodgerblue;">Administrador</td>
+									</c:when>
+									<c:otherwise>
+										<td><a class="mx-1" href=""><i class="far fa-eye"></i></a>
+											<a class="mx-1"
+											href="/Webapp_Proyecto_Final/listarItinerario.do?id=${user.id}"><i
+												class="fas fa-shopping-cart"></i></a><a class="mx-1" href=""
+											data-bs-toggle="modal" data-bs-target="#modalEditarUsuario"
+											data-bs-id="${user.id}" data-bs-nombre="${user.nombre}"
+											data-bs-usuario="${user.usuario}"
+											data-bs-dineroDisp="${user.dineroDisponible}"
+											data-bs-tiempoDisp="${user.tiempoDisponible}"
+											data-bs-preferencia="${user.preferencia.nombre}"><i
+												class="fas fa-pencil-alt"></i></a> <a class="mx-1" href=""
+											data-bs-toggle="modal" data-bs-target="#modalEliminarUsuario"
+											data-bs-id="${user.id}"> <i class="fas fa-trash-alt"></i>
+										</a></td>
+									</c:otherwise>
+								</c:choose>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -119,7 +147,7 @@
 									id="contrasena" placeholder="Password" required="required"
 									name="contrasena"> <label
 									class='${usuarioCrear.errores.get("contrasena") != null ? "is-invalid" : ""}'
-									for="contrasena">Contraseña</label>
+									for="contrasena">ContraseÃ±a</label>
 								<div class="invalid-tooltip">
 									<c:out value='${usuarioCrear.errores.get("contrasena")}'></c:out>
 								</div>
@@ -136,6 +164,21 @@
 									name="admin" id="noAdministrador" checked> <label
 									class="form-check-label" for="noAdministrador"> Usuario
 								</label>
+							</div>
+
+							<div class="form-floating my-3">
+								<select class="form-select" aria-label="Default select example"
+									name="genero" id="genero">
+									<option selected>Elegir una preferencia</option>
+									<c:forEach items="${generos}" var="genero">
+										<option value="${genero.nombre}">${genero.nombre}</option>
+									</c:forEach>
+								</select> <label
+									class='${usuarioCrear.errores.get("genero") != null ? "is-invalid" : ""}'
+									for="genero"></label>
+								<div class="invalid-tooltip">
+									<c:out value='${usuarioCrear.errores.get("genero")}'></c:out>
+								</div>
 							</div>
 
 							<div class="form-floating mb-3">
@@ -159,22 +202,6 @@
 									<c:out value='${usuarioCrear.errores.get("tiempo")}'></c:out>
 								</div>
 							</div>
-							<div>
-								<select class="form-select" aria-label="Default select example"
-									name="genero" id="genero">
-									<option selected>Elegir una preferencia</option>
-									<c:forEach items="${generos}" var="genero" varStatus="itemLoop">
-										<option value="${genero.nombre}"><c:out
-												value="${genero.nombre}"></c:out></option>
-									</c:forEach>
-
-								</select> <label
-									class='${usuarioCrear.errores.get("genero") != null ? "is-invalid" : ""}'
-									for="genero"></label>
-								<div class="invalid-tooltip">
-									<c:out value='${usuarioCrear.errores.get("genero")}'></c:out>
-								</div>
-							</div>
 
 							<div class="mb-3 mt-3">
 								<label for="fotoPerfil" class="form-label">Foto de
@@ -182,8 +209,117 @@
 							</div>
 
 							<button type="submit"
-								class="w-100 mb-2 btn btn-lg rounded-4 btn-warning">Crear
-								Usuario</button>
+								class="w-100 mb-2 btn btn-lg rounded-4 btn-warning">Crear</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- MODAL EDITAR USUARIO -->
+		<div class="modal fade" id="modalEditarUsuario"
+			data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+			aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content rounded-5 shadow">
+					<!-- ENCABEZADO DEL MODAL -->
+					<div class="modal-header p-5 pb-4 border-bottom-0">
+						<div class="d-inline-flex">
+							<h2 class="align-self-center">Editar Usuario</h2>
+						</div>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<!-- CUERPO DEL MODAL -->
+					<div class="modal-body p-5 pt-0">
+						<!-- FORLMULARIO DEL MODAL -->
+						<form action="editarUsuario.do" method="post">
+							<div class="form-floating mb-3">
+								<input type="text" class="form-control rounded-4 d-none"
+									id="idEdit" placeholder="id" required="required" name="id"
+									value="${usuarioEditar.id}">
+							</div>
+							<div class="form-floating mb-3">
+								<input type="text" class="form-control rounded-4"
+									id="nombreEdit" placeholder="Nombre" required="required"
+									name="nombre" value="${usuarioEditar.nombre}"> <label
+									class='${usuarioEditar.errores.get("nombre") != null ? "is-invalid" : ""}'
+									for="nombreEdit">Nombre y apellido</label>
+								<div class="invalid-tooltip">
+									<c:out value='${usuarioEditar.errores.get("nombre")}'></c:out>
+								</div>
+							</div>
+
+							<div class="form-floating mb-3">
+								<input type="text" class="form-control rounded-4"
+									id="usuarioEdit" placeholder="User" required="required"
+									name="usuario" value="${usuarioEditar.usuario}"> <label
+									class='${usuarioEditar.errores.get("usuario") != null ? "is-invalid" : ""}'
+									for="usuarioEdit">Usuario</label>
+								<div class="invalid-tooltip">
+									<c:out value='${usuarioEditar.errores.get("usuario")}'></c:out>
+								</div>
+							</div>
+
+							<div class="form-check">
+								<input class="form-check-input" type="radio" value="admin"
+									name="admin" id="administradorEdit"> <label
+									class="form-check-label" for="administradorEdit">
+									Administrador </label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="radio" value="usuario"
+									name="admin" id="noAdministradorEdit" checked> <label
+									class="form-check-label" for="noAdministradorEdit">
+									Usuario </label>
+							</div>
+
+							<div class="form-floating my-3">
+								<select class="form-select" aria-label="Default select example"
+									name="genero" id="generoEdit">
+									<option selected>Elegir una preferencia</option>
+									<c:forEach items="${generos}" var="genero">
+										<option value="${genero.nombre}">${genero.nombre}</option>
+									</c:forEach>
+								</select> <label
+									class='${usuarioEditar.errores.get("genero") != null ? "is-invalid" : ""}'
+									for="generoEdit"></label>
+								<div class="invalid-tooltip">
+									<c:out value='${usuarioEditar.errores.get("genero")}'></c:out>
+								</div>
+							</div>
+
+							<div class="form-floating mb-3">
+								<input type="number" class="form-control rounded-4"
+									id="dineroEdit" placeholder="Dinero" required="required"
+									name="dinero" value="${usuarioEditar.dineroDisponible}">
+								<label
+									class='${usuarioEditar.errores.get("dinero") != null ? "is-invalid" : ""}'
+									for="dineroEdit">Dinero</label>
+								<div class="invalid-tooltip">
+									<c:out value='${usuarioEditar.errores.get("dinero")}'></c:out>
+								</div>
+							</div>
+
+							<div class="form-floating mb-3">
+								<input type="number" class="form-control rounded-4"
+									id="tiempoEdit" placeholder="Tiempo" required="required"
+									name="tiempo" value="${usuarioEditar.tiempoDisponible}">
+								<label
+									class='${usuarioEditar.errores.get("tiempo") != null ? "is-invalid" : ""}'
+									for="tiempoEdit">Tiempo</label>
+								<div class="invalid-tooltip">
+									<c:out value='${usuarioEditar.errores.get("tiempo")}'></c:out>
+								</div>
+							</div>
+
+							<div class="mb-3 mt-3">
+								<label for="fotoPerfilEdit" class="form-label">Foto de
+									perfil</label> <input class="form-control" type="file" id="fotoPerfil">
+							</div>
+
+							<button type="submit"
+								class="w-100 mb-2 btn btn-lg rounded-4 btn-warning">Editar</button>
 						</form>
 					</div>
 				</div>
@@ -198,10 +334,10 @@
 				<div class="modal-content bg-warning">
 					<div class="modal-header border-0">
 						<h5 class="modal-title mx-auto fw-bold" id="exampleModalLabel"
-							style="text-decoration: underline;">¡ATENCIÓN!</h5>
+							style="text-decoration: underline;">Â¡ATENCIÃ“N!</h5>
 					</div>
 					<div class="modal-body mx-auto fw-bold">Estas a punto de
-						eliminar este usuario. ¿Estas seguro?</div>
+						eliminar este usuario. Â¿Estas seguro?</div>
 					<div class="modal-footer d-flex border-0 justify-content-center">
 						<a id="botonElim" type="button" href="" class="btn btn-success">Aceptar</a>
 						<button type="button" class="btn btn-secondary"
@@ -210,6 +346,7 @@
 				</div>
 			</div>
 		</div>
+
 	</main>
 	<footer>
 		<jsp:include page="../parciales/footer.jsp"></jsp:include>
@@ -218,5 +355,10 @@
 	<script type="text/javascript">
 		abrirModalUsuario('${serv}');
 	</script>
+	<c:if test="${success != null }">
+		<script type="text/javascript">
+			abrirModalSuccess();
+		</script>
+	</c:if>
 </body>
 </html>

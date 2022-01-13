@@ -47,7 +47,16 @@ public class Inicio extends HttpServlet implements Servlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		promociones = servPromocion.listar();
-		resp.sendRedirect("index.jsp");
+		Usuario usuario = (Usuario) req.getSession().getAttribute("usuario");
+		
+		if (usuario == null)
+			promociones = servPromocion.listar();
+		else {
+			req.getSession().removeAttribute("promociones");
+			promociones = servFiltro.promosFiltradas(usuario);
+		}
+		req.getSession().setAttribute("promociones", promociones);
+		RequestDispatcher disparcher = req.getRequestDispatcher("index.jsp");
+		disparcher.forward(req, resp);
 	}
 }

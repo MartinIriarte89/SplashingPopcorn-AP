@@ -2,6 +2,7 @@ package controlador.sesion;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -37,8 +38,11 @@ public class InicioSesionServlet extends HttpServlet {
 			req.getSession().setAttribute("usuario", nuevoUsuario);
 			resp.sendRedirect("inicio");
 		} else {
-			req.setAttribute("flash", "Nombre de usuario o contraseña incorrectos");
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/inicio");
+			HashMap<String, String> errores = servInicioSesion.getErrores();
+
+			req.setAttribute("erroresSesion", errores);
+			
+			RequestDispatcher dispatcher = req.getServletContext().getRequestDispatcher("/inicio");
 			dispatcher.forward(req, resp);
 		}
 	}

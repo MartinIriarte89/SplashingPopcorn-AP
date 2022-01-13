@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -16,9 +15,8 @@
 <link rel="stylesheet" type="text/css" href="css/estilosCompartidos.css">
 <link rel="stylesheet" type="text/css" href="css/index.css">
 <link rel="stylesheet" type="text/css" href="css/botones.css">
-
-
-
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
 	integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
@@ -34,6 +32,8 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 	crossorigin="anonymous"></script>
+<script type="text/javascript"
+	src="/Webapp_Proyecto_Final/js/modales.js"></script>
 
 <link rel="shortcut icon" href="imagenes/logo.png" sizes="75px;">
 
@@ -219,6 +219,11 @@
 		<!-- ELEMENTO FOOTER -->
 		<jsp:include page="parciales/footer.jsp"></jsp:include>
 	</footer>
-</body>
 
+	<c:if test="${erroresSesion != null}">
+		<script type="text/javascript">
+			abrirModalInicioSesion();
+		</script>
+	</c:if>
+</body>
 </html>

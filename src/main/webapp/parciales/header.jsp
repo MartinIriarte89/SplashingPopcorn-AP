@@ -1,10 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
-
-
-
 <!-- BARRA NAV -->
 <div id="barra" class="d-flex shadow-lg p-0 rounded-1 fixed-top mx-1">
 	<nav
@@ -41,7 +36,7 @@
 	</c:if>
 
 	<c:if test="${usuario != null }">
-		<div id="info-barra" class="me-md-5 me-3 my-md-auto font-lato">
+		<div id="info-barra" class="me-md-5 me-2 my-md-auto font-lato">
 			<i class="bi bi-currency-exchange"></i> ${usuario.dineroDisponible} <i
 				class="bi bi-hourglass-split"></i> ${usuario.tiempoDisponible}<span
 				class="ms-1">min.</span>
@@ -68,7 +63,7 @@
 				</c:when>
 				<c:otherwise>
 					<ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
-						<li><a class="dropdown-item" href="#">Mi perfil</a></li>
+						<li><a class="dropdown-item" href="/Webapp_Proyecto_Final/perfilUsuario.do">Mi perfil</a></li>
 						<li><a class="dropdown-item"
 							href="/Webapp_Proyecto_Final/listarItinerario.do">Mis compras</a></li>
 						<li><hr class="dropdown-divider"></li>

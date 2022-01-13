@@ -44,16 +44,21 @@ public class CrearUsuarioServlet extends HttpServlet implements Servlet {
 		String preferenciaNombre = req.getParameter("genero");
 		boolean esAdmin = false;
 
-		Genero preferencia = servGenero.buscarPor(preferenciaNombre);
-		if (admin != null) {
+		if (admin.equals("admin")) {
 			esAdmin = true;
+			dineroDisponible = 0;
+			tiempoDisponible = 0;
 		}
+		Genero preferencia = servGenero.buscarPor(preferenciaNombre);
 
 		Usuario usuarioTemp = servUsuario.crear(nombre, usuario, contrasena, dineroDisponible, tiempoDisponible,
 				preferencia, urlPerfil, esAdmin);
 
 		if (usuarioTemp.esValido()) {
-			resp.sendRedirect("listarUsuarios.ad");
+			req.setAttribute("success", "¡Usuario creado correctamente!");
+			
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/listarUsuarios.ad");
+			dispatcher.forward(req, resp);
 		} else {
 			req.setAttribute("usuarioCrear", usuarioTemp);
 			req.setAttribute("serv", "crear");
