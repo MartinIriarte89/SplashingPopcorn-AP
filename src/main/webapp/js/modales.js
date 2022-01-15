@@ -32,6 +32,16 @@ function abrirModalUsuario(texto) {
 	}
 }
 
+function abrirModalInicioSesion() {
+	let myModal = new bootstrap.Modal(document.getElementById('modalInicioSesion'));
+	myModal.show();
+}
+
+function abrirModalEditarDatosPersonales() {
+	let myModal = new bootstrap.Modal(document.getElementById('modalEditarDatosPersonales'));
+	myModal.show();
+}
+
 //MODALE DE ALERTAS VARIAS
 function abrirModalFlash() {
 	let myModal = new bootstrap.Modal(document.getElementById('flash'));
@@ -46,10 +56,5 @@ function abrirModalSuccess() {
 
 function abrirModalError() {
 	let myModal = new bootstrap.Modal(document.getElementById('error'));
-	myModal.show();
-}
-
-function abrirModalInicioSesion() {
-	let myModal = new bootstrap.Modal(document.getElementById('modalInicioSesion'));
 	myModal.show();
 }

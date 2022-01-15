@@ -1,3 +1,5 @@
+//PARA CAMBIAR LAS FOTOS EN LOS DETALLES DE LAS PROMOCIONES
+
 if (!!document.getElementById('contenidoDetalle')) {
 	var contenido = document.querySelector('#contenidoDetalle');
 	var foto = document.querySelector('#foto');

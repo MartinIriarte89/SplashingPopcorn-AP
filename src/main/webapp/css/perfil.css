@@ -2,3 +2,130 @@ body{
 	background: url('../imagenes/spikes.png');
 	margin-top: 0px;
 }
+
+#fotoPerfil{
+	height: 300px;
+	max-width: 280px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-top: 30px;
+    box-shadow: 4px 16px 16px 2px #0000008a;
+    border: solid 4px #dfdcdc;
+    background-position: center;
+}
+
+#boton{
+	box-shadow: 4px 16px 16px 2px #0000008a;
+	font-size: 12px;
+	border-color: #dfdcdc;
+    border-width: medium;
+	color: #114a66;
+	width: 100px;
+}
+
+#boton:hover{
+	color: #114a66;
+}
+
+.contenedor{
+	background-color: #1d6c93;
+	border-radius: 4px;
+}
+
+.titulo{
+	font-size: 25px;
+    padding: 10px;
+    color: white;
+    text-shadow: 4px 3px 3px #000000d1;
+}
+
+.texto{
+	font-size: 18px;
+    padding: 5px;
+    color: white;
+    text-shadow: 4px 3px 3px #000000d1;
+}
+
+.texto-numero{
+	font-size: 20px;
+	color: yellow;
+}
+
+@media  (min-width: 0px) and (max-width: 575.99px){
+	#fotoPerfil{
+		height: 200px;
+		max-width: 200px;
+	}
+	
+	#boton{
+		font-size: 12px;
+		width: 85px;
+	}
+	
+	.titulo{
+		font-size: 20px;
+	    padding: 10px;
+	}
+	
+	.texto{
+		font-size: 14px;
+	    padding: 5px;
+	}
+	
+	.texto-numero{
+		font-size: 16px;
+	}
+}
+
+@media  (min-width: 576px) and (max-width: 767.99px){
+	.texto{
+		font-size: 16px;
+	}
+	
+	.titulo{
+		font-size: 23px;
+	}
+	
+	.texto-numero{
+		font-size: 18px;
+	}
+	
+	#fotoPerfil{
+		height: 200px;
+		max-width: 200px;
+	}		
+}
+
+@media  (min-width: 768px) and (max-width: 991.99px){
+	.texto{
+		font-size: 18px;
+	}
+	
+	.titulo{
+		font-size: 25px;
+	}
+	
+	.texto-numero{
+		font-size: 20px;
+	}
+	
+	#fotoPerfil{
+		height: 200px;
+		max-width: 200px;
+	}		
+}
+
+@media  (min-width: 992px) and (max-width: 1199.99px){
+	.texto{
+		font-size: 18px;
+	}
+	
+	.titulo{
+		font-size: 25px;
+	}
+	
+	#fotoPerfil{
+		height: 300px;
+		max-width: 280px;
+	}		
+}

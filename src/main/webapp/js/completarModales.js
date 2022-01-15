@@ -1,5 +1,26 @@
 $(document).ready(function() {
-	
+
+	if (!!document.getElementById('modalEditarDatosPersonales')) {
+
+		var modalEditarDatosPersonales = document.getElementById('modalEditarDatosPersonales')
+		modalEditarDatosPersonales.addEventListener('show.bs.modal', function(event) {
+
+			let boton = event.relatedTarget
+
+			let nombre = boton.getAttribute('data-bs-nombre')
+			let usuario = boton.getAttribute('data-bs-usuario')
+			let preferencia = boton.getAttribute('data-bs-preferencia')
+
+			let nombreEdit = modalEditarDatosPersonales.querySelector('#nombre')
+			let usuarioEdit = modalEditarDatosPersonales.querySelector('#usuario')
+			let preferenciaEdit = modalEditarDatosPersonales.querySelector('#genero')
+
+			nombreEdit.value = nombre;
+			usuarioEdit.value = usuario;
+			preferenciaEdit.value = preferencia;
+		});
+	}
+
 	if (!!document.getElementById('modalEliminarUsuario')) {
 
 		var modalBorrarUsuario = document.getElementById('modalEliminarUsuario')
@@ -14,7 +35,7 @@ $(document).ready(function() {
 			botonEnviar.setAttribute('href', "/Webapp_Proyecto_Final/borrarUsuario.ad?id=" + id)
 		});
 	}
-	
+
 	if (!!document.getElementById('modalEditarUsuario')) {
 
 		var modalEditarUsuario = document.getElementById('modalEditarUsuario')

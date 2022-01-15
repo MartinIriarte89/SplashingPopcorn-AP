@@ -42,16 +42,27 @@ public class ServicioUsuario {
 		}
 		return nuevoUsuario;
 	}
-	
-	public Usuario editar(int id, String nombre, String usuario, String contrasena,
-			Genero preferencia, String urlPerfil) {
+
+	public Usuario editarDatosPersonales(int id, String nombre, String usuario, Genero preferencia) {
 		Usuario usuarioBBDD = usuarioDao.buscarPorId(id);
 
 		if (!usuarioBBDD.esNulo()) {
 			usuarioBBDD.setNombre(nombre);
 			usuarioBBDD.setUsuario(usuario);
-			usuarioBBDD.setContrasena(contrasena);
 			usuarioBBDD.setPreferencia(preferencia);
+
+			if (usuarioBBDD.esValido()) {
+				usuarioDao.actualizar(usuarioBBDD);
+				ProveedorDeConexion.cerrarConexion();
+			}
+		}
+		return usuarioBBDD;
+	}
+
+	public Usuario editarFotoPerfil(int id, String urlPerfil) {
+		Usuario usuarioBBDD = usuarioDao.buscarPorId(id);
+
+		if (!usuarioBBDD.esNulo()) {
 			usuarioBBDD.setUrlPerfil(urlPerfil);
 
 			if (usuarioBBDD.esValido()) {
@@ -61,9 +72,24 @@ public class ServicioUsuario {
 		}
 		return usuarioBBDD;
 	}
-	
-	public Usuario editar(int id, String nombre, String usuario, double dineroDisponible,
-			int tiempoDisponible, Genero preferencia, String urlPerfil, boolean esAdmin) {
+
+	public Usuario editarContrasena(int id, String ContrasenaNueva) {
+		Usuario usuarioBBDD = usuarioDao.buscarPorId(id);
+
+		if (!usuarioBBDD.esNulo()) {
+			usuarioBBDD.setContrasena(ContrasenaNueva);
+
+			if (usuarioBBDD.esValido()) {
+				usuarioDao.actualizar(usuarioBBDD);
+				ProveedorDeConexion.cerrarConexion();
+			}
+		}
+		return usuarioBBDD;
+
+	}
+
+	public Usuario editar(int id, String nombre, String usuario, double dineroDisponible, int tiempoDisponible,
+			Genero preferencia, String urlPerfil, boolean esAdmin) {
 		Usuario usuarioBBDD = usuarioDao.buscarPorId(id);
 
 		if (!usuarioBBDD.esNulo()) {
@@ -89,13 +115,22 @@ public class ServicioUsuario {
 		return usuario;
 	}
 
-	public boolean sonDatosValidos() {
-		validarDatos();
+	public boolean esCambioContrasenaValido(String ContrasenaNueva, String ContrasenaRepetida) {
+		validarCambioContrasena(ContrasenaNueva, ContrasenaRepetida);
 		return errores.isEmpty();
 	}
 
-	// VALIDAR DATOS
-	private void validarDatos() {
+	private void validarCambioContrasena(String ContrasenaNueva, String ContrasenaRepetida) {
 		errores = new HashMap<String, String>();
+		if (ContrasenaNueva.equals(ContrasenaRepetida) && ContrasenaNueva.equals("")) {
+			errores.put("contrasenaNueva", "No debe contener caracteres especiales, y su longitud debe ser mayor a 4");
+		}
+		if (!ContrasenaNueva.equals(ContrasenaRepetida)) {
+			errores.put("contrasenaRepetida", "No hay coincidencia");
+		}
+	}
+
+	public HashMap<String, String> getErrores() {
+		return this.errores;
 	}
 }

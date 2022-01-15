@@ -12,7 +12,6 @@
 <link rel="stylesheet"
 	href="/Webapp_Proyecto_Final/css/estilosCompartidos.css">
 
-
 <title>Usuarios Registrados</title>
 <link rel="shortcut icon" href="img/logo.png" sizes="75px;">
 
