@@ -204,7 +204,7 @@
 
 							<div class="mb-3 mt-3">
 								<label for="fotoPerfil" class="form-label">Foto de
-									perfil</label> <input class="form-control" type="file" id="fotoPerfil">
+									perfil</label> <input class="form-control" type="file" id="fotoPerfil" name="urlPerfil">
 							</div>
 
 							<button type="submit"

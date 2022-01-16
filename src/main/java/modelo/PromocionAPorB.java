@@ -13,8 +13,14 @@ public class PromocionAPorB extends Promocion {
 		super(nombre, atracciones, descripcion, urlPortada, cantPromosACobrar, tipoPromocion);
 		Collections.sort(atracciones);
 
-		for (int i = 0; i < cantPromosACobrar; i++) {
-			atraccionesACobrar.add(atracciones.get(i));
+		if (cantPromosACobrar <= atracciones.size()) {
+			for (int i = 0; i < cantPromosACobrar; i++) {
+				atraccionesACobrar.add(atracciones.get(i));
+			}
+		} else {
+			for (Pelicula pelicula : atracciones) {
+				atraccionesACobrar.add(pelicula);
+			}
 		}
 	}
 
@@ -40,12 +46,11 @@ public class PromocionAPorB extends Promocion {
 	@Override
 	public void validar() {
 		super.validar();
-		Map <String, String> errores = super.getErrores();
-		
+		Map<String, String> errores = super.getErrores();
+
 		if (super.getPeliculas().size() < super.getBeneficio()) {
 			errores.put("beneficio", "Las películas a regalar no pueden superar la cantidad de películas en promoción");
 		}
-		
 		super.setErrores(errores);
 	}
 }

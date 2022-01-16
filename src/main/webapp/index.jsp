@@ -51,6 +51,11 @@
 	font-family: Merriweather;
 	font-size: 14px;
 }
+
+.wave {
+	position: absolute;
+	width: 100%;
+}
 </style>
 
 <title>Mis Compras</title>
@@ -104,9 +109,11 @@
 					<span class="visually-hidden">Next</span>
 				</button>
 			</div>
+
 		</div>
 		<!-- CONTENEDOR FONDO POCHOCLOS -->
 		<div id="fondo-pochoclos">
+
 			<div class="titulo text-center color-principal">
 				<h1>Estas son nuestras PROMOS para vos!</h1>
 			</div>
@@ -214,6 +221,21 @@
 				</div>
 			</div>
 		</div>
+		<!-- MODAL SUCCESS -->
+		<div class="modal fade" id="success" tabindex="-1"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content bg-success">
+					<div
+						class="modal-body mx-auto my-4 text-center text-white fw-bold fs-5">${success}</div>
+					<div class="modal-footer d-flex border-0">
+						<a type="button" class="btn btn-outline-light mx-auto"
+							href="/Webapp_Proyecto_Final/inicio" data-bs-dismiss="modal">Aceptar</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
 	</main>
 	<footer class="m-1">
 		<!-- ELEMENTO FOOTER -->
@@ -223,6 +245,11 @@
 	<c:if test="${erroresSesion != null}">
 		<script type="text/javascript">
 			abrirModalInicioSesion();
+		</script>
+	</c:if>
+	<c:if test="${success != null}">
+		<script type="text/javascript">
+			abrirModalSuccess();
 		</script>
 	</c:if>
 </body>

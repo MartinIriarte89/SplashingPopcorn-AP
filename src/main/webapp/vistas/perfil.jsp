@@ -6,6 +6,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <jsp:include page="../parciales/librerias.jsp"></jsp:include>
 <link rel="stylesheet" href="/Webapp_Proyecto_Final/css/perfil.css" />
 
@@ -39,7 +40,8 @@
 							class="col-7 col-lg-10 mx-auto rounded-circle p-0"
 							style="background-image: url('/Webapp_Proyecto_Final/${usuario.urlPerfil}');"></div>
 						<button id="boton" type="button"
-							class="btn btn-warning mx-auto my-4 px-1 col-4 col-sm-2 col-md-4 col-lg-3 col-xl-2 font-lato">Cambiar
+							class="btn btn-warning mx-auto my-4 px-1 col-4 col-sm-2 col-md-4 col-lg-3 col-xl-2 font-lato"
+							data-bs-toggle="modal" data-bs-target="#modalEditarFoto">Cambiar
 							foto</button>
 					</div>
 				</div>
@@ -162,7 +164,7 @@
 						<!-- ENCABEZADO DEL MODAL -->
 						<div class="modal-header p-5 pb-4 border-bottom-0">
 							<div class="d-inline-flex">
-								<h2 class="align-self-center">Editar Usuario</h2>
+								<h2 class="align-self-center">Editar Datos Personales</h2>
 							</div>
 							<button type="button" class="btn-close" data-bs-dismiss="modal"
 								aria-label="Close"></button>
@@ -228,6 +230,39 @@
 					</div>
 				</div>
 			</div>
+
+			<!-- MODAL EDITAR FOTO -->
+			<div class="modal fade" id="modalEditarFoto"
+				data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+				aria-labelledby="staticBackdropLabel" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content rounded-5 shadow">
+						<!-- ENCABEZADO DEL MODAL -->
+						<div class="modal-header p-5 pb-4 border-bottom-0">
+							<div class="d-inline-flex">
+								<h2 class="align-self-center">Editar Foto</h2>
+							</div>
+							<button type="button" class="btn-close" data-bs-dismiss="modal"
+								aria-label="Close"></button>
+						</div>
+						<!-- CUERPO DEL MODAL -->
+						<div class="modal-body p-5 pt-0">
+							<!-- FORLMULARIO DEL MODAL -->
+							<form action="editarUsuario.do" method="post">
+								<div class="mb-3">
+									<label for="formFile" class="form-label">Seleccione un
+										formato de imagen válido</label> <input class="form-control"
+										type="file" id="formFile" name="urlPerfil">
+								</div>
+
+								<button type="submit"
+									class="w-100 mb-2 btn btn-lg rounded-4 btn-warning">Editar</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
 		</div>
 	</main>
 	<footer>

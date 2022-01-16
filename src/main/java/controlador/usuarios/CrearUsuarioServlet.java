@@ -49,6 +49,9 @@ public class CrearUsuarioServlet extends HttpServlet implements Servlet {
 			dineroDisponible = 0;
 			tiempoDisponible = 0;
 		}
+		if (urlPerfil == null || urlPerfil.equals("")) {
+			urlPerfil = "imagenes/fotoPerfilDefecto.jpg";
+		}
 		Genero preferencia = servGenero.buscarPor(preferenciaNombre);
 
 		Usuario usuarioTemp = servUsuario.crear(nombre, usuario, contrasena, dineroDisponible, tiempoDisponible,
@@ -56,13 +59,13 @@ public class CrearUsuarioServlet extends HttpServlet implements Servlet {
 
 		if (usuarioTemp.esValido()) {
 			req.setAttribute("success", "¡Usuario creado correctamente!");
-			
+
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/listarUsuarios.ad");
 			dispatcher.forward(req, resp);
 		} else {
 			req.setAttribute("usuarioCrear", usuarioTemp);
 			req.setAttribute("serv", "crear");
-			
+
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/listarUsuarios.ad");
 			dispatcher.forward(req, resp);
 		}

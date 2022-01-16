@@ -164,13 +164,13 @@
 												<!-- PRECIO Y DURACION CARD -->
 												<div class="row text-white text-center mb-3 mx-auto">
 													<div class="col-6 border-bottom border-1">
-														<div class="row flex-column">
+														<div class="row h-100 flex-column">
 															<div class="col-12">Precio:</div>
 															<span class="h5 text-danger precio-duracion">$${pelicula.precio}</span>
 														</div>
 													</div>
 													<div class="col-6">
-														<div class="row flex-column border-bottom border-1">
+														<div class="row h-100 flex-column border-bottom border-1">
 															<div class="col-12">Duración:</div>
 															<span class="h5 text-danger precio-duracion">${pelicula.duracion}
 																min.</span>

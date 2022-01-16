@@ -48,7 +48,7 @@
 			<div id="cuerpo" class="mb-5">
 				<div class="row justify-content-around m-0 p-0"
 					id="contenidoDetallePromo"
-					style="background-image: linear-gradient(145deg, rgb(22 26 29/ 98%) 40%, rgba(50, 105, 147, 0.8) 90%)">
+					style="background-image: linear-gradient(145deg, rgb(22 26 29/ 98%) 25%, rgb(85 28 59 / 86%) 90%);)">
 					<!-- IMAGEN -->
 					<div class="col-xxl-4 col-lg-5 col-12 my-3 m-0 p-0">
 						<div id="foto"

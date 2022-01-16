@@ -6,15 +6,18 @@ body{
 .titulo{
 	text-shadow: 8px 2px 2px rgb(0 0 0 / 59%);
 	padding-top: 100px;
-	background-color: #ba181b;
+	background: linear-gradient(to right, #240b36, #c31432);
 	color: lightyellow;
 	font-size: 6.5rem;
 }
 
 .triangulo {
-	border-top: 60px solid #ba181b;
-	border-left: 49vw solid transparent;
-	border-right: 49vw solid transparent;
+	height: 60px;
+	width: 100%;
+	background: linear-gradient(to right, #240b36, #c31432);
+	clip-path: polygon(50% 100%, 0 0, 100% 0);
+	transform: translateZ(0);
+	margin-top: -1px;
 }
 
 /*---------------------------------*/
@@ -73,7 +76,6 @@ body{
 .titulo-filtro{
 	color: lightyellow;
 	text-shadow: 8px 2px 2px rgb(0 0 0 / 59%);
-	text-decoration: underline red;
 	font-size: 2.3rem;
 }
 
@@ -202,9 +204,7 @@ span{
 	}
 	
 	.triangulo {
-		border-top: 40px solid #ba181b;
-		border-left: 48vw solid transparent;
-		border-right: 48vw solid transparent;
+		height: 40px;
 	}
 	
 	#contenedor-filtros{
@@ -282,9 +282,7 @@ span{
 	}
 	
 	.triangulo {
-		border-top: 40px solid #ba181b;
-		border-left: 48vw solid transparent;
-		border-right: 48vw solid transparent;
+		height: 40px;
 	}
 	
 	#contenedor-filtros{

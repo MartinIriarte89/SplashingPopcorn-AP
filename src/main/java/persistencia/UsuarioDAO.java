@@ -147,7 +147,7 @@ public class UsuarioDAO {
 
 	private Usuario crearUsuario(ResultSet resultados) throws Exception {
 		GeneroDAO generoDAO = FabricaDAO.getGeneroDAO();
-		
+
 		int id = resultados.getInt("id");
 		String nombre = resultados.getString("nombre");
 		String usuario = resultados.getString("usuario");
@@ -162,4 +162,17 @@ public class UsuarioDAO {
 		return new Usuario(id, nombre, usuario, contrasena, dinero, tiempo, preferencia, urlPerfil, esAdmin);
 	}
 
+	public boolean esUsuarioExistente(String usuario) {
+		String sql = "SELECT id FROM usuarios WHERE usuario = ?";
+		try {
+			Connection conexion = ProveedorDeConexion.getConexion();
+			PreparedStatement declaracion = conexion.prepareStatement(sql);
+			declaracion.setString(1, usuario);
+			ResultSet resultados = declaracion.executeQuery();
+
+			return resultados.next();
+		} catch (Exception e) {
+			throw new DatosPerdidosError(e);
+		}
+	}
 }

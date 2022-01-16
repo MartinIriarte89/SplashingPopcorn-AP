@@ -13,13 +13,12 @@ body{
 	box-shadow: 2px 8px 8px rgba(0,0,0, 1);
 	opacity: 95%;
 	transition: 0.4s;
-	background-image: linear-gradient(135deg, #161A1D, #161A1D 250px, rgba(186, 24, 27, .8) 252px, rgba(102, 7, 8, .9) 1300px), url(../imagenes/fondoBarra.jpg)!important;
-	
+	background-image: linear-gradient(135deg, #161A1D, #161A1D 250px, #240b36cc 252px, #c31432e6 1300px), url(../imagenes/fondoBarra.jpg)!important;
 }
 
 #barra:hover{
 	transform: scale(1.005);
-	background-image: linear-gradient(135deg, #BA181B 250px, #161A1D, rgba(102, 7, 8, .9) 252px, rgba(186, 24, 27, .9)), url(../imagenes/fondoBarra.jpg)!important;
+	background-image: linear-gradient(135deg, #c31432 250px, #161A1D, #240b36e6 252px, #c31432e6), url(../imagenes/fondoBarra.jpg)!important;
 }
 
 .collapse ul > li > a:hover{
@@ -206,11 +205,11 @@ footer a svg{
 	/* ESTILO DE LA BARRA*/
 	
 	#barra{
-		background-image: repeating-linear-gradient(135deg, #161A1D, #161A1D 180px, rgba(190, 21, 21, .8) 182px, rgba(140, 21, 21, 1) 1300px), url(../imagenes/fondoBarra.jpg)!important;
+		background-image: repeating-linear-gradient(135deg, #161A1D, #161A1D 180px, #240b36cc 182px, #c31432e6 1300px), url(../imagenes/fondoBarra.jpg)!important;
 	}
 	
 	#barra:hover{
-		background-image: linear-gradient(135deg, rgb(205, 26, 26) 180px, rgba(44, 44, 44, 0.9), rgba(140, 21, 21, 0.8) 181px, rgba(205, 26, 26, 1)), url(../imagenes/fondoBarra.jpg)!important;
+		background-image: linear-gradient(135deg, #c31432 180px, rgba(44, 44, 44, 0.9), #240b36cc 181px, #c31432e6), url(../imagenes/fondoBarra.jpg)!important;
 	}
 	
 	.nav-padding{

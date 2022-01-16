@@ -1,4 +1,4 @@
-		package modelo;
+package modelo;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -172,20 +172,24 @@ public class Usuario {
 		if (contrasenaEncrip.equals("")) {
 			errores.put("contrasena", "No debe contener caracteres especiales, y su longitud debe ser mayor a 4");
 		}
-		if (!Comparador.comparar(nombre, Patron.NOMBRE_APELLIDO_VALIDO)) {
-			errores.put("nombre", "No debe contener caracteres especiales, ingrese nombre y apellido");
-		}
-		if (!Comparador.comparar(usuario, Patron.USUARIO_VALIDO)) {
-			errores.put("usuario", "No debe contener caracteres especiales");
-		}
 		if (preferencia.esNulo()) {
 			errores.put("genero", "El genero no existe");
 		}
 		if (nombre == null) {
 			errores.put("nombre", "El campo no puede estar vacío");
 		}
+		if (nombre != null) {
+			if (!Comparador.comparar(nombre, Patron.NOMBRE_APELLIDO_VALIDO)) {
+				errores.put("nombre", "No debe contener caracteres especiales, ingrese nombre y apellido");
+			}
+		}
 		if (usuario == null) {
 			errores.put("usuario", "El campo no puede estar vacío");
+		}
+		if (usuario != null) {
+			if (!Comparador.comparar(usuario, Patron.USUARIO_VALIDO)) {
+				errores.put("usuario", "No debe contener caracteres especiales");
+			}
 		}
 		if (preferencia == null) {
 			errores.put("genero", "El campo no puede estar vacío");

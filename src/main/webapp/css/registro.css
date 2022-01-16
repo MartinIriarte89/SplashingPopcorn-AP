@@ -1,0 +1,29 @@
+main{
+	background: #c31432;  /* fallback for old browsers */
+	background: -webkit-linear-gradient(to right, #240b36, #c31432);  /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to right, #240b36, #c31432); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	 
+}
+
+.form-floating{
+	box-shadow: 7px 12px 16px #2d2c2c;
+}
+
+.boton{
+	box-shadow: 7px 12px 16px #2d2c2c;
+}
+
+.titulo-form{
+	text-shadow: 8px 7px 6px black;
+}
+
+.font-merriweather{
+	color: #801033;
+    font-weight: 600;
+}
+
+@media (min-width: 992px){
+	.titulo-form{
+		font-size: 55px;
+	}
+}

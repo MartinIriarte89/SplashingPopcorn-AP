@@ -36,18 +36,20 @@
 	</c:if>
 
 	<c:if test="${usuario != null }">
-		<div id="info-barra" class="me-md-5 me-2 my-md-auto font-lato">
-			<i class="bi bi-currency-exchange"></i> ${usuario.dineroDisponible} <i
-				class="bi bi-hourglass-split"></i> ${usuario.tiempoDisponible}<span
-				class="ms-1">min.</span>
-		</div>
+
+		<c:if test="${!usuario.esAdmin()}">
+			<div id="info-barra" class="me-md-5 me-2 my-md-auto font-lato">
+				<i class="bi bi-currency-exchange"></i> ${usuario.dineroDisponible}
+				<i class="bi bi-hourglass-split"></i> ${usuario.tiempoDisponible}<span
+					class="ms-1">min.</span>
+			</div>
+		</c:if>
 
 		<div class="dropdown dropstart">
 			<a href="#"
-				class="d-block link-dark text-decoration-none dropdown me-4"
-				data-bs-toggle="dropdown" aria-expanded="false"> <img
-				src="https://github.com/mdo.png" alt="img perfil" width="60"
-				height="60" class="rounded-circle">
+				class="d-block rounded-circle link-dark text-decoration-none dropdown me-4"
+				data-bs-toggle="dropdown" aria-expanded="false"
+				style="height: 60px; width: 60px; background: url('/Webapp_Proyecto_Final/${usuario.urlPerfil}'); background-size: cover; background-position: center;">
 			</a>
 
 			<c:choose>
@@ -63,7 +65,8 @@
 				</c:when>
 				<c:otherwise>
 					<ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
-						<li><a class="dropdown-item" href="/Webapp_Proyecto_Final/perfilUsuario.do">Mi perfil</a></li>
+						<li><a class="dropdown-item"
+							href="/Webapp_Proyecto_Final/perfilUsuario.do">Mi perfil</a></li>
 						<li><a class="dropdown-item"
 							href="/Webapp_Proyecto_Final/listarItinerario.do">Mis compras</a></li>
 						<li><hr class="dropdown-divider"></li>

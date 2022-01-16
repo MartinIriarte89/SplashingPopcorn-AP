@@ -19,7 +19,7 @@
 					aria-label="Close"></button>
 			</div>
 			<!-- CUERPO DEL MODAL -->
-			<div class="modal-body p-5 pt-0">
+			<div class="modal-body px-5 py-3 pt-0">
 				<!-- FORLMULARIO DEL MODAL -->
 				<form action="inicioSesion" method="post">
 					<div class="form-floating mb-3">
@@ -46,6 +46,9 @@
 					<small class="text-muted"> Al hacer click en Iniciar
 						Sesión, acepta los términos de uso.</small>
 				</form>
+				<hr>
+				<div class="text-center h-4">Si no estas registrado, regístrate gratis aquí </div>
+				<div class="d-flex mt-3"> <a class="mx-auto btn btn-secondary" href="/Webapp_Proyecto_Final/registro" style="font-size: 12px">Regístrate</a> </div>
 			</div>
 		</div>
 	</div>

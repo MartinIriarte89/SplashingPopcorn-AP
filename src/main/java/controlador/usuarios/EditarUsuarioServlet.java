@@ -43,7 +43,7 @@ public class EditarUsuarioServlet extends HttpServlet implements Servlet {
 			int id = validarDatos.esNumeroEnteroValido(req.getParameter("id"));
 			String nombre = req.getParameter("nombre");
 			String usuario = req.getParameter("usuario");
-			String urlPerfil = req.getParameter("url perfil");
+			String urlPerfil = req.getParameter("urlPerfil");
 			String preferenciaNombre = req.getParameter("genero");
 			double dineroDisponible = validarDatos.esNumeroDoubleValido(req.getParameter("dinero"));
 			int tiempoDisponible = validarDatos.esNumeroEnteroValido(req.getParameter("tiempo"));
@@ -84,10 +84,10 @@ public class EditarUsuarioServlet extends HttpServlet implements Servlet {
 
 				usuarioTemp = servUsuario.editarContrasena(id, contrasenaNueva);
 
-			} else if (urlPerfil != null) {
-				usuarioTemp = servUsuario.editarFotoPerfil(id, urlPerfil);
-			} else {
+			} else if (nombre != null || usuario != null || preferenciaNombre != null) {
 				usuarioTemp = servUsuario.editarDatosPersonales(id, nombre, usuario, preferencia);
+			} else {
+				usuarioTemp = servUsuario.editarFotoPerfil(id, urlPerfil);
 			}
 		}
 

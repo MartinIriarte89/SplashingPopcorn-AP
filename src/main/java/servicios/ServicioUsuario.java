@@ -114,6 +114,10 @@ public class ServicioUsuario {
 		ProveedorDeConexion.cerrarConexion();
 		return usuario;
 	}
+	
+	public boolean esUsuarioExistente(String usuario) {
+		return usuarioDao.esUsuarioExistente(usuario);
+	}
 
 	public boolean esCambioContrasenaValido(String ContrasenaNueva, String ContrasenaRepetida) {
 		validarCambioContrasena(ContrasenaNueva, ContrasenaRepetida);
