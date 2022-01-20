@@ -13,8 +13,8 @@
 
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="css/estilosCompartidos.css">
-<link rel="stylesheet" type="text/css" href="css/index.css">
 <link rel="stylesheet" type="text/css" href="css/botones.css">
+<link rel="stylesheet" type="text/css" href="css/index.css">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 <link rel="stylesheet"
@@ -50,11 +50,8 @@
 .font-merriweather-light {
 	font-family: Merriweather;
 	font-size: 14px;
-}
-
-.wave {
-	position: absolute;
-	width: 100%;
+	height: 250px;
+	overflow: hidden;
 }
 </style>
 
@@ -111,133 +108,112 @@
 			</div>
 
 		</div>
-		<!-- CONTENEDOR FONDO POCHOCLOS -->
-		<div id="fondo-pochoclos">
-
-			<div class="titulo text-center color-principal">
-				<h1>Estas son nuestras PROMOS para vos!</h1>
+		<!-- CONTENEDOR FONDO -->
+		<div id="fondo" class="py-5">
+			<div class="wave" style="top: 0;">
+				<svg viewBox="0 0 500 150" preserveAspectRatio="none"
+					style="height: 100%; width: 100%;">
+						<path
+						d="M-1.12,110.12 C96.51,218.66 283.30,-47.75 502.82,77.55 L500.00,0.00 L0.00,0.00 Z"
+						style="stroke: none; fill: #3b125b;"></path></svg>
 			</div>
 
 			<!-- CONTENEDOR DE CARS -->
+			<div class="d-flex col-12 flex-column mt-5 mb-3 px-0"
+				style="padding: 130px;">
 
-			<div class="d-flex col-12 flex-column mt-5 mb-3 p-0">
-
-				<!-- TABLA DE CARDS -->
-				<div class="row justify-content-around contenido m-0 mb-4">
-
-					<!-- CARD -->
-					<div
-						class="display-flex justify-content-center col-md-4 col-5 mt-5 px-md-4 px-sm-5 px-2">
-						<div
-							class="row flex-column fondo-backdrop carta mx-auto h-100 m-0"
-							style="background-image: linear-gradient(90deg, rgba(22, 26, 29, 1) 30%, rgba(22, 26, 29, 1) 80%);">
-							<!-- IMAGEN CARD -->
-
-							<div class="fondo-portada mx-auto"
-								style="background-image: url('imagenes/1_peli_portada.jpg');">
-							</div>
-
-							<!-- DESCRIPCION CARD -->
-							<div class="col d-flex p-0">
-								<div class="row m-0 my-2 w-100" id="contenedorDescrip">
-									<div class="d-flex">
-										<p class="titulo-carta h3 mx-auto text-center text-white">
-											Super descuentos</p>
-									</div>
-									<div class="d-flex mt-auto justify-content-center">
-										<a href="#" class="botondes learn-more d-flex"> <span
-											class="circle" aria-hidden="true"> <span
-												class="icon arrow"></span>
-										</span> <span class="button-text mx-auto">Ver</span>
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<!-- CARD -->
-					<div
-						class="display-flex justify-content-center col-md-4 col-5 mt-5 px-md-4 px-sm-5 px-2">
-						<div
-							class="row flex-column fondo-backdrop carta mx-auto h-100 m-0"
-							style="background-image: linear-gradient(90deg, rgba(22, 26, 29, 1) 30%, rgba(22, 26, 29, 1) 80%);">
-							<!-- IMAGEN CARD -->
-
-							<div class="fondo-portada mx-auto"
-								style="background-image: url('imagenes/1_peli_portada.jpg');">
-							</div>
-
-							<!-- DESCRIPCION CARD -->
-							<div class="col d-flex p-0">
-								<div class="row m-0 my-2 w-100" id="contenedorDescrip">
-									<div class="d-flex">
-										<p class="titulo-carta h3 mx-auto text-center text-white">
-											Precios locos</p>
-									</div>
-									<div class="d-flex mt-auto justify-content-center">
-										<a href="#" class="botondes learn-more d-flex"> <span
-											class="circle" aria-hidden="true"> <span
-												class="icon arrow"></span>
-										</span> <span class="button-text mx-auto">Ver</span>
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<!-- CARD -->
-					<div
-						class="display-flex justify-content-center col-md-4 col-5 mt-5 px-md-4 px-sm-5 px-2">
-						<div
-							class="row flex-column fondo-backdrop carta mx-auto h-100 m-0"
-							style="background-image: linear-gradient(90deg, rgba(22, 26, 29, 1) 30%, rgba(22, 26, 29, 1) 80%);">
-							<!-- IMAGEN CARD -->
-
-							<div class="fondo-portada mx-auto"
-								style="background-image: url('imagenes/1_peli_portada.jpg');">
-							</div>
-
-							<!-- DESCRIPCION CARD -->
-							<div class="col d-flex p-0">
-								<div class="row m-0 my-2 w-100" id="contenedorDescrip">
-									<div class="d-flex">
-										<p class="titulo-carta h3 mx-auto text-center text-white">
-											Una de regalo</p>
-									</div>
-									<div class="d-flex mt-auto justify-content-center">
-										<a href="#" class="botondes learn-more d-flex"> <span
-											class="circle" aria-hidden="true"> <span
-												class="icon arrow"></span>
-										</span> <span class="button-text mx-auto">Ver</span>
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
+				<div class="titulo text-center color-principal">
+					<h1 class="m-0 p-1">Estas son nuestras promos para vos!</h1>
 				</div>
-			</div>
-		</div>
-		<!-- MODAL SUCCESS -->
-		<div class="modal fade" id="success" tabindex="-1"
-			aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered">
-				<div class="modal-content bg-success">
+
+				<!-- CARDS -->
+				<div class="row m-0 mt-1">
 					<div
-						class="modal-body mx-auto my-4 text-center text-white fw-bold fs-5">${success}</div>
-					<div class="modal-footer d-flex border-0">
-						<a type="button" class="btn btn-outline-light mx-auto"
-							href="/Webapp_Proyecto_Final/inicio" data-bs-dismiss="modal">Aceptar</a>
+						class="d-flex col-lg-4 col-sm-6 col-12 mt-lg-5 mb-lg-5 mt-sm-4 mt-3 mb-4 ps-sm-2 pe-sm-3 p-0 justify-content-center">
+						<div
+							class="card flex-sm-grow-0 flex-fill text-center border-0 box-imagen-card">
+							<img src="imagenes/fondoBarra.jpg" class="card-img-top rounded-3"
+								alt="descuento">
+							<div
+								class="card-body col-sm-12 col-11 align-self-center p-0 pt-sm-3">
+								<h5
+									class="card-title text-center color-principal rounded-1 fs-3">Super
+									Descuentos</h5>
+								<a href="#" class="botondes learn-more"> <span
+									class="circle" aria-hidden="true"> <span
+										class="icon arrow"></span>
+								</span> <span class="button-text">Ir a ver</span>
+								</a>
+							</div>
+						</div>
+					</div>
+
+					<div
+						class="d-flex col-lg-4 col-sm-6 col-12 mt-lg-5 mb-lg-5 mt-sm-4 mt-3 mb-4 ps-sm-2 pe-sm-3 p-0 justify-content-center">
+						<div
+							class="card flex-sm-grow-0 flex-fill text-center border-0 box-imagen-card">
+							<img src="imagenes/fondoBarra.jpg" class="card-img-top rounded-3"
+								alt="descuento">
+							<div
+								class="card-body col-sm-12 col-11 align-self-center p-0 pt-sm-3">
+								<h5
+									class="card-title text-center color-principal rounded-1 fs-3">Una
+									de Regalo</h5>
+								<a href="#" class="botondes learn-more"> <span
+									class="circle" aria-hidden="true"> <span
+										class="icon arrow"></span>
+								</span> <span class="button-text">Ir a ver</span>
+								</a>
+							</div>
+						</div>
+					</div>
+
+					<div
+						class="d-flex  col-lg-4 col-sm-6 col-12 mt-lg-5 mb-lg-5 mb-3 m-auto ps-sm-2 pe-sm-3 p-0 justify-content-center">
+						<div
+							class="card flex-sm-grow-0 flex-fill text-center border-0 box-imagen-card">
+							<img src="imagenes/fondoBarra.jpg" class="card-img-top rounded-3"
+								alt="descuento">
+							<div
+								class="card-body col-sm-12 col-11 align-self-center p-0 pt-sm-3">
+								<h5
+									class="card-title text-center color-principal fs-3 rounded-1">Precios
+									Locos</h5>
+								<a href="#" class="botondes learn-more"> <span
+									class="circle" aria-hidden="true"> <span
+										class="icon arrow"></span>
+								</span> <span class="button-text">Ir a ver</span>
+								</a>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
 
+			<div class="wave" style="bottom: 0;">
+					<svg viewBox="0 0 500 150" preserveAspectRatio="none"
+						style="height: 100%; width: 100%;">
+						<path
+							d="M-16.36,59.78 C169.87,193.00 408.58,-76.37 502.82,54.85 L500.00,149.99 L0.00,149.99 Z"
+							style="stroke: none; fill: #3b125b;"></path></svg>
+				</div>
+			</div>
+			<!-- MODAL SUCCESS -->
+			<div class="modal fade" id="success" tabindex="-1"
+				aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content bg-success">
+						<div
+							class="modal-body mx-auto my-4 text-center text-white fw-bold fs-5">${success}</div>
+						<div class="modal-footer d-flex border-0">
+							<a type="button" class="btn btn-outline-light mx-auto"
+								href="/Webapp_Proyecto_Final/inicio" data-bs-dismiss="modal">Aceptar</a>
+						</div>
+					</div>
+				</div>
+			</div>
 	</main>
-	<footer class="m-1">
+	<footer>
 		<!-- ELEMENTO FOOTER -->
 		<jsp:include page="parciales/footer.jsp"></jsp:include>
 	</footer>
