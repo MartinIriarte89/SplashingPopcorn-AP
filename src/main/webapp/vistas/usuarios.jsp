@@ -30,7 +30,7 @@
 		style="background-image: url('/Webapp_Proyecto_Final/imagenes/spikes.png');">
 
 		<!-- MODAL ERROR -->
-		<jsp:include page="../parciales/modalesCompra.jsp"></jsp:include>
+		<jsp:include page="../parciales/modalMsjError.jsp"></jsp:include>
 
 		<!-- MODAL SUCCESS -->
 		<div class="modal fade" id="success" tabindex="-1"
@@ -71,7 +71,7 @@
 										<td class="font-lato" style="color: dodgerblue;">Administrador</td>
 									</c:when>
 									<c:otherwise>
-										<td><a class="mx-1" href=""><i class="far fa-eye"></i></a>
+										<td><a class="mx-1" href="/Webapp_Proyecto_Final/perfilUsuario.do?id=${user.id}"><i class="far fa-eye"></i></a>
 											<a class="mx-1"
 											href="/Webapp_Proyecto_Final/listarItinerario.do?id=${user.id}"><i
 												class="fas fa-shopping-cart"></i></a><a class="mx-1" href=""
@@ -118,7 +118,7 @@
 					<!-- CUERPO DEL MODAL -->
 					<div class="modal-body p-5 pt-0">
 						<!-- FORLMULARIO DEL MODAL -->
-						<form action="crearUsuario.ad" method="post">
+						<form action="crearUsuario.ad" method="post" enctype="multipart/form-data">
 							<div class="form-floating mb-3">
 								<input type="text" class="form-control rounded-4" id="nombre"
 									placeholder="Nombre" required="required" name="nombre"
@@ -166,7 +166,7 @@
 							</div>
 
 							<div class="form-floating my-3">
-								<select class="form-select" aria-label="Default select example"
+								<select class="form-select p-3" aria-label="Default select example"
 									name="genero" id="genero">
 									<option selected>Elegir una preferencia</option>
 									<c:forEach items="${generos}" var="genero">
@@ -232,7 +232,7 @@
 					<!-- CUERPO DEL MODAL -->
 					<div class="modal-body p-5 pt-0">
 						<!-- FORLMULARIO DEL MODAL -->
-						<form action="editarUsuario.do" method="post">
+						<form action="editarUsuario.do" method="post" enctype="multipart/form-data">
 							<div class="form-floating mb-3">
 								<input type="text" class="form-control rounded-4 d-none"
 									id="idEdit" placeholder="id" required="required" name="id"
@@ -274,7 +274,7 @@
 							</div>
 
 							<div class="form-floating my-3">
-								<select class="form-select" aria-label="Default select example"
+								<select class="form-select p-3" aria-label="Default select example"
 									name="genero" id="generoEdit">
 									<option selected>Elegir una preferencia</option>
 									<c:forEach items="${generos}" var="genero">
@@ -314,7 +314,7 @@
 
 							<div class="mb-3 mt-3">
 								<label for="fotoPerfilEdit" class="form-label">Foto de
-									perfil</label> <input class="form-control" type="file" id="fotoPerfil">
+									perfil</label> <input class="form-control" type="file" id="fotoPerfil" name="urlPerfil">
 							</div>
 
 							<button type="submit"
@@ -357,6 +357,11 @@
 	<c:if test="${success != null }">
 		<script type="text/javascript">
 			abrirModalSuccess();
+		</script>
+	</c:if>
+	<c:if test="${flash != null }">
+		<script type="text/javascript">
+		abrirModalFlash();
 		</script>
 	</c:if>
 </body>

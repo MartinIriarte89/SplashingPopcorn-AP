@@ -50,8 +50,6 @@
 .font-merriweather-light {
 	font-family: Merriweather;
 	font-size: 14px;
-	height: 250px;
-	overflow: hidden;
 }
 </style>
 
@@ -70,27 +68,42 @@
 		<c:if test="${usuario == null }">
 			<jsp:include page="parciales/inicioSesionModal.jsp"></jsp:include>
 		</c:if>
-		<div class="container-fluid">
+		<div class="container-fluid p-1">
 
 			<!-- CARRUSEL -->
 			<div id="carouselExampleCaptions" class="carousel slide"
-				data-bs-ride="carousel">
+				data-bs-ride="carousel" data-bs-interval="4000">
+				<div class="carousel-indicators">
+					<button type="button" data-bs-target="#carouselExampleCaptions"
+						data-bs-slide-to="0" class="active" aria-current="true"
+						aria-label="Slide 1"></button>
+					<c:forEach begin="${1}" end="${promociones.size()}"
+						varStatus="status">
+						<button type="button" data-bs-target="#carouselExampleCaptions"
+							data-bs-slide-to="${status.index}"
+							aria-label='Slide ${status.index + 1}'></button>
+					</c:forEach>
+				</div>
 				<div class="carousel-inner">
-
 					<div class="carousel-item active">
-						<img src="imagenes/cine.jpg" class="d-block w-100"
-							alt="${promocion.titulo}">
-						<div class="carousel-caption d-none d-md-block">
-							<h1>${promocion.titulo}</h1>
+						<img src="imagenes/cine.jpg" class="d-block w-100" alt="Portada">
+						<div class="carousel-caption d-block">
+							<h5 class="font-lato tituloPromocion mb-md-4 mb-3">Splashing Popcorn</h5>
+							<p class="font-merriweather-light parrafoPromocion mb-md-4 mb-3 d-sm-block d-none">Tu página de confianza para comprar tus películas favoritas</p>
 						</div>
 					</div>
 					<c:forEach items="${promociones}" var="promocion">
 						<!-- ITEMS DE CARRUSEL -->
 						<div class="carousel-item">
-							<img src="${promocion.urlPortada}" class="d-block w-100"
-								alt="${promocion.titulo}">
-							<div class="carousel-caption d-none d-md-block">
-								<h1>${promocion.titulo}</h1>
+							<a
+								href="/Webapp_Proyecto_Final/listarDetallePromocion?id=${promocion.id}"
+								style="height: 100%; width: 100%"><img
+								src="${promocion.urlPortada}" class="d-block w-100"
+								alt="${promocion.titulo}"></a>
+							<div class="carousel-caption d-block">
+								<h5 class="font-lato tituloPromocion mb-md-4 mb-3">${promocion.titulo}</h5>
+								<p class="font-merriweather-light parrafoPromocion d-sm-block d-none mb-md-4 mb-3">Promoción:
+									"${promocion.tipoPromocion}"</p>
 							</div>
 						</div>
 					</c:forEach>
@@ -191,27 +204,27 @@
 			</div>
 
 			<div class="wave" style="bottom: 0;">
-					<svg viewBox="0 0 500 150" preserveAspectRatio="none"
-						style="height: 100%; width: 100%;">
+				<svg viewBox="0 0 500 150" preserveAspectRatio="none"
+					style="height: 100%; width: 100%;">
 						<path
-							d="M-16.36,59.78 C169.87,193.00 408.58,-76.37 502.82,54.85 L500.00,149.99 L0.00,149.99 Z"
-							style="stroke: none; fill: #3b125b;"></path></svg>
-				</div>
+						d="M-16.36,59.78 C169.87,193.00 408.58,-76.37 502.82,54.85 L500.00,149.99 L0.00,149.99 Z"
+						style="stroke: none; fill: #3b125b;"></path></svg>
 			</div>
-			<!-- MODAL SUCCESS -->
-			<div class="modal fade" id="success" tabindex="-1"
-				aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div class="modal-dialog modal-dialog-centered">
-					<div class="modal-content bg-success">
-						<div
-							class="modal-body mx-auto my-4 text-center text-white fw-bold fs-5">${success}</div>
-						<div class="modal-footer d-flex border-0">
-							<a type="button" class="btn btn-outline-light mx-auto"
-								href="/Webapp_Proyecto_Final/inicio" data-bs-dismiss="modal">Aceptar</a>
-						</div>
+		</div>
+		<!-- MODAL SUCCESS -->
+		<div class="modal fade" id="success" tabindex="-1"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content bg-success">
+					<div
+						class="modal-body mx-auto my-4 text-center text-white fw-bold fs-5">${success}</div>
+					<div class="modal-footer d-flex border-0">
+						<a type="button" class="btn btn-outline-light mx-auto"
+							href="/Webapp_Proyecto_Final/inicio" data-bs-dismiss="modal">Aceptar</a>
 					</div>
 				</div>
 			</div>
+		</div>
 	</main>
 	<footer>
 		<!-- ELEMENTO FOOTER -->

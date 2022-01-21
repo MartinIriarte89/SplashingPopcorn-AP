@@ -6,6 +6,7 @@ import java.util.HashMap;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.Servlet;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -13,16 +14,21 @@ import jakarta.servlet.http.HttpServletResponse;
 import modelo.Genero;
 import modelo.Usuario;
 import servicios.ServicioGenero;
+import servicios.ServicioGuardarImagen;
 import servicios.ServicioUsuario;
 import utilidades.Validacion;
 
 @WebServlet("/editarUsuario.do")
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 1, maxFileSize = 1024 * 1024 * 20, // 20 MB
+		maxRequestSize = 1024 * 1024 * 100 // 100 MB
+)
 public class EditarUsuarioServlet extends HttpServlet implements Servlet {
 
 	private static final long serialVersionUID = 750290554834772235L;
 	private ServicioUsuario servUsuario;
 	private Validacion validarDatos;
 	private ServicioGenero servGenero;
+	private ServicioGuardarImagen servGuardarImagen;
 
 	@Override
 	public void init() throws ServletException {
@@ -30,6 +36,7 @@ public class EditarUsuarioServlet extends HttpServlet implements Servlet {
 		servUsuario = new ServicioUsuario();
 		validarDatos = new Validacion();
 		servGenero = new ServicioGenero();
+		servGuardarImagen = new ServicioGuardarImagen();
 	}
 
 	@Override
@@ -43,13 +50,20 @@ public class EditarUsuarioServlet extends HttpServlet implements Servlet {
 			int id = validarDatos.esNumeroEnteroValido(req.getParameter("id"));
 			String nombre = req.getParameter("nombre");
 			String usuario = req.getParameter("usuario");
-			String urlPerfil = req.getParameter("urlPerfil");
 			String preferenciaNombre = req.getParameter("genero");
 			double dineroDisponible = validarDatos.esNumeroDoubleValido(req.getParameter("dinero"));
 			int tiempoDisponible = validarDatos.esNumeroEnteroValido(req.getParameter("tiempo"));
 			boolean esAdmin = req.getParameter("admin").equals("admin") ? true : false;
-
+			String urlPerfil = req.getPart("urlPerfil").getSubmittedFileName();
+			
 			Genero preferencia = servGenero.buscarPor(preferenciaNombre);
+			
+			
+			if (!urlPerfil.equals("")) {
+				String nombreArchivo = id + req.getPart("urlPerfil").getSubmittedFileName();
+				servGuardarImagen.guardarFotoPerfilUsuario(nombreArchivo, req.getParts());
+				urlPerfil = "imagenes/perfiles/" +  id + urlPerfil;
+			}
 
 			usuarioTemp = servUsuario.editar(id, nombre, usuario, dineroDisponible, tiempoDisponible, preferencia,
 					urlPerfil, esAdmin);
@@ -59,7 +73,6 @@ public class EditarUsuarioServlet extends HttpServlet implements Servlet {
 			String nombre = req.getParameter("nombre");
 			String usuario = req.getParameter("usuario");
 			String preferenciaNombre = req.getParameter("genero");
-			String urlPerfil = req.getParameter("url perfil");
 			String contrasenaActual = validarDatos.esContrasenaValida(req.getParameter("contrasenaActual"));
 			String contrasenaNueva = validarDatos.esContrasenaValida(req.getParameter("contrasenaNueva"));
 			String contrasenaRepetida = validarDatos.esContrasenaValida(req.getParameter("contrasenaRepetida"));
@@ -87,15 +100,28 @@ public class EditarUsuarioServlet extends HttpServlet implements Servlet {
 			} else if (nombre != null || usuario != null || preferenciaNombre != null) {
 				usuarioTemp = servUsuario.editarDatosPersonales(id, nombre, usuario, preferencia);
 			} else {
-				usuarioTemp = servUsuario.editarFotoPerfil(id, urlPerfil);
+
+				if (!req.getPart("urlPerfil").getSubmittedFileName().equals("")) {
+					String nombreArchivo = user.getId() + req.getPart("urlPerfil").getSubmittedFileName();
+					servGuardarImagen.guardarFotoPerfilUsuario(nombreArchivo, req.getParts());
+					usuarioTemp = servUsuario.editarFotoPerfil(id, nombreArchivo);
+				} else {
+					req.setAttribute("flash", "Error al actualizar el usuario");
+
+					RequestDispatcher dispatcher = req.getServletContext().getRequestDispatcher(ruta);
+					dispatcher.forward(req, resp);
+					return;
+				}
 			}
 		}
 
 		if (!usuarioTemp.esNulo()) {
 			if (usuarioTemp.esValido()) {
 				req.setAttribute("success", "¡Usuario editado correctamente!");
-				if (!user.esAdmin())
+				if (!user.esAdmin()) {
 					req.getSession().setAttribute("usuario", usuarioTemp);
+				}
+					
 
 				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(ruta);
 				dispatcher.forward(req, resp);

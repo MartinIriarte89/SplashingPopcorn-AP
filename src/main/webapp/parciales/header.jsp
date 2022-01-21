@@ -55,7 +55,6 @@
 			<c:choose>
 				<c:when test="${usuario.esAdmin()}">
 					<ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
-						<li><a class="dropdown-item" href="#">Compras de usuario</a></li>
 						<li><a class="dropdown-item"
 							href="/Webapp_Proyecto_Final/listarUsuarios.ad">Usuarios</a></li>
 						<li><hr class="dropdown-divider"></li>

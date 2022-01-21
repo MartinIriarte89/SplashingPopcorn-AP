@@ -5,6 +5,7 @@ import java.io.IOException;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.Servlet;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -12,23 +13,29 @@ import jakarta.servlet.http.HttpServletResponse;
 import modelo.Genero;
 import modelo.Usuario;
 import servicios.ServicioGenero;
+import servicios.ServicioGuardarImagen;
 import servicios.ServicioUsuario;
 import utilidades.Validacion;
 
 @WebServlet("/crearUsuario.ad")
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 1, maxFileSize = 1024 * 1024 * 20, // 20 MB
+		maxRequestSize = 1024 * 1024 * 100 // 100 MB
+)
 public class CrearUsuarioServlet extends HttpServlet implements Servlet {
 
 	private static final long serialVersionUID = -6626649526922232487L;
 	private ServicioUsuario servUsuario;
 	private ServicioGenero servGenero;
 	private Validacion validarDatos;
+	private ServicioGuardarImagen servGuardarImagen;
 
 	@Override
 	public void init() throws ServletException {
 		super.init();
 		this.servUsuario = new ServicioUsuario();
 		this.servGenero = new ServicioGenero();
-		validarDatos = new Validacion();
+		this.validarDatos = new Validacion();
+		this.servGuardarImagen = new ServicioGuardarImagen();
 	}
 
 	@Override
@@ -40,7 +47,7 @@ public class CrearUsuarioServlet extends HttpServlet implements Servlet {
 		String admin = req.getParameter("admin");
 		double dineroDisponible = validarDatos.esNumeroDoubleValido(req.getParameter("dinero"));
 		int tiempoDisponible = validarDatos.esNumeroEnteroValido(req.getParameter("tiempo"));
-		String urlPerfil = req.getParameter("fotoPerfil");
+		String urlPerfil = req.getPart("urlPerfil").getSubmittedFileName();
 		String preferenciaNombre = req.getParameter("genero");
 		boolean esAdmin = false;
 
@@ -49,6 +56,13 @@ public class CrearUsuarioServlet extends HttpServlet implements Servlet {
 			dineroDisponible = 0;
 			tiempoDisponible = 0;
 		}
+
+		if (!urlPerfil.equals("")) {
+			String nombreArchivo = req.getPart("urlPerfil").getSubmittedFileName();
+			servGuardarImagen.guardarFotoPerfilUsuario(nombreArchivo, req.getParts());
+			urlPerfil = "imagenes/perfiles/" + urlPerfil;
+		}
+
 		if (urlPerfil == null || urlPerfil.equals("")) {
 			urlPerfil = "imagenes/fotoPerfilDefecto.jpg";
 		}

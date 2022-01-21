@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import modelo.Genero;
 import modelo.Usuario;
+import modelo.objetoNulo.UsuarioNulo;
 import persistencia.FabricaDAO;
 import persistencia.UsuarioDAO;
 import persistencia.commons.ProveedorDeConexion;
@@ -61,9 +62,11 @@ public class ServicioUsuario {
 
 	public Usuario editarFotoPerfil(int id, String urlPerfil) {
 		Usuario usuarioBBDD = usuarioDao.buscarPorId(id);
-
+		String ruta = "imagenes/perfiles/";
+		String rutaCompleta = ruta + urlPerfil;
+		
 		if (!usuarioBBDD.esNulo()) {
-			usuarioBBDD.setUrlPerfil(urlPerfil);
+			usuarioBBDD.setUrlPerfil(rutaCompleta);
 
 			if (usuarioBBDD.esValido()) {
 				usuarioDao.actualizar(usuarioBBDD);
@@ -91,6 +94,10 @@ public class ServicioUsuario {
 	public Usuario editar(int id, String nombre, String usuario, double dineroDisponible, int tiempoDisponible,
 			Genero preferencia, String urlPerfil, boolean esAdmin) {
 		Usuario usuarioBBDD = usuarioDao.buscarPorId(id);
+		
+		if(usuarioBBDD.esAdmin()) {
+			usuarioBBDD = UsuarioNulo.construir();
+		}
 
 		if (!usuarioBBDD.esNulo()) {
 			usuarioBBDD.setNombre(nombre);
@@ -109,7 +116,7 @@ public class ServicioUsuario {
 		return usuarioBBDD;
 	}
 
-	public Usuario buscar(int id) {
+	public Usuario buscarPor(int id) {
 		Usuario usuario = usuarioDao.buscarPorId(id);
 		ProveedorDeConexion.cerrarConexion();
 		return usuario;

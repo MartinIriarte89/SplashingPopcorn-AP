@@ -116,7 +116,7 @@ public class Usuario {
 	}
 
 	public void setUrlPerfil(String urlPerfil) {
-		this.urlPerfil = urlPerfil == null ? this.urlPerfil : urlPerfil;
+		this.urlPerfil = urlPerfil == null || urlPerfil.equals("") ? this.urlPerfil : urlPerfil;
 	}
 
 	public void setItinerario(Itinerario itinerario) {

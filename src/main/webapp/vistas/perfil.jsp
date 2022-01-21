@@ -23,6 +23,21 @@
 		<jsp:include page="../parciales/header.jsp"></jsp:include>
 	</header>
 	<main>
+	
+			<!-- MODAL SUCCESS -->
+			<div class="modal fade" id="success" tabindex="-1"
+				aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content bg-success">
+						<div class="modal-body mx-auto my-4 text-white fw-bold fs-5">${success}</div>
+						<div class="modal-footer d-flex border-0">
+							<button type="button" class="btn btn-outline-light mx-auto"
+								data-bs-dismiss="modal">Aceptar</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		
 		<!-- CONTENEDOR PRINCIPAL-->
 		<div
 			class="container-fluid m-0 p-0 d-flex flex-column justify-content-center"
@@ -38,7 +53,7 @@
 						class="row flex-column m-0 p-0 contenedor w-100 justify-content-between">
 						<div id="fotoPerfil"
 							class="col-7 col-lg-10 mx-auto rounded-circle p-0"
-							style="background-image: url('/Webapp_Proyecto_Final/${usuario.urlPerfil}');"></div>
+							style="background-image: url('/Webapp_Proyecto_Final/${usuarioPerfil !=null ?  usuarioPerfil.urlPerfil : usuario.urlPerfil}');"></div>
 						<button id="boton" type="button"
 							class="btn btn-warning mx-auto my-4 px-1 col-4 col-sm-2 col-md-4 col-lg-3 col-xl-2 font-lato"
 							data-bs-toggle="modal" data-bs-target="#modalEditarFoto">Cambiar
@@ -49,16 +64,16 @@
 				<div class="col col-md-12 col-xl-10 order-md-2 mt-1">
 					<div class="row m-0 p-0 font-merriweather">
 						<div id="" class="col-12 text-center contenedor titulo">
-							<c:out value="${usuario.nombre}"></c:out>
+							<c:out value='${usuarioPerfil !=null ? usuarioPerfil.nombre : usuario.nombre}'></c:out>
 						</div>
 						<div class="row m-0 mt-1 p-0 contenedor justify-content-md-center">
 							<div class="col-6 col-md-5 text-center texto mt-1">Usuario:</div>
 							<div class="col-6 col-md-5 text-center texto mt-1">Preferencia:</div>
 							<div class="col-6 col-md-5 text-center texto">
-								<c:out value="${usuario.usuario}"></c:out>
+								<c:out value='${usuarioPerfil !=null ?  usuarioPerfil.usuario : usuario.usuario }'></c:out>
 							</div>
 							<div class="col-6 col-md-5 text-center texto">
-								<c:out value="${usuario.preferencia.nombre}"></c:out>
+								<c:out value='${usuarioPerfil !=null ?  usuarioPerfil.preferencia.nombre : usuario.preferencia.nombre }'></c:out>
 							</div>
 						</div>
 						<div class="row m-0 mt-1 p-0 contenedor justify-content-md-center">
@@ -67,10 +82,10 @@
 							<div class="col-6 col-md-5 text-center texto mt-1">Tu
 								tiempo</div>
 							<div class="col-6 col-md-5 text-center texto texto-numero">
-								<c:out value="$${usuario.dineroDisponible}"></c:out>
+								<c:out value='$${usuarioPerfil !=null ?  usuarioPerfil.dineroDisponible : usuario.dineroDisponible }'></c:out>
 							</div>
 							<div class="col-6 col-md-5 text-center texto texto-numero">
-								<c:out value="${usuario.tiempoDisponible}"></c:out>
+								<c:out value='${usuarioPerfil !=null ?  usuarioPerfil.tiempoDisponible : usuario.tiempoDisponible }'></c:out>
 								<span style="font-variant: small-caps;"> min.</span>
 							</div>
 						</div>
@@ -82,9 +97,9 @@
 								<button id="boton" type="button" class="btn btn-warning"
 									data-bs-toggle="modal"
 									data-bs-target="#modalEditarDatosPersonales"
-									data-bs-nombre="${usuario.nombre}"
-									data-bs-usuario="${usuario.usuario}"
-									data-bs-preferencia="${usuario.preferencia.nombre}">Editar</button>
+									data-bs-nombre='${usuarioPerfil !=null ?  usuarioPerfil.nombre : usuario.nombre }'
+									data-bs-usuario='${usuarioPerfil !=null ?  usuarioPerfil.usuario : usuario.usuario }'
+									data-bs-preferencia='${usuarioPerfil !=null ?  usuarioPerfil.preferencia.nombre : usuario.preferencia.nombre }'>Editar</button>
 							</div>
 						</div>
 					</div>
@@ -196,7 +211,7 @@
 								</div>
 
 								<div class="form-floating my-3">
-									<select class="form-select" aria-label="Default select example"
+									<select class="form-select p-3" aria-label="Default select example"
 										name="genero" id="genero">
 										<option selected>Elegir una preferencia</option>
 										<c:forEach items="${generos}" var="genero">
@@ -213,19 +228,6 @@
 								<button type="submit"
 									class="w-100 mb-2 btn btn-lg rounded-4 btn-warning">Editar</button>
 							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- MODAL SUCCESS -->
-			<div class="modal fade" id="success" tabindex="-1"
-				aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div class="modal-dialog modal-dialog-centered">
-					<div class="modal-content bg-success">
-						<div class="modal-body mx-auto my-4 text-white fw-bold fs-5">${success}</div>
-						<div class="modal-footer d-flex border-0">
-							<button type="button" class="btn btn-outline-light mx-auto"
-								data-bs-dismiss="modal">Aceptar</button>
 						</div>
 					</div>
 				</div>
@@ -248,7 +250,7 @@
 						<!-- CUERPO DEL MODAL -->
 						<div class="modal-body p-5 pt-0">
 							<!-- FORLMULARIO DEL MODAL -->
-							<form action="editarUsuario.do" method="post">
+							<form action="editarUsuario.do" method="post" enctype="multipart/form-data">
 								<div class="mb-3">
 									<label for="formFile" class="form-label">Seleccione un
 										formato de imagen válido</label> <input class="form-control"
