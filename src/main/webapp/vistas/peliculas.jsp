@@ -250,7 +250,7 @@
 					<!-- CUERPO DEL MODAL -->
 					<div class="modal-body p-5 pt-0">
 						<!-- FORLMULARIO DEL MODAL -->
-						<form action="crearPelicula.ad" method="post">
+						<form action="crearPelicula.ad" method="post" enctype="multipart/form-data">
 							<div class="row mb-3">
 								<div class="col-6 form-floating mb-3">
 									<input type="text" class="form-control rounded-4" id="titulo"
@@ -338,12 +338,12 @@
 							<div class="row mb-3">
 								<div class=" col-md-6 col-12">
 									<label for="fotoDeFondo" class="form-label">Foto de
-										fondo</label> <input class="form-control" type="file" id="fotoDeFondo">
+										fondo</label> <input class="form-control" type="file" id="fotoDeFondo" name="urlFondo">
 								</div>
 								<div class=" col-md-6 col-12">
 									<label for="fotoDePortada" class="form-label">Foto de
 										portada</label> <input class="form-control" type="file"
-										id="fotoDePortada">
+										id="fotoDePortada" name="urlPortada">
 								</div>
 							</div>
 							<div class="form-floating my-3 col-md-10 col-12 mx-auto">
@@ -389,7 +389,7 @@
 					<!-- CUERPO DEL MODAL -->
 					<div class="modal-body p-5 pt-0">
 						<!-- FORLMULARIO DEL MODAL -->
-						<form action="editarPelicula.ad" method="post">
+						<form action="editarPelicula.ad" method="post" enctype="multipart/form-data">
 							<div class="col-6 form-floating mb-3">
 								<input type="number" class="form-control rounded-4 d-none"
 									id="idEdit" placeholder="Id" required="required" name="id"
@@ -485,17 +485,17 @@
 								<div class=" col-md-6 col-12">
 									<label for="fotoDeFondoEdit" class="form-label">Foto de
 										fondo</label> <input class="form-control" type="file"
-										id="fotoDeFondoEdit">
+										id="fotoDeFondoEdit" name="urlFondo">
 								</div>
 								<div class=" col-md-6 col-12">
 									<label for="fotoDePortadaEdit" class="form-label">Foto
 										de portada</label> <input class="form-control" type="file"
-										id="fotoDePortadaEdit">
+										id="fotoDePortadaEdit" name="urlPortada">
 								</div>
 							</div>
 							<div class="form-floating my-3 col-md-10 col-12 mx-auto">
 								<textarea class="form-control"
-									placeholder="Leave a comment here" name="descripcion"
+									placeholder="Dejá un comentario aquí" name="descripcion"
 									id="descripcionEdit" style="height: 100px">${peliEditar.descripcion}</textarea>
 								<label
 									class='${peliEditar.errores.get("descripcion") != null ? "is-invalid" : ""}'

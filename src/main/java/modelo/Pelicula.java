@@ -134,11 +134,11 @@ public class Pelicula implements Sugerencia, Comparable<Pelicula> {
 	}
 
 	public void setUrlFondo(String urlFondo) {
-		this.urlFondo = urlFondo == null ? this.urlFondo : urlFondo;
+		this.urlFondo = urlFondo == null || urlFondo.equals("") ? this.urlFondo : urlFondo;
 	}
 
 	public void setUrlPortada(String urlPortada) {
-		this.urlPortada = urlPortada == null ? this.urlPortada : urlPortada;
+		this.urlPortada = urlPortada == null || urlPortada.equals("") ? this.urlPortada : urlPortada;
 	}
 
 	public void setDescripcion(String descripcion) {

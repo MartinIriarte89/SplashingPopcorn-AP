@@ -61,7 +61,7 @@ public class EditarUsuarioServlet extends HttpServlet implements Servlet {
 			
 			if (!urlPerfil.equals("")) {
 				String nombreArchivo = id + req.getPart("urlPerfil").getSubmittedFileName();
-				servGuardarImagen.guardarFotoPerfilUsuario(nombreArchivo, req.getParts());
+				servGuardarImagen.guardarFotoPerfilUsuario(nombreArchivo, req.getPart("urlPerfil"));
 				urlPerfil = "imagenes/perfiles/" +  id + urlPerfil;
 			}
 
@@ -103,7 +103,7 @@ public class EditarUsuarioServlet extends HttpServlet implements Servlet {
 
 				if (!req.getPart("urlPerfil").getSubmittedFileName().equals("")) {
 					String nombreArchivo = user.getId() + req.getPart("urlPerfil").getSubmittedFileName();
-					servGuardarImagen.guardarFotoPerfilUsuario(nombreArchivo, req.getParts());
+					servGuardarImagen.guardarFotoPerfilUsuario(nombreArchivo, req.getPart("urlPerfil"));
 					usuarioTemp = servUsuario.editarFotoPerfil(id, nombreArchivo);
 				} else {
 					req.setAttribute("flash", "Error al actualizar el usuario");

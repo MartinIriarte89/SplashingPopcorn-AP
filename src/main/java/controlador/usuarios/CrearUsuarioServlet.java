@@ -59,7 +59,7 @@ public class CrearUsuarioServlet extends HttpServlet implements Servlet {
 
 		if (!urlPerfil.equals("")) {
 			String nombreArchivo = req.getPart("urlPerfil").getSubmittedFileName();
-			servGuardarImagen.guardarFotoPerfilUsuario(nombreArchivo, req.getParts());
+			servGuardarImagen.guardarFotoPerfilUsuario(nombreArchivo, req.getPart("urlPerfil"));
 			urlPerfil = "imagenes/perfiles/" + urlPerfil;
 		}
 
