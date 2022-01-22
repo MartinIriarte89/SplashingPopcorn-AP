@@ -6,27 +6,34 @@ import java.util.ArrayList;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.Servlet;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import modelo.Pelicula;
 import modelo.Promocion;
+import servicios.ServicioGuardarImagen;
 import servicios.ServicioPelicula;
 import servicios.ServicioPromocion;
 import utilidades.Validacion;
 
 @WebServlet("/crearPromocion.ad")
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 1, maxFileSize = 1024 * 1024 * 20, // 20 MB
+maxRequestSize = 1024 * 1024 * 100 // 100 MB
+)
 public class CrearPromocionServlet extends HttpServlet implements Servlet {
 	private static final long serialVersionUID = -6648217727244375105L;
 	private ServicioPromocion servPromocion;
 	private ServicioPelicula servPelicula;
+	private ServicioGuardarImagen servGuardarImagen;
 	private Validacion validarDatos;
 
 	public void init() throws ServletException {
 		super.init();
 		this.servPromocion = new ServicioPromocion();
 		this.servPelicula = new ServicioPelicula();
+		this.servGuardarImagen = new ServicioGuardarImagen();
 		this.validarDatos = new Validacion();
 	}
 
@@ -42,14 +49,19 @@ public class CrearPromocionServlet extends HttpServlet implements Servlet {
 		ArrayList<Pelicula> peliculas = new ArrayList<Pelicula>();
 
 		String titulo = request.getParameter("titulo");
-		String[] idPeliculas = validarDatos.split(request.getParameter("idPeliculas"), ",");
+		String [] idPeliculas = validarDatos.split(request.getParameter("idPeliculas"), ",");
 		String descripcion = request.getParameter("descripcion");
-		String urlPortada = request.getParameter("urlPortada");
+		String urlPortada = request.getPart("urlPortada").getSubmittedFileName();
 		String tipoPromocion = request.getParameter("tipoPromocion");
 		double beneficio = validarDatos.esNumeroDoubleValido(request.getParameter("beneficio"));
 
 		for (String id : idPeliculas) {
 			peliculas.add(servPelicula.buscarPor(validarDatos.esNumeroEnteroValido(id)));
+		}
+		
+		if (!urlPortada.equals("")) {
+			servGuardarImagen.guardarFotoPortadaPromocion(urlPortada, request.getPart("urlPortada"));
+			urlPortada = "imagenes/portadas/promociones/" + urlPortada;
 		}
 
 		Promocion promocion = servPromocion.crear(titulo, peliculas, descripcion, urlPortada, tipoPromocion, beneficio);

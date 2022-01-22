@@ -11,23 +11,29 @@
 <jsp:include page="../parciales/librerias.jsp"></jsp:include>
 <link rel="stylesheet"
 	href="/Webapp_Proyecto_Final/css/estilosCompartidos.css">
-
-<title>Usuarios Registrados</title>
-<link rel="shortcut icon" href="img/logo.png" sizes="75px;">
+<link rel="stylesheet"
+	href="/Webapp_Proyecto_Final/css/estiloUsuarios.css">
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.11.4/datatables.min.css" />
 
 <script type="text/javascript"
 	src="/Webapp_Proyecto_Final/js/modales.js"></script>
 <script type="text/javascript"
+	src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.11.4/datatables.min.js"></script>
+<script type="text/javascript"
 	src="/Webapp_Proyecto_Final/js/completarModales.js" defer></script>
+<script type="text/javascript"
+	src="/Webapp_Proyecto_Final/js/dataTable.js" defer></script>
 
+<link rel="shortcut icon" href="img/logo.png" sizes="75px;">
+<title>Usuarios Registrados</title>
 </head>
 <body>
 	<header>
 		<jsp:include page="../parciales/header.jsp"></jsp:include>
 	</header>
 
-	<main
-		style="background-image: url('/Webapp_Proyecto_Final/imagenes/spikes.png');">
+	<main>
 
 		<!-- MODAL ERROR -->
 		<jsp:include page="../parciales/modalMsjError.jsp"></jsp:include>
@@ -51,7 +57,8 @@
 				Usuarios</div>
 			<div class="row align-items-start justify-content-center mt-4">
 
-				<table class="ms-2 table table-dark table-striped table-hover">
+				<table
+					class="ms-2 table table-dark table-striped table-hover dataTable">
 					<thead>
 						<tr>
 							<th scope="col">Id</th>
@@ -71,8 +78,9 @@
 										<td class="font-lato" style="color: dodgerblue;">Administrador</td>
 									</c:when>
 									<c:otherwise>
-										<td><a class="mx-1" href="/Webapp_Proyecto_Final/perfilUsuario.do?id=${user.id}"><i class="far fa-eye"></i></a>
-											<a class="mx-1"
+										<td><a class="mx-1"
+											href="/Webapp_Proyecto_Final/perfilUsuario.do?id=${user.id}"><i
+												class="far fa-eye"></i></a> <a class="mx-1"
 											href="/Webapp_Proyecto_Final/listarItinerario.do?id=${user.id}"><i
 												class="fas fa-shopping-cart"></i></a><a class="mx-1" href=""
 											data-bs-toggle="modal" data-bs-target="#modalEditarUsuario"
@@ -118,7 +126,8 @@
 					<!-- CUERPO DEL MODAL -->
 					<div class="modal-body p-5 pt-0">
 						<!-- FORLMULARIO DEL MODAL -->
-						<form action="crearUsuario.ad" method="post" enctype="multipart/form-data">
+						<form action="crearUsuario.ad" method="post"
+							enctype="multipart/form-data">
 							<div class="form-floating mb-3">
 								<input type="text" class="form-control rounded-4" id="nombre"
 									placeholder="Nombre" required="required" name="nombre"
@@ -166,8 +175,8 @@
 							</div>
 
 							<div class="form-floating my-3">
-								<select class="form-select p-3" aria-label="Default select example"
-									name="genero" id="genero">
+								<select class="form-select p-3"
+									aria-label="Default select example" name="genero" id="genero">
 									<option selected>Elegir una preferencia</option>
 									<c:forEach items="${generos}" var="genero">
 										<option value="${genero.nombre}">${genero.nombre}</option>
@@ -204,7 +213,8 @@
 
 							<div class="mb-3 mt-3">
 								<label for="fotoPerfil" class="form-label">Foto de
-									perfil</label> <input class="form-control" type="file" id="fotoPerfil" name="urlPerfil">
+									perfil</label> <input class="form-control" type="file" id="fotoPerfil"
+									name="urlPerfil">
 							</div>
 
 							<button type="submit"
@@ -232,7 +242,8 @@
 					<!-- CUERPO DEL MODAL -->
 					<div class="modal-body p-5 pt-0">
 						<!-- FORLMULARIO DEL MODAL -->
-						<form action="editarUsuario.do" method="post" enctype="multipart/form-data">
+						<form action="editarUsuario.do" method="post"
+							enctype="multipart/form-data">
 							<div class="form-floating mb-3">
 								<input type="text" class="form-control rounded-4 d-none"
 									id="idEdit" placeholder="id" required="required" name="id"
@@ -274,8 +285,9 @@
 							</div>
 
 							<div class="form-floating my-3">
-								<select class="form-select p-3" aria-label="Default select example"
-									name="genero" id="generoEdit">
+								<select class="form-select p-3"
+									aria-label="Default select example" name="genero"
+									id="generoEdit">
 									<option selected>Elegir una preferencia</option>
 									<c:forEach items="${generos}" var="genero">
 										<option value="${genero.nombre}">${genero.nombre}</option>
@@ -314,7 +326,8 @@
 
 							<div class="mb-3 mt-3">
 								<label for="fotoPerfilEdit" class="form-label">Foto de
-									perfil</label> <input class="form-control" type="file" id="fotoPerfil" name="urlPerfil">
+									perfil</label> <input class="form-control" type="file" id="fotoPerfil"
+									name="urlPerfil">
 							</div>
 
 							<button type="submit"
@@ -361,7 +374,7 @@
 	</c:if>
 	<c:if test="${flash != null }">
 		<script type="text/javascript">
-		abrirModalFlash();
+			abrirModalFlash();
 		</script>
 	</c:if>
 </body>

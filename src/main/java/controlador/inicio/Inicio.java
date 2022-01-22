@@ -26,8 +26,8 @@ public class Inicio extends HttpServlet implements Servlet {
 	@Override
 	public void init() throws ServletException {
 		super.init();
-		servPromocion = new ServicioPromocion();
-		servFiltro = new ServicioFiltro();
+		this.servPromocion = new ServicioPromocion();
+		this.servFiltro = new ServicioFiltro();
 	}
 
 	@Override

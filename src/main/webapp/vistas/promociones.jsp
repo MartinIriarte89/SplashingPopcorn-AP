@@ -46,7 +46,7 @@
 		<jsp:include page="../parciales/inicioSesionModal.jsp"></jsp:include>
 		<!-- MODAL MSJ ERROR -->
 		<jsp:include page="../parciales/modalMsjError.jsp"></jsp:include>
-		<!-- MODAL ERROR -->
+		<!-- MODAL MSJ COMPRA -->
 		<jsp:include page="../parciales/modalesCompra.jsp"></jsp:include>
 
 		<div class="container-fluid p-0">
@@ -55,8 +55,6 @@
 				<div class="animate__animated animate__bounceInDown">Promociones</div>
 			</div>
 			<div class="triangulo"></div>
-
-
 
 			<!-- CONTENEDOR GENERO, CARDS Y PAGINADOR -->
 			<div class="container-fluid p-0 mt-5 mb-3 ">
@@ -251,7 +249,7 @@
 					<!-- CUERPO DEL MODAL -->
 					<div class="modal-body p-5 pt-0">
 						<!-- FORLMULARIO DEL MODAL -->
-						<form action="crearPromocion.ad" method="post">
+						<form action="crearPromocion.ad" method="post" enctype="multipart/form-data">
 							<div class="form-floating mb-3">
 								<input type="text" class="form-control rounded-4" id="titulo"
 									placeholder="Titulo" required="required" name="titulo"
@@ -343,7 +341,7 @@
 							<div class="">
 								<label for="fotoDePortada" class="form-label">Foto de
 									portada</label> <input class="form-control" type="file"
-									id="fotoDePortada">
+									id="fotoDePortada" name="urlPortada">
 							</div>
 
 							<div class="form-floating my-3 col-12 mx-auto">
@@ -388,7 +386,7 @@
 					<!-- CUERPO DEL MODAL -->
 					<div class="modal-body p-5 pt-0">
 						<!-- FORLMULARIO DEL MODAL -->
-						<form action="editarPromocion.ad" method="post">
+						<form action="editarPromocion.ad" method="post" enctype="multipart/form-data">
 							<div class="form-floating mb-3">
 								<input type="text" class="form-control rounded-4 d-none"
 									id="idEdit" placeholder="Titulo" required="required"
@@ -487,7 +485,7 @@
 							<div class="">
 								<label for="fotoDePortadaEdit" class="form-label">Foto
 									de portada</label> <input class="form-control" type="file"
-									id="fotoDePortadaEdit">
+									id="fotoDePortadaEdit" name="urlPortadaEdit">
 							</div>
 
 							<div class="form-floating my-3 col-12 mx-auto">

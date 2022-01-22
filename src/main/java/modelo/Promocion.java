@@ -129,7 +129,7 @@ public abstract class Promocion implements Sugerencia {
 	}
 
 	public void setUrlPortada(String urlPortada) {
-		this.urlPortada = urlPortada == null ? this.urlPortada : urlPortada;
+		this.urlPortada = urlPortada == null || urlPortada.equals("")? this.urlPortada : urlPortada;
 	}
 
 	@Override

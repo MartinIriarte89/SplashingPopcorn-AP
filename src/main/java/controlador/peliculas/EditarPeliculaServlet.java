@@ -19,7 +19,7 @@ import utilidades.Validacion;
 
 @WebServlet("/editarPelicula.ad")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 1, maxFileSize = 1024 * 1024 * 20, // 20 MB
-maxRequestSize = 1024 * 1024 * 100 // 100 MB
+		maxRequestSize = 1024 * 1024 * 100 // 100 MB
 )
 public class EditarPeliculaServlet extends HttpServlet implements Servlet {
 
@@ -60,20 +60,22 @@ public class EditarPeliculaServlet extends HttpServlet implements Servlet {
 		String generoNombre = request.getParameter("genero");
 
 		Genero genero = servGenero.buscarPor(generoNombre);
-		
+
 		if (!urlPortada.equals("")) {
+			urlPortada = id + urlPortada;
 			servGuardarImagen.guardarFotoPortadaPelicula(urlPortada, request.getPart("urlPortada"));
 			urlPortada = "imagenes/portadas/peliculas/" + urlPortada;
 		}
-		
+
 		if (!urlFondo.equals("")) {
+			urlFondo = id + urlFondo;
 			servGuardarImagen.guardarFotoFondoPelicula(urlFondo, request.getPart("urlFondo"));
 			urlFondo = "imagenes/fondos/peliculas/" + urlFondo;
 		}
 
 		Pelicula pelicula = servicioPelicula.editar(id, titulo, precio, duracion, stock, genero, descripcion,
 				urlPortada, urlFondo, anioLanzamiento, lema);
-		
+
 		if (!pelicula.esNulo()) {
 			if (pelicula.esValida()) {
 				response.sendRedirect("peliculas");
@@ -84,7 +86,7 @@ public class EditarPeliculaServlet extends HttpServlet implements Servlet {
 				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/peliculas");
 				dispatcher.forward(request, response);
 			}
-		}else {
+		} else {
 			request.setAttribute("flash", "La película no existe");
 
 			RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/peliculas");
