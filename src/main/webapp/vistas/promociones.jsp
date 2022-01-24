@@ -7,7 +7,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Promociones</title>
+
+<title>Promociones || Splashing Popcorn</title>
 
 <jsp:include page="../parciales/librerias.jsp"></jsp:include>
 
@@ -17,7 +18,11 @@
 	href="/Webapp_Proyecto_Final/css/estiloPeliculasYPromos.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-
+<style type="text/css">
+#promo {
+	opacity: 1 !important;
+}
+</style>
 
 <script type="text/javascript"
 	src="/Webapp_Proyecto_Final/js/filtrarGeneros.js"></script>
@@ -29,8 +34,6 @@
 	src="/Webapp_Proyecto_Final/js/modales.js"></script>
 <script type="text/javascript"
 	src="/Webapp_Proyecto_Final/js/completarModales.js" defer></script>
-
-
 
 </head>
 
@@ -93,7 +96,7 @@
 
 							<div
 								class="text-center my-xl-5 mt-2 mb-4 h1 text-white font-lato titulo-filtro">Filtrar
-								por genero</div>
+								por género</div>
 							<div class="overflow-auto" id="contenedor-filtros">
 								<div
 									class="row text-center justify-content-xl-start justify-content-center lista-generos"
@@ -136,7 +139,7 @@
 									<!-- BACKDROP IMAGEN -->
 									<div class="row flex-column fondo-backdrop carta mx-auto m-0"
 										data-type="${promocion.genero}"
-										style="background-image: linear-gradient(130deg, rgb(0 0 0) 30%, rgb(13 13 13/ 88%) 80%);">
+										style="background-image: linear-gradient(130deg, #131111 30%, rgb(16 1 23) 80%);">
 										<!-- IMAGEN CARD -->
 										<div
 											class="fondo-portada mx-auto p-0 d-flex justify-content-center align-items-center"
@@ -156,6 +159,9 @@
 										<!-- DESCRIPCION CARD -->
 										<div class="col d-flex p-0">
 											<div class="row m-0 my-2 w-100">
+												<div class="text-center">
+													<span id="tipoPromo">${promocion.tipoPromocion.equals("porcentual") ? "¡Super Descuento!" : promocion.tipoPromocion.equals("absoluta") ? "¡Precios Locos!" : "¡Va de regalo!"}</span>
+												</div>
 												<!-- TITULO CARD -->
 												<div class="d-flex align-items-center" style="height: 60px">
 													<p class="titulo-carta h3 mx-auto text-center text-white">
@@ -249,7 +255,8 @@
 					<!-- CUERPO DEL MODAL -->
 					<div class="modal-body p-5 pt-0">
 						<!-- FORLMULARIO DEL MODAL -->
-						<form action="crearPromocion.ad" method="post" enctype="multipart/form-data">
+						<form action="crearPromocion.ad" method="post"
+							enctype="multipart/form-data">
 							<div class="form-floating mb-3">
 								<input type="text" class="form-control rounded-4" id="titulo"
 									placeholder="Titulo" required="required" name="titulo"
@@ -386,7 +393,8 @@
 					<!-- CUERPO DEL MODAL -->
 					<div class="modal-body p-5 pt-0">
 						<!-- FORLMULARIO DEL MODAL -->
-						<form action="editarPromocion.ad" method="post" enctype="multipart/form-data">
+						<form action="editarPromocion.ad" method="post"
+							enctype="multipart/form-data">
 							<div class="form-floating mb-3">
 								<input type="text" class="form-control rounded-4 d-none"
 									id="idEdit" placeholder="Titulo" required="required"

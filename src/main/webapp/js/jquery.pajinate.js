@@ -20,7 +20,7 @@
 			nav_label_first: 'Primero',
 			nav_label_prev: 'Prev.',
 			nav_label_next: 'Sig.',
-			nav_label_last: 'Ultimo',
+			nav_label_last: 'Último',
 			nav_order: ["first", "prev", "num", "next", "last"],
 			nav_label_info: 'Showing {0}-{1} of {2} results',
 			show_first_last: true,

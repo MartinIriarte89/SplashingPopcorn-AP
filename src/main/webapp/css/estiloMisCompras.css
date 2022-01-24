@@ -5,8 +5,9 @@
 }
 
 main{
-	background-image: url(../imagenes/spikes.png);
-	background-attachment: fixed;	
+	background-image: url(../imagenes/z.png);
+	background-attachment: fixed;
+	background-size: 900px;	
 }
 
 #titulo{
@@ -18,7 +19,7 @@ main{
 
 .carta{
 	border-radius: 16px;
-	box-shadow: 4px 8px 12px rgba(0,0,0, 0.5);
+	box-shadow: 4px 8px 12px rgb(182 174 146 / 50%);
 }
 
 .fondo-backdrop{
@@ -62,7 +63,7 @@ span{
 	margin-left: -12.5%;
 	border-bottom-left-radius: 50% ;
 	border-bottom-right-radius: 50% ;
-	background: linear-gradient(90deg, var(--col-terciario)30%, transparent),url(../imagenes/25327-rojo-y-blanco.jpg);
+	background: linear-gradient(to right, #240b36, #c3143299),url(../imagenes/25327-rojo-y-blanco.jpg);
 	background-size: cover;
 	background-position: right center;
 }

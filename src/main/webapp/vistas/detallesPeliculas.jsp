@@ -6,17 +6,20 @@
 <head>
 
 <jsp:include page="../parciales/librerias.jsp"></jsp:include>
-<link rel="stylesheet" type="text/css" href="./css/index.css">
 <link rel="stylesheet" type="text/css" href="./css/botones.css">
 <link rel="stylesheet" type="text/css" href="./css/detalles.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-
+<style type="text/css">
+#peli{
+	opacity: 1 !important;
+}
+</style>
 <script type="text/javascript"
 	src="/Webapp_Proyecto_Final/js/modales.js"></script>
 <script type="text/javascript" src="./js/funciones.js" defer></script>
 
-<title>Detalle de Película</title>
+<title>Detalle de Películas || Splashing Popcorn</title>
 
 </head>
 <body>

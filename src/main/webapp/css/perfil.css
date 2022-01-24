@@ -1,6 +1,12 @@
 body{
-	background: url('../imagenes/spikes.png');
+	background: url('../imagenes/z.png');
+	background-size: 900px;
+	background-attachment: fixed;
 	margin-top: 0px;
+}
+
+#inicio{
+	opacity: 0.5;
 }
 
 #fotoPerfil{
@@ -19,16 +25,17 @@ body{
 	font-size: 12px;
 	border-color: #dfdcdc;
     border-width: medium;
-	color: #114a66;
+	color: white;
+	background-color: #593565;
 	width: 100px;
 }
 
 #boton:hover{
-	color: #114a66;
+	color: white;
 }
 
 .contenedor{
-	background-color: #1d6c93;
+	background: linear-gradient(to right, #6d1c36, #4b1224);
 	border-radius: 4px;
 }
 

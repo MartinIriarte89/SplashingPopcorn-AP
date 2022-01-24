@@ -1,4 +1,70 @@
 main{
-	background-image: url('/Webapp_Proyecto_Final/imagenes/spikes.png');
+	background-image: url('/Webapp_Proyecto_Final/imagenes/z.png');
 	background-attachment: fixed;
+	background-size: 900px;
 }
+
+.titulo{
+	text-shadow: 8px 2px 2px rgb(0 0 0 / 59%);
+	padding-top: 100px;
+	background: linear-gradient(to right, #240b36, #c31432);
+	color: lightyellow;
+	font-size: 6.5rem;
+}
+
+.triangulo {
+	height: 60px;
+	width: 100%;
+	background: linear-gradient(to right, #240b36, #c31432);
+	clip-path: polygon(50% 100%, 0 0, 100% 0);
+	transform: translateZ(0);
+	margin-top: -1px;
+}
+
+.contenedor-btn{
+	background: linear-gradient(to right, #3b1732, #5f2a44 20% 80%, #3b1732);
+	border-radius: 6px;
+}
+
+.btn-propio{
+	background: #f34848db;
+	color: white;
+	border-radius: 4px;
+}
+
+.btn-propio:hover{
+	color: white;
+   	box-shadow: 2px 4px 11px 1px #a39e9e;
+}
+
+@media (min-width: 0px) and (max-width: 575.99px){
+	
+	.titulo{
+		padding-top: 70px;
+		font-size: 3rem;	
+	}
+	
+	.triangulo {
+		height: 40px;
+	}
+}
+
+@media (min-width: 576px) and (max-width: 991.98px){
+	
+	.titulo{
+		padding-top: 80px;
+		font-size: 3.5rem;	
+	}
+	
+	.triangulo {
+		height: 40px;
+	}
+}
+
+div.dataTables_wrapper div.dataTables_filter input {
+	background-color: #559bff99;
+    border: none;
+}
+
+
+

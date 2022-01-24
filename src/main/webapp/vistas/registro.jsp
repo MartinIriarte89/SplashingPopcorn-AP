@@ -14,7 +14,8 @@
 <script type="text/javascript"
 	src="/Webapp_Proyecto_Final/js/modales.js"></script>
 
-<title>Registro</title>
+
+<title>Registro || Splashing Popcorn</title>
 </head>
 <body>
 	<main>

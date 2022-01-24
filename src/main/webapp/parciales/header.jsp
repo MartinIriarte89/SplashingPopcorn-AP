@@ -17,11 +17,11 @@
 
 
 				<li><a href="/Webapp_Proyecto_Final/inicio"
-					class="nav-link px-2 link-light fs-5">Inicio</a></li>
+					class="nav-link px-2 link-light opacity-50 fs-5" id="inicio">Inicio</a></li>
 				<li><a href="/Webapp_Proyecto_Final/peliculas"
-					class="nav-link px-2 link-light opacity-50 fs-5">Películas</a></li>
+					class="nav-link px-2 link-light opacity-50 fs-5" id="peli">Películas</a></li>
 				<li><a href="/Webapp_Proyecto_Final/promociones"
-					class="nav-link px-2 link-light opacity-50 fs-5">Promociones</a></li>
+					class="nav-link px-2 link-light opacity-50 fs-5" id="promo">Promociones</a></li>
 			</ul>
 		</div>
 	</nav>

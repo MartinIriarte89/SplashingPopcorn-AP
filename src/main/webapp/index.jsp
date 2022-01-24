@@ -11,7 +11,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link href="css/bootstrap.min.css" rel="stylesheet">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+	crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="css/estilosCompartidos.css">
 <link rel="stylesheet" type="text/css" href="css/botones.css">
 <link rel="stylesheet" type="text/css" href="css/index.css">
@@ -53,7 +57,7 @@
 }
 </style>
 
-<title>Mis Compras</title>
+<title>Splashing Popcorn</title>
 
 </head>
 
@@ -88,8 +92,11 @@
 					<div class="carousel-item active">
 						<img src="imagenes/cine.jpg" class="d-block w-100" alt="Portada">
 						<div class="carousel-caption d-block">
-							<h5 class="font-lato tituloPromocion mb-md-4 mb-3">Splashing Popcorn</h5>
-							<p class="font-merriweather-light parrafoPromocion mb-md-4 mb-3 d-sm-block d-none">Tu página de confianza para comprar tus películas favoritas</p>
+							<h5 class="font-lato tituloPromocion mb-md-4 mb-3">Splashing
+								Popcorn</h5>
+							<p
+								class="font-merriweather-light parrafoPromocion mb-md-4 mb-3 d-sm-block d-none">Tu
+								página de confianza para comprar tus películas favoritas</p>
 						</div>
 					</div>
 					<c:forEach items="${promociones}" var="promocion">
@@ -102,8 +109,9 @@
 								alt="${promocion.titulo}"></a>
 							<div class="carousel-caption d-block">
 								<h5 class="font-lato tituloPromocion mb-md-4 mb-3">${promocion.titulo}</h5>
-								<p class="font-merriweather-light parrafoPromocion d-sm-block d-none mb-md-4 mb-3">Promoción:
-									"${promocion.tipoPromocion}"</p>
+								<p
+									class="font-merriweather-light parrafoPromocion d-sm-block d-none mb-md-4 mb-3">Promoción:
+									${promocion.tipoPromocion.equals("porcentual") ? "¡Super Descuento!" : promocion.tipoPromocion.equals("absoluta") ? "¡Precios Locos!" : "¡Va de regalo!"}</p>
 							</div>
 						</div>
 					</c:forEach>
@@ -128,12 +136,12 @@
 					style="height: 100%; width: 100%;">
 						<path
 						d="M-1.12,110.12 C96.51,218.66 283.30,-47.75 502.82,77.55 L500.00,0.00 L0.00,0.00 Z"
-						style="stroke: none; fill: #3b125b;"></path></svg>
+						style="stroke: none; fill: #a30c2f ;"></path></svg>
 			</div>
 
 			<!-- CONTENEDOR DE CARS -->
 			<div class="d-flex col-12 flex-column mt-5 mb-3 px-0"
-				style="padding: 130px;">
+				style="padding: 130px; filter: brightness(1.2);">
 
 				<div class="titulo text-center color-principal">
 					<h1 class="m-0 p-1">Estas son nuestras promos para vos!</h1>
@@ -145,16 +153,13 @@
 						class="d-flex col-lg-4 col-sm-6 col-12 mt-lg-5 mb-lg-5 mt-sm-4 mt-3 mb-4 ps-sm-2 pe-sm-3 p-0 justify-content-center">
 						<div
 							class="card flex-sm-grow-0 flex-fill text-center border-0 box-imagen-card">
-							<img src="imagenes/fondoBarra.jpg" class="card-img-top rounded-3"
-								alt="descuento">
+							<img src="imagenes/SuperDescuentos.png"
+								class="card-img-top rounded-3 mx-auto" alt="descuento">
 							<div
 								class="card-body col-sm-12 col-11 align-self-center p-0 pt-sm-3">
-								<h5
-									class="card-title text-center color-principal rounded-1 fs-3">Super
-									Descuentos</h5>
-								<a href="#" class="botondes learn-more"> <span
-									class="circle" aria-hidden="true"> <span
-										class="icon arrow"></span>
+								<a href="/Webapp_Proyecto_Final/promociones"
+									class="botondes learn-more"> <span class="circle"
+									aria-hidden="true"> <span class="icon arrow"></span>
 								</span> <span class="button-text">Ir a ver</span>
 								</a>
 							</div>
@@ -165,16 +170,13 @@
 						class="d-flex col-lg-4 col-sm-6 col-12 mt-lg-5 mb-lg-5 mt-sm-4 mt-3 mb-4 ps-sm-2 pe-sm-3 p-0 justify-content-center">
 						<div
 							class="card flex-sm-grow-0 flex-fill text-center border-0 box-imagen-card">
-							<img src="imagenes/fondoBarra.jpg" class="card-img-top rounded-3"
-								alt="descuento">
+							<img src="imagenes/UnaDeRegalo.png"
+								class="card-img-top rounded-3 mx-auto" alt="descuento">
 							<div
 								class="card-body col-sm-12 col-11 align-self-center p-0 pt-sm-3">
-								<h5
-									class="card-title text-center color-principal rounded-1 fs-3">Una
-									de Regalo</h5>
-								<a href="#" class="botondes learn-more"> <span
-									class="circle" aria-hidden="true"> <span
-										class="icon arrow"></span>
+								<a href="/Webapp_Proyecto_Final/promociones"
+									class="botondes learn-more"> <span class="circle"
+									aria-hidden="true"> <span class="icon arrow"></span>
 								</span> <span class="button-text">Ir a ver</span>
 								</a>
 							</div>
@@ -185,16 +187,13 @@
 						class="d-flex  col-lg-4 col-sm-6 col-12 mt-lg-5 mb-lg-5 mb-3 m-auto ps-sm-2 pe-sm-3 p-0 justify-content-center">
 						<div
 							class="card flex-sm-grow-0 flex-fill text-center border-0 box-imagen-card">
-							<img src="imagenes/fondoBarra.jpg" class="card-img-top rounded-3"
-								alt="descuento">
+							<img src="imagenes/PreciosLocos.png"
+								class="card-img-top rounded-3 mx-auto" alt="descuento">
 							<div
 								class="card-body col-sm-12 col-11 align-self-center p-0 pt-sm-3">
-								<h5
-									class="card-title text-center color-principal fs-3 rounded-1">Precios
-									Locos</h5>
-								<a href="#" class="botondes learn-more"> <span
-									class="circle" aria-hidden="true"> <span
-										class="icon arrow"></span>
+								<a href="/Webapp_Proyecto_Final/promociones"
+									class="botondes learn-more"> <span class="circle"
+									aria-hidden="true"> <span class="icon arrow"></span>
 								</span> <span class="button-text">Ir a ver</span>
 								</a>
 							</div>
@@ -203,12 +202,12 @@
 				</div>
 			</div>
 
-			<div class="wave" style="bottom: 0;">
+			<div class="wave" style="bottom: 0; margin-bottom: -1px;">
 				<svg viewBox="0 0 500 150" preserveAspectRatio="none"
 					style="height: 100%; width: 100%;">
 						<path
 						d="M-16.36,59.78 C169.87,193.00 408.58,-76.37 502.82,54.85 L500.00,149.99 L0.00,149.99 Z"
-						style="stroke: none; fill: #3b125b;"></path></svg>
+						style="stroke: none; fill: #a30c2f ;"></path></svg>
 			</div>
 		</div>
 		<!-- MODAL SUCCESS -->

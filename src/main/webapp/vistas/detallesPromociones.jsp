@@ -6,12 +6,16 @@
 <head>
 
 <jsp:include page="../parciales/librerias.jsp"></jsp:include>
-<link rel="stylesheet" type="text/css" href="./css/index.css">
 <link rel="stylesheet" type="text/css" href="./css/botones.css">
 <link rel="stylesheet" type="text/css" href="./css/detalles.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
 <style type="text/css">
+#promo {
+	opacity: 1 !important;
+}
+
 #promos {
 	height: 250px;
 }
@@ -29,7 +33,7 @@
 	src="/Webapp_Proyecto_Final/js/modales.js"></script>
 <script type="text/javascript" src="./js/funciones.js" defer></script>
 
-<title>Detalle de Película</title>
+<title>Detalle de Promociones || Splashing Popcorn</title>
 
 </head>
 <body>
@@ -48,7 +52,7 @@
 			<div id="cuerpo" class="mb-5">
 				<div class="row justify-content-around m-0 p-0"
 					id="contenidoDetallePromo"
-					style="background-image: linear-gradient(145deg, rgb(22 26 29/ 98%) 25%, rgb(85 28 59 / 86%) 90%);)">
+					style="background-image: linear-gradient(145deg, rgb(22 26 29/ 98%) 25%, rgb(85 28 59/ 86%) 90%);)">
 					<!-- IMAGEN -->
 					<div class="col-xxl-4 col-lg-5 col-12 my-3 m-0 p-0">
 						<div id="foto"

@@ -25,8 +25,7 @@
 <script type="text/javascript"
 	src="/Webapp_Proyecto_Final/js/dataTable.js" defer></script>
 
-<link rel="shortcut icon" href="img/logo.png" sizes="75px;">
-<title>Usuarios Registrados</title>
+<title>Usuarios Registrados || Splashing Popcorn</title>
 </head>
 <body>
 	<header>
@@ -52,13 +51,20 @@
 			</div>
 		</div>
 
-		<div class="container pt-5 " style="min-height: 100vh;">
-			<div class="f1 h1 text-center mt-5 mb-3 font-lato">Tabla de
-				Usuarios</div>
-			<div class="row align-items-start justify-content-center mt-4">
+		<!-- TITULO -->
+		<div class="h1 text-center font-lato m-0 titulo">
+			<div class="animate__animated animate__bounceInDown">Tabla de
+				usuarios</div>
+		</div>
+		<div class="triangulo"></div>
 
-				<table
-					class="ms-2 table table-dark table-striped table-hover dataTable">
+		<div class="container py-3 " style="min-height: 100vh;">
+
+
+			<div
+				class="row font-merriweather align-items-start justify-content-center mt-4"
+				style="color: white;">
+				<table class="table table-light table-striped table-hover dataTable">
 					<thead>
 						<tr>
 							<th scope="col">Id</th>
@@ -100,9 +106,9 @@
 					</tbody>
 				</table>
 			</div>
-			<div class="row">
+			<div class="contenedor-btn row m-0 mt-3 p-2">
 				<button type="button"
-					class="btn btn-outline-primary col-lg-2 col-sm-3 col-4 px-0 py-2"
+					class="btn btn-propio mx-auto col-lg-2 col-sm-3 col-4 px-0 py-2 font-lato"
 					data-bs-toggle="modal" data-bs-target="#modalCrearUsuario">Crear
 					Usuario</button>
 			</div>

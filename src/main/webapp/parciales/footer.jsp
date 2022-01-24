@@ -11,17 +11,16 @@
 					<!-- ICONOS DE REDES -->
 					<div class="d-flex col-8 justify-content-end align-items-end">
 						<ul class="d-flex animacion m-0 p-2 mx-md-3 align-items-center">
-							<li class="texto-footer">Seguinos en nuestras redes:</li>
-							<li class="ms-2"><a href="#" class="facebook"> <i
-									class="fab fa-facebook-f icon"></i>
+							<li class="texto-footer">Contactá con el desarrollador:</li>
+							<li class="ms-2"><a href="https://www.linkedin.com/in/martin-iriarte-6a4aa21b7"> <i
+									class="fab fa-linkedin-in icon"></i>
 							</a></li>
-							<li class="ms-2"><a href="#" class="twitter"><i
-									class="fab fa-twitter icon"></i></a></li>
-							<li class="ms-2"><a href="#" class="instagram"><i
-									class="fab fa-instagram icon"></i></a></li>
+							<li class="ms-2"><a href="https://github.com/MartinIriarte89/Webapp-Proyecto-Final-AP"><i
+									class="fab fa-github icon"></i></a></li>
+							<li class="ms-2"><a href="mailto:iriartemartin2@gmail.com?Subject=Splashing%20Popcorn"><i
+									class="fab far fa-envelope icon"></i></a></li>
 						</ul>
 					</div>
-
 				</div>
 			</div>
 		</div>

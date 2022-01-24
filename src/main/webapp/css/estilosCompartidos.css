@@ -102,11 +102,7 @@ body{
 /*-----------ESTILO DEL FOOTER-----------*/
 
 .fondo-footer{
-	background-image: url(../imagenes/fondoFooter.jpg);
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-attachment: fixed;
-	background-position: center 50px;
+	background: linear-gradient(360deg, #240b36 0%, #c31432 90%);
 }
 
 .texto-footer{
@@ -127,7 +123,7 @@ footer a svg{
 }
 
 .animacion li a {
-  width: 50px;
+  width: 52px;
   height: 50px;
   background-color: #fff;
   text-align: center;
@@ -144,6 +140,7 @@ footer a svg{
 .animacion li a .icon {
   position: relative;
   color: #262626;
+  background-color: transparent;
   transition: .5s;
   z-index: 3;
 }
@@ -151,18 +148,6 @@ footer a svg{
 .animacion li a:hover .icon {
   color: rgb(255, 255, 255);
   transform: rotateY(360deg);
-}
-
-.facebook:hover .icon{
-  background-color: #3b5999;
-}
-
-.instagram:hover .icon{
-	background: linear-gradient(135deg,blue,red);
-}
-
-.twitter:hover .icon{
-	background-color: #55acee;
 }
 
 .animacion li a:before {
@@ -182,15 +167,15 @@ footer a svg{
 }
 
 .animacion li:nth-child(2) a:before{
-  background: #3b5999;
+  background: #007bb6;
 }
 
 .animacion li:nth-child(3) a:before{
-  background: #55acee;
+  background: black;
 }
 
 .animacion li:nth-child(4) a:before {
-  background:linear-gradient(135deg,blue,red);
+  background:#ea4335;
 }
 
 

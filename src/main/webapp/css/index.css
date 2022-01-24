@@ -6,6 +6,10 @@ main{
 	margin-top: 62px;
 }
 
+#inicio{
+	opacity: 1 !important;
+}
+
 .boton-inicio::before {
   width: 100%;
   height: 100%;
@@ -36,12 +40,12 @@ main{
 	color: lightyellow;
     font-weight: bolder;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    background-color: rgb(154 27 56);
+    background-color: rgb(66 63 63);
     box-shadow: 0px 8px 8px rgb(0 0 0 / 70%);
 }
 
 #fondo{
-	background-image: url(../imagenes/spikes.png)!important;
+	background-image: url(../imagenes/z2.png)!important;
 	background-attachment: fixed;
 	filter: brightness(0.8);
 }
@@ -101,6 +105,7 @@ span{
 	width: 100%;
 	height: 200px;
 	z-index: -1;
+	filter: brightness(1.5);
 }
 
 .box-imagen-card {
@@ -110,7 +115,7 @@ span{
 }
 
 .circle {
-  	background: #6c757d;
+  	background: #cc8a3a;
 	opacity: 1;
 }
 
@@ -119,7 +124,6 @@ span{
 	border-right: 0.125rem solid white;
 }
 .button-text {
-	color: black;
 	opacity: 1;
 }
 
@@ -153,6 +157,10 @@ span{
 
 	.parrafoPromocion{
 		font-size: 10px !important;
+	}
+	
+	.card-img-top{
+		width: 70% !important;
 	}
 	
 }

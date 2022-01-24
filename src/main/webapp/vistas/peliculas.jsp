@@ -7,7 +7,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Películas</title>
+<title>Películas || Splashing Popcorn</title>
 
 <jsp:include page="../parciales/librerias.jsp"></jsp:include>
 
@@ -17,16 +17,21 @@
 	href="/Webapp_Proyecto_Final/css/estiloPeliculasYPromos.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+<style type="text/css">
+#peli {
+	opacity: 1 !important;
+}
+</style>
 
 
 <script type="text/javascript"
 	src="/Webapp_Proyecto_Final/js/filtrarGeneros.js"></script>
 <script type="text/javascript"
-	src="/Webapp_Proyecto_Final/js/jquery.pajinate.js"></script>
-<script type="text/javascript"
-	src="/Webapp_Proyecto_Final/js/jquery.resize2.js"></script>
-<script type="text/javascript"
 	src="/Webapp_Proyecto_Final/js/modales.js"></script>
+<script type="text/javascript"
+	src="/Webapp_Proyecto_Final/js/jquery.pajinate.js" defer></script>
+<script type="text/javascript"
+	src="/Webapp_Proyecto_Final/js/jquery.resize2.js" defer></script>
 <script type="text/javascript"
 	src="/Webapp_Proyecto_Final/js/completarModales.js" defer></script>
 
@@ -92,7 +97,7 @@
 
 							<div
 								class="text-center my-xl-5 mt-2 mb-4 h1 text-white font-lato titulo-filtro">Filtrar
-								por genero</div>
+								por género</div>
 							<div class="overflow-auto" id="contenedor-filtros">
 								<div
 									class="row text-center justify-content-xl-start justify-content-center lista-generos"
@@ -135,7 +140,7 @@
 									<!-- BACKDROP IMAGEN -->
 									<div class="row flex-column fondo-backdrop carta mx-auto m-0"
 										data-type="${pelicula.genero}"
-										style="background-image: linear-gradient(90deg, rgba(22, 26, 29, 1) 30%, rgba(22, 26, 29, 0.5) 80%), url('${pelicula.urlFondo}');">
+										style="background-image: linear-gradient(90deg, rgba(22, 26, 29, 0.6) 30%, rgba(22, 26, 29, 0.5) 80%), url('${pelicula.urlFondo}');">
 										<!-- IMAGEN CARD -->
 										<div
 											class="fondo-portada mx-auto p-0 d-flex justify-content-center align-items-center"
@@ -250,7 +255,8 @@
 					<!-- CUERPO DEL MODAL -->
 					<div class="modal-body p-5 pt-0">
 						<!-- FORLMULARIO DEL MODAL -->
-						<form action="crearPelicula.ad" method="post" enctype="multipart/form-data">
+						<form action="crearPelicula.ad" method="post"
+							enctype="multipart/form-data">
 							<div class="row mb-3">
 								<div class="col-6 form-floating mb-3">
 									<input type="text" class="form-control rounded-4" id="titulo"
@@ -338,7 +344,8 @@
 							<div class="row mb-3">
 								<div class=" col-md-6 col-12">
 									<label for="fotoDeFondo" class="form-label">Foto de
-										fondo</label> <input class="form-control" type="file" id="fotoDeFondo" name="urlFondo">
+										fondo</label> <input class="form-control" type="file" id="fotoDeFondo"
+										name="urlFondo">
 								</div>
 								<div class=" col-md-6 col-12">
 									<label for="fotoDePortada" class="form-label">Foto de
@@ -389,7 +396,8 @@
 					<!-- CUERPO DEL MODAL -->
 					<div class="modal-body p-5 pt-0">
 						<!-- FORLMULARIO DEL MODAL -->
-						<form action="editarPelicula.ad" method="post" enctype="multipart/form-data">
+						<form action="editarPelicula.ad" method="post"
+							enctype="multipart/form-data">
 							<div class="col-6 form-floating mb-3">
 								<input type="number" class="form-control rounded-4 d-none"
 									id="idEdit" placeholder="Id" required="required" name="id"

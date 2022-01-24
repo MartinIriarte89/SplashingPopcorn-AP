@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
@@ -15,7 +15,7 @@
 <script type="text/javascript" src="../js/jquery.pajinate.js"></script>
 <script type="text/javascript" src="../js/jquery.resize.js"></script>
 <script type="text/javascript" src="../js/funciones.js"></script>
-<title>Mis Compras</title>
+<title>Mis Compras || Splashing Popcorn</title>
 
 </head>
 <body>
@@ -119,31 +119,31 @@
 						<div class="modal-body p-0 m-0">
 							<div class="container-fluid px-0 py-3 text-modal">
 								<div class="row pt-2 text-modal">
-									<div class="col-4 fs-4 text-end font-merriweather-light">Título:</div>
+									<div class="col-4 fs-4 text-end font-merriweather-light">TÃ­tulo:</div>
 									<div
 										class="col-8 text-center align-self-center font-merriweather-light"
-										id="modalTitulo">"Nombre de la película"</div>
+										id="modalTitulo">"Nombre de la pelÃ­cula"</div>
 								</div>
 
 								<div class="row mt-3 text-modal ">
-									<div class="col-4 fs-4 text-end font-merriweather-light ">Género:</div>
+									<div class="col-4 fs-4 text-end font-merriweather-light ">GÃ©nero:</div>
 									<div
 										class="col-8 text-center align-self-center font-merriweather-light"
-										id="modalGenero">"Género de la Película"</div>
+										id="modalGenero">"GÃ©nero de la PelÃ­cula"</div>
 								</div>
 
 								<div class="row mt-3 text-modal">
 									<div class="col-4 fs-4 text-end font-merriweather-light">Costo:</div>
 									<div
 										class="col-8 text-center align-self-center font-merriweather-light"
-										id="modalPrecio">"Costo de la Película"</div>
+										id="modalPrecio">"Costo de la PelÃ­cula"</div>
 								</div>
 
 								<div class="row mt-3 text-modal">
-									<div class="col-4 fs-4 text-end font-merriweather-light">Duración:</div>
+									<div class="col-4 fs-4 text-end font-merriweather-light">DuraciÃ³n:</div>
 									<div
 										class="col-8 text-center align-self-center font-merriweather-light"
-										id="modalDuracion">"Duración de la Película"</div>
+										id="modalDuracion">"DuraciÃ³n de la PelÃ­cula"</div>
 								</div>
 							</div>
 
