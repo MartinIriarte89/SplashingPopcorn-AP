@@ -87,8 +87,8 @@
 
 											<div class="col-6 p-0 ">
 												<a href="#" type="button"
-													class="boton-admin d-flex col-10 btn btn-danger text-center mx-auto align-items-center justify-content-center">Añadir
-													genero</a>
+													class="boton-admin d-flex col-10 btn btn-danger text-center mx-auto align-items-center justify-content-center"
+													data-bs-toggle="modal" data-bs-target="#modalGenero">Género</a>
 											</div>
 										</div>
 									</div>
@@ -547,39 +547,66 @@
 			</div>
 		</div>
 
-		<!-- MODAL CREAR GÉNERO -->
-		<div class="modal fade" id="modalCrearGenero" tabindex="-1"
+		<!-- MODAL GÉNERO -->
+		<div class="modal fade" id="modalGenero" tabindex="-1"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-dialog-centered">
 				<div class="modal-content rounded-5 shadow">
-					<div class="modal-header p-5 pb-4 border-bottom-0">
+					<div class="modal-header p-5 pb-1 border-bottom-0">
 						<div class="d-inline-flex">
-							<img alt="" src="imagenes/logo.png"
-								style="width: 30%; margin: -20px;">
-							<h2 class="align-self-center">Crear género</h2>
+							<h2 class="align-self-center font-lato">Géneros</h2>
 						</div>
 
 						<button type="button" class="btn-close" data-bs-dismiss="modal"
 							aria-label="Close"></button>
 					</div>
 
-
 					<div class="modal-body p-5 pt-0">
-						<form action="/Webapp_Proyecto_Final/genero/crearGenero.ad"
-							method="post">
 
-							<label for="genero">Nuevo género</label>
+						<!-- FORM AÑADIR GENERO -->
+						<form class="mt-4 formulario-genero"
+							action="/Webapp_Proyecto_Final/crearGenero.ad" method="post">
+
+							<div class="text-center mb-3 modal-titulo-genero font-lato">Añadir
+								género</div>
 							<div class="form-floating mb-3">
-								<input type="text" class="form-control rounded-4" id="genero"
-									name="genero" required value="${genero.nombre}">
-								<div class="invalid-feedback">Introduzca el nombre del
-									nuevo género por favor</div>
+								<input type="text" class="form-control rounded-4"
+									id="crearGenero" placeholder="Genero" required="required"
+									name="genero"> <label
+									class='${generoErrores.get("nombre") != null ? "is-invalid" : ""}'
+									for="crearGenero">Añadir género</label>
+								<div class="invalid-tooltip">
+									<c:out value='${generoErrores.get("nombre")}'></c:out>
+								</div>
 							</div>
 							<button type="submit"
-								class="w-100 mb-2 btn btn-lg rounded-4 btn-warning">Crear
-								género</button>
+								class="w-50 mb-2 btn btn-lg rounded-4 btn-warning d-flex mx-auto justify-content-center">Añadir</button>
+						</form>
 
+						<hr style="background: black; opacity: 1; padding: 1px;">
 
+						<!-- FORM ELIMINAR GENERO -->
+						<form class="mt-4 formulario-genero"
+							action="/Webapp_Proyecto_Final/borrarGenero.ad" method="post">
+							<div class="text-center mb-3 modal-titulo-genero font-lato">Eliminar
+								género</div>
+							<div class="mb-3 form-floating">
+								<select
+									class='form-select py-3 formulario-genero ${generoErrores.get("borrar") != null ? "is-invalid" : ""}'
+									name="genero" id="eliminarGenero"
+									aria-label="Floating label select example">
+									<option selected="selected" value="">Selecciona un
+										género</option>
+									<c:forEach items="${generos}" var="genero">
+										<option value="${genero.nombre}">${genero.nombre}</option>
+									</c:forEach>
+								</select>
+								<div class="invalid-tooltip">
+									<c:out value='${generoErrores.get("borrar")}'></c:out>
+								</div>
+							</div>
+							<button type="submit"
+								class="w-50 mb-2 btn btn-lg rounded-4 btn-warning d-flex mx-auto justify-content-center">Eliminar</button>
 						</form>
 					</div>
 				</div>
@@ -610,6 +637,12 @@
 	<c:if test="${error != null }">
 		<script type="text/javascript">
 			abrirModalError();
+		</script>
+	</c:if>
+
+	<c:if test="${generoErrores != null}">
+		<script type="text/javascript">
+			abrirModalGenero();
 		</script>
 	</c:if>
 </body>

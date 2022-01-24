@@ -12,8 +12,4 @@ public class Comparador {
 		comparador = pat.matcher(cadena);
 		return comparador.matches();
 	}
-	
-	public static void main(String[] args) {
-		System.out.println(Comparador.comparar("Matías Ottero", Patron.NOMBRE_APELLIDO_VALIDO));
-	}
 }

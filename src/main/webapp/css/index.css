@@ -45,8 +45,9 @@ main{
 }
 
 #fondo{
-	background-image: url(../imagenes/z2.png)!important;
+	background-image: url(../imagenes/z.png)!important;
 	background-attachment: fixed;
+	background-size: 900px;
 	filter: brightness(0.8);
 }
 
@@ -111,7 +112,7 @@ span{
 .box-imagen-card {
 	width: 25rem;
 	background: transparent;
-	transition: 0.3s;
+	
 }
 
 .circle {

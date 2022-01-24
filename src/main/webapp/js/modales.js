@@ -32,6 +32,11 @@ function abrirModalUsuario(texto) {
 	}
 }
 
+function abrirModalGenero() {
+	let myModal = new bootstrap.Modal(document.getElementById('modalGenero'));
+	myModal.show();
+}
+
 function abrirModalInicioSesion() {
 	let myModal = new bootstrap.Modal(document.getElementById('modalInicioSesion'));
 	myModal.show();

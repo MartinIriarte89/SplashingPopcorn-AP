@@ -178,6 +178,15 @@ span{
 		text-shadow: 4px 2px 5px #242222;
 	}
 
+.formulario-genero{
+	border: solid 1px #aba6a6;
+	padding: 15px;
+}
+
+.modal-titulo-genero{
+	font-size: 25px;
+}
+
 @media (min-width: 0px) and (max-width: 575.99px){
 	
 	.fondo-portada{

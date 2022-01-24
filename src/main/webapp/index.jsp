@@ -111,7 +111,7 @@
 								<h5 class="font-lato tituloPromocion mb-md-4 mb-3">${promocion.titulo}</h5>
 								<p
 									class="font-merriweather-light parrafoPromocion d-sm-block d-none mb-md-4 mb-3">Promoción:
-									${promocion.tipoPromocion.equals("porcentual") ? "¡Super Descuento!" : promocion.tipoPromocion.equals("absoluta") ? "¡Precios Locos!" : "¡Va de regalo!"}</p>
+									${promocion.tipoPromocion.equals("porcentual") ? "¡Súper Descuento!" : promocion.tipoPromocion.equals("absoluta") ? "¡Precios Locos!" : "¡Va de regalo!"}</p>
 							</div>
 						</div>
 					</c:forEach>
@@ -154,7 +154,7 @@
 						<div
 							class="card flex-sm-grow-0 flex-fill text-center border-0 box-imagen-card">
 							<img src="imagenes/SuperDescuentos.png"
-								class="card-img-top rounded-3 mx-auto" alt="descuento">
+								class="card-img-top rounded-3 mx-auto" alt="descuento" style="filter: drop-shadow(5px 11px 8px grey);">
 							<div
 								class="card-body col-sm-12 col-11 align-self-center p-0 pt-sm-3">
 								<a href="/Webapp_Proyecto_Final/promociones"
@@ -171,7 +171,7 @@
 						<div
 							class="card flex-sm-grow-0 flex-fill text-center border-0 box-imagen-card">
 							<img src="imagenes/UnaDeRegalo.png"
-								class="card-img-top rounded-3 mx-auto" alt="descuento">
+								class="card-img-top rounded-3 mx-auto" alt="descuento" style="filter: drop-shadow(5px 11px 8px grey);">
 							<div
 								class="card-body col-sm-12 col-11 align-self-center p-0 pt-sm-3">
 								<a href="/Webapp_Proyecto_Final/promociones"
@@ -188,7 +188,7 @@
 						<div
 							class="card flex-sm-grow-0 flex-fill text-center border-0 box-imagen-card">
 							<img src="imagenes/PreciosLocos.png"
-								class="card-img-top rounded-3 mx-auto" alt="descuento">
+								class="card-img-top rounded-3 mx-auto" alt="descuento" style="filter: drop-shadow(5px 11px 8px grey);">
 							<div
 								class="card-body col-sm-12 col-11 align-self-center p-0 pt-sm-3">
 								<a href="/Webapp_Proyecto_Final/promociones"

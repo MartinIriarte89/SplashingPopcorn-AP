@@ -77,17 +77,11 @@
 									<div class="col-xl-12 col-6">
 
 										<div class="col-12 row m-0">
-											<div class="col-6 p-0">
+											<div class="col-6 p-0 mx-auto">
 												<a type="button"
 													class="boton-admin d-flex col-10 btn btn-danger text-center mx-auto align-items-center justify-content-center"
 													data-bs-toggle="modal"
 													data-bs-target="#modalCrearPromocion">Añadir promoción</a>
-											</div>
-
-											<div class="col-6 p-0 ">
-												<a href="#" type="button"
-													class="boton-admin d-flex col-10 btn btn-danger text-center mx-auto align-items-center justify-content-center">Añadir
-													genero</a>
 											</div>
 										</div>
 									</div>
@@ -160,7 +154,7 @@
 										<div class="col d-flex p-0">
 											<div class="row m-0 my-2 w-100">
 												<div class="text-center">
-													<span id="tipoPromo">${promocion.tipoPromocion.equals("porcentual") ? "¡Super Descuento!" : promocion.tipoPromocion.equals("absoluta") ? "¡Precios Locos!" : "¡Va de regalo!"}</span>
+													<span id="tipoPromo">${promocion.tipoPromocion.equals("porcentual") ? "¡Súper Descuento!" : promocion.tipoPromocion.equals("absoluta") ? "¡Precios Locos!" : "¡Va de regalo!"}</span>
 												</div>
 												<!-- TITULO CARD -->
 												<div class="d-flex align-items-center" style="height: 60px">
@@ -539,7 +533,7 @@
 				</div>
 			</div>
 		</div>
-
+		
 	</main>
 
 	<footer>

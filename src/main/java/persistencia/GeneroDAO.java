@@ -32,15 +32,15 @@ public class GeneroDAO {
 	}
 
 	public boolean borrar(Genero genero) {
-		String sql = "UPDATE generos SET borrado_logico = 1 WHERE genero = ?";
+		String sql = "DELETE FROM generos WHERE genero = ? AND genero NOT IN (SELECT fk_genero FROM peliculas)";
 		try {
 			Connection conexion = ProveedorDeConexion.getConexion();
 			PreparedStatement declaracion = conexion.prepareStatement(sql);
 
 			declaracion.setString(1, genero.getNombre());
-			declaracion.executeUpdate();
+			int filasMod = declaracion.executeUpdate();
 
-			return true;
+			return filasMod != 0;
 		} catch (SQLException e) {
 			throw new DatosPerdidosError(e);
 		}
