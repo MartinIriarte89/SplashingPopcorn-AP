@@ -16,11 +16,11 @@
 				class="nav me-auto mt-md-0 mt-2 mb-2 mb-md-0 ms-md-2 d-inline-flex flex-md-row flex-column itemsbarra">
 
 
-				<li><a href="/Webapp_Proyecto_Final/inicio"
+				<li><a href="./inicio"
 					class="nav-link px-2 link-light opacity-50 fs-5" id="inicio">Inicio</a></li>
-				<li><a href="/Webapp_Proyecto_Final/peliculas"
+				<li><a href="./peliculas"
 					class="nav-link px-2 link-light opacity-50 fs-5" id="peli">Películas</a></li>
-				<li><a href="/Webapp_Proyecto_Final/promociones"
+				<li><a href="./promociones"
 					class="nav-link px-2 link-light opacity-50 fs-5" id="promo">Promociones</a></li>
 			</ul>
 		</div>
@@ -49,28 +49,28 @@
 			<a href="#"
 				class="d-block rounded-circle link-dark text-decoration-none dropdown me-4"
 				data-bs-toggle="dropdown" aria-expanded="false"
-				style="height: 60px; width: 60px; background: url('/Webapp_Proyecto_Final/${usuario.urlPerfil}'); background-size: cover; background-position: center;">
+				style="height: 60px; width: 60px; background: url('./${usuario.urlPerfil}'); background-size: cover; background-position: center;">
 			</a>
 
 			<c:choose>
 				<c:when test="${usuario.esAdmin()}">
 					<ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
 						<li><a class="dropdown-item"
-							href="/Webapp_Proyecto_Final/listarUsuarios.ad">Usuarios</a></li>
+							href="./listarUsuarios.ad">Usuarios</a></li>
 						<li><hr class="dropdown-divider"></li>
 						<li><a class="dropdown-item"
-							href="/Webapp_Proyecto_Final/cerrarSesion">Cerrar sesión</a></li>
+							href="./cerrarSesion">Cerrar sesión</a></li>
 					</ul>
 				</c:when>
 				<c:otherwise>
 					<ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
 						<li><a class="dropdown-item"
-							href="/Webapp_Proyecto_Final/perfilUsuario.do">Mi perfil</a></li>
+							href="./perfilUsuario.do">Mi perfil</a></li>
 						<li><a class="dropdown-item"
-							href="/Webapp_Proyecto_Final/listarItinerario.do">Mis compras</a></li>
+							href="./listarItinerario.do">Mis compras</a></li>
 						<li><hr class="dropdown-divider"></li>
 						<li><a class="dropdown-item"
-							href="/Webapp_Proyecto_Final/cerrarSesion">Cerrar sesión</a></li>
+							href="./cerrarSesion">Cerrar sesión</a></li>
 					</ul>
 				</c:otherwise>
 			</c:choose>

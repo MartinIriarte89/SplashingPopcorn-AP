@@ -12,9 +12,9 @@
 <jsp:include page="../parciales/librerias.jsp"></jsp:include>
 
 <link rel="stylesheet" type="text/css"
-	href="/Webapp_Proyecto_Final/css/botones.css">
+	href="./css/botones.css">
 <link rel="stylesheet" type="text/css"
-	href="/Webapp_Proyecto_Final/css/estiloPeliculasYPromos.css">
+	href="./css/estiloPeliculasYPromos.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 <style type="text/css">
@@ -25,15 +25,15 @@
 
 
 <script type="text/javascript"
-	src="/Webapp_Proyecto_Final/js/filtrarGeneros.js"></script>
+	src="./js/filtrarGeneros.js"></script>
 <script type="text/javascript"
-	src="/Webapp_Proyecto_Final/js/modales.js"></script>
+	src="./js/modales.js"></script>
 <script type="text/javascript"
-	src="/Webapp_Proyecto_Final/js/jquery.pajinate.js" defer></script>
+	src="./js/jquery.pajinate.js" defer></script>
 <script type="text/javascript"
-	src="/Webapp_Proyecto_Final/js/jquery.resize2.js" defer></script>
+	src="./js/jquery.resize2.js" defer></script>
 <script type="text/javascript"
-	src="/Webapp_Proyecto_Final/js/completarModales.js" defer></script>
+	src="./js/completarModales.js" defer></script>
 
 </head>
 
@@ -140,11 +140,11 @@
 									<!-- BACKDROP IMAGEN -->
 									<div class="row flex-column fondo-backdrop carta mx-auto m-0"
 										data-type="${pelicula.genero}"
-										style="background-image: linear-gradient(90deg, rgba(22, 26, 29, 0.6) 30%, rgba(22, 26, 29, 0.5) 80%), url('${pelicula.urlFondo}');">
+										style="background-image: linear-gradient(90deg, rgba(22, 26, 29, 0.6) 30%, rgba(22, 26, 29, 0.5) 80%), url('./${pelicula.urlFondo}');">
 										<!-- IMAGEN CARD -->
 										<div
 											class="fondo-portada mx-auto p-0 d-flex justify-content-center align-items-center"
-											style="background-image: url('${pelicula.urlPortada}');">
+											style="background-image: url('./${pelicula.urlPortada}');">
 											<c:choose>
 												<c:when
 													test='${!usuario.itinerario.noTieneA(pelicula) && (sessionScope.usuario != null)}'>
@@ -185,7 +185,7 @@
 												<!-- BOTONES CARD -->
 												<div class="d-flex mt-auto justify-content-center mb-2">
 													<a
-														href="/Webapp_Proyecto_Final/listarDetallePelicula?id=${pelicula.id}"
+														href="./listarDetallePelicula?id=${pelicula.id}"
 														class="botondes learn-more d-flex"> <span
 														class="circle" aria-hidden="true"> <span
 															class="icon arrow"></span>
@@ -255,7 +255,7 @@
 					<!-- CUERPO DEL MODAL -->
 					<div class="modal-body p-5 pt-0">
 						<!-- FORLMULARIO DEL MODAL -->
-						<form action="crearPelicula.ad" method="post"
+						<form action="./crearPelicula.ad" method="post"
 							enctype="multipart/form-data">
 							<div class="row mb-3">
 								<div class="col-6 form-floating mb-3">
@@ -271,7 +271,7 @@
 
 								<div class="col-6 form-floating mb-3">
 									<input type="text" class="form-control rounded-4" id="lema"
-										placeholder="Lema" required="required" name="lema"
+										placeholder="Lema" name="lema"
 										value="${peliCrear.lema}"> <label
 										class='${peliCrear.errores.get("lema") != null ? "is-invalid" : ""}'
 										for="lema">Lema</label>
@@ -396,7 +396,7 @@
 					<!-- CUERPO DEL MODAL -->
 					<div class="modal-body p-5 pt-0">
 						<!-- FORLMULARIO DEL MODAL -->
-						<form action="editarPelicula.ad" method="post"
+						<form action="./editarPelicula.ad" method="post"
 							enctype="multipart/form-data">
 							<div class="col-6 form-floating mb-3">
 								<input type="number" class="form-control rounded-4 d-none"
@@ -418,7 +418,7 @@
 
 								<div class="col-6 form-floating mb-3">
 									<input type="text" class="form-control rounded-4" id="lemaEdit"
-										placeholder="Lema" required="required" name="lema"
+										placeholder="Lema" name="lema"
 										value="${peliEditar.lema}"> <label
 										class='${peliEditar.errores.get("lema") != null ? "is-invalid" : ""}'
 										for="lemaEdit">Lema</label>
@@ -539,7 +539,7 @@
 					<div class="modal-body mx-auto fw-bold">Estas a punto de
 						eliminar esta película. ¿Estas seguro?</div>
 					<div class="modal-footer d-flex border-0 justify-content-center">
-						<a id="botonElim" type="button" href="" class="btn btn-success">Aceptar</a>
+						<a id="botonElim" type="button" class="btn btn-success">Aceptar</a>
 						<button type="button" class="btn btn-secondary"
 							data-bs-dismiss="modal">Cancelar</button>
 					</div>
@@ -565,7 +565,7 @@
 
 						<!-- FORM AÑADIR GENERO -->
 						<form class="mt-4 formulario-genero"
-							action="/Webapp_Proyecto_Final/crearGenero.ad" method="post">
+							action="./crearGenero.ad" method="post">
 
 							<div class="text-center mb-3 modal-titulo-genero font-lato">Añadir
 								género</div>
@@ -587,7 +587,7 @@
 
 						<!-- FORM ELIMINAR GENERO -->
 						<form class="mt-4 formulario-genero"
-							action="/Webapp_Proyecto_Final/borrarGenero.ad" method="post">
+							action="./borrarGenero.ad" method="post">
 							<div class="text-center mb-3 modal-titulo-genero font-lato">Eliminar
 								género</div>
 							<div class="mb-3 form-floating">

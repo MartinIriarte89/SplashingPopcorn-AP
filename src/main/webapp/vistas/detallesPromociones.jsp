@@ -30,7 +30,7 @@
 </style>
 
 <script type="text/javascript"
-	src="/Webapp_Proyecto_Final/js/modales.js"></script>
+	src="./js/modales.js"></script>
 <script type="text/javascript" src="./js/funciones.js" defer></script>
 
 <title>Detalle de Promociones || Splashing Popcorn</title>
@@ -57,7 +57,7 @@
 					<div class="col-xxl-4 col-lg-5 col-12 my-3 m-0 p-0">
 						<div id="foto"
 							class="d-flex p-0 justify-content-center align-items-center animate__animated animate__backInLeft"
-							style="background-image: url('${promocion.urlPortada}');">
+							style="background-image: url('./${promocion.urlPortada}');">
 							<c:choose>
 								<c:when
 									test='${!usuario.itinerario.noTieneA(promocion) && (sessionScope.usuario != null)}'>
@@ -99,9 +99,9 @@
 									class="w-100 overflow-auto border border-2 d-flex">
 									<c:forEach items="${promocion.getPeliculas()}" var="pelicula">
 										<a
-											href="/Webapp_Proyecto_Final/listarDetallePelicula?id=${pelicula.id}"
+											href="./listarDetallePelicula?id=${pelicula.id}"
 											class="col-4 link overflow-hidden my-auto ms-2 p-0 justify-content-center align-items-center d-flex"
-											style="background-image: url('${pelicula.urlPortada}');">
+											style="background-image: url('./	${pelicula.urlPortada}');">
 											<c:choose>
 												<c:when
 													test='${!usuario.itinerario.noTieneA(pelicula) && (sessionScope.usuario != null)}'>
@@ -169,7 +169,7 @@
 						comprar esta promoción. ¿Estas seguro?</div>
 					<div class="modal-footer d-flex border-0 justify-content-center">
 						<a id="botonConfirm" type="button"
-							href="/Webapp_Proyecto_Final/comprarPromocion.do?id=${promocion.id}"
+							href="./comprarPromocion.do?id=${promocion.id}"
 							class="btn btn-success">Aceptar</a>
 						<button type="button" class="btn btn-secondary"
 							data-bs-dismiss="modal">Cancelar</button>

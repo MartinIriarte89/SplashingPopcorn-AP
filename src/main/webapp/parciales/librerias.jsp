@@ -7,7 +7,7 @@
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
 	crossorigin="anonymous">
 <link rel="stylesheet" type="text/css"
-	href="/Webapp_Proyecto_Final/css/estilosCompartidos.css">
+	href="./css/estilosCompartidos.css">
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
 	integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
@@ -31,7 +31,7 @@
 	crossorigin="anonymous"></script>
 
 <link rel="shortcut icon"
-	href="/Webapp_Proyecto_Final/imagenes/logo.png" sizes="75px;">
+	href="./imagenes/logo.png" sizes="75px;">
 
 <style>
 .font-lato {

@@ -8,13 +8,13 @@
 
 <jsp:include page="../parciales/librerias.jsp"></jsp:include>
 <link rel="stylesheet" type="text/css"
-	href="../css/estiloMisCompras.css">
-<link rel="stylesheet" type="text/css" href="../css/botones.css">
+	href="./css/estiloMisCompras.css">
+<link rel="stylesheet" type="text/css" href="./css/botones.css">
 <script type="text/javascript"
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-<script type="text/javascript" src="../js/jquery.pajinate.js"></script>
-<script type="text/javascript" src="../js/jquery.resize.js"></script>
-<script type="text/javascript" src="../js/funciones.js"></script>
+<script type="text/javascript" src="./js/jquery.pajinate.js"></script>
+<script type="text/javascript" src="./js/jquery.resize.js"></script>
+<script type="text/javascript" src="./js/funciones.js"></script>
 <title>Mis Compras || Splashing Popcorn</title>
 
 </head>
@@ -56,13 +56,13 @@
 								class="display-flex justify-content-center col-xl-12 col-md-4 col-5 mt-5 px-md-4 px-sm-5 px-2">
 								<div
 									class="row flex-xl-row flex-column fondo-backdrop carta h-100 m-0"
-									style='background-image:${compra.esPromocion() ? "linear-gradient(130deg , rgb(0 0 0) 30%, rgb(13 13 13/ 88%) 80%)" : "linear-gradient(90deg, rgba(22, 26, 29, 1) 30%, rgba(22, 26, 29, 0.5) 80%)"} , url("../${compra.urlFondo}");'>
+									style='background-image:${compra.esPromocion() ? "linear-gradient(130deg , rgb(0 0 0) 30%, rgb(13 13 13/ 88%) 80%)" : "linear-gradient(90deg, rgba(22, 26, 29, 1) 30%, rgba(22, 26, 29, 0.5) 80%)"} , url("./${compra.urlFondo}");'>
 									<!-- IMAGEN CARD -->
 									<div class="col-auto ms-xl-5 mx-auto">
 										<div class="fondo-portada"
-											style="background-image: url('../${compra.urlPortada}');">
+											style="background-image: url('./${compra.urlPortada}');">
 											<a
-												href='/Webapp_Proyecto_Final/${compra.esPromocion() ? "listarDetallePromocion" : "listarDetallePelicula"}?id=${compra.id}'><img
+												href='./${compra.esPromocion() ? "listarDetallePromocion" : "listarDetallePelicula"}?id=${compra.id}'><img
 												class="w-100 h-100" style="opacity: 0%"></a>
 										</div>
 									</div>

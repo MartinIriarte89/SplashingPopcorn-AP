@@ -12,6 +12,7 @@ public class ServicioItinerario {
 	public Itinerario buscarPor(int id) {
 		Itinerario itinerario = itinerarioDAO.buscarPor(id);
 		ProveedorDeConexion.cerrarConexion();
+		
 		return itinerario;
 	}
 }

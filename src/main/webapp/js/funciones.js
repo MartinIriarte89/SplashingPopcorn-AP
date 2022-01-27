@@ -92,7 +92,7 @@ function mostrarPelicula(id, esPromo) {
 		cargarModal(json);
 	});
 
-	xhr.open('GET', '../getProducto.jsp?id=' + id + '&esPromo=' + esPromo);
+	xhr.open('GET', './getProducto.jsp?id=' + id + '&esPromo=' + esPromo);
 
 	// Realizamos el pedido
 	xhr.send(fd);

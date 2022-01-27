@@ -9,11 +9,7 @@
 
 <jsp:include page="../parciales/librerias.jsp"></jsp:include>
 <link rel="stylesheet" type="text/css"
-	href="/Webapp_Proyecto_Final/css/registro.css">
-
-<script type="text/javascript"
-	src="/Webapp_Proyecto_Final/js/modales.js"></script>
-
+	href="./css/registro.css">
 
 <title>Registro || Splashing Popcorn</title>
 </head>
@@ -31,7 +27,7 @@
 
 				<div class="row m-0 p-0">
 					<div class="col-md-8 col-11 mx-auto">
-						<form action="" method="post">
+						<form action="./registro" method="post">
 							<div class="form-floating mb-4">
 								<input type="text"
 									class="form-control rounded-4 font-merriweather" id="nombre"

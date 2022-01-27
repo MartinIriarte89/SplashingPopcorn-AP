@@ -8,6 +8,7 @@ import java.util.HashMap;
 
 import modelo.Itinerario;
 import modelo.Sugerencia;
+import modelo.objetoNulo.ItinerarioNulo;
 import persistencia.commons.ProveedorDeConexion;
 
 public class ItinerarioDAO {
@@ -63,8 +64,14 @@ public class ItinerarioDAO {
 			ResultSet resultItinerario = declarItinerario.executeQuery();
 			ResultSet resultIdPromociones = declarIdPromociones.executeQuery();
 			ResultSet resultIdAtracciones = declarIdAtracciones.executeQuery();
-
-			itinerario = crearItinerario(resultItinerario, resultIdPromociones, resultIdAtracciones);
+			
+			
+			
+			if(resultItinerario.next()) {
+				itinerario = crearItinerario(resultItinerario, resultIdPromociones, resultIdAtracciones);
+			}else {
+				itinerario = ItinerarioNulo.construir();	
+			}
 
 		} catch (Exception e) {
 			throw new DatosPerdidosError(e);

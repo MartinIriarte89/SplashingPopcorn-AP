@@ -61,4 +61,8 @@ public class Itinerario {
 			peliculasCompradas.add((Pelicula) sugerencia);
 		}
 	}
+
+	public boolean esNulo() {
+		return false;
+	}
 }

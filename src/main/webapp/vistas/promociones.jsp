@@ -13,9 +13,9 @@
 <jsp:include page="../parciales/librerias.jsp"></jsp:include>
 
 <link rel="stylesheet" type="text/css"
-	href="/Webapp_Proyecto_Final/css/botones.css">
+	href="./css/botones.css">
 <link rel="stylesheet" type="text/css"
-	href="/Webapp_Proyecto_Final/css/estiloPeliculasYPromos.css">
+	href="./css/estiloPeliculasYPromos.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 <style type="text/css">
@@ -25,15 +25,15 @@
 </style>
 
 <script type="text/javascript"
-	src="/Webapp_Proyecto_Final/js/filtrarGeneros.js"></script>
+	src="./js/filtrarGeneros.js"></script>
 <script type="text/javascript"
-	src="/Webapp_Proyecto_Final/js/jquery.pajinate.js"></script>
+	src="./js/jquery.pajinate.js"></script>
 <script type="text/javascript"
-	src="/Webapp_Proyecto_Final/js/jquery.resize2.js"></script>
+	src="./js/jquery.resize2.js"></script>
 <script type="text/javascript"
-	src="/Webapp_Proyecto_Final/js/modales.js"></script>
+	src="./js/modales.js"></script>
 <script type="text/javascript"
-	src="/Webapp_Proyecto_Final/js/completarModales.js" defer></script>
+	src="./js/completarModales.js" defer></script>
 
 </head>
 
@@ -137,7 +137,7 @@
 										<!-- IMAGEN CARD -->
 										<div
 											class="fondo-portada mx-auto p-0 d-flex justify-content-center align-items-center"
-											style="background-image: url('${promocion.urlPortada}');">
+											style="background-image: url('./${promocion.urlPortada}');">
 											<c:choose>
 												<c:when
 													test='${!usuario.itinerario.noTieneA(promocion) && (sessionScope.usuario != null)}'>
@@ -181,7 +181,7 @@
 												<!-- BOTONES CARD -->
 												<div class="d-flex mt-auto justify-content-center mb-2">
 													<a
-														href="/Webapp_Proyecto_Final/listarDetallePromocion?id=${promocion.id}"
+														href="./listarDetallePromocion?id=${promocion.id}"
 														class="botondes learn-more d-flex"> <span
 														class="circle" aria-hidden="true"> <span
 															class="icon arrow"></span>
@@ -249,7 +249,7 @@
 					<!-- CUERPO DEL MODAL -->
 					<div class="modal-body p-5 pt-0">
 						<!-- FORLMULARIO DEL MODAL -->
-						<form action="crearPromocion.ad" method="post"
+						<form action="./crearPromocion.ad" method="post"
 							enctype="multipart/form-data">
 							<div class="form-floating mb-3">
 								<input type="text" class="form-control rounded-4" id="titulo"
@@ -387,7 +387,7 @@
 					<!-- CUERPO DEL MODAL -->
 					<div class="modal-body p-5 pt-0">
 						<!-- FORLMULARIO DEL MODAL -->
-						<form action="editarPromocion.ad" method="post"
+						<form action="./editarPromocion.ad" method="post"
 							enctype="multipart/form-data">
 							<div class="form-floating mb-3">
 								<input type="text" class="form-control rounded-4 d-none"

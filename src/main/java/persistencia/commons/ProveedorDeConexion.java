@@ -48,12 +48,12 @@ public class ProveedorDeConexion {
 
 	public static Connection getConexion() throws SQLException {
 		try {
-			Class.forName("org.sqlite.JDBC");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			throw new SQLException(e);
 		}
 		if (conexion == null || conexion.isClosed()) {
-			conexion = DriverManager.getConnection(url);
+			conexion = DriverManager.getConnection(url,"root","");
 		}
 		return conexion;
 	}

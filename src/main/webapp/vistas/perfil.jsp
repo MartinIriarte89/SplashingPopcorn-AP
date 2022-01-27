@@ -8,12 +8,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <jsp:include page="../parciales/librerias.jsp"></jsp:include>
-<link rel="stylesheet" href="/Webapp_Proyecto_Final/css/perfil.css" />
+<link rel="stylesheet" href="./css/perfil.css" />
 
 <script type="text/javascript"
-	src="/Webapp_Proyecto_Final/js/modales.js"></script>
+	src="./js/modales.js"></script>
 <script type="text/javascript"
-	src="/Webapp_Proyecto_Final/js/completarModales.js" defer></script>
+	src="./js/completarModales.js" defer></script>
 
 <title>Perfil || Splashing Popcorn</title>
 </head>
@@ -122,7 +122,7 @@
 							class="row m-0 p-0 contenedor font-merriweather align-items-md-center">
 							<div class="col-12 col-lg-10 mx-lg-auto text-center titulo">Cambia
 								tu contraseña</div>
-							<form action="/Webapp_Proyecto_Final/editarUsuario.do"
+							<form action="./editarUsuario.do"
 								method="post">
 								<div class="col-12 col-lg-9 mx-lg-auto mb-lg-5">
 									<div
@@ -200,7 +200,7 @@
 						<!-- CUERPO DEL MODAL -->
 						<div class="modal-body p-5 pt-0">
 							<!-- FORLMULARIO DEL MODAL -->
-							<form action="editarUsuario.do" method="post">
+							<form action="./editarUsuario.do" method="post">
 								<div class="form-floating mb-3">
 									<input type="text" class="form-control rounded-4" id="nombre"
 										placeholder="Nombre" required="required" name="nombre"
@@ -263,7 +263,7 @@
 						<!-- CUERPO DEL MODAL -->
 						<div class="modal-body p-5 pt-0">
 							<!-- FORLMULARIO DEL MODAL -->
-							<form action="editarUsuario.do" method="post"
+							<form action="./editarUsuario.do" method="post"
 								enctype="multipart/form-data">
 								<div class="mb-3">
 									<label for="formFile" class="form-label">Seleccione un

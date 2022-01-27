@@ -32,7 +32,7 @@ $(document).ready(function() {
 
 			let botonEnviar = modalBorrarUsuario.querySelector('#botonElim')
 
-			botonEnviar.setAttribute('href', "/Webapp_Proyecto_Final/borrarUsuario.ad?id=" + id)
+			botonEnviar.setAttribute('href', "./borrarUsuario.ad?id=" + id)
 		});
 	}
 
@@ -79,7 +79,7 @@ $(document).ready(function() {
 
 			let botonEnviar = modalBorrar.querySelector('#botonElim')
 
-			botonEnviar.setAttribute('href', "/Webapp_Proyecto_Final/borrarPelicula.ad?id=" + id)
+			botonEnviar.setAttribute('href', "./borrarPelicula.ad?id=" + id)
 		});
 	}
 
@@ -136,7 +136,7 @@ $(document).ready(function() {
 
 			let botonEnviar = modalBorrarPromo.querySelector('#botonElim')
 
-			botonEnviar.setAttribute('href', "/Webapp_Proyecto_Final/borrarPromocion.ad?id=" + id)
+			botonEnviar.setAttribute('href', "./borrarPromocion.ad?id=" + id)
 		});
 	}
 

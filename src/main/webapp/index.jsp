@@ -16,9 +16,9 @@
 	rel="stylesheet"
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
 	crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href="css/estilosCompartidos.css">
-<link rel="stylesheet" type="text/css" href="css/botones.css">
-<link rel="stylesheet" type="text/css" href="css/index.css">
+<link rel="stylesheet" type="text/css" href="./css/estilosCompartidos.css">
+<link rel="stylesheet" type="text/css" href="./css/botones.css">
+<link rel="stylesheet" type="text/css" href="./css/index.css">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 <link rel="stylesheet"
@@ -37,9 +37,9 @@
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 	crossorigin="anonymous"></script>
 <script type="text/javascript"
-	src="/Webapp_Proyecto_Final/js/modales.js"></script>
+	src="./js/modales.js"></script>
 
-<link rel="shortcut icon" href="imagenes/logo.png" sizes="75px;">
+<link rel="shortcut icon" href="./imagenes/logo.png" sizes="75px;">
 
 <style>
 .font-lato {
@@ -64,13 +64,13 @@
 <body>
 	<header>
 		<!-- ELEMENTO HEADER -->
-		<jsp:include page="parciales/header.jsp"></jsp:include>
+		<jsp:include page="./parciales/header.jsp"></jsp:include>
 	</header>
 	<main>
 
 		<!-- MODAL INICIO SESION -->
 		<c:if test="${usuario == null }">
-			<jsp:include page="parciales/inicioSesionModal.jsp"></jsp:include>
+			<jsp:include page="./parciales/inicioSesionModal.jsp"></jsp:include>
 		</c:if>
 		<div class="container-fluid p-1">
 
@@ -90,7 +90,7 @@
 				</div>
 				<div class="carousel-inner">
 					<div class="carousel-item active">
-						<img src="imagenes/cine.jpg" class="d-block w-100" alt="Portada">
+						<img src="./imagenes/cine.jpg" class="d-block w-100" alt="Portada">
 						<div class="carousel-caption d-block">
 							<h5 class="font-lato tituloPromocion mb-md-4 mb-3">Splashing
 								Popcorn</h5>
@@ -103,9 +103,9 @@
 						<!-- ITEMS DE CARRUSEL -->
 						<div class="carousel-item">
 							<a
-								href="/Webapp_Proyecto_Final/listarDetallePromocion?id=${promocion.id}"
+								href="./listarDetallePromocion?id=${promocion.id}"
 								style="height: 100%; width: 100%"><img
-								src="${promocion.urlPortada}" class="d-block w-100"
+								src="./${promocion.urlPortada}" class="d-block w-100"
 								alt="${promocion.titulo}"></a>
 							<div class="carousel-caption d-block">
 								<h5 class="font-lato tituloPromocion mb-md-4 mb-3">${promocion.titulo}</h5>
@@ -157,7 +157,7 @@
 								class="card-img-top rounded-3 mx-auto" alt="descuento" style="filter: drop-shadow(5px 11px 8px grey);">
 							<div
 								class="card-body col-sm-12 col-11 align-self-center p-0 pt-sm-3">
-								<a href="/Webapp_Proyecto_Final/promociones"
+								<a href="./promociones"
 									class="botondes learn-more"> <span class="circle"
 									aria-hidden="true"> <span class="icon arrow"></span>
 								</span> <span class="button-text">Ir a ver</span>
@@ -174,7 +174,7 @@
 								class="card-img-top rounded-3 mx-auto" alt="descuento" style="filter: drop-shadow(5px 11px 8px grey);">
 							<div
 								class="card-body col-sm-12 col-11 align-self-center p-0 pt-sm-3">
-								<a href="/Webapp_Proyecto_Final/promociones"
+								<a href="./promociones"
 									class="botondes learn-more"> <span class="circle"
 									aria-hidden="true"> <span class="icon arrow"></span>
 								</span> <span class="button-text">Ir a ver</span>
@@ -191,7 +191,7 @@
 								class="card-img-top rounded-3 mx-auto" alt="descuento" style="filter: drop-shadow(5px 11px 8px grey);">
 							<div
 								class="card-body col-sm-12 col-11 align-self-center p-0 pt-sm-3">
-								<a href="/Webapp_Proyecto_Final/promociones"
+								<a href="./promociones"
 									class="botondes learn-more"> <span class="circle"
 									aria-hidden="true"> <span class="icon arrow"></span>
 								</span> <span class="button-text">Ir a ver</span>
@@ -219,7 +219,7 @@
 						class="modal-body mx-auto my-4 text-center text-white fw-bold fs-5">${success}</div>
 					<div class="modal-footer d-flex border-0">
 						<a type="button" class="btn btn-outline-light mx-auto"
-							href="/Webapp_Proyecto_Final/inicio" data-bs-dismiss="modal">Aceptar</a>
+							href="" data-bs-dismiss="modal">Aceptar</a>
 					</div>
 				</div>
 			</div>

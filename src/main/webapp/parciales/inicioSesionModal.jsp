@@ -10,7 +10,7 @@
 			<!-- ENCABEZADO DEL MODAL -->
 			<div class="modal-header p-5 pb-4 border-bottom-0">
 				<div class="d-inline-flex">
-					<img alt="" src="/Webapp_Proyecto_Final/imagenes/logo.png"
+					<img alt="" src="./imagenes/logo.png"
 						style="width: 30%; margin: -20px;">
 					<h2 class="align-self-center">Splashing Popcorn</h2>
 				</div>
@@ -48,7 +48,7 @@
 				</form>
 				<hr>
 				<div class="text-center h-4">Si no estas registrado, regístrate gratis aquí </div>
-				<div class="d-flex mt-3"> <a class="mx-auto btn btn-secondary" href="/Webapp_Proyecto_Final/registro" style="font-size: 12px">Regístrate</a> </div>
+				<div class="d-flex mt-3"> <a class="mx-auto btn btn-secondary" href="./registro" style="font-size: 12px">Regístrate</a> </div>
 			</div>
 		</div>
 	</div>
