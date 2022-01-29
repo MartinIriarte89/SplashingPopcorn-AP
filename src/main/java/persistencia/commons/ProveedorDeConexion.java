@@ -53,7 +53,7 @@ public class ProveedorDeConexion {
 			throw new SQLException(e);
 		}
 		if (conexion == null || conexion.isClosed()) {
-			conexion = DriverManager.getConnection(url,"root","");
+			conexion = DriverManager.getConnection(url,"root","PEYpiQzGtd");
 		}
 		return conexion;
 	}

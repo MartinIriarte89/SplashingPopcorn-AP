@@ -48,7 +48,7 @@ if (!!document.getElementById('contenidoDetallePromo')) {
 		let imagenPortada = window.getComputedStyle(foto).getPropertyValue('background-image');
 
 		if ($(window).width() < 992) {
-			contenido.style.backgroundImage =  imagenPortada;
+			contenido.style.backgroundImage = imagenPortada;
 			foto.style.backgroundImage = imagenFondo;
 		}
 	});
@@ -62,7 +62,7 @@ if (!!document.getElementById('contenidoDetallePromo')) {
 
 		}
 		if ($(window).width() <= 992) {
-			contenido.style.backgroundImage =  copiaPortada;
+			contenido.style.backgroundImage = copiaPortada;
 			foto.style.backgroundImage = copiaFondo;
 
 		}
@@ -71,6 +71,29 @@ if (!!document.getElementById('contenidoDetallePromo')) {
 }
 
 
+if (!!document.getElementById('foto')) {
+	var foto = document.querySelector('#foto');
+
+	$(document).ready(function() {
+
+		if ($(window).width() >= 576) {
+			foto.classList.add("animate__animated");
+			foto.classList.add("animate__backInLeft")
+		}
+	});
+}
+
+if (!!document.getElementById('contenedor-descripcion')) {
+	var contenedorDescripcion = document.querySelector('#contenedor-descripcion');
+
+	$(document).ready(function() {
+
+		if ($(window).width() >= 576) {
+			contenedorDescripcion.classList.add("animate__animated");
+			contenedorDescripcion.classList.add("animate__backInRight")
+		}
+	});
+}
 
 
 

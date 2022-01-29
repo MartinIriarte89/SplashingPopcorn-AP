@@ -11,8 +11,7 @@
 
 <jsp:include page="../parciales/librerias.jsp"></jsp:include>
 
-<link rel="stylesheet" type="text/css"
-	href="./css/botones.css">
+<link rel="stylesheet" type="text/css" href="./css/botones.css">
 <link rel="stylesheet" type="text/css"
 	href="./css/estiloPeliculasYPromos.css">
 <link rel="stylesheet"
@@ -24,16 +23,11 @@
 </style>
 
 
-<script type="text/javascript"
-	src="./js/filtrarGeneros.js"></script>
-<script type="text/javascript"
-	src="./js/modales.js"></script>
-<script type="text/javascript"
-	src="./js/jquery.pajinate.js" defer></script>
-<script type="text/javascript"
-	src="./js/jquery.resize2.js" defer></script>
-<script type="text/javascript"
-	src="./js/completarModales.js" defer></script>
+<script type="text/javascript" src="./js/filtrarGeneros.js"></script>
+<script type="text/javascript" src="./js/modales.js"></script>
+<script type="text/javascript" src="./js/jquery.pajinate.js" defer></script>
+<script type="text/javascript" src="./js/jquery.resize2.js" defer></script>
+<script type="text/javascript" src="./js/completarModales.js" defer></script>
 
 </head>
 
@@ -184,8 +178,7 @@
 												</div>
 												<!-- BOTONES CARD -->
 												<div class="d-flex mt-auto justify-content-center mb-2">
-													<a
-														href="./listarDetallePelicula?id=${pelicula.id}"
+													<a href="./listarDetallePelicula?id=${pelicula.id}"
 														class="botondes learn-more d-flex"> <span
 														class="circle" aria-hidden="true"> <span
 															class="icon arrow"></span>
@@ -271,8 +264,8 @@
 
 								<div class="col-6 form-floating mb-3">
 									<input type="text" class="form-control rounded-4" id="lema"
-										placeholder="Lema" name="lema"
-										value="${peliCrear.lema}"> <label
+										placeholder="Lema" name="lema" value="${peliCrear.lema}">
+									<label
 										class='${peliCrear.errores.get("lema") != null ? "is-invalid" : ""}'
 										for="lema">Lema</label>
 									<div class="invalid-tooltip">
@@ -342,15 +335,24 @@
 							</div>
 
 							<div class="row mb-3">
-								<div class=" col-md-6 col-12">
-									<label for="fotoDeFondo" class="form-label">Foto de
-										fondo</label> <input class="form-control" type="file" id="fotoDeFondo"
-										name="urlFondo">
+								<div class=" col-md-6 col-12 ">
+									<label for="fotoDeFondo"
+										class='form-label ${errorImagenFondo.get("error") != null ? "is-invalid" : "" }'>Foto
+										de fondo</label> <input class="form-control" type="file"
+										id="fotoDeFondo" name="urlFondo"
+										accept="image/.jpeg,.png,.jpg,.gif,.webp">
+									<div class="invalid-feedback">
+										<c:out value='${errorImagenFondo.get("error")}'></c:out>
+									</div>
 								</div>
-								<div class=" col-md-6 col-12">
-									<label for="fotoDePortada" class="form-label">Foto de
-										portada</label> <input class="form-control" type="file"
-										id="fotoDePortada" name="urlPortada">
+								<div class=" col-md-6 col-12 ">
+									<label for="fotoDePortada"
+										class='form-label ${errorImagenPortada.get("error") != null ? "is-invalid" : "" }'>Foto
+										de portada</label> <input class="form-control" type="file"
+										id="fotoDePortada" name="urlPortada" accept="image/*">
+									<div class="invalid-feedback">
+										<c:out value='${errorImagenPortada.get("error")}'></c:out>
+									</div>
 								</div>
 							</div>
 							<div class="form-floating my-3 col-md-10 col-12 mx-auto">
@@ -418,8 +420,8 @@
 
 								<div class="col-6 form-floating mb-3">
 									<input type="text" class="form-control rounded-4" id="lemaEdit"
-										placeholder="Lema" name="lema"
-										value="${peliEditar.lema}"> <label
+										placeholder="Lema" name="lema" value="${peliEditar.lema}">
+									<label
 										class='${peliEditar.errores.get("lema") != null ? "is-invalid" : ""}'
 										for="lemaEdit">Lema</label>
 									<div class="invalid-tooltip">
@@ -490,15 +492,25 @@
 							</div>
 
 							<div class="row mb-3">
-								<div class=" col-md-6 col-12">
-									<label for="fotoDeFondoEdit" class="form-label">Foto de
-										fondo</label> <input class="form-control" type="file"
-										id="fotoDeFondoEdit" name="urlFondo">
+								<div class=" col-md-6 col-12 ">
+									<label for="fotoDeFondoEdit"
+										class='form-label ${errorImagenFondo.get("error") != null ? "is-invalid" : "" }'>Foto
+										de fondo</label> <input class="form-control" type="file"
+										id="fotoDeFondoEdit" name="urlFondo"
+										accept="image/.jpeg,.png,.jpg,.gif,.webp">
+									<div class="invalid-feedback">
+										<c:out value='${errorImagenFondo.get("error")}'></c:out>
+									</div>
 								</div>
-								<div class=" col-md-6 col-12">
-									<label for="fotoDePortadaEdit" class="form-label">Foto
+								<div class=" col-md-6 col-12 ">
+									<label for="fotoDePortadaEdit"
+										class='form-label ${errorImagenPortada.get("error") != null ? "is-invalid" : "" }'>Foto
 										de portada</label> <input class="form-control" type="file"
-										id="fotoDePortadaEdit" name="urlPortada">
+										id="fotoDePortadaEdit" name="urlPortada"
+										accept="image/.jpeg,.png,.jpg,.gif,.webp">
+									<div class="invalid-feedback">
+										<c:out value='${errorImagenPortada.get("error")}'></c:out>
+									</div>
 								</div>
 							</div>
 							<div class="form-floating my-3 col-md-10 col-12 mx-auto">
@@ -564,8 +576,8 @@
 					<div class="modal-body p-5 pt-0">
 
 						<!-- FORM AÑADIR GENERO -->
-						<form class="mt-4 formulario-genero"
-							action="./crearGenero.ad" method="post">
+						<form class="mt-4 formulario-genero" action="./crearGenero.ad"
+							method="post">
 
 							<div class="text-center mb-3 modal-titulo-genero font-lato">Añadir
 								género</div>
@@ -586,8 +598,8 @@
 						<hr style="background: black; opacity: 1; padding: 1px;">
 
 						<!-- FORM ELIMINAR GENERO -->
-						<form class="mt-4 formulario-genero"
-							action="./borrarGenero.ad" method="post">
+						<form class="mt-4 formulario-genero" action="./borrarGenero.ad"
+							method="post">
 							<div class="text-center mb-3 modal-titulo-genero font-lato">Eliminar
 								género</div>
 							<div class="mb-3 form-floating">

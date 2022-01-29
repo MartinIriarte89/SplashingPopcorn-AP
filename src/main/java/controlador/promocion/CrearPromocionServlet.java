@@ -20,7 +20,7 @@ import utilidades.Validacion;
 
 @WebServlet("/crearPromocion.ad")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 1, maxFileSize = 1024 * 1024 * 20, // 20 MB
-maxRequestSize = 1024 * 1024 * 100 // 100 MB
+		maxRequestSize = 1024 * 1024 * 100 // 100 MB
 )
 public class CrearPromocionServlet extends HttpServlet implements Servlet {
 	private static final long serialVersionUID = -6648217727244375105L;
@@ -49,7 +49,7 @@ public class CrearPromocionServlet extends HttpServlet implements Servlet {
 		ArrayList<Pelicula> peliculas = new ArrayList<Pelicula>();
 
 		String titulo = request.getParameter("titulo");
-		String [] idPeliculas = validarDatos.split(request.getParameter("idPeliculas"), ",");
+		String[] idPeliculas = validarDatos.split(request.getParameter("idPeliculas"), ",");
 		String descripcion = request.getParameter("descripcion");
 		String urlPortada = request.getPart("urlPortada").getSubmittedFileName();
 		String tipoPromocion = request.getParameter("tipoPromocion");
@@ -58,9 +58,19 @@ public class CrearPromocionServlet extends HttpServlet implements Servlet {
 		for (String id : idPeliculas) {
 			peliculas.add(servPelicula.buscarPor(validarDatos.esNumeroEnteroValido(id)));
 		}
-		
+
 		if (!urlPortada.equals("")) {
-			servGuardarImagen.guardarFotoPortadaPromocion(urlPortada, request.getPart("urlPortada"));
+			if (!servGuardarImagen.guardarFotoPortadaPromocion(urlPortada, request.getPart("urlPortada"))) {
+				Promocion promocion = servPromocion.crearPromocionTemp(titulo, peliculas, descripcion, urlPortada,
+						tipoPromocion, beneficio);
+				request.setAttribute("errorImagen", servGuardarImagen.getErrores());
+				request.setAttribute("promocionTempCrear", promocion);
+				request.setAttribute("serv", "crear");
+
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/promociones");
+				dispatcher.forward(request, response);
+				return;
+			}
 			urlPortada = "imagenes/portadas/promociones/" + urlPortada;
 		}
 

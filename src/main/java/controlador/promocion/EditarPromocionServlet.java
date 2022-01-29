@@ -20,7 +20,7 @@ import utilidades.Validacion;
 
 @WebServlet("/editarPromocion.ad")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 1, maxFileSize = 1024 * 1024 * 20, // 20 MB
-maxRequestSize = 1024 * 1024 * 100 // 100 MB
+		maxRequestSize = 1024 * 1024 * 100 // 100 MB
 )
 public class EditarPromocionServlet extends HttpServlet implements Servlet {
 
@@ -37,7 +37,7 @@ public class EditarPromocionServlet extends HttpServlet implements Servlet {
 		this.servGuardarImagen = new ServicioGuardarImagen();
 		this.validarDatos = new Validacion();
 	}
-	
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		RequestDispatcher dispatcher = req.getServletContext().getRequestDispatcher("/promociones");
@@ -60,10 +60,20 @@ public class EditarPromocionServlet extends HttpServlet implements Servlet {
 		for (String idPeli : idPeliculas) {
 			peliculas.add(servPelicula.buscarPor(validarDatos.esNumeroEnteroValido(idPeli)));
 		}
-		
+
 		if (!urlPortada.equals("")) {
 			urlPortada = id + urlPortada;
-			servGuardarImagen.guardarFotoPortadaPromocion(urlPortada, request.getPart("urlPortadaEdit"));
+			if (!servGuardarImagen.guardarFotoPortadaPromocion(urlPortada, request.getPart("urlPortadaEdit"))) {
+				Promocion promocion = servPromocion.crearPromocionTemp(titulo, peliculas, descripcion, urlPortada,
+						tipoPromocion, beneficio);
+				request.setAttribute("errorImagen", servGuardarImagen.getErrores());
+				request.setAttribute("promocionTempEdit", promocion);
+				request.setAttribute("serv", "editar");
+
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/promociones");
+				dispatcher.forward(request, response);
+				return;
+			}
 			urlPortada = "imagenes/portadas/promociones/" + urlPortada;
 		}
 

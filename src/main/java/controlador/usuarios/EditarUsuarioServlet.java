@@ -19,9 +19,7 @@ import servicios.ServicioUsuario;
 import utilidades.Validacion;
 
 @WebServlet("/editarUsuario.do")
-@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 1, maxFileSize = 1024 * 1024 * 20, // 20 MB
-		maxRequestSize = 1024 * 1024 * 100 // 100 MB
-)
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 1, maxRequestSize = 1024 * 1024 * 100)
 public class EditarUsuarioServlet extends HttpServlet implements Servlet {
 
 	private static final long serialVersionUID = 750290554834772235L;
@@ -55,14 +53,22 @@ public class EditarUsuarioServlet extends HttpServlet implements Servlet {
 			int tiempoDisponible = validarDatos.esNumeroEnteroValido(req.getParameter("tiempo"));
 			boolean esAdmin = req.getParameter("admin").equals("admin") ? true : false;
 			String urlPerfil = req.getPart("urlPerfil").getSubmittedFileName();
-			
+
 			Genero preferencia = servGenero.buscarPor(preferenciaNombre);
-			
-			
+
 			if (!urlPerfil.equals("")) {
 				String nombreArchivo = id + req.getPart("urlPerfil").getSubmittedFileName();
-				servGuardarImagen.guardarFotoPerfilUsuario(nombreArchivo, req.getPart("urlPerfil"));
-				urlPerfil = "imagenes/perfiles/" +  id + urlPerfil;
+				if (!servGuardarImagen.guardarFotoPerfilUsuario(nombreArchivo, req.getPart("urlPerfil"))) {
+					Usuario usuariotemp = new Usuario(nombre, usuario, "", dineroDisponible, tiempoDisponible,
+							preferencia, urlPerfil, esAdmin);
+					req.setAttribute("errorImagen", servGuardarImagen.getErrores());
+					req.setAttribute("usuarioEditar", usuariotemp);
+
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(ruta);
+					dispatcher.forward(req, resp);
+					return;
+				}
+				urlPerfil = "imagenes/perfiles/" + id + urlPerfil;
 			}
 
 			usuarioTemp = servUsuario.editar(id, nombre, usuario, dineroDisponible, tiempoDisponible, preferencia,
@@ -103,6 +109,13 @@ public class EditarUsuarioServlet extends HttpServlet implements Servlet {
 
 				if (!req.getPart("urlPerfil").getSubmittedFileName().equals("")) {
 					String nombreArchivo = user.getId() + req.getPart("urlPerfil").getSubmittedFileName();
+					if (!servGuardarImagen.guardarFotoPerfilUsuario(nombreArchivo, req.getPart("urlPerfil"))) {
+						req.setAttribute("errorImagen", servGuardarImagen.getErrores());
+
+						RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(ruta);
+						dispatcher.forward(req, resp);
+						return;
+					}
 					servGuardarImagen.guardarFotoPerfilUsuario(nombreArchivo, req.getPart("urlPerfil"));
 					usuarioTemp = servUsuario.editarFotoPerfil(id, nombreArchivo);
 				} else {
@@ -121,7 +134,6 @@ public class EditarUsuarioServlet extends HttpServlet implements Servlet {
 				if (!user.esAdmin()) {
 					req.getSession().setAttribute("usuario", usuarioTemp);
 				}
-					
 
 				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(ruta);
 				dispatcher.forward(req, resp);

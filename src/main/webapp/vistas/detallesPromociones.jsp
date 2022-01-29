@@ -56,7 +56,7 @@
 					<!-- IMAGEN -->
 					<div class="col-xxl-4 col-lg-5 col-12 my-3 m-0 p-0">
 						<div id="foto"
-							class="d-flex p-0 justify-content-center align-items-center animate__animated animate__backInLeft"
+							class="d-flex p-0 justify-content-center align-items-center"
 							style="background-image: url('./${promocion.urlPortada}');">
 							<c:choose>
 								<c:when
@@ -72,7 +72,7 @@
 					</div>
 					<!-- DESCRIPCION DE PELICULA-->
 					<div
-						class="col-xxl-7 col-lg-6 col-12 p-0 me-lg-auto ms-lg-4 my-3 mt-lg-0 mt-5 d-flex flex-column animate__animated animate__backInRight"
+						class="col-xxl-7 col-lg-6 col-12 p-0 me-lg-auto ms-lg-4 my-3 mt-lg-0 mt-5 d-flex flex-column "
 						id="contenedor-descripcion">
 						<!-- DESCRIPCION -->
 						<div class="row flex-column h-100 m-0 p-0">

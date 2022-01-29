@@ -12,8 +12,7 @@
 
 <jsp:include page="../parciales/librerias.jsp"></jsp:include>
 
-<link rel="stylesheet" type="text/css"
-	href="./css/botones.css">
+<link rel="stylesheet" type="text/css" href="./css/botones.css">
 <link rel="stylesheet" type="text/css"
 	href="./css/estiloPeliculasYPromos.css">
 <link rel="stylesheet"
@@ -24,16 +23,11 @@
 }
 </style>
 
-<script type="text/javascript"
-	src="./js/filtrarGeneros.js"></script>
-<script type="text/javascript"
-	src="./js/jquery.pajinate.js"></script>
-<script type="text/javascript"
-	src="./js/jquery.resize2.js"></script>
-<script type="text/javascript"
-	src="./js/modales.js"></script>
-<script type="text/javascript"
-	src="./js/completarModales.js" defer></script>
+<script type="text/javascript" src="./js/filtrarGeneros.js"></script>
+<script type="text/javascript" src="./js/jquery.pajinate.js"></script>
+<script type="text/javascript" src="./js/jquery.resize2.js"></script>
+<script type="text/javascript" src="./js/modales.js"></script>
+<script type="text/javascript" src="./js/completarModales.js" defer></script>
 
 </head>
 
@@ -180,8 +174,7 @@
 												</div>
 												<!-- BOTONES CARD -->
 												<div class="d-flex mt-auto justify-content-center mb-2">
-													<a
-														href="./listarDetallePromocion?id=${promocion.id}"
+													<a href="./listarDetallePromocion?id=${promocion.id}"
 														class="botondes learn-more d-flex"> <span
 														class="circle" aria-hidden="true"> <span
 															class="icon arrow"></span>
@@ -336,13 +329,18 @@
 							<div>
 								<input type="text" class="form-control d-none" id="idPeliculas"
 									placeholder="idPeliculas" required="required"
-									name="idPeliculas">
+									name="idPeliculas" accept="image/*">
 							</div>
 
 							<div class="">
-								<label for="fotoDePortada" class="form-label">Foto de
-									portada</label> <input class="form-control" type="file"
-									id="fotoDePortada" name="urlPortada">
+								<label for="fotoDePortada"
+									class='form-label ${errorImagen.get("error") != null ? "is-invalid" : "" }'>Foto
+									de portada</label> <input class="form-control" type="file"
+									id="fotoDePortada" name="urlPortada"
+									accept="image/.jpeg,.png,.jpg,.gif,.webp">
+								<div class="invalid-feedback">
+									<c:out value='${errorImagen.get("error")}'></c:out>
+								</div>
 							</div>
 
 							<div class="form-floating my-3 col-12 mx-auto">
@@ -481,13 +479,18 @@
 							<div>
 								<input type="text" class="form-control d-none"
 									id="idPeliculasEdit" placeholder="idPeliculas"
-									required="required" name="idPeliculasEdit">
+									required="required" name="idPeliculasEdit" accept="image/*">
 							</div>
 
 							<div class="">
-								<label for="fotoDePortadaEdit" class="form-label">Foto
+								<label for="fotoDePortadaEdit"
+									class='form-label ${errorImagen.get("error") != null ? "is-invalid" : "" }'>Foto
 									de portada</label> <input class="form-control" type="file"
-									id="fotoDePortadaEdit" name="urlPortadaEdit">
+									id="fotoDePortadaEdit" name="urlPortadaEdit"
+									accept="image/.jpeg,.png,.jpg,.gif,.webp">
+								<div class="invalid-feedback">
+									<c:out value='${errorImagen.get("error")}'></c:out>
+								</div>
 							</div>
 
 							<div class="form-floating my-3 col-12 mx-auto">
@@ -533,7 +536,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 	</main>
 
 	<footer>

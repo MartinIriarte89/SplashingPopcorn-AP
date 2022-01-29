@@ -63,13 +63,33 @@ public class EditarPeliculaServlet extends HttpServlet implements Servlet {
 
 		if (!urlPortada.equals("")) {
 			urlPortada = id + urlPortada;
-			servGuardarImagen.guardarFotoPortadaPelicula(urlPortada, request.getPart("urlPortada"));
+			if (!servGuardarImagen.guardarFotoPortadaPelicula(urlPortada, request.getPart("urlPortada"))) {
+				Pelicula pelicula = new Pelicula(titulo, precio, duracion, stock, genero, descripcion, urlPortada,
+						urlFondo, anioLanzamiento, lema);
+				request.setAttribute("errorImagenPortada", servGuardarImagen.getErrores());
+				request.setAttribute("peliEditar", pelicula);
+				request.setAttribute("serv", "editar");
+
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/peliculas");
+				dispatcher.forward(request, response);
+				return;
+			}
 			urlPortada = "imagenes/portadas/peliculas/" + urlPortada;
 		}
 
 		if (!urlFondo.equals("")) {
 			urlFondo = id + urlFondo;
-			servGuardarImagen.guardarFotoFondoPelicula(urlFondo, request.getPart("urlFondo"));
+			if (!servGuardarImagen.guardarFotoFondoPelicula(urlFondo, request.getPart("urlFondo"))) {
+				Pelicula pelicula = new Pelicula(titulo, precio, duracion, stock, genero, descripcion, urlPortada,
+						urlFondo, anioLanzamiento, lema);
+				request.setAttribute("errorImagenFondo", servGuardarImagen.getErrores());
+				request.setAttribute("peliEditar", pelicula);
+				request.setAttribute("serv", "editar");
+
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/peliculas");
+				dispatcher.forward(request, response);
+				return;
+			}
 			urlFondo = "imagenes/fondos/peliculas/" + urlFondo;
 		}
 

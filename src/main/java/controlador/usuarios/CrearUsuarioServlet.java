@@ -18,8 +18,7 @@ import servicios.ServicioUsuario;
 import utilidades.Validacion;
 
 @WebServlet("/crearUsuario.ad")
-@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 1, maxFileSize = 1024 * 1024 * 20, // 20 MB
-		maxRequestSize = 1024 * 1024 * 100 // 100 MB
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 1, maxRequestSize = 1024 * 1024 * 100 // 100 MB
 )
 public class CrearUsuarioServlet extends HttpServlet implements Servlet {
 
@@ -50,6 +49,7 @@ public class CrearUsuarioServlet extends HttpServlet implements Servlet {
 		String urlPerfil = req.getPart("urlPerfil").getSubmittedFileName();
 		String preferenciaNombre = req.getParameter("genero");
 		boolean esAdmin = false;
+		Genero preferencia = servGenero.buscarPor(preferenciaNombre);
 
 		if (admin.equals("admin")) {
 			esAdmin = true;
@@ -57,16 +57,24 @@ public class CrearUsuarioServlet extends HttpServlet implements Servlet {
 			tiempoDisponible = 0;
 		}
 
-		if (!urlPerfil.equals("")) {
-			String nombreArchivo = req.getPart("urlPerfil").getSubmittedFileName();
-			servGuardarImagen.guardarFotoPerfilUsuario(nombreArchivo, req.getPart("urlPerfil"));
-			urlPerfil = "imagenes/perfiles/" + urlPerfil;
-		}
-
 		if (urlPerfil == null || urlPerfil.equals("")) {
 			urlPerfil = "imagenes/fotoPerfilDefecto.jpg";
 		}
-		Genero preferencia = servGenero.buscarPor(preferenciaNombre);
+
+		if (!urlPerfil.equals("")) {
+			String nombreArchivo = req.getPart("urlPerfil").getSubmittedFileName();
+			if (!servGuardarImagen.guardarFotoPerfilUsuario(nombreArchivo, req.getPart("urlPerfil"))) {
+				Usuario usuariotemp = new Usuario(nombre, usuario, contrasena, dineroDisponible, tiempoDisponible,
+						preferencia, urlPerfil, esAdmin);
+				req.setAttribute("errorImagen", servGuardarImagen.getErrores());
+				req.setAttribute("usuarioCrear", usuariotemp);
+
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/listarUsuarios.ad");
+				dispatcher.forward(req, resp);
+				return;
+			}
+			urlPerfil = "imagenes/perfiles/" + urlPerfil;
+		}
 
 		Usuario usuarioTemp = servUsuario.crear(nombre, usuario, contrasena, dineroDisponible, tiempoDisponible,
 				preferencia, urlPerfil, esAdmin);

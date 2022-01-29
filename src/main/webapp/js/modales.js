@@ -47,6 +47,11 @@ function abrirModalEditarDatosPersonales() {
 	myModal.show();
 }
 
+function abrirModalFoto() {
+	let myModal = new bootstrap.Modal(document.getElementById('modalEditarFoto'));
+	myModal.show();
+}
+
 //MODALE DE ALERTAS VARIAS
 function abrirModalFlash() {
 	let myModal = new bootstrap.Modal(document.getElementById('flash'));

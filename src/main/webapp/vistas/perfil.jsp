@@ -10,10 +10,8 @@
 <jsp:include page="../parciales/librerias.jsp"></jsp:include>
 <link rel="stylesheet" href="./css/perfil.css" />
 
-<script type="text/javascript"
-	src="./js/modales.js"></script>
-<script type="text/javascript"
-	src="./js/completarModales.js" defer></script>
+<script type="text/javascript" src="./js/modales.js"></script>
+<script type="text/javascript" src="./js/completarModales.js" defer></script>
 
 <title>Perfil || Splashing Popcorn</title>
 </head>
@@ -48,12 +46,13 @@
 				style="margin-top: 60px;">
 
 				<!--FOTO DE PERFIL-->
-				<div class='d-flex col  ${usuario.esAdmin() ? "col-xl-10 col-md-12":"col-md-6 col-xl-5 pe-md-1" }'>
+				<div
+					class='d-flex col  ${usuario.esAdmin() ? "col-xl-10 col-md-12":"col-md-6 col-xl-5 pe-md-1" }'>
 					<div
 						class="row flex-column m-0 p-0 contenedor w-100 justify-content-between">
 						<div id="fotoPerfil"
 							class='col-7 col-lg-10 mx-auto rounded-circle p-0 ${usuario.esAdmin() ? "my-5":"" }'
-							style="background-image: url('/Webapp_Proyecto_Final/${usuarioPerfil !=null ?  usuarioPerfil.urlPerfil : usuario.urlPerfil}');"></div>
+							style="background-image: url('./${usuarioPerfil !=null ?  usuarioPerfil.urlPerfil : usuario.urlPerfil}');"></div>
 						<c:if test="${!usuario.esAdmin()}">
 							<button id="boton" type="button"
 								class="btn btn-warning mx-auto my-4 px-1 col-4 col-sm-2 col-md-4 col-lg-3 col-xl-2 font-lato"
@@ -122,8 +121,7 @@
 							class="row m-0 p-0 contenedor font-merriweather align-items-md-center">
 							<div class="col-12 col-lg-10 mx-lg-auto text-center titulo">Cambia
 								tu contraseña</div>
-							<form action="./editarUsuario.do"
-								method="post">
+							<form action="./editarUsuario.do" method="post">
 								<div class="col-12 col-lg-9 mx-lg-auto mb-lg-5">
 									<div
 										class="row m-0 p-0 mb-2 justify-content-start justify-content-sm-center">
@@ -265,10 +263,15 @@
 							<!-- FORLMULARIO DEL MODAL -->
 							<form action="./editarUsuario.do" method="post"
 								enctype="multipart/form-data">
-								<div class="mb-3">
-									<label for="formFile" class="form-label">Seleccione un
-										formato de imagen válido</label> <input class="form-control"
-										type="file" id="formFile" name="urlPerfil">
+								<div class="mb-3 ">
+									<label for="formFile"
+										class='form-label ${errorImagen.get("error") != null ? "is-invalid" : "" }'>Seleccione
+										un formato de imagen válido</label> <input class="form-control"
+										type="file" id="formFile" name="urlPerfil"
+										accept="image/.jpeg,.png,.jpg,.gif,.webp">
+									<div class="invalid-feedback">
+										<c:out value='${errorImagen.get("error")}'></c:out>
+									</div>
 								</div>
 
 								<button type="submit"
@@ -294,6 +297,11 @@
 	<c:if test="${success != null}">
 		<script type="text/javascript">
 			abrirModalSuccess();
+		</script>
+	</c:if>
+	<c:if test="${errorImagen != null}">
+		<script type="text/javascript">
+			abrirModalFoto();
 		</script>
 	</c:if>
 </body>

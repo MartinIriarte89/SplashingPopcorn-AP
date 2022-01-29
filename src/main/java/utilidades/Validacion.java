@@ -47,5 +47,5 @@ public class Validacion {
 			array [0] = "0";
 		}
 		return array;
-	}	
+	}
 }

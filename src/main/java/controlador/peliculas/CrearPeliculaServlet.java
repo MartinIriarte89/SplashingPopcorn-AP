@@ -1,4 +1,4 @@
-	package controlador.peliculas;
+package controlador.peliculas;
 
 import java.io.IOException;
 
@@ -18,16 +18,13 @@ import servicios.ServicioPelicula;
 import utilidades.Validacion;
 
 @WebServlet("/crearPelicula.ad")
-@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 1, maxFileSize = 1024 * 1024 * 20, // 20 MB
-maxRequestSize = 1024 * 1024 * 100 // 100 MB
-)
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 1, maxRequestSize = 1024 * 1024 * 100)
 public class CrearPeliculaServlet extends HttpServlet implements Servlet {
 	private static final long serialVersionUID = 3132664092732174419L;
 	private ServicioPelicula servicioPelicula;
 	private ServicioGenero servGenero;
 	private ServicioGuardarImagen servGuardarImagen;
 	private Validacion validarDatos;
-	
 
 	@Override
 	public void init() throws ServletException {
@@ -37,7 +34,7 @@ public class CrearPeliculaServlet extends HttpServlet implements Servlet {
 		this.servGuardarImagen = new ServicioGuardarImagen();
 		this.validarDatos = new Validacion();
 	}
-	
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		RequestDispatcher dispatcher = req.getServletContext().getRequestDispatcher("/peliculas");
@@ -59,14 +56,34 @@ public class CrearPeliculaServlet extends HttpServlet implements Servlet {
 		String generoNombre = request.getParameter("genero");
 
 		Genero genero = servGenero.buscarPor(generoNombre);
-		
+
 		if (!urlPortada.equals("")) {
-			servGuardarImagen.guardarFotoPortadaPelicula(urlPortada, request.getPart("urlPortada"));
+			if (!servGuardarImagen.guardarFotoPortadaPelicula(urlPortada, request.getPart("urlPortada"))) {
+				Pelicula pelicula = new Pelicula(titulo, precio, duracion, stock, genero, descripcion, urlPortada,
+						urlFondo, anioLanzamiento, lema);
+				request.setAttribute("errorImagenPortada", servGuardarImagen.getErrores());
+				request.setAttribute("peliCrear", pelicula);
+				request.setAttribute("serv", "crear");
+
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/peliculas");
+				dispatcher.forward(request, response);
+				return;
+			}
 			urlPortada = "imagenes/portadas/peliculas/" + urlPortada;
 		}
-		
+
 		if (!urlFondo.equals("")) {
-			servGuardarImagen.guardarFotoFondoPelicula(urlFondo, request.getPart("urlFondo"));
+			if (!servGuardarImagen.guardarFotoFondoPelicula(urlFondo, request.getPart("urlFondo"))) {
+				Pelicula pelicula = new Pelicula(titulo, precio, duracion, stock, genero, descripcion, urlPortada,
+						urlFondo, anioLanzamiento, lema);
+				request.setAttribute("errorImagenFondo", servGuardarImagen.getErrores());
+				request.setAttribute("peliCrear", pelicula);
+				request.setAttribute("serv", "crear");
+
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/peliculas");
+				dispatcher.forward(request, response);
+				return;
+			}
 			urlFondo = "imagenes/fondos/peliculas/" + urlFondo;
 		}
 

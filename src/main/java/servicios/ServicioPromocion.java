@@ -91,4 +91,19 @@ public class ServicioPromocion {
 		return promocion;
 
 	}
+	
+	public Promocion crearPromocionTemp(String titulo, ArrayList<Pelicula> peliculas, String descripcion, String urlPortada,
+			String tipoPromocion, double descuento) {
+		Promocion promocion;
+
+		if (tipoPromocion.equalsIgnoreCase("Porcentual"))
+			promocion = new PromocionPorcentual(titulo, peliculas, (int) descuento, descripcion, urlPortada,
+					tipoPromocion);
+		else if (tipoPromocion.equalsIgnoreCase("Absoluta"))
+			promocion = new PromocionAbsoluta(titulo, peliculas, descuento, descripcion, urlPortada, tipoPromocion);
+		else
+			promocion = new PromocionAPorB(titulo, peliculas, (int) descuento, descripcion, urlPortada, tipoPromocion);
+
+		return promocion;
+	}
 }

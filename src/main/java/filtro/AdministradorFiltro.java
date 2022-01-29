@@ -25,7 +25,7 @@ public class AdministradorFiltro implements Filter {
 			if (usuario.esAdmin()) {
 				chain.doFilter(request, response);
 			} else {
-				request.setAttribute("flash", "Debe ser ");
+				request.setAttribute("flash", "Debe ser administrador");
 
 				RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/index.jsp");
 				dispatcher.forward(request, response);

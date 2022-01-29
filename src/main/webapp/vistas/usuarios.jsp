@@ -9,21 +9,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <jsp:include page="../parciales/librerias.jsp"></jsp:include>
-<link rel="stylesheet"
-	href="/Webapp_Proyecto_Final/css/estilosCompartidos.css">
-<link rel="stylesheet"
-	href="/Webapp_Proyecto_Final/css/estiloUsuarios.css">
+<link rel="stylesheet" href="./css/estilosCompartidos.css">
+<link rel="stylesheet" href="./css/estiloUsuarios.css">
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.11.4/datatables.min.css" />
 
-<script type="text/javascript"
-	src="/Webapp_Proyecto_Final/js/modales.js"></script>
+<script type="text/javascript" src="./js/modales.js"></script>
 <script type="text/javascript"
 	src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.11.4/datatables.min.js"></script>
-<script type="text/javascript"
-	src="/Webapp_Proyecto_Final/js/completarModales.js" defer></script>
-<script type="text/javascript"
-	src="/Webapp_Proyecto_Final/js/dataTable.js" defer></script>
+<script type="text/javascript" src="./js/completarModales.js" defer></script>
+<script type="text/javascript" src="./js/dataTable.js" defer></script>
 
 <title>Usuarios Registrados || Splashing Popcorn</title>
 </head>
@@ -85,9 +80,9 @@
 									</c:when>
 									<c:otherwise>
 										<td><a class="mx-1"
-											href="/Webapp_Proyecto_Final/perfilUsuario.do?id=${user.id}"><i
+											href="./perfilUsuario.do?id=${user.id}"><i
 												class="far fa-eye"></i></a> <a class="mx-1"
-											href="/Webapp_Proyecto_Final/listarItinerario.do?id=${user.id}"><i
+											href="./listarItinerario.do?id=${user.id}"><i
 												class="fas fa-shopping-cart"></i></a><a class="mx-1" href=""
 											data-bs-toggle="modal" data-bs-target="#modalEditarUsuario"
 											data-bs-id="${user.id}" data-bs-nombre="${user.nombre}"
@@ -132,7 +127,7 @@
 					<!-- CUERPO DEL MODAL -->
 					<div class="modal-body p-5 pt-0">
 						<!-- FORLMULARIO DEL MODAL -->
-						<form action="crearUsuario.ad" method="post"
+						<form action="./crearUsuario.ad" method="post"
 							enctype="multipart/form-data">
 							<div class="form-floating mb-3">
 								<input type="text" class="form-control rounded-4" id="nombre"
@@ -218,9 +213,13 @@
 							</div>
 
 							<div class="mb-3 mt-3">
-								<label for="fotoPerfil" class="form-label">Foto de
-									perfil</label> <input class="form-control" type="file" id="fotoPerfil"
-									name="urlPerfil">
+								<label for='fotoPerfil'
+									class='form-label ${errorImagen.get("error") != null ? "is-invalid" : ""}'>Foto
+									de perfil</label> <input class="form-control" type="file"
+									id="fotoPerfil" name="urlPerfil" accept="image/*">
+								<div class="invalid-feedback">
+									<c:out value='${errorImagen.get("error")}'></c:out>
+								</div>
 							</div>
 
 							<button type="submit"
@@ -248,7 +247,7 @@
 					<!-- CUERPO DEL MODAL -->
 					<div class="modal-body p-5 pt-0">
 						<!-- FORLMULARIO DEL MODAL -->
-						<form action="editarUsuario.do" method="post"
+						<form action="./editarUsuario.do" method="post"
 							enctype="multipart/form-data">
 							<div class="form-floating mb-3">
 								<input type="text" class="form-control rounded-4 d-none"
@@ -331,9 +330,13 @@
 							</div>
 
 							<div class="mb-3 mt-3">
-								<label for="fotoPerfilEdit" class="form-label">Foto de
-									perfil</label> <input class="form-control" type="file" id="fotoPerfil"
-									name="urlPerfil">
+								<label for="fotoPerfilEdit "
+									class='form-label ${errorImagen.get("error") != null ? "is-invalid" : ""}'>Foto
+									de perfil</label> <input class="form-control" type="file"
+									id="fotoPerfil" name="urlPerfil" accept="image/*">
+								<div class="invalid-feedback">
+									<c:out value='${errorImagen.get("error")}'></c:out>
+								</div>
 							</div>
 
 							<button type="submit"
