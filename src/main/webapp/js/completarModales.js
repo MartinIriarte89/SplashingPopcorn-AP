@@ -1,4 +1,28 @@
 $(document).ready(function() {
+	//CODIGO USADO PARA CARGAR MODAL DE DETALLE DE COMPRAS
+	if (!!document.getElementById('compra')) {
+
+		var modalCompra = document.getElementById('compra')
+		modalCompra.addEventListener('show.bs.modal', function(event) {
+
+			let boton = event.relatedTarget
+
+			let titulo = boton.getAttribute('data-bs-titulo')
+			let genero = boton.getAttribute('data-bs-genero')
+			let costo = boton.getAttribute('data-bs-costo')
+			let duracion = boton.getAttribute('data-bs-duracion')
+
+			let tituloElem = modalCompra.querySelector('#modalTitulo')
+			let generoElem = modalCompra.querySelector('#modalGenero')
+			let precioElem = modalCompra.querySelector('#modalPrecio')
+			let duracionElem = modalCompra.querySelector('#modalDuracion')
+
+			tituloElem.value = titulo;
+			generoElem.value = genero;
+			precioElem.value = costo;
+			duracionElem.value = duracion;
+		});
+	}
 
 	if (!!document.getElementById('modalEditarDatosPersonales')) {
 

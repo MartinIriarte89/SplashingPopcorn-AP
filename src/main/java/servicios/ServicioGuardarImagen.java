@@ -7,10 +7,10 @@ import jakarta.servlet.http.Part;
 
 public class ServicioGuardarImagen {
 
-	private final String RUTA_PERFIL_USUARIO = "./opt/tomcat/webapps/ROOT/imagenes/perfiles/";
-	private final String RUTA_PORTADA_PELICULA = "./opt/tomcat/webapps/ROOT/imagenes/portadas/peliculas/";
-	private final String RUTA_FONDO_PELICULA = "./opt/tomcat/webapps/ROOT/imagenes/fondos/peliculas/";
-	private final String RUTA_PORTADA_PROMOCION = "./opt/tomcat/webapps/ROOT/imagenes/portadas/promociones/";
+	private final String RUTA_PERFIL_USUARIO = "/opt/tomcat/webapps/ROOT/imagenes/perfiles/";
+	private final String RUTA_PORTADA_PELICULA = "/opt/tomcat/webapps/ROOT/imagenes/portadas/peliculas/";
+	private final String RUTA_FONDO_PELICULA = "/opt/tomcat/webapps/ROOT/imagenes/fondos/peliculas/";
+	private final String RUTA_PORTADA_PROMOCION = "/opt/tomcat/webapps/ROOT/imagenes/portadas/promociones/";
 	private HashMap<String, String> errores;
 
 	public boolean guardarFotoPerfilUsuario(String nombreArchivo, Part parteDeArchivo) {
@@ -68,7 +68,7 @@ public class ServicioGuardarImagen {
 			errores.put("error", "Debe ser un formato de imagen válido (jpeg, jpg, png, gif o webp).");
 		}
 		if (!esTamañoImagenAceptado(imagen.getSize())) {
-			errores.put("error", "El tamaño no debe superar 1 mb.");
+			errores.put("error", "El tamaño no debe superar 5 mb.");
 		}
 	}
 
@@ -83,6 +83,6 @@ public class ServicioGuardarImagen {
 	}
 
 	private boolean esTamañoImagenAceptado(long tamañoImagen) {
-		return tamañoImagen <= 1000000;
+		return tamañoImagen <= 5000000;
 	}
 }

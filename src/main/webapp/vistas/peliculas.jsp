@@ -604,7 +604,7 @@
 								género</div>
 							<div class="mb-3 form-floating">
 								<select
-									class='form-select py-3 formulario-genero ${generoErrores.get("borrar") != null ? "is-invalid" : ""}'
+									class='form-select py-3 formulario-genero ${generoErrores.get("borrar") != null || genero.Errores.get("nombre") != null? "is-invalid" : ""}'
 									name="genero" id="eliminarGenero"
 									aria-label="Floating label select example">
 									<option selected="selected" value="">Selecciona un
@@ -614,7 +614,7 @@
 									</c:forEach>
 								</select>
 								<div class="invalid-tooltip">
-									<c:out value='${generoErrores.get("borrar")}'></c:out>
+									<c:out value='${generoErrores.get("borrar")} ${generoErrores.get("nombre")}'></c:out>
 								</div>
 							</div>
 							<button type="submit"

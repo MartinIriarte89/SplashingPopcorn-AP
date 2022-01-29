@@ -18,8 +18,7 @@ import servicios.ServicioPelicula;
 import utilidades.Validacion;
 
 @WebServlet("/editarPelicula.ad")
-@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 1, maxFileSize = 1024 * 1024 * 20, // 20 MB
-		maxRequestSize = 1024 * 1024 * 100 // 100 MB
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 1, maxRequestSize = 1024 * 1024 * 100 // 100 MB
 )
 public class EditarPeliculaServlet extends HttpServlet implements Servlet {
 

@@ -19,8 +19,7 @@ import servicios.ServicioPromocion;
 import utilidades.Validacion;
 
 @WebServlet("/crearPromocion.ad")
-@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 1, maxFileSize = 1024 * 1024 * 20, // 20 MB
-		maxRequestSize = 1024 * 1024 * 100 // 100 MB
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 1, maxRequestSize = 1024 * 1024 * 100 // 100 MB
 )
 public class CrearPromocionServlet extends HttpServlet implements Servlet {
 	private static final long serialVersionUID = -6648217727244375105L;

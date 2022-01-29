@@ -7,14 +7,14 @@
 <head>
 
 <jsp:include page="../parciales/librerias.jsp"></jsp:include>
-<link rel="stylesheet" type="text/css"
-	href="./css/estiloMisCompras.css">
+<link rel="stylesheet" type="text/css" href="./css/estiloMisCompras.css">
 <link rel="stylesheet" type="text/css" href="./css/botones.css">
 <script type="text/javascript"
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 <script type="text/javascript" src="./js/jquery.pajinate.js"></script>
 <script type="text/javascript" src="./js/jquery.resize.js"></script>
 <script type="text/javascript" src="./js/funciones.js"></script>
+<script type="text/javascript" src="./js/completarModales.js" defer></script>
 <title>Mis Compras || Splashing Popcorn</title>
 
 </head>
@@ -82,7 +82,12 @@
 											</div>
 											<div class="d-flex mt-auto justify-content-center">
 												<button type="button" class="btn btn-neon"
-													onclick="mostrarPelicula(${compra.id}, ${compra.esPromocion()})">
+													data-bs-toggle="modal" 
+													data-bs-target="#compra"
+													data-bs-titulo="${compra.titulo}"
+													data-bs-genero="${compra.genero.nombre}"
+													data-bs-costo="${compra.precio}"
+													data-bs-duracion="${compra.duracion}">
 													<span id="span1"></span> <span id="span2"></span> <span
 														id="span3"></span> <span id="span4"></span>Detalle compra
 												</button>
@@ -122,28 +127,28 @@
 									<div class="col-4 fs-4 text-end font-merriweather-light">Título:</div>
 									<div
 										class="col-8 text-center align-self-center font-merriweather-light"
-										id="modalTitulo">"Nombre de la película"</div>
+										id="modalTitulo"></div>
 								</div>
 
 								<div class="row mt-3 text-modal ">
 									<div class="col-4 fs-4 text-end font-merriweather-light ">Género:</div>
 									<div
 										class="col-8 text-center align-self-center font-merriweather-light"
-										id="modalGenero">"Género de la Película"</div>
+										id="modalGenero"></div>
 								</div>
 
 								<div class="row mt-3 text-modal">
 									<div class="col-4 fs-4 text-end font-merriweather-light">Costo:</div>
 									<div
 										class="col-8 text-center align-self-center font-merriweather-light"
-										id="modalPrecio">"Costo de la Película"</div>
+										id="modalPrecio"></div>
 								</div>
 
 								<div class="row mt-3 text-modal">
 									<div class="col-4 fs-4 text-end font-merriweather-light">Duración:</div>
 									<div
 										class="col-8 text-center align-self-center font-merriweather-light"
-										id="modalDuracion">"Duración de la Película"</div>
+										id="modalDuracion"></div>
 								</div>
 							</div>
 

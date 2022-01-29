@@ -98,7 +98,7 @@
 						<c:if test="${!usuario.esAdmin()}">
 							<div class="row m-0 mt-1 p-0 contenedor">
 								<div
-									class="col-8 d-flex justify-content-center align-items-center texto">Editáa
+									class="col-8 d-flex justify-content-center align-items-center texto">Editá
 									tus datos personales</div>
 								<div
 									class="col-4 col-sm-2 text-center font-lato texto mt-1 py-3">
