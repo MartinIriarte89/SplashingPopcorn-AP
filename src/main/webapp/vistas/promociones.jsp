@@ -195,7 +195,7 @@
 																data-bs-descripcion="${promocion.descripcion}"
 																data-bs-beneficio="${promocion.beneficio}"
 																data-bs-tipoPromocion="${promocion.tipoPromocion}"
-																data-bs-idPelis="${promocion.getIdPelis()}"><i
+																data-bs-idPelis="${promocion.getIdPeliculas()}"><i
 																class="bi bi-pencil-square"></i></a> <span>editar</span>
 														</div>
 														<div

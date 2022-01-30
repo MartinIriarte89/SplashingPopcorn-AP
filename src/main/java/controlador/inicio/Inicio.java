@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import modelo.Promocion;
 import modelo.Usuario;
-import servicios.ServicioFiltro;
+import servicios.ServicioFiltrarSugerencia;
 import servicios.ServicioPromocion;
 
 @WebServlet("/inicio")
@@ -20,14 +20,14 @@ public class Inicio extends HttpServlet implements Servlet {
 
 	private static final long serialVersionUID = -4824357444673542251L;
 	private ServicioPromocion servPromocion;
-	private ServicioFiltro servFiltro;
+	private ServicioFiltrarSugerencia servFiltro;
 	ArrayList<Promocion> promociones;
 
 	@Override
 	public void init() throws ServletException {
 		super.init();
 		this.servPromocion = new ServicioPromocion();
-		this.servFiltro = new ServicioFiltro();
+		this.servFiltro = new ServicioFiltrarSugerencia();
 	}
 
 	@Override

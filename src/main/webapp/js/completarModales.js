@@ -17,10 +17,10 @@ $(document).ready(function() {
 			let precioElem = modalCompra.querySelector('#modalPrecio')
 			let duracionElem = modalCompra.querySelector('#modalDuracion')
 
-			tituloElem.value = titulo;
-			generoElem.value = genero;
-			precioElem.value = costo;
-			duracionElem.value = duracion;
+			tituloElem.innerHTML = titulo;
+			generoElem.innerHTML = genero;
+			precioElem.innerHTML = costo;
+			duracionElem.innerHTML = duracion;
 		});
 	}
 

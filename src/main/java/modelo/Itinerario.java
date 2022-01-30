@@ -26,10 +26,6 @@ public class Itinerario {
 		return compras;
 	}
 
-	public ArrayList<Pelicula> getPeliculasCompradas() {
-		return this.peliculasCompradas;
-	}
-
 	public int getFkUsuario() {
 		return this.fkUsuario;
 	}
@@ -60,9 +56,5 @@ public class Itinerario {
 		} else {
 			peliculasCompradas.add((Pelicula) sugerencia);
 		}
-	}
-
-	public boolean esNulo() {
-		return false;
 	}
 }

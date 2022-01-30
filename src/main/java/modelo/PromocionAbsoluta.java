@@ -35,5 +35,4 @@ public class PromocionAbsoluta extends Promocion {
 		
 		super.setErrores(errores);
 	}
-
 }

@@ -47,18 +47,6 @@ public abstract class Promocion implements Sugerencia {
 		this.tipoPromocion = tipoPromocion;
 	}
 
-	public ArrayList<Pelicula> getPeliculas() {
-		return this.peliculas;
-	}
-
-	public double getBeneficio() {
-		return this.beneficio;
-	}
-
-	public String getTipoPromocion() {
-		return this.tipoPromocion;
-	}
-
 	@Override
 	public int getId() {
 		return this.id;
@@ -102,11 +90,6 @@ public abstract class Promocion implements Sugerencia {
 	}
 
 	@Override
-	public String getUrlFondo() {
-		return "";
-	}
-
-	@Override
 	public String getUrlPortada() {
 		return this.urlPortada;
 	}
@@ -114,6 +97,22 @@ public abstract class Promocion implements Sugerencia {
 	@Override
 	public String getDescripcion() {
 		return this.descripcion;
+	}
+
+	public ArrayList<Pelicula> getPeliculas() {
+		return this.peliculas;
+	}
+
+	public double getBeneficio() {
+		return this.beneficio;
+	}
+
+	public String getTipoPromocion() {
+		return this.tipoPromocion;
+	}
+
+	public Map<String, String> getErrores() {
+		return errores;
 	}
 
 	public void setTitulo(String titulo) {
@@ -129,7 +128,19 @@ public abstract class Promocion implements Sugerencia {
 	}
 
 	public void setUrlPortada(String urlPortada) {
-		this.urlPortada = urlPortada == null || urlPortada.equals("")? this.urlPortada : urlPortada;
+		this.urlPortada = urlPortada == null || urlPortada.equals("") ? this.urlPortada : urlPortada;
+	}
+
+	public void setTipoPromocion(String tipoPromocion) {
+		this.tipoPromocion = tipoPromocion;
+	}
+
+	public void setBeneficio(double beneficio) {
+		this.beneficio = beneficio;
+	}
+
+	protected void setErrores(Map<String, String> errores) {
+		this.errores = errores;
 	}
 
 	@Override
@@ -163,28 +174,6 @@ public abstract class Promocion implements Sugerencia {
 			}
 		}
 		return noEstaIncluida;
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(peliculas, id, titulo, genero);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Promocion other = (Promocion) obj;
-		return Objects.equals(peliculas, other.peliculas) && id == other.id && Objects.equals(titulo, other.titulo)
-				&& Objects.equals(genero, other.genero);
-	}
-
-	public Map<String, String> getErrores() {
-		return errores;
 	}
 
 	@Override
@@ -238,13 +227,13 @@ public abstract class Promocion implements Sugerencia {
 				errores.put("beneficio", "No puede ser mayor a la cantidad de películas en promoción");
 			}
 		}
-		if(!tipoPromocion.equals("porcentual") && !tipoPromocion.equals("absoluta") && !tipoPromocion.equals("axb")) {
+		if (!tipoPromocion.equals("porcentual") && !tipoPromocion.equals("absoluta") && !tipoPromocion.equals("axb")) {
 			errores.put("tipoPromocion", "No existe este tipo de promoción");
 		}
-		if(titulo == null) {
+		if (titulo == null) {
 			errores.put("titulo", "El campo no puede estar vacío");
 		}
-		if(tipoPromocion == null) {
+		if (tipoPromocion == null) {
 			errores.put("titulo", "El campo no puede estar vacío");
 		}
 	}
@@ -268,12 +257,7 @@ public abstract class Promocion implements Sugerencia {
 		return sonValidas;
 	}
 
-	@Override
-	public String toString() {
-		return "Promocion [id=" + id + ", titulo=" + titulo + "]";
-	}
-
-	public String getIdPelis() {
+	public String getIdPeliculas() {
 		String idPelis = "";
 
 		for (int i = 0; i < peliculas.size(); i++) {
@@ -285,15 +269,27 @@ public abstract class Promocion implements Sugerencia {
 		return idPelis;
 	}
 
-	public void setTipoPromocion(String tipoPromocion) {
-		this.tipoPromocion = tipoPromocion;
+	@Override
+	public String toString() {
+		return "Promocion [id=" + id + ", titulo=" + titulo + ", peliculas=" + peliculas + ", genero=" + genero
+				+ ", beneficio=" + beneficio + ", tipoPromocion=" + tipoPromocion + "]";
 	}
 
-	public void setBeneficio(double beneficio) {
-		this.beneficio = beneficio;
+	@Override
+	public int hashCode() {
+		return Objects.hash(peliculas, id, titulo, genero);
 	}
 
-	protected void setErrores(Map<String, String> errores) {
-		this.errores = errores;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Promocion other = (Promocion) obj;
+		return Objects.equals(peliculas, other.peliculas) && id == other.id && Objects.equals(titulo, other.titulo)
+				&& Objects.equals(genero, other.genero);
 	}
 }

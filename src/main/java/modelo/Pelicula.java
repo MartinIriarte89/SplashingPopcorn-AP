@@ -52,10 +52,6 @@ public class Pelicula implements Sugerencia, Comparable<Pelicula> {
 		setLema(lema);
 	}
 
-	public Map<String, String> getErrores() {
-		return this.errores;
-	}
-
 	@Override
 	public int getId() {
 		return this.id;
@@ -87,11 +83,6 @@ public class Pelicula implements Sugerencia, Comparable<Pelicula> {
 	}
 
 	@Override
-	public String getUrlFondo() {
-		return this.urlFondo;
-	}
-
-	@Override
 	public String getUrlPortada() {
 		return this.urlPortada;
 	}
@@ -99,6 +90,14 @@ public class Pelicula implements Sugerencia, Comparable<Pelicula> {
 	@Override
 	public String getDescripcion() {
 		return this.descripcion;
+	}
+
+	public Map<String, String> getErrores() {
+		return this.errores;
+	}
+
+	public String getUrlFondo() {
+		return this.urlFondo;
 	}
 
 	public int getAnioLanzamiento() {
@@ -149,12 +148,12 @@ public class Pelicula implements Sugerencia, Comparable<Pelicula> {
 		this.anioLanzamiento = anioLanzamiento;
 	}
 
-	public void setErrores(Map<String, String> errores) {
-		this.errores = errores;
-	}
-
 	@Override
 	public boolean esPromocion() {
+		return false;
+	}
+
+	public boolean esNulo() {
 		return false;
 	}
 
@@ -168,37 +167,9 @@ public class Pelicula implements Sugerencia, Comparable<Pelicula> {
 		return this.getStock() > 0;
 	}
 
-	public boolean esNulo() {
-		return false;
-	}
-
 	@Override
 	public boolean noEstaIncluidaEn(ArrayList<Pelicula> peliculasCompradas) {
 		return !peliculasCompradas.contains(this);
-	}
-
-	@Override
-	public int compareTo(Pelicula o) {
-		return -Double.compare(this.precio, o.precio);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(stock, duracion, id, titulo, precio, genero);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Pelicula other = (Pelicula) obj;
-		return stock == other.stock && Double.doubleToLongBits(duracion) == Double.doubleToLongBits(other.duracion)
-				&& id == other.id && Objects.equals(titulo, other.titulo) && precio == other.precio
-				&& Objects.equals(genero, other.genero);
 	}
 
 	@Override
@@ -269,8 +240,32 @@ public class Pelicula implements Sugerencia, Comparable<Pelicula> {
 	}
 
 	@Override
-	public String toString() {
-		return "Pelicula [id=" + id + ", titulo=" + titulo + ", lema=" + lema + "]";
+	public int compareTo(Pelicula o) {
+		return -Double.compare(this.precio, o.precio);
 	}
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(stock, duracion, id, titulo, precio, genero);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Pelicula other = (Pelicula) obj;
+		return stock == other.stock && Double.doubleToLongBits(duracion) == Double.doubleToLongBits(other.duracion)
+				&& id == other.id && Objects.equals(titulo, other.titulo) && precio == other.precio
+				&& Objects.equals(genero, other.genero);
+	}
+
+	@Override
+	public String toString() {
+		return "Pelicula [id=" + id + ", titulo=" + titulo + ", precio=" + precio + ", duracion=" + duracion
+				+ ", stock=" + stock + ", genero=" + genero + ", anioLanzamiento=" + anioLanzamiento + "]";
+	}
 }

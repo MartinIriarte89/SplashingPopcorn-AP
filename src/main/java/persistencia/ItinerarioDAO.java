@@ -8,7 +8,6 @@ import java.util.HashMap;
 
 import modelo.Itinerario;
 import modelo.Sugerencia;
-import modelo.objetoNulo.ItinerarioNulo;
 import persistencia.commons.ProveedorDeConexion;
 
 public class ItinerarioDAO {
@@ -38,7 +37,7 @@ public class ItinerarioDAO {
 				itinerarios.put(idItinerario,
 						crearItinerario(resultItinerario, resultIdPromociones, resultIdAtracciones));
 			}
-			
+
 		} catch (Exception e) {
 			throw new DatosPerdidosError(e);
 		}
@@ -64,14 +63,8 @@ public class ItinerarioDAO {
 			ResultSet resultItinerario = declarItinerario.executeQuery();
 			ResultSet resultIdPromociones = declarIdPromociones.executeQuery();
 			ResultSet resultIdAtracciones = declarIdAtracciones.executeQuery();
-			
-			
-			
-			if(resultItinerario.next()) {
-				itinerario = crearItinerario(resultItinerario, resultIdPromociones, resultIdAtracciones);
-			}else {
-				itinerario = ItinerarioNulo.construir();	
-			}
+
+			itinerario = crearItinerario(resultItinerario, resultIdPromociones, resultIdAtracciones);
 
 		} catch (Exception e) {
 			throw new DatosPerdidosError(e);
@@ -92,7 +85,7 @@ public class ItinerarioDAO {
 
 			insertarCompras(itinerario, conexion);
 			declaracion.executeUpdate();
-			
+
 		} catch (Exception e) {
 			throw new DatosPerdidosError(e);
 		}
@@ -100,14 +93,14 @@ public class ItinerarioDAO {
 	}
 
 	private void insertarCompras(Itinerario itinerario, Connection conexion) throws Exception {
-		
+
 		String sqlPromoComprada = "INSERT INTO compras_de_itinerarios (fk_itinerario, fk_promocion, precio, duracion_min) VALUES (?, ?, ?, ?)";
 		String sqlPelicComprada = "INSERT INTO compras_de_itinerarios (fk_itinerario, fk_pelicula, precio, duracion_min) VALUES (?, ?, ?, ?)";
 
 		PreparedStatement declarPromoComprada = conexion.prepareStatement(sqlPromoComprada);
 		PreparedStatement declarPelicComprada = conexion.prepareStatement(sqlPelicComprada);
 		ArrayList<Sugerencia> sugerenciasCompradas = itinerario.getCompras();
-		Sugerencia ultimaCompra = sugerenciasCompradas.get(sugerenciasCompradas.size()-1);
+		Sugerencia ultimaCompra = sugerenciasCompradas.get(sugerenciasCompradas.size() - 1);
 
 		if (ultimaCompra.esPromocion()) {
 			declarPromoComprada.setInt(1, itinerario.getFkUsuario());
@@ -142,7 +135,7 @@ public class ItinerarioDAO {
 			int idPelicula = resultIdPelicula.getInt("fk_pelicula");
 			compras.add(peliculaDAO.buscarConEliminadasPor(idPelicula));
 		}
-		
+
 		return new Itinerario(fkUsuario, compras, costo, duracion);
 	}
 }
