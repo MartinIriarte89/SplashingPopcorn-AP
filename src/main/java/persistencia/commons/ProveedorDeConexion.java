@@ -58,6 +58,18 @@ public class ProveedorDeConexion {
 		return conexion;
 	}
 	
+	public static Connection getConexion(String url) throws SQLException {
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			throw new SQLException(e);
+		}
+		if (conexion == null || conexion.isClosed()) {
+			conexion = DriverManager.getConnection(url,"root","");
+		}
+		return conexion;
+	}
+	
 	public static boolean cerrarConexion() {
 		if (conexion != null) {
 			try {

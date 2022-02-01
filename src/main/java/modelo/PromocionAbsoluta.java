@@ -7,15 +7,15 @@ public class PromocionAbsoluta extends Promocion {
 
 	private double precioDePaquete;
 
-	public PromocionAbsoluta(String nombre, ArrayList<Pelicula> atracciones, double precioDePaquete, String descripcion,
+	public PromocionAbsoluta(String nombre, ArrayList<Pelicula> peliculas, double precioDePaquete, String descripcion,
 			String urlPortada, String tipoPromocion) {
-		super(nombre, atracciones, descripcion, urlPortada, precioDePaquete, tipoPromocion);
+		super(nombre, peliculas, descripcion, urlPortada, precioDePaquete, tipoPromocion);
 		this.precioDePaquete = precioDePaquete;
 	}
 
-	public PromocionAbsoluta(int id, String nombre, ArrayList<Pelicula> atracciones, double precioDePaquete,
+	public PromocionAbsoluta(int id, String nombre, ArrayList<Pelicula> peliculas, double precioDePaquete,
 			String descripcion, String urlPortada, String tipoPromocion) {
-		super(id, nombre, atracciones, descripcion, urlPortada, precioDePaquete, tipoPromocion);
+		super(id, nombre, peliculas, descripcion, urlPortada, precioDePaquete, tipoPromocion);
 		this.precioDePaquete = precioDePaquete;
 	}
 

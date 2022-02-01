@@ -1,17 +1,18 @@
 package modelo;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Itinerario {
 
 	private int fkUsuario;
 	private ArrayList<Sugerencia> compras = new ArrayList<Sugerencia>();
 	private ArrayList<Pelicula> peliculasCompradas = new ArrayList<Pelicula>();
-	private int costoDelItinerario;
-	private double duracionDelItinerario;
+	private double costoDelItinerario;
+	private int duracionDelItinerario;
 
-	public Itinerario(int idUsuario, ArrayList<Sugerencia> compras, int costoDelItinerario,
-			double duracionDelItinerario) {
+	public Itinerario(int idUsuario, ArrayList<Sugerencia> compras, double costoDelItinerario,
+			int duracionDelItinerario) {
 		this.fkUsuario = idUsuario;
 		this.compras = compras;
 		this.costoDelItinerario = costoDelItinerario;
@@ -30,11 +31,11 @@ public class Itinerario {
 		return this.fkUsuario;
 	}
 
-	public int getCostoDelItinerario() {
+	public double getCostoDelItinerario() {
 		return this.costoDelItinerario;
 	}
 
-	public double getDuracionDelItinerario() {
+	public int getDuracionDelItinerario() {
 		return this.duracionDelItinerario;
 	}
 
@@ -56,5 +57,31 @@ public class Itinerario {
 		} else {
 			peliculasCompradas.add((Pelicula) sugerencia);
 		}
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(compras, costoDelItinerario, duracionDelItinerario, fkUsuario, peliculasCompradas);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Itinerario other = (Itinerario) obj;
+		return Objects.equals(compras, other.compras) && costoDelItinerario == other.costoDelItinerario
+				&& Double.doubleToLongBits(duracionDelItinerario) == Double
+						.doubleToLongBits(other.duracionDelItinerario)
+				&& fkUsuario == other.fkUsuario && Objects.equals(peliculasCompradas, other.peliculasCompradas);
+	}
+
+	@Override
+	public String toString() {
+		return "Itinerario [fkUsuario=" + fkUsuario + ", compras=" + compras + ", costoDelItinerario="
+				+ costoDelItinerario + ", duracionDelItinerario=" + duracionDelItinerario + "]";
 	}
 }

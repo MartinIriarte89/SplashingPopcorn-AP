@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import modelo.Itinerario;
 import modelo.Sugerencia;
@@ -12,12 +11,12 @@ import persistencia.commons.ProveedorDeConexion;
 
 public class ItinerarioDAO {
 
-	public HashMap<Integer, Itinerario> cargarItinerarios() {
+	public ArrayList<Itinerario> cargarItinerarios() {
 
 		String sqlItinerarios = "SELECT * FROM itinerarios";
 		String sqlIdPromociones = "SELECT fk_promocion FROM compras_de_itinerarios WHERE fk_itinerario = ? AND fk_promocion IS NOT NULL";
-		String sqlIdAtracciones = "SELECT fk_atraccion FROM compras_de_itinerarios WHERE fk_itinerario = ? AND fk_atraccion IS NOT NULL";
-		HashMap<Integer, Itinerario> itinerarios = new HashMap<Integer, Itinerario>();
+		String sqlIdAtracciones = "SELECT fk_pelicula FROM compras_de_itinerarios WHERE fk_itinerario = ? AND fk_pelicula IS NOT NULL";
+		ArrayList<Itinerario> itinerarios = new ArrayList<Itinerario>();
 
 		try {
 			Connection conexion = ProveedorDeConexion.getConexion();
@@ -34,8 +33,7 @@ public class ItinerarioDAO {
 				ResultSet resultIdPromociones = declarIdPromociones.executeQuery();
 				ResultSet resultIdAtracciones = declarIdAtracciones.executeQuery();
 
-				itinerarios.put(idItinerario,
-						crearItinerario(resultItinerario, resultIdPromociones, resultIdAtracciones));
+				itinerarios.add(crearItinerario(resultItinerario, resultIdPromociones, resultIdAtracciones));
 			}
 
 		} catch (Exception e) {
@@ -64,6 +62,7 @@ public class ItinerarioDAO {
 			ResultSet resultIdPromociones = declarIdPromociones.executeQuery();
 			ResultSet resultIdAtracciones = declarIdAtracciones.executeQuery();
 
+			resultItinerario.next();
 			itinerario = crearItinerario(resultItinerario, resultIdPromociones, resultIdAtracciones);
 
 		} catch (Exception e) {
@@ -79,8 +78,8 @@ public class ItinerarioDAO {
 			Connection conexion = ProveedorDeConexion.getConexion();
 			PreparedStatement declaracion = conexion.prepareStatement(sql);
 
-			declaracion.setInt(1, itinerario.getCostoDelItinerario());
-			declaracion.setDouble(2, itinerario.getDuracionDelItinerario());
+			declaracion.setDouble(1, itinerario.getCostoDelItinerario());
+			declaracion.setInt(2, itinerario.getDuracionDelItinerario());
 			declaracion.setInt(3, itinerario.getFkUsuario());
 
 			insertarCompras(itinerario, conexion);
@@ -120,8 +119,8 @@ public class ItinerarioDAO {
 	private Itinerario crearItinerario(ResultSet resultItinerario, ResultSet resultIdPromo, ResultSet resultIdPelicula)
 			throws Exception {
 		int fkUsuario = resultItinerario.getInt("id");
-		int costo = resultItinerario.getInt("costo");
-		double duracion = resultItinerario.getDouble("duracion");
+		double costo = resultItinerario.getDouble("costo");
+		int duracion = resultItinerario.getInt("duracion");
 		PeliculaDAO peliculaDAO = FabricaDAO.getPeliculaDAO();
 		PromocionDAO promocionDAO = FabricaDAO.getPromocionDAO();
 

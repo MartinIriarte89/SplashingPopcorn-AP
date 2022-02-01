@@ -8,29 +8,29 @@ public class PromocionAPorB extends Promocion {
 
 	private ArrayList<Pelicula> atraccionesACobrar = new ArrayList<Pelicula>();
 
-	public PromocionAPorB(String nombre, ArrayList<Pelicula> atracciones, int cantPromosACobrar, String descripcion,
+	public PromocionAPorB(String nombre, ArrayList<Pelicula> peliculas, int cantPromosACobrar, String descripcion,
 			String urlPortada, String tipoPromocion) {
-		super(nombre, atracciones, descripcion, urlPortada, cantPromosACobrar, tipoPromocion);
-		Collections.sort(atracciones);
+		super(nombre, peliculas, descripcion, urlPortada, cantPromosACobrar, tipoPromocion);
+		Collections.sort(peliculas);
 
-		if (cantPromosACobrar <= atracciones.size()) {
+		if (cantPromosACobrar <= peliculas.size()) {
 			for (int i = 0; i < cantPromosACobrar; i++) {
-				atraccionesACobrar.add(atracciones.get(i));
+				atraccionesACobrar.add(peliculas.get(i));
 			}
 		} else {
-			for (Pelicula pelicula : atracciones) {
+			for (Pelicula pelicula : peliculas) {
 				atraccionesACobrar.add(pelicula);
 			}
 		}
 	}
 
-	public PromocionAPorB(int id, String nombre, ArrayList<Pelicula> atracciones, int cantPromosACobrar,
+	public PromocionAPorB(int id, String nombre, ArrayList<Pelicula> peliculas, int cantPromosACobrar,
 			String descripcion, String urlPortada, String tipoPromocion) {
-		super(id, nombre, atracciones, descripcion, urlPortada, cantPromosACobrar, tipoPromocion);
-		Collections.sort(atracciones);
+		super(id, nombre, peliculas, descripcion, urlPortada, cantPromosACobrar, tipoPromocion);
+		Collections.sort(peliculas);
 
 		for (int i = 0; i < cantPromosACobrar; i++) {
-			atraccionesACobrar.add(atracciones.get(i));
+			atraccionesACobrar.add(peliculas.get(i));
 		}
 	}
 

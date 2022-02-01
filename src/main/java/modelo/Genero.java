@@ -65,4 +65,9 @@ public class Genero {
 		Genero other = (Genero) obj;
 		return Objects.equals(nombre, other.nombre);
 	}
+
+	@Override
+	public String toString() {
+		return "Genero [nombre=" + nombre + "]";
+	}
 }

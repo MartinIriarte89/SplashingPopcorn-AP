@@ -199,7 +199,7 @@ public class Usuario {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(dineroDisponible, id, itinerario, nombre, preferencia, tiempoDisponible);
+		return Objects.hash(id, itinerario, nombre, preferencia, usuario);
 	}
 
 	@Override
@@ -211,10 +211,8 @@ public class Usuario {
 		if (getClass() != obj.getClass())
 			return false;
 		Usuario other = (Usuario) obj;
-		return dineroDisponible == other.dineroDisponible && id == other.id
-				&& Objects.equals(itinerario, other.itinerario) && Objects.equals(nombre, other.nombre)
-				&& Objects.equals(preferencia, other.preferencia)
-				&& Double.doubleToLongBits(tiempoDisponible) == Double.doubleToLongBits(other.tiempoDisponible);
+		return id == other.id && Objects.equals(itinerario, other.itinerario) && Objects.equals(nombre, other.nombre)
+				&& Objects.equals(preferencia, other.preferencia) && Objects.equals(usuario, other.usuario);
 	}
 
 	@Override
